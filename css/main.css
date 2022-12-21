@@ -31,12 +31,13 @@ nav{
     position: relative;
     left: 0;
     margin-left: 15px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
 .navkeys{
     display: flex;
     margin-right: 10px;
+    margin-top: 10px;
     padding: 5px;
     position:relative;
     width: fit-content;
@@ -87,22 +88,20 @@ ul{
 }
 .sns-buttons{
     flex-grow: 1;
-    margin: 12px;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    border-spacing: 30px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    border-spacing: 15px;
+    margin: 0.5%;
     text-align: center;
+    font-size: x-large;
 }
 .sns-button-container{
     display: flex;
     flex-direction:row;
     align-items: center;
     justify-content: center;
-    padding: 50px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    padding: 3px;
+    padding-bottom: 0px;
 }
 article {
     color: rgb(255, 255, 255);
@@ -116,23 +115,25 @@ article {
     display: flex;
     flex-direction:row;
     position: relative;
-    padding: 20px;
+    padding: 0.2%;
     justify-content: center;
+    padding-left: 1.7%;
 }
 .flexs{
     flex-wrap: wrap;
     word-wrap: normal;
+    width: fit-content;
     overflow-wrap: normal;
     text-align: left;
-    margin: 50px;
-    word-spacing: 5px;
+    margin: 2%;
+    word-spacing: 0.2%;
     border-radius: 20px;
     border-width: 5px;
     border-color: wheat;
     border-style: groove;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 10px;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-bottom: 2%;
 }
 .aboutus-container{
     margin: 100px;
@@ -149,4 +150,30 @@ article {
     width: 80%;
     align-items: center;
     justify-content: center;
+}
+iframe{
+    min-width: 600px;
+    min-height: 400px;
+    width: 80%;
+    aspect-ratio: 1.96;
+    padding: 5px;
+    margin: 5px;
+    border:0;
+}
+.map-holder{
+    width: inherit;
+    height : inherit;
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
+}
+.contact-form-holder{
+    text-align: center;
+    min-width: inherit;
+    text-align: center;
+}
+.contact-form{
+    text-align: center;
+    min-width: 50%;
+    height: 50%;
 }
