@@ -49,7 +49,7 @@ nav{
 }
 a{
     color: rgb(255, 255, 255);
-    background-color: darkslategrey;
+    background: linear-gradient(#003d35,#0d5c52,#36a496,#36a496,#0d5c52,#003d35);
     width: fit-content;
     height: fit-content;
     font-size: x-large;
