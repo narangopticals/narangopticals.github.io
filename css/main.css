@@ -9,7 +9,7 @@ h1{
 }
 nav{
     background-color: rgb(52, 51, 51);
-    text-align: center;
+    text-align: left;
     position: sticky;
     top:0;
     z-index: 1000000;
@@ -43,18 +43,20 @@ nav{
 }
 .navs{
     flex-grow: 1;
-    margin: 2px;
+    margin: 5px;
+    border-radius: 2px;
+    font-weight: bold;
 }
 a{
     color: rgb(255, 255, 255);
-    background-color: darkslategrey;
+    background: linear-gradient(#003d35,#0d5c52,#36a496,#36a496,#0d5c52,#003d35);
     width: fit-content;
     height: fit-content;
     font-size: x-large;
     padding: 10px;
-    border: 5px solid powderblue;
-    margin-top: 1px;
-    margin-bottom: 1px;
+    border: 2px solid powderblue;
+    margin-top: 2px;
+    margin-bottom:2px;
     position: relative;
 }
 h4 {
@@ -86,13 +88,13 @@ ul{
     justify-content: center;
 }
 .sns-buttons{
-    flex-grow: 1;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    flex-grow: 0.13;
     border-spacing: 15px;
     margin: 5px;
     text-align: center;
     font-size: x-large;
+    border-radius: 5px;
+    font-weight: bolder;
 }
 .sns-button-container{
     display: flex;
@@ -101,6 +103,21 @@ ul{
     justify-content: center;
     padding: 3px;
     padding-bottom: 0px;
+}
+#sns-button-fb{
+    background: linear-gradient(#0000CC,#01019ec8,#0101839e);
+}
+#sns-button-ig{
+    background: linear-gradient(#8b0053,#740146,#68013e);
+}
+#sns-button-jsdl{
+    background: linear-gradient(#9e4a01c8,#723601c8,#e16b03c8);
+}
+#sns-button-whatsapp{
+    background: linear-gradient(#006e47,#018e5d,#01482f);
+}
+#sns-button-gmap{
+    background: radial-gradient(#ac0202,#ac3502,rgba(131, 73, 1, 0.62));
 }
 article {
     color: rgb(255, 255, 255);
@@ -127,11 +144,11 @@ article {
     margin: 10px;
     word-spacing: 5px;
     border-radius: 20px;
-    border-width: 5px;
-    border-color: wheat;
+    border-width: 3px;
+    border-color: rgb(122, 81, 4);
     border-style: groove;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
     padding-bottom: 10px;
 }
 .aboutus-container{
