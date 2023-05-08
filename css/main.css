@@ -115,13 +115,13 @@ ul{
 }
 #sns-button-jsdl{
     background: linear-gradient(#d56502c7,#9e4a01c8,#402003c7);
+
 }
 #sns-button-whatsapp{
     background: linear-gradient(#006e47,#018e5d,#01482f);
 }
 #sns-button-twitter{
     background: linear-gradient(#09547d,#054365,#022e45);
-}
 article {
     color: rgb(255, 255, 255);
     font-size: 35px;
