@@ -1,6 +1,7 @@
 body {
-    background: rgb(33, 32, 32); /*background color grey*/
     font-family: Arial, Helvetica, sans-serif; /*font style change*/
+    width: fit-content;
+    height: fit-content;
 }
 h1{
     color:rgb(255, 255, 255);
@@ -49,7 +50,7 @@ nav{
 }
 a{
     color: rgb(255, 255, 255);
-    background: linear-gradient(#027f6e,#037667,#035549, #005d51, #00594d, #036a5c);
+    background: linear-gradient(#003d35,#0d5c52,#36a496,#36a496,#0d5c52,#003d35);
     width: fit-content;
     height: fit-content;
     font-size: x-large;
@@ -87,10 +88,23 @@ ul{
     width: fit-content;
     justify-content: center;
 }
+#card-area{
+    /*background: rgb(0, 0, 0); /*background color grey*/
+    background-image:url("../imgs/vector-carbonfire.jpg");
+    background-size: cover;
+    display: flex;
+    flex-direction:column;
+    padding: 30px;
+    border-radius: 25px;
+    min-height: fit-content;
+    min-width: fit-content;
+    padding-bottom: 0px;
+    aspect-ratio: 1.77;
+}
 .sns-buttons{
-    flex-grow: 0.13;
+    flex-grow: 1;
     border-spacing: 15px;
-    margin: 5px;
+    margin: 1px;
     text-align: center;
     font-size: x-large;
     border-radius: 5px;
@@ -115,7 +129,6 @@ ul{
 }
 #sns-button-jsdl{
     background: linear-gradient(#d56502c7,#9e4a01c8,#402003c7);
-
 }
 #sns-button-whatsapp{
     background: linear-gradient(#006e47,#018e5d,#01482f);
@@ -171,25 +184,20 @@ article {
     align-items: center;
     justify-content: center;
 }
-iframe.contact-form{
-    width: 100%;
-    height: 100%;
-    padding: 5px;
-    margin: 5px;
-    border:0;
-}
+
 iframe.maps-frame{
-    min-width: 60%;
-    min-height: 40%;
+    min-width: 40%;
+    min-height: 20%;
     width: 60%;
-    aspect-ratio: 1.96;
+    aspect-ratio: 2.8;
     padding: 5px;
     margin: 5px;
     border:0;
 }
 iframe{
-    min-width: 700px;
-    min-height: 500px;
+    min-width: 600px;
+    min-height: 400px;
+    width: 80%;
     aspect-ratio: 1.96;
     padding: 5px;
     margin: 5px;
@@ -211,6 +219,43 @@ iframe.contact-form{
     min-width: 50%;
     height: 50%;
 }
-a.dailer{
-    font-size: calc(inherit-20);
+#info-area{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    align-self: center;
+}
+#phone-button{
+    padding: 2px;
+    padding-right: 8px;
+    font-weight: bold;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    align-self:flex-start;
+    background: linear-gradient(#535353,#434343,#2a2a2a);
+    border: 2px solid rgb(255, 255, 255);
+}
+
+#contact-area{
+    align-self: flex-start;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    align-content: center;
+}
+#site-button{
+    padding: 4px;
+    font-weight: bold;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-self:flex-start;
+    background: rgb(0, 0, 0);
+    border: 2px solid rgb(255, 255, 255);
+    margin: 10px;
 }
