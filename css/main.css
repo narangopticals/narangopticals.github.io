@@ -8,7 +8,7 @@ button{
 h1{
     color:rgb(255, 255, 255);
     text-shadow: 0 0 4px #c66666, 0 0 8px #6793c6;
-    font-size: 55px;
+    font-size: 350%;
 }
 .logo{
     aspect-ratio: 1;
@@ -82,14 +82,14 @@ nav{
 }*/
 h4 {
     color: rgb(255, 255, 255);
-    font-size: 40px;
+    font-size: 300%;
     font-stretch: expanded;
     letter-spacing: 2.5px;
     text-shadow: 0 0 8px #c66666, 0 0 12px #6793c6;
 }
 h3 {
     color: powderblue;
-    font-size: 20px;
+    font-size: x-large;
     font-stretch: expanded;
     letter-spacing: 1px;
     margin: 10px;
@@ -174,7 +174,7 @@ ul{
 }
 article {
     color: rgb(255, 255, 255);
-    font-size: 30px;
+    font-size: xx-large;
     font-stretch: expanded;
     word-wrap: normal;
     text-align: left;
@@ -303,7 +303,6 @@ a.dailer{
 
   /* Dropdown button */
 .dropdown .dropbtn, .menuBtns, .dailer {
-    font-size: 16px;
     border: none;
     outline: none;
     color: white;
