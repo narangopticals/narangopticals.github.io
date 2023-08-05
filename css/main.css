@@ -2,6 +2,9 @@ body {
     background: rgb(33, 32, 32); /*background color grey*/
     font-family: Arial, Helvetica, sans-serif; /*font style change*/
 }
+button{
+    border-radius: 4px;
+}
 h1{
     color:rgb(255, 255, 255);
     text-shadow: 0 0 4px #c66666, 0 0 8px #6793c6;
@@ -213,9 +216,9 @@ article {
 .aboutus-container{
     margin-left: 8%;
     margin-right: 8%;
-    margin-top: 3%;
-    margin-bottom: 3%;
-    word-spacing: 5px;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+    word-spacing: 4px;
     border-radius: 20px;
     border-width: 5px;
     border-color: wheat;
@@ -397,14 +400,17 @@ a.dailer{
 .active, .dot:hover {
     background-color: #717171;
 }
-.nextPrevCont{
-    align-self: center;
-    margin: 1%;
-    width: 4%;
-}
-#animBtn{
+#playPause{
     align-self: center;
     background: #022e45;
-    padding: 5%;
+    color: white;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    padding: 1%;
+}
+.mapView{
+    border-radius: 20px;
+    border-style: groove;
 }
 /* mod-5aug23 -v1.0.6*/
