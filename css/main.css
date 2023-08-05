@@ -8,13 +8,13 @@ button{
 h1{
     color:rgb(255, 255, 255);
     text-shadow: 0 0 4px #c66666, 0 0 8px #6793c6;
-    font-size: 350%;
+    font-size: 250%;
 }
 .logo{
     aspect-ratio: 1;
-    max-width: 5%;
-    margin: 5px;
-    margin-left: 1%;
+    max-width: 10%;
+    margin: 0.5%;
+    margin-left: 0.1%;
 }
 nav{
     background-color: rgb(52, 51, 51);
@@ -26,22 +26,24 @@ nav{
     width: fit-content(100%);
 }
 .flexSpc{
-    flex-grow: 0.2;
-    min-width: 50px;
+    flex-grow: 20%;
+    min-width: 25%;
 }
-.staticbar{
+#staticbar{
     display: flex;
     flex-direction:row;
     align-items: center;
     justify-content: center;
     align-content: center;
+    align-self: flex-start;
 }
-.navbar{
+#navbar{
     display: flex;
     flex-direction:row;
     align-items: center;
-    justify-content: start;
-    width: 100%;
+    justify-content: center;
+    width: 90%;
+    padding: 5%;
 }
 .header{
     color: rgb(255, 255, 255);
@@ -51,20 +53,20 @@ nav{
     position: relative;
     left: 0;
     margin-left: 2%;
-    margin-top: 10px;
+    margin-top: 0.50%;
     margin-bottom: 0px;
 }
 .navkeys{
     display: flex;
-    margin-right: 10px;
-    margin-top: 10px;
-    padding: 5px;
+    margin-right: 0.50%;
+    margin-top: 0.50%;
+    padding: 0.25%;
     position:relative;
     width: fit-content;
 }
 .navs{
     flex-grow: 1;
-    margin: 5px;
+    margin: 0.25%;
     border-radius: 2px;
     font-weight: bold;
 }
@@ -82,17 +84,17 @@ nav{
 }*/
 h4 {
     color: rgb(255, 255, 255);
-    font-size: 300%;
+    font-size: 170%;
     font-stretch: expanded;
     letter-spacing: 2.5px;
     text-shadow: 0 0 8px #c66666, 0 0 12px #6793c6;
 }
 h3 {
     color: powderblue;
-    font-size: x-large;
+    font-size: 115%;
     font-stretch: expanded;
     letter-spacing: 1px;
-    margin: 10px;
+    margin: 0.50%;
 }
 li{
     width: fit-content;
@@ -129,8 +131,8 @@ ul{
 }*/
 .sns-buttons{
     flex-grow: 0.13;
-    border-spacing: 15px;
-    margin: 5px;
+    border-spacing: 0.75%;
+    margin: 0.12%,0.12%,0.25%,0.25%;
     text-align: center;
     font-size: x-large;
     border-radius: 5px;
@@ -139,11 +141,9 @@ ul{
     background: linear-gradient(#027f6e,#037667,#035549, #005d51, #00594d, #036a5c);
     width:inherit;
     height: fit-content;
-    font-size: x-large;
-    padding: 10px;
+    font-size: 130%;
+    padding: 0%, 0%, 2%, 2%;
     border: 2px solid powderblue;
-    margin-top: 2px;
-    margin-bottom:2px;
 }
 .sns-button-container{
     display: flex;
@@ -174,7 +174,7 @@ ul{
 }
 article {
     color: rgb(255, 255, 255);
-    font-size: xx-large;
+    font-size: 145%;
     font-stretch: expanded;
     word-wrap: normal;
     text-align: left;
@@ -203,31 +203,31 @@ article {
     width:auto;
     overflow-wrap: normal;
     text-align: left;
-    margin: 10px;
+    margin: 0.50%;
     word-spacing: 3px;
     border-radius: 20px;
     border-width: 3px;
     border-color: rgb(122, 81, 4);
     border-style: groove;
-    padding-left: 25px;
-    padding-right: 25px;
-    padding-bottom: 10px;
+    padding-left: 1.25%;
+    padding-right: 1.25%;
+    padding-bottom: 0.50%
 }
 .aboutus-container{
     margin-left: 8%;
     margin-right: 8%;
     margin-top: 1.5%;
     margin-bottom: 1.5%;
-    word-spacing: 4px;
+    word-spacing: 20%;
     border-radius: 20px;
     border-width: 5px;
     border-color: wheat;
     border-style: groove;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 10px;
-    letter-spacing: 1.5px;
-    line-height: 55px;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-bottom: 1%;
+    letter-spacing: 20%;
+    line-height: 200%;
     width: 80%;
     align-items: center;
     justify-content: center;
@@ -235,32 +235,19 @@ article {
 iframe.contact-form{
     width: 100%;
     height: 100%;
-    padding: 5px;
-    margin: 5px;
-    border:0;
-}
-iframe.maps-frame{
-    min-width: 60%;
-    min-height: 40%;
-    width: 60%;
-    aspect-ratio: 1.96;
-    padding: 5px;
-    margin: 5px;
     border:0;
 }
 iframe{
-    min-width: 700px;
-    min-height: 500px;
-    aspect-ratio: 1.96;
-    padding: 5px;
-    margin: 5px;
+    min-width: 85%;
+    min-height: 100%;
     border:0;
+    aspect-ratio: 1.96;
 }
 .map-holder{
     width: inherit;
     height : inherit;
-    padding: 5px;
-    margin: 5px;
+    padding: 1%;
+    margin: 1%;
     text-align: center;
 }
 .contact-form-holder{
@@ -268,12 +255,8 @@ iframe{
     min-width: inherit;
     height: 50%;
 }
-iframe.contact-form{
-    min-width: 50%;
-    height: 50%;
-}
 a.dailer{
-    font-size: calc(inherit-20);
+    font-size: 80%;
     width: fit-content;
 }
 /*Test.html Trial*/
@@ -302,29 +285,32 @@ a.dailer{
 }
 
   /* Dropdown button */
+
 .dropdown .dropbtn, .menuBtns, .dailer {
     border: none;
     outline: none;
     color: white;
-    padding: 14px 16px;
     background-color: inherit;
     font-family: inherit; /* Important for vertical align on mobile phones */
-    margin: 0; /* Important for vertical align on mobile phones */
+    margin: 0%; /* Important for vertical align on mobile phones */
     background: linear-gradient(#027f6e,#037667,#035549, #005d51, #00594d, #036a5c);
     width: fit-content;
     height: fit-content;
-    font-size: x-large;
-    padding: 10px;
+    font-size: 135%;
     border: 2px solid powderblue;
-    margin-top: 2px;
-    margin-bottom:2px;
+    margin-top: 0.20%;
+    margin-bottom: 0.20%;
     position: relative;
     font-weight: bold;
+}
+.menuBtn{
+    padding: 22% 22% 22% 22%;
+    margin: 22% 22% 22% 22%;
 }
 .menuBtns{
     width:inherit;
     color: rgb(175, 175, 175);
-    margin: 2%;
+    margin: 0.7%;
 }
   /* Add a red background color to navbar links on hover */
 .navbar a:hover, .dropdown:hover .dropbtn {
@@ -335,8 +321,8 @@ a.dailer{
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
+    background-color: #9e9e9e;
+    min-width: 15%;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
@@ -345,15 +331,16 @@ a.dailer{
 .dropdown-content a {
     float: none;
     color: white;
-    padding: 12px 16px;
+    padding: 1% 3%;
     text-decoration: none;
     display: block;
     text-align: left;
+    margin: 2%;
 }
 
   /* Add a grey background color to dropdown links on hover */
 .dropdown-content a:hover {
-    background-color: #ddd;
+    background-color: #888787;
 }
 
   /* Show the dropdown menu on hover */
@@ -367,9 +354,9 @@ a.dailer{
     display: flex;
     flex-direction:column;
     position: relative;
-    padding: 5px;
+    padding: 0.30%;
     justify-content: center;
-    padding-left: 8px;
+    padding-left: 0.60%;
     width: 100%;
     position: relative;
     margin: auto;
@@ -381,8 +368,8 @@ a.dailer{
 .slideName {
     height: fit-content;
     width: fit-content;
-    margin: 0 2px;
-    padding: 10px;
+    margin: 4% 0%;
+    padding: 2%;
     background-color: #bbb;
     /*border-radius: 50%;*/
     display: inline-block;
@@ -409,7 +396,8 @@ a.dailer{
     padding: 1%;
 }
 .mapView{
-    border-radius: 20px;
+    border-radius: 3.5%;
     border-style: groove;
+    width: 90%;
 }
 /* mod-5aug23 -v1.0.6*/
