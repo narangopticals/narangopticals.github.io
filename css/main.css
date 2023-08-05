@@ -254,8 +254,9 @@ iframe{
     height: 50%;
 }
 a.dailer{
-    font-size: 80%;
+    font-size: 75%;
     width: fit-content;
+    padding: 0.3%;
 }
 /*Test.html Trial*/
  /* Navbar container */
@@ -294,7 +295,7 @@ a.dailer{
     background: linear-gradient(#027f6e,#037667,#035549, #005d51, #00594d, #036a5c);
     width: fit-content;
     height: fit-content;
-    font-size: 135%;
+    font-size: 140%;
     border: 2px solid powderblue;
     margin-top: 0.20%;
     margin-bottom: 0.20%;
@@ -306,7 +307,8 @@ a.dailer{
     margin: 22% 22% 22% 22%;
 }
 .menuBtns{
-    width:inherit;
+    width:fit-content;
+    min-width: 100%;
     color: rgb(175, 175, 175);
     margin: 0.7%;
 }
