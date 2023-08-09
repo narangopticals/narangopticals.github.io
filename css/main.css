@@ -401,3 +401,14 @@ a.dailer{
     width: 90%;
 }
 /* mod-5aug23 -v1.0.6*/
+#youtube-holder{
+    align-self: center;
+    color: white;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    padding: 0.5%;
+    aspect-ratio: 1.76;
+    min-width: 40%;
+    min-height: 50%;
+}
