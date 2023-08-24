@@ -236,8 +236,6 @@ iframe.contact-form{
     border:0;
 }
 iframe{
-    min-width: 85%;
-    min-height: 100%;
     border:0;
     aspect-ratio: 1.96;
 }
@@ -396,9 +394,11 @@ a.dailer{
     padding: 0.5%;
 }
 .mapView{
+    min-width: 60%;
+    min-height: 70%;
     border-radius: 3.5%;
     border-style: groove;
-    width: 90%;
+    width: 70%;
 }
 /* mod-5aug23 -v1.0.6*/
 #youtube-holder{
@@ -411,4 +411,6 @@ a.dailer{
     aspect-ratio: 1.76;
     min-width: 40%;
     min-height: 50%;
+    width: 40%;
+    height: 50%;
 }
