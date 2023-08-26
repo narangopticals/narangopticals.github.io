@@ -360,6 +360,7 @@ a.dailer{
     width: 100%;
     position: relative;
     margin: auto;
+    text-align: center;
 }
 .contentSlider{
     min-width: 50%;
