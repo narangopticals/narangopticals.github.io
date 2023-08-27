@@ -11,7 +11,6 @@ h1{
     font-size: 250%;
 }
 .logo{
-    max-width: 100px;
     margin: 0.5%;
     margin-left: 0.1%;
     border-radius: 50%;
@@ -30,9 +29,9 @@ nav{
 }
 #staticbar{
     display: flex;
-    flex-direction:row;
+    /*flex-direction:row;*/
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     align-content: center;
     align-self: flex-start;
 }
@@ -41,13 +40,12 @@ nav{
     flex-direction:row;
     align-items: center;
     justify-content: center;
-    width: 90%;
+    /*width: 90%;*/
     padding: 1%;
 }
 .header{
     color: rgb(255, 255, 255);
     width: fit-content;
-    flex-grow: 1;
     position: relative;
     left: 0;
     margin-left: 2%;
@@ -137,7 +135,7 @@ ul{
     font-weight: bolder;
     color: rgb(255, 255, 255);
     background: linear-gradient(#027f6e,#037667,#035549, #005d51, #00594d, #036a5c);
-    width:inherit;
+    width:100%;
     height: fit-content;
     font-size: 130%;
     padding: 0%, 0%, 2%, 2%;
@@ -281,6 +279,7 @@ a.dailer{
     float: left;
     overflow: hidden;
     padding-right: 3%;
+    min-width: 50%;
 }
 
   /* Dropdown button */
@@ -301,6 +300,8 @@ a.dailer{
     margin-bottom: 0.20%;
     position: relative;
     font-weight: bold;
+    min-width: 100%;
+    border-radius: 5px;
 }
 .menuBtn{
     padding: 22% 22% 22% 22%;
@@ -443,6 +444,22 @@ a.dailer{
     .info-holder{
         flex-direction:column;
     }
+    .dropdown-content{
+        padding-right: 4%;
+    }
+    #staticbar{
+        flex-direction: column;
+    }
+    #navbar{
+        width: 80%;
+    }
+    .logo{
+        max-width: 20%;
+    }
+    #directionFrame{
+        width: 100%;
+        margin-top: 5%;
+    }
 }
 /* Landscape orientation */
 @media screen and (orientation: landscape) {
@@ -452,5 +469,20 @@ a.dailer{
     }
     #youtube-holder{
         width: 40%;
+    }
+    .dropdown-content{
+        padding-right: 1.60%;
+    }
+    #staticbar{
+        flex-direction: row;
+    }
+    #navbar{
+        width: 25%;
+    }
+    .logo{
+        max-width: 6%;
+    }
+    #directionFrame{
+        width: 60%;
     }
 }
