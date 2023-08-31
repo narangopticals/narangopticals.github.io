@@ -5,7 +5,7 @@ body {
 button{
     border-radius: 4px;
 }
-h1{
+h1, #flexSpc{
     color:rgb(255, 255, 255);
     text-shadow: 0 0 4px #c66666, 0 0 8px #6793c6;
     font-size: 250%;
@@ -23,10 +23,11 @@ nav{
     z-index: 1000000;
     width: fit-content(100%);
 }
-.flexSpc{
+#flexSpc{
     flex-grow: 20%;
-    min-width: 25%;
+    text-align: center;
 }
+
 #staticbar{
     display: flex;
     /*flex-direction:row;*/
@@ -78,6 +79,12 @@ nav{
     margin-bottom:2px;
     position: relative;
 }*/
+p{
+    text-align: center;
+    font-size: medium;
+    font-weight: bold;
+    word-wrap: normal;
+}
 h4 {
     color: rgb(255, 255, 255);
     font-size: 170%;
@@ -135,7 +142,6 @@ ul{
     font-weight: bolder;
     color: rgb(255, 255, 255);
     background: linear-gradient(#027f6e,#037667,#035549, #005d51, #00594d, #036a5c);
-    width:100%;
     height: fit-content;
     font-size: 130%;
     padding: 0%, 0%, 2%, 2%;
@@ -292,7 +298,6 @@ a.dailer{
     font-family: inherit; /* Important for vertical align on mobile phones */
     margin: 0%; /* Important for vertical align on mobile phones */
     background: linear-gradient(#027f6e,#037667,#035549, #005d51, #00594d, #036a5c);
-    width: fit-content;
     height: fit-content;
     font-size: 140%;
     border: 2px solid powderblue;
@@ -300,7 +305,6 @@ a.dailer{
     margin-bottom: 0.20%;
     position: relative;
     font-weight: bold;
-    min-width: 100%;
     border-radius: 5px;
 }
 .menuBtn{
@@ -308,10 +312,9 @@ a.dailer{
     margin: 22% 22% 22% 22%;
 }
 .menuBtns{
-    width:fit-content;
-    min-width: 100%;
     color: rgb(175, 175, 175);
     margin: 0.7%;
+    display: block;
 }
   /* Add a red background color to navbar links on hover */
 .navbar a:hover, .dropdown:hover .dropbtn {
@@ -444,9 +447,7 @@ a.dailer{
     .info-holder{
         flex-direction:column;
     }
-    .dropdown-content{
-        padding-right: 4%;
-    }
+
     #staticbar{
         flex-direction: column;
     }
@@ -460,6 +461,12 @@ a.dailer{
         width: 100%;
         margin-top: 5%;
     }
+    .dropdown-content{
+        max-width: 45%;
+    }
+    #prodParent{
+        width: 80%;
+    }
 }
 /* Landscape orientation */
 @media screen and (orientation: landscape) {
@@ -469,9 +476,6 @@ a.dailer{
     }
     #youtube-holder{
         width: 40%;
-    }
-    .dropdown-content{
-        padding-right: 1.60%;
     }
     #staticbar{
         flex-direction: row;
@@ -485,4 +489,20 @@ a.dailer{
     #directionFrame{
         width: 60%;
     }
+    #prodParent{
+        width: 20%;
+    }
+}
+
+#mainProdView{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    align-content:center;
+    /*column-gap: 2%;
+    row-gap: 2%;
+    /*grid-template-columns: auto auto auto;*/
+    /*grid-template-columns: repeat(3, 1fr); /* sets 3 columns with equal width */
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
 }
