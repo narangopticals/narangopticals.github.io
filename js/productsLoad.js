@@ -4,7 +4,7 @@ async function Func() {
         return val;
     });
 
-    var data = fetch("../json/config.json").then((res) => {
+    var data = fetch("../json/prodData.json").then((res) => {
         return res.json();
     }); //.then(d => {return JSON.stringify(d)});
     //console.log(data);
