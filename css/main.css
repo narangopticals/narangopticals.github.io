@@ -15,13 +15,18 @@ h1, #flexSpc{
     margin-left: 0.1%;
     border-radius: 50%;
 }
+#barHider{
+    font-size: large;
+}
 nav{
-    background-color: rgb(52, 51, 51);
+    /*background: linear-gradient(rgb(42, 42, 45),rgb(23, 23, 23),rgb(16, 16, 16), rgb(23, 23, 23), rgb(45, 42, 42));*/
+    background: linear-gradient(rgb(42, 42, 45),rgb(23, 23, 23),rgb(16, 15, 15), rgb(23, 23, 14), rgb(23, 14, 14), rgb(34, 9, 9));
     text-align: left;
     position: sticky;
     top:0;
     z-index: 1000000;
-    width: fit-content(100%);
+    width: 100%;
+    /*text-align: end;*/
 }
 #flexSpc{
     flex-grow: 20%;
@@ -35,6 +40,8 @@ nav{
     justify-content: start;
     align-content: center;
     align-self: flex-start;
+    /*border: 3px solid rgb(141, 141, 141);*/
+    border-bottom: #00594d;
 }
 #navbar{
     display: flex;
@@ -43,6 +50,7 @@ nav{
     justify-content: center;
     /*width: 90%;*/
     padding: 1%;
+    text-align: center;
 }
 .header{
     color: rgb(255, 255, 255);
@@ -285,7 +293,8 @@ a.dailer{
     float: left;
     overflow: hidden;
     padding-right: 3%;
-    min-width: 50%;
+    min-width: 30%;
+    align-self: center;
 }
 
   /* Dropdown button */
@@ -318,7 +327,7 @@ a.dailer{
     min-width: fit-content;
 }
   /* Add a red background color to navbar links on hover */
-.navbar a:hover, .dropdown:hover .dropbtn {
+.navbar a:hover .dropdown:hover .dropbtn {
     background: linear-gradient(#900226,#73021e,#5e0219, #6a021c, #73021e, #900226);
 }
 
@@ -454,7 +463,7 @@ a.dailer{
         flex-direction: column;
     }
     #navbar{
-        width: 80%;
+        width: 90%;
     }
     .logo{
         max-width: 20%;
@@ -491,7 +500,7 @@ a.dailer{
         flex-direction: row;
     }
     #navbar{
-        width: 25%;
+        width: 30%;
     }
     .logo{
         max-width: 6%;

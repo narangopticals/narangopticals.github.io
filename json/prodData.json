@@ -2,24 +2,68 @@
    "data": [
       {
          "reg-num": "1",
-         "title": "chappal",
+         "title": "chappal number 1",
          "imgfile": "../products/1.jpg"
       },
 
       {
          "reg-num": "2",
-         "title": "joota",
+         "title": "joota number 1",
          "imgfile": "../products/2.jpg"
       },
       {
          "reg-num": "3",
-         "title": "chappal",
+         "title": "chappal number 2",
          "imgfile": "../products/1.jpg"
       },
 
       {
          "reg-num": "4",
-         "title": "joota",
+         "title": "joota number 2",
+         "imgfile": "../products/2.jpg"
+      },
+      {
+         "reg-num": "5",
+         "title": "chappal number 3",
+         "imgfile": "../products/1.jpg"
+      },
+
+      {
+         "reg-num": "6",
+         "title": "joota number 3",
+         "imgfile": "../products/2.jpg"
+      },
+      {
+         "reg-num": "7",
+         "title": "chappal number 4",
+         "imgfile": "../products/1.jpg"
+      },
+
+      {
+         "reg-num": "8",
+         "title": "joota number 4",
+         "imgfile": "../products/2.jpg"
+      },
+      {
+         "reg-num": "9",
+         "title": "chappal number 5",
+         "imgfile": "../products/1.jpg"
+      },
+
+      {
+         "reg-num": "10",
+         "title": "joota number 5",
+         "imgfile": "../products/2.jpg"
+      },
+      {
+         "reg-num": "11",
+         "title": "chappal number 6",
+         "imgfile": "../products/1.jpg"
+      },
+
+      {
+         "reg-num": "12",
+         "title": "joota number 6",
          "imgfile": "../products/2.jpg"
       }
    ]
