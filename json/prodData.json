@@ -1,70 +1,37 @@
 {
    "data": [
       {
-         "reg-num": "1",
-         "title": "chappal number 1",
-         "imgfile": "../products/1.jpg"
+         "itemcode": "TomStar-01",
+         "title": "Small Rectange Centre NoseBar",
+         "imgfile": "https://drive.google.com/file/d/1e2DRArX7_3xbxg_tLCc3XBWjLJSw_2OI/preview"
       },
 
       {
-         "reg-num": "2",
-         "title": "joota number 1",
-         "imgfile": "../products/2.jpg"
+         "itemcode": "TomStar-02",
+         "title": "Small Cateye Centre NoseBar",
+         "imgfile": "https://drive.google.com/file/d/1dzKpRWMUVcTODyZNlaOK1tOD-BK7_BXE/preview"
       },
       {
-         "reg-num": "3",
-         "title": "chappal number 2",
-         "imgfile": "../products/1.jpg"
-      },
-
-      {
-         "reg-num": "4",
-         "title": "joota number 2",
-         "imgfile": "../products/2.jpg"
-      },
-      {
-         "reg-num": "5",
-         "title": "chappal number 3",
-         "imgfile": "../products/1.jpg"
+         "itemcode": "TomStar-03",
+         "title": "Medium Rectange Centre NoseBar",
+         "imgfile": "https://drive.google.com/file/d/1e46KINePjBJUeyZwQ6cPwBxbHtzH12PR/preview"
       },
 
       {
-         "reg-num": "6",
-         "title": "joota number 3",
-         "imgfile": "../products/2.jpg"
+         "itemcode": "TomStar-04",
+         "title": "Medium Rectangle Double NoseBar",
+         "imgfile": "https://drive.google.com/file/d/1eBzkOtaeHCYLQn97QNY5e3k8OZ6Vhty5/preview"
       },
       {
-         "reg-num": "7",
-         "title": "chappal number 4",
-         "imgfile": "../products/1.jpg"
-      },
-
-      {
-         "reg-num": "8",
-         "title": "joota number 4",
-         "imgfile": "../products/2.jpg"
-      },
-      {
-         "reg-num": "9",
-         "title": "chappal number 5",
-         "imgfile": "../products/1.jpg"
+         "itemcode": "TomStar-05",
+         "title": "Small Oval Centre NoseBar",
+         "imgfile": "https://drive.google.com/file/d/1e4toCOqXfRK9Ic1kLFPdNi4uhi09JeGD/preview"
       },
 
       {
-         "reg-num": "10",
-         "title": "joota number 5",
-         "imgfile": "../products/2.jpg"
-      },
-      {
-         "reg-num": "11",
-         "title": "chappal number 6",
-         "imgfile": "../products/1.jpg"
-      },
-
-      {
-         "reg-num": "12",
-         "title": "joota number 6",
-         "imgfile": "../products/2.jpg"
+         "itemcode": "TomStar-06",
+         "title": "Large Aviator Double NoseBar",
+         "imgfile": "https://drive.google.com/file/d/1e9orbKMjpr9Fg2fP9c_mUIDhGZDwL4XW/preview"
       }
    ]
 }

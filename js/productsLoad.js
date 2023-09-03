@@ -68,14 +68,14 @@ export async function loadItems(startNum, endNum) {
             var valueData = str[i];
             //console.log(valueData.imgfile);
             console.log(elem);
-            elem.querySelector("img").src = valueData.imgfile;
+            elem.querySelector("iframe").src = valueData.imgfile;
             elem.querySelector("h1").textContent = valueData.title;
             //elem.querySelector("a").href="https://wa.me/+919756231332?text="+encodeURIComponent(encodeURIComponent(valueData.title)+"\n Item ID"+i);
             //elem.querySelector("a").href="https://api.whatsapp.com/send/?phone=919756231332&text="+encodeURIComponent(encodeURIComponent(valueData.title)+"\n Item ID"+i)+"&type=phone_number&app_absent=0";
-            elem.querySelector("a").href = "https://web.whatsapp.com/send/?phone=919756231332&text=" + encodeURIComponent(valueData.title) + "\n Item ID" + i + "&type=phone_number&app_absent=0";
+            elem.querySelector("a").href = "https://web.whatsapp.com/send/?phone=919756231332&text=I want to know More About Your Products"+ encodeURIComponent("\nName : ") + encodeURIComponent(valueData.title) + encodeURIComponent(",  Item ID :") + valueData.itemcode + "&type=phone_number&app_absent=0&send=1";
             i++;
         }else{
-            elem.querySelector("img").src = "";
+            elem.querySelector("iframe").src = "";
             elem.querySelector("h1").textContent = "";
             elem.style.visibility = "hidden";
         }
