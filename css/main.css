@@ -522,6 +522,6 @@ a.dailer{
         align-content:center;
         column-gap: 2%;
         row-gap: 2%;
-        grid-template-columns: repeat(3,30%);
+        grid-template-columns: repeat(3,33%);
     }
 }
