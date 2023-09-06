@@ -1,15 +1,13 @@
-
-
-
 var str = "";
 //var section = 1;
+
 
 export async function Func(section) {
     var prodParent = fetch("../class/prodview.html").then((res) => {
         var val = res.text();
         return val;
     });
-    var data ="";
+    var data = "";
     /*data = fetch('').then((res) => {
         return res.json();
     });
@@ -19,11 +17,11 @@ export async function Func(section) {
         }); //.then(d => {return JSON.stringify(d)});
         //console.log(data);
     }*/
-    if(section == 0){
+    if (section == 0) {
         data = fetch("../json/prodFmData.json").then((res) => {
             return res.json();
         });
-    }else {
+    } else {
         data = fetch("../json/prodSgdata.json").then((res) => {
             return res.json();
         });
@@ -59,8 +57,8 @@ export async function Func(section) {
         var itemStart = 0;
         for (var i = 0; i < btns.length; i++) {
             var btn = btns[i];
-            btn.setAttribute('onclick', 'window.loadItems('+itemStart+', '+(itemStart + 8)+')');
-            itemStart = itemStart+9 ;
+            btn.setAttribute('onclick', 'window.loadItems(' + itemStart + ', ' + (itemStart + 8) + ')');
+            itemStart = itemStart + 9;
         }
     }
     async function addItemViews(startNum, endNum) {
@@ -79,9 +77,22 @@ export async function loadItems(startNum, endNum) {
     var elemsParents = window.document.querySelectorAll('div[class^=grid]');
     console.log(elemsParents);
     var i = startNum;
+    var devType = navigator.userAgent;
+    var wbLink = "";
+    if (devType.match(/Android/i)
+        || devType.match(/webOS/i)
+        || devType.match(/iPhone/i)
+        || devType.match(/iPad/i)
+        || devType.match(/iPod/i)
+        || devType.match(/BlackBerry/i)
+        || devType.match(/Windows Phone/i)) {
+        wbLink = "https://wa.me/+919756231332?text";
+    } else {
+        wbLink = "https://web.whatsapp.com/send/?phone=919756231332&text";
+    }
     for (var j = 0; j < 9; j++) {
         var elem = elemsParents[j];
-        if (i < str.length){
+        if (i < str.length) {
             elem.style.visibility = "visible";
             var valueData = str[i];
             //console.log(valueData.imgfile);
@@ -90,9 +101,9 @@ export async function loadItems(startNum, endNum) {
             elem.querySelector("h1").textContent = valueData.title;
             //elem.querySelector("a").href="https://wa.me/+919756231332?text="+encodeURIComponent(encodeURIComponent(valueData.title)+"\n Item ID"+i);
             //elem.querySelector("a").href="https://api.whatsapp.com/send/?phone=919756231332&text="+encodeURIComponent(encodeURIComponent(valueData.title)+"\n Item ID"+i)+"&type=phone_number&app_absent=0";
-            elem.querySelector("a").href = "https://web.whatsapp.com/send/?phone=919756231332&text=I want to know More About Your Products"+ encodeURIComponent("\nName : ") + encodeURIComponent(valueData.title) + encodeURIComponent(",  Item ID :") + valueData.itemcode + "&type=phone_number&app_absent=0&send=1";
+            elem.querySelector("a").href = wbLink+"=I want to know More About Your Products" + encodeURIComponent("\nName : ") + encodeURIComponent(valueData.title) + encodeURIComponent(",  Item ID :") + valueData.itemcode + "&type=phone_number&app_absent=0&send=1";
             i++;
-        }else{
+        } else {
             elem.querySelector("iframe").src = "";
             elem.querySelector("h1").textContent = "";
             elem.style.visibility = "hidden";
