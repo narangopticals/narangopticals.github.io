@@ -49,6 +49,10 @@
             </div>
             <button id="barHider" onclick="toggle()">Hide Navigator</button>
         </nav>
+        <div style="width: 100%; height:fit-content; text-align:center; margin: 0.5%;">
+            <button class="slideName" style="font-weight: bold;" onclick="switchSection(0)">Frame</button>
+            <button class="slideName" style="font-weight: bold;" onclick="switchSection(1)">Sunglass</button>
+        </div>
         <div id="btnNavProdView" style="width: 70%; align-items: center; text-align: center; padding:1%;height: 100%;"></div>
         <div id="mainProdView"
             style="margin-left:5%;
@@ -62,6 +66,8 @@
             import { Func, loadItems } from "./js/productsLoad.js";
             window.Func = Func;
             window.loadItems = loadItems;
+            //window.Func(1);
+            switchSection(0);
         </script>
         <script>
             function toggle(){
@@ -79,7 +85,21 @@
                 }
             }
             toggle();
-            checkScreen();
+            var currentSection = 1;
+            function switchSection(section){
+                if (currentSection != section){
+                    let slideName = document.getElementsByClassName("slideName");
+                    for (i = 0; i < slideName.length; i++) {
+                        slideName[i].className = slideName[i].className.replace("active", "");
+                        slideName[i].textContent = slideName[i].textContent.replace("*","");
+                    }
+                    slideName[section].className += " active";
+                    slideName[section].textContent += "*";
+                    Func(section);
+                    currentSection=section;
+                }
+            }
+            /*checkScreen();
             function checkScreen(){
                 let hyt = window.screen.height;
                 let wdt = window.screen.width;
@@ -90,7 +110,7 @@
                     document.getElementById("staticbar").style.flexDirection = "row";
                     document.getElementById("navbar").style.width = "25%";
                 }
-            }
+            }*/
         </script>
     </body>
 </html>

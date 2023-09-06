@@ -1,15 +1,33 @@
-var str = "";
 
-export async function Func() {
+
+
+var str = "";
+//var section = 1;
+
+export async function Func(section) {
     var prodParent = fetch("../class/prodview.html").then((res) => {
         var val = res.text();
         return val;
     });
-
-    var data = fetch("../json/prodData.json").then((res) => {
+    var data ="";
+    /*data = fetch('').then((res) => {
         return res.json();
-    }); //.then(d => {return JSON.stringify(d)});
-    //console.log(data);
+    });
+    if (data == ""){
+        data = fetch("../json/prodData.json").then((res) => {
+            return res.json();
+        }); //.then(d => {return JSON.stringify(d)});
+        //console.log(data);
+    }*/
+    if(section == 0){
+        data = fetch("../json/prodFmData.json").then((res) => {
+            return res.json();
+        });
+    }else {
+        data = fetch("../json/prodSgdata.json").then((res) => {
+            return res.json();
+        });
+    }
     str = Object.values((await data).valueOf("data"))[0];
     //console.log(str.length);
     var dataLength = str.length;
@@ -82,4 +100,4 @@ export async function loadItems(startNum, endNum) {
     }
 }
 
-Func();
+//Func(0);
