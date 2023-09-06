@@ -273,9 +273,9 @@ a.dailer{
 }
 /*Test.html Trial*/
  /* Navbar container */
-.navbar{
+#navbar{
     overflow: hidden;
-    background-color: #333;
+    /*background-color: #333;*/
     font-family: Arial;
 }
 
@@ -301,7 +301,6 @@ a.dailer{
   /* Dropdown button */
 
 .dropdown .dropbtn, .menuBtns, .dailer {
-    border: none;
     outline: none;
     color: white;
     background-color: inherit;
@@ -328,7 +327,7 @@ a.dailer{
     min-width: fit-content;
 }
   /* Add a red background color to navbar links on hover */
-.navbar a:hover .dropdown:hover .dropbtn {
+#navbar .dropdown:hover button {
     background: linear-gradient(#900226,#73021e,#5e0219, #6a021c, #73021e, #900226);
 }
 
@@ -356,7 +355,7 @@ a.dailer{
 
   /* Add a grey background color to dropdown links on hover */
 .dropdown-content a:hover {
-    background-color: #888787;
+    background: linear-gradient(#888787,#4a4a4a,#4a4a4a,#888787);
 }
 
   /* Show the dropdown menu on hover */
