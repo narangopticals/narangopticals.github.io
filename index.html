@@ -15,8 +15,10 @@
     <body>
         <nav id="navSpace">
             <div id="staticbar">
-                <img class="logo" src="imgs/logo.jpg"></img>
-                <h1 class="header">Narang Opticals</h1>
+                <a id="logoHeader" href="/" style="width: 100%; text-align: center;">
+                    <h1 class="header">Narang Opticals</h1>
+                    <img class="logo" src="imgs/logo.jpg"></img>
+                </a>
                 <div id="flexSpc" style="flex-grow: 0.75;">Products</div>
                 <div id="navbar" style="min-width: 30%;">
                     <div class="dropdown">
@@ -99,18 +101,6 @@
                     currentSection=section;
                 }
             }
-            /*checkScreen();
-            function checkScreen(){
-                let hyt = window.screen.height;
-                let wdt = window.screen.width;
-                if (hyt > wdt){
-                    document.getElementById("staticbar").style.flexDirection = "column";
-                    document.getElementById("navbar").style.width = "80%";
-                }else{
-                    document.getElementById("staticbar").style.flexDirection = "row";
-                    document.getElementById("navbar").style.width = "25%";
-                }
-            }*/
         </script>
     </body>
 </html>

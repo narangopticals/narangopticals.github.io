@@ -34,7 +34,7 @@ nav{
     text-align: center;
 }
 
-#staticbar{
+#staticbar,#logoHeader{
     display: flex;
     /*flex-direction:row;*/
     align-items: center;
@@ -288,7 +288,6 @@ a.dailer{
     padding: 14px 16px;
     text-decoration: none;
 }*/
-
   /* The dropdown container */
 .dropdown {
     float: left;
