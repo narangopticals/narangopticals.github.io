@@ -86,10 +86,10 @@ export async function loadItems(startNum, endNum) {
         || devType.match(/iPod/i)
         || devType.match(/BlackBerry/i)
         || devType.match(/Windows Phone/i)) {
-        wbLink = "https://api.whatsapp.com/send/?phone=919756231332&text=";
-    } else {
-        //wbLink = "https://web.whatsapp.com/send/?phone=919756231332&text=";
+        //wbLink = "https://api.whatsapp.com/send/?phone=919756231332&text=";
         wbLink = "intent:#Intent;scheme=startci://open?url_param="
+    } else {
+        wbLink = "https://web.whatsapp.com/send/?phone=919756231332&text=";
     }
     for (var j = 0; j < 9; j++) {
         var elem = elemsParents[j];
@@ -110,18 +110,6 @@ export async function loadItems(startNum, endNum) {
             elem.querySelector("iframe").src = "";
             elem.querySelector("h1").textContent = "";
             elem.style.visibility = "hidden";
-        }var devType = navigator.userAgent;
-        var wbLink = "";
-        if (devType.match(/Android/i)
-            || devType.match(/webOS/i)
-            || devType.match(/iPhone/i)
-            || devType.match(/iPad/i)
-            || devType.match(/iPod/i)
-            || devType.match(/BlackBerry/i)
-            || devType.match(/Windows Phone/i)) {
-            wbLink = "https://wa.me/+919756231332?text";
-        } else {
-            wbLink = "https://web.whatsapp.com/send/?phone=919756231332&text";
         }var devType = navigator.userAgent;
         var wbLink = "";
         if (devType.match(/Android/i)
