@@ -103,6 +103,7 @@ export async function loadItems(startNum, endNum) {
             //elem.querySelector("a").href="https://api.whatsapp.com/send/?phone=919756231332&text="+encodeURIComponent(encodeURIComponent(valueData.title)+"\n Item ID"+i)+"&type=phone_number&app_absent=0";
             elem.querySelector("a").href = wbLink+"I want to know More About Your Products" + encodeURIComponent("\nName : ") + encodeURIComponent(valueData.title) + encodeURIComponent(",  Item ID :") + valueData.itemcode + "&type=phone_number&app_absent=0&send=1";
             i++;
+            //elem.querySelector("h1").style.fontSize = "inherit";
         } else {
             elem.querySelector("iframe").src = "";
             elem.querySelector("h1").textContent = "";

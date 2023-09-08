@@ -484,9 +484,13 @@ a.dailer{
     #mainProdView{
         display: flex;
         flex-direction: column;
-        width: 100%;
-        align-content:start;
-												margin-right:10%;
+        width: 70%;
+        align-content:center;
+        text-align: center;
+        font-size: large;
+    }
+    .dropbtn,.sns-buttons,.slideName{
+        font-size: 110%;
     }
 
 }
@@ -520,10 +524,12 @@ a.dailer{
     }
     #mainProdView{
         display: grid;
-        width: 100%;
-        align-content:start;
-        column-gap: 2%;
+        /*width: 100%;*/
+        align-content:center;
+        text-align: center;
+        /*column-gap: 2%;*/
         row-gap: 2%;
         grid-template-columns: repeat(3,28%);
+        font-size: x-large;
     }
 }
