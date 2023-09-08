@@ -146,13 +146,15 @@ ul{
     border-spacing: 0.75%;
     margin: 0.12%,0.12%,0.25%,0.25%;
     text-align: center;
-    font-size: x-large;
     border-radius: 5px;
     font-weight: bolder;
     color: rgb(255, 255, 255);
     background: linear-gradient(#027f6e,#037667,#035549, #005d51, #00594d, #036a5c);
     height: fit-content;
+    /*
+    font-size: x-large;
     font-size: 130%;
+    */
     padding: 0%, 0%, 2%, 2%;
     border: 2px solid powderblue;
 }
@@ -307,7 +309,7 @@ a.dailer{
     margin: 0%; /* Important for vertical align on mobile phones */
     background: linear-gradient(#027f6e,#037667,#035549, #005d51, #00594d, #036a5c);
     height: fit-content;
-    font-size: 140%;
+    /*font-size: 140%;*/
     border: 2px solid powderblue;
     margin-top: 0.20%;
     margin-bottom: 0.20%;
@@ -484,10 +486,12 @@ a.dailer{
     #mainProdView{
         display: flex;
         flex-direction: column;
-        width: 100%;
+        width: fit-content;
         align-content:center;
         text-align: center;
         font-size: large;
+        padding-left: 15%;
+        padding-right: 15%;
     }
     .dropbtn,.sns-buttons,.slideName{
         font-size: 110%;
@@ -531,5 +535,9 @@ a.dailer{
         row-gap: 2%;
         grid-template-columns: repeat(3,28%);
         font-size: x-large;
+    }
+
+    .dropbtn,.sns-buttons,.slideName{
+        font-size: 140%;
     }
 }
