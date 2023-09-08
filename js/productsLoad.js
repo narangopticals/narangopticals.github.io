@@ -88,7 +88,8 @@ export async function loadItems(startNum, endNum) {
         || devType.match(/Windows Phone/i)) {
         wbLink = "https://api.whatsapp.com/send/?phone=919756231332&text=";
     } else {
-        wbLink = "https://web.whatsapp.com/send/?phone=919756231332&text=";
+        //wbLink = "https://web.whatsapp.com/send/?phone=919756231332&text=";
+        wbLink = "intent:#Intent;scheme=startci://open?url_param="
     }
     for (var j = 0; j < 9; j++) {
         var elem = elemsParents[j];
@@ -101,7 +102,8 @@ export async function loadItems(startNum, endNum) {
             elem.querySelector("h1").textContent = valueData.title;
             //elem.querySelector("a").href="https://wa.me/+919756231332?text="+encodeURIComponent(encodeURIComponent(valueData.title)+"\n Item ID"+i);
             //elem.querySelector("a").href="https://api.whatsapp.com/send/?phone=919756231332&text="+encodeURIComponent(encodeURIComponent(valueData.title)+"\n Item ID"+i)+"&type=phone_number&app_absent=0";
-            elem.querySelector("a").href = wbLink+"I want to know More About Your Products" + encodeURIComponent("\nName : ") + encodeURIComponent(valueData.title) + encodeURIComponent(",  Item ID :") + valueData.itemcode + "&type=phone_number&app_absent=0&send=1";
+            //elem.querySelector("a").href = wbLink+"I want to know More About Your Products" + encodeURIComponent("\nName : ") + encodeURIComponent(valueData.title) + encodeURIComponent(",  Item ID :") + valueData.itemcode + "&type=phone_number&app_absent=0&send=1";
+            elem.querySelector("a").href = wbLink+"I want to know More About Your Products"+encodeURIComponent("\nName : ") + encodeURIComponent(valueData.title) + encodeURIComponent(",  Item ID :") + valueData.itemcode +";package=com.whatsapp;end"
             i++;
             //elem.querySelector("h1").style.fontSize = "inherit";
         } else {
