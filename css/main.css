@@ -484,8 +484,9 @@ a.dailer{
     #mainProdView{
         display: flex;
         flex-direction: column;
-        width: 90%;
-        align-content:center;
+        width: 100%;
+        align-content:start;
+												margin-right:10%;
     }
 
 }
@@ -519,10 +520,10 @@ a.dailer{
     }
     #mainProdView{
         display: grid;
-        width: 90%;
-        align-content:center;
+        width: 100%;
+        align-content:start;
         column-gap: 2%;
         row-gap: 2%;
-        grid-template-columns: repeat(3,33%);
+        grid-template-columns: repeat(3,28%);
     }
 }
