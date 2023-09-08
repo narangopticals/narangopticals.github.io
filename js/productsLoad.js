@@ -1,7 +1,6 @@
 var str = "";
 //var section = 1;
 
-
 export async function Func(section) {
     var prodParent = fetch("../class/prodview.html").then((res) => {
         var val = res.text();
@@ -30,8 +29,8 @@ export async function Func(section) {
     //console.log(str.length);
     var dataLength = str.length;
     var prodParents = "";
-    if (dataLength > 9) {
-        await addPagesNavBtn();
+    if (dataLength > 8) {
+        await addPagesNavBtn(dataLength);
         await addItemViews(0, 9);
         await loadItems(0, 9);
     } else {
@@ -39,12 +38,14 @@ export async function Func(section) {
         await loadItems(0, dataLength);
     }
 
-    async function addPagesNavBtn() {
-        var pagesLen = dataLength % 10;
+    async function addPagesNavBtn(dataLength) {
+        var dtl= dataLength;
+        var pagesLen = Math.round(dtl / 9);
         var pagesView = fetch("../class/pagesview.html").then((res) => {
             return res.text();
         });
-        var pagesBtns = "";
+        var pagesBtns =  (await pagesView)
+                            .replaceAll('</button>', 'Pages: </button>');
         for (var i = 1; i <= pagesLen; i++) {
             var pagesBtns = pagesBtns + "\n" + (await pagesView)
                 .replaceAll('prodPagesBtn', 'prodPagesBtn' + i)
@@ -55,7 +56,7 @@ export async function Func(section) {
         btnParent = document.getElementById("btnNavProdView");
         var btns = btnParent.querySelectorAll('button');
         var itemStart = 0;
-        for (var i = 0; i < btns.length; i++) {
+        for (var i = 1; i < btns.length; i++) {
             var btn = btns[i];
             btn.setAttribute('onclick', 'window.loadItems(' + itemStart + ', ' + (itemStart + 8) + ')');
             itemStart = itemStart + 9;
