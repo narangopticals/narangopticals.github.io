@@ -45,8 +45,7 @@ nav{
     border-bottom: #00594d;
 }
 #navbar{
-    display: flex;
-    flex-direction:row;
+    display: flex;flex-direction:row;
     align-items: center;
     justify-content: center;
     /*width: 90%;*/
@@ -496,7 +495,12 @@ a.dailer{
     .dropbtn,.sns-buttons,.slideName{
         font-size: 110%;
     }
-
+    .header, #flexSpc{
+        font-size: xx-large;
+    }
+    #navbar div{
+        font-size:medium;
+    }
 }
 /* Landscape orientation */
 @media screen and (orientation: landscape) {
@@ -539,5 +543,8 @@ a.dailer{
 
     .dropbtn,.sns-buttons,.slideName{
         font-size: 140%;
+    }
+    .header{
+        font-size: x-large;
     }
 }
