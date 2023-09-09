@@ -44,19 +44,18 @@ export async function Func(section) {
         var pagesView = fetch("../class/pagesview.html").then((res) => {
             return res.text();
         });
-        var pagesBtns =  (await pagesView)
-                            .replaceAll('</button>', 'Pages: </button>');
+        var pagesBtns =  "";
         for (var i = 1; i <= pagesLen; i++) {
             var pagesBtns = pagesBtns + "\n" + (await pagesView)
                 .replaceAll('prodPagesBtn', 'prodPagesBtn' + i)
-                .replaceAll('</button>', i + '</button>');
+                .replaceAll('</button>', 'Page: '+ i + '</button>');
         }
         var btnParent = document.getElementById("btnNavProdView");
         btnParent.innerHTML = pagesBtns;
         btnParent = document.getElementById("btnNavProdView");
         var btns = btnParent.querySelectorAll('button');
         var itemStart = 0;
-        for (var i = 1; i < btns.length; i++) {
+        for (var i = 0; i < btns.length; i++) {
             var btn = btns[i];
             btn.setAttribute('onclick', 'window.loadItems(' + itemStart + ', ' + (itemStart + 8) + ')');
             itemStart = itemStart + 9;
@@ -125,6 +124,14 @@ export async function loadItems(startNum, endNum) {
         } else {
             wbLink = "https://web.whatsapp.com/send/?phone=919756231332&text";
         }
+        /*var currentPageNo = Math.round(startNum/9);
+        var buttons = document.getElementById('btnNavProdView').children;
+        for (i = 0 ; i < buttons.length ; i++){            
+            buttons[i].textContent = buttons[i].textContent.replaceAll('*','');
+            if (i == currentPageNo){
+                buttons[i].textContent = buttons[i].textContent + '*';
+            }
+        }*/
     }
 }
 

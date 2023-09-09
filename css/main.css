@@ -534,7 +534,7 @@ a.dailer{
         /*column-gap: 2%;*/
         row-gap: 2%;
         grid-template-columns: repeat(3,28%);
-        font-size: x-large;
+        font-size: larger;
     }
 
     .dropbtn,.sns-buttons,.slideName{
