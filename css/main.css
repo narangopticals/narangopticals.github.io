@@ -496,7 +496,7 @@ a.dailer{
         font-size: 110%;
     }
     .header, #flexSpc{
-        font-size: xx-large;
+        font-size: 40px;
     }
     #navbar div{
         font-size:medium;
@@ -545,6 +545,6 @@ a.dailer{
         font-size: 140%;
     }
     .header{
-        font-size: x-large;
+        font-size:40px;
     }
 }
