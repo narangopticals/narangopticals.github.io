@@ -16,10 +16,10 @@
             <iframe class="contact-form" src="https://docs.google.com/forms/d/e/1FAIpQLSc-aGQTwFXOkthFMcucHcXOv_-GQU9HCM2rXaHiBBpe7-2qCg/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
         </div>
         <script type="module">
-            import { Func, toggle } from "./js/navload.js";
-            window.Func = Func;
+            import { navLoader, toggle } from "./js/navload.js";
+            window.navLoader = navLoader;
             window.toggle = toggle;
-            Func('menuBtns',2,'Contact Us');
+            navLoader('menuBtns',2,'Contact Us');
         </script>
     </body>
 </html>

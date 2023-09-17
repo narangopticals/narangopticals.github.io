@@ -64,10 +64,10 @@
         </div>
         <br>
         <script type="module">
-            import { Func, toggle } from "./js/navload.js";
-            window.Func = Func;
+            import { navLoader, toggle } from "./js/navload.js";
+            window.navLoader = navLoader;
             window.toggle = toggle;
-            Func('menuBtns',1,'About Us');
+            navLoader('menuBtns',1,'About Us');
         </script>
         <script>
         </script>
@@ -79,7 +79,7 @@
     let playBtn = document.getElementById("playPause");
     firstRun();
 
-    checkScreen();
+    //checkScreen();
     function firstRun(){
         autoBol=false;
         playBtn.innerHTML="&#9632 Stop";

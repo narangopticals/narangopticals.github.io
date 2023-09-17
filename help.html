@@ -13,7 +13,7 @@
 <body>
 
     <nav id="navSpace">
-    
+
     </nav>
 
     <h4 style="text-align:center;"> How to navigate : </h4>
@@ -55,11 +55,11 @@
             </div>
         </div>
     </div>
-    
+
     <script type="module">
-        import { Func, toggle } from "./js/navload.js";
-        window.Func = Func;
+        import { navLoader, toggle } from "./js/navload.js";
+        window.navLoader = navLoader;
         window.toggle = toggle;
-        Func('sns-buttons',6, 'Guide Tour');
+        navLoader('sns-buttons', 6, 'Guide Tour');
     </script>
 </body>

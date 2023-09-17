@@ -19,10 +19,10 @@
             allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
     <script type="module">
-        import { Func, toggle } from "./js/navload.js";
-        window.Func = Func;
+        import { navLoader, toggle } from "./js/navload.js";
+        window.navLoader = navLoader;
         window.toggle = toggle;
-        Func('menuBtns', 3, 'Google Maps');
+        navLoader('menuBtns', 3, 'Google Maps');
     </script>
 
 </body>
