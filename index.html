@@ -14,42 +14,6 @@
 
     <body>
         <nav id="navSpace">
-            <div id="staticbar">
-                <a id="logoHeader" href="/" style="width: 100%; text-align: center;">
-                    <h1 class="header">Narang Opticals</h1>
-                    <img class="logo" src="imgs/logo.jpg"></img>
-                </a>
-                <div id="flexSpc" style="flex-grow: 0.75;">Products</div>
-                <div id="navbar" style="min-width: 30%;">
-                    <div class="dropdown">
-                        <button id="menuBtn" class="dropbtn">Menu&#9660
-                            <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content">
-                            <a class="menuBtns" href="/" style="background: linear-gradient(#888787,#4a4a4a,#4a4a4a,#888787);">Home*</a>
-                            <a class="menuBtns" href="/aboutus.html">About Us</a>
-                            <a class="menuBtns" href="/connect.html">Connect</a>
-                            <a class="menuBtns" href="/map.html">Map</a>
-                        </div>
-                    </div>
-                    <div class="dropdown">
-                        <button class="dropbtn">Social Media&#9660
-                            <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content">
-                            <a id="sns-button-fb" class="sns-buttons" href="https://www.facebook.com/narangopticals/">Facebook</a>
-                            <a id="sns-button-ig" class="sns-buttons" href="https://www.instagram.com/narangopticals/">Instagram</a>
-                            <a id="sns-button-gmap" class="sns-buttons" href="https://goo.gl/maps/2amGwn9QsvAvpBs88">Google Maps</a>
-                            <a id="sns-button-jsdl" class="sns-buttons" href="https://jsdl.in/DT-99WSGH2J">JustDial</a>
-                            <a id="sns-button-whatsapp" class="sns-buttons" href="https://wa.me/919756231332?text=Hi">Whatsapp</a>
-                            <a id="sns-button-twitter" class="sns-buttons" href="https://www.twitter.com/narangopticals/">Twitter</a>
-                        </div>
-                    </div>
-                    <a href="help.html" class="dropdown"><button class="sns-buttons">Guide Tour</button></a>
-                </div>
-                <div id="flexSpc"></div>
-            </div>
-            <button id="barHider" onclick="toggle()">Hide Navigator</button>
         </nav>
         <div style="width: 100%; height:fit-content; text-align:center; margin: 0.5%;">
             <button class="slideName" style="font-weight: bold;" onclick="switchSection(0)">Frame</button>
@@ -72,22 +36,13 @@
             //window.Func(1);
             switchSection(0);
         </script>
+        <script type="module">
+            import { navLoader, toggle } from "./js/navload.js";
+            window.navLoader = navLoader;
+            window.toggle = toggle;
+            navLoader('menuBtns',0,'Products');
+        </script>
         <script>
-            function toggle(){
-                var bar = document.getElementById('staticbar');
-                var hider = document.getElementById('barHider');
-                var navSpc = document.getElementById('navSpace');
-                if (bar.style.display.indexOf('flex') == 0 && hider.textContent.indexOf('Hide Navigator') == 0){
-                    bar.style.display = 'none';
-                    hider.textContent = 'Show Navigator';
-                    navSpc.style.width = 'fit-content';
-                }else{
-                    bar.style.display = 'flex';
-                    hider.textContent = 'Hide Navigator';
-                    navSpc.style.width = '100%';
-                }
-            }
-            toggle();
             var currentSection = 1;
             function switchSection(section){
                 if (currentSection != section){
@@ -95,9 +50,11 @@
                     for (i = 0; i < slideName.length; i++) {
                         slideName[i].className = slideName[i].className.replace("active", "");
                         slideName[i].textContent = slideName[i].textContent.replace("*","");
+                        slideName[i].title = "Click To Switch"
                     }
                     slideName[section].className += " active";
                     slideName[section].textContent += "*";
+                    slideName[section].title = "Currently Open";
                     Func(section);
                     currentSection=section;
                 }

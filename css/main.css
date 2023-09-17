@@ -5,7 +5,7 @@ body {
 button{
     border-radius: 4px;
 }
-h1, #flexSpc{
+h1, #flexSpc, #flexSpcTxt{
     color:rgb(255, 255, 255);
     text-shadow: 0 0 4px #c66666, 0 0 8px #6793c6;
     font-size: 250%;
@@ -29,7 +29,7 @@ nav{
     width: 100%;
     /*text-align: end;*/
 }
-#flexSpc{
+#flexSpc, #flexSpcTxt{
     flex-grow: 20%;
     text-align: center;
 }
@@ -495,7 +495,7 @@ a.dailer{
     .dropbtn,.sns-buttons,.slideName{
         font-size: 110%;
     }
-    .header, #flexSpc{
+    .header, #flexSpc, #flexSpcTxt{
         font-size: 40px;
     }
     #navbar div{

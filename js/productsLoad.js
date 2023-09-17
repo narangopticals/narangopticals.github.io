@@ -34,6 +34,7 @@ export async function Func(section) {
         await addItemViews(0, 9);
         await loadItems(0, 9);
     } else {
+        await addPagesNavBtn(dataLength);
         await addItemViews(0, dataLength);
         await loadItems(0, dataLength);
     }
@@ -63,11 +64,11 @@ export async function Func(section) {
     }
     async function addItemViews(startNum, endNum) {
         for (var i = startNum; i < endNum; i++) {
-            console.log(prodParent);
+            //console.log(prodParent);
             var vW = (await prodParent).replaceAll('grid', 'grid' + i);
-            console.log(vW);
+            //console.log(vW);
             prodParents = prodParents + "\n" + vW;
-            console.log(prodParents);
+            //console.log(prodParents);
         }
         var pS = prodParents.toString();
         document.getElementById("mainProdView").innerHTML = pS;
@@ -75,7 +76,7 @@ export async function Func(section) {
 }
 export async function loadItems(startNum, endNum) {
     var elemsParents = window.document.querySelectorAll('div[class^=grid]');
-    console.log(elemsParents);
+    //console.log(elemsParents);
     var i = startNum;
     var devType = navigator.userAgent;
     var wbLink = "";
@@ -90,7 +91,7 @@ export async function loadItems(startNum, endNum) {
         //wbLink = "intent:#Intent;scheme=startci://open?url_param="
         wbLink = "https://wa.me/+919756231332?text=";
     } else {
-        wbLink = "https://web.whatsapp.com/send/?phone=919756231332&text=";
+        wbLink = "https://api.whatsapp.com/send/?phone=919756231332&text=";
     }
     for (var j = 0; j < 9; j++) {
         var elem = elemsParents[j];
@@ -98,7 +99,7 @@ export async function loadItems(startNum, endNum) {
             elem.style.visibility = "visible";
             var valueData = str[i];
             //console.log(valueData.imgfile);
-            console.log(elem);
+            //console.log(elem);
             elem.querySelector("iframe").src = valueData.imgfile;
             elem.querySelector("h1").textContent = valueData.title;
             //elem.querySelector("a").href="https://wa.me/+919756231332?text="+encodeURIComponent(encodeURIComponent(valueData.title)+"\n Item ID"+i);
@@ -122,7 +123,7 @@ export async function loadItems(startNum, endNum) {
             || devType.match(/Windows Phone/i)) {
             wbLink = "https://wa.me/+919756231332?text";
         } else {
-            wbLink = "https://web.whatsapp.com/send/?phone=919756231332&text";
+            wbLink = "https://api.whatsapp.com/send/?phone=919756231332&text=";
         }
         /*var currentPageNo = Math.round(startNum/9);
         var buttons = document.getElementById('btnNavProdView').children;
