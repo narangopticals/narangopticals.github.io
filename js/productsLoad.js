@@ -17,9 +17,15 @@ export async function Func(section) {
         //console.log(data);
     }*/
     if (section == 0) {
-        data = fetch("../json/prodFmData.json").then((res) => {
-            return res.json();
+        //data = await fetch("https://gist.githubusercontent.com/narangopticals/ea3f7fa9a39a62872983e2b813441d53/raw/1c2b863b7e5b5f3c94e9f7bc51acf40e1828e19c/prodFmData.json").then((res) => {
+        var results = fetch('https://api.github.com/gists/5bd845b70c653deca357979be9e4fdd0').then(results => {
+            return results.json();
         });
+        var data = await results.then(data => {
+            return data.files["prodFmData.json"].content;
+        });
+        setTimeout(data = JSON.parse(data), 3000);
+        console.log(data);
     } else {
         data = fetch("../json/prodSgdata.json").then((res) => {
             return res.json();
@@ -40,16 +46,16 @@ export async function Func(section) {
     }
 
     async function addPagesNavBtn(dataLength) {
-        var dtl= dataLength;
-        var pagesLen = Math.round(dtl / 9);
+        var dtl = dataLength + 1;
+        var pagesLen = Math.ceil(dtl / 9);
         var pagesView = fetch("../class/pagesview.html").then((res) => {
             return res.text();
         });
-        var pagesBtns =  "";
+        var pagesBtns = "";
         for (var i = 1; i <= pagesLen; i++) {
             var pagesBtns = pagesBtns + "\n" + (await pagesView)
                 .replaceAll('prodPagesBtn', 'prodPagesBtn' + i)
-                .replaceAll('</button>', 'Page: '+ i + '</button>');
+                .replaceAll('</button>', 'Page: ' + i + '</button>');
         }
         var btnParent = document.getElementById("btnNavProdView");
         btnParent.innerHTML = pagesBtns;
@@ -104,7 +110,7 @@ export async function loadItems(startNum, endNum) {
             elem.querySelector("h1").textContent = valueData.title;
             //elem.querySelector("a").href="https://wa.me/+919756231332?text="+encodeURIComponent(encodeURIComponent(valueData.title)+"\n Item ID"+i);
             //elem.querySelector("a").href="https://api.whatsapp.com/send/?phone=919756231332&text="+encodeURIComponent(encodeURIComponent(valueData.title)+"\n Item ID"+i)+"&type=phone_number&app_absent=0";
-            elem.querySelector("a").href = wbLink+"I want to know More About Your Products" + encodeURIComponent("\nName : ") + encodeURIComponent(valueData.title) + encodeURIComponent(",  Item ID :") + valueData.itemcode + "&type=phone_number&app_absent=0&send=1";
+            elem.querySelector("a").href = wbLink + "I want to know More About Your Products" + encodeURIComponent("\nName : ") + encodeURIComponent(valueData.title) + encodeURIComponent(",  Item ID :") + valueData.itemcode + "&type=phone_number&app_absent=0&send=1";
             //elem.querySelector("a").href = wbLink+"I want to know More About Your Products"+encodeURIComponent("\nName : ") + encodeURIComponent(valueData.title) + encodeURIComponent(",  Item ID :") + valueData.itemcode +";package=com.whatsapp;end"
             i++;
             //elem.querySelector("h1").style.fontSize = "inherit";
@@ -112,7 +118,7 @@ export async function loadItems(startNum, endNum) {
             elem.querySelector("iframe").src = "";
             elem.querySelector("h1").textContent = "";
             elem.style.visibility = "hidden";
-        }var devType = navigator.userAgent;
+        } var devType = navigator.userAgent;
         var wbLink = "";
         if (devType.match(/Android/i)
             || devType.match(/webOS/i)
@@ -134,6 +140,17 @@ export async function loadItems(startNum, endNum) {
             }
         }*/
     }
+    removePopElem();
+    function removePopElem() {
+        var popElem = document.querySelectorAll('.ndfHFb-c4YZDc-Wrql6b');
+        for (var i = 0; i < popElem.length; i++) {
+            popElem[i].remove();
+        }
+        setTimeout(removePopElem, 15000);
+        //console.log("popup found = "+popElem.length);
+    }
+
+
 }
 
 //Func(0);
