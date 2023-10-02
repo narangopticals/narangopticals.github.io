@@ -485,12 +485,12 @@ a.dailer{
     #mainProdView{
         display: flex;
         flex-direction: column;
-        width: fit-content;
+        width: 85%;
         align-content:center;
         text-align: center;
         font-size: large;
-        padding-left: 15%;
-        padding-right: 15%;
+        padding-left: 10%;
+        padding-right: 5%;
     }
     .dropbtn,.sns-buttons,.slideName{
         font-size: 110%;
@@ -537,7 +537,7 @@ a.dailer{
         text-align: center;
         /*column-gap: 2%;*/
         row-gap: 2%;
-        grid-template-columns: repeat(3,28%);
+        grid-template-columns: repeat(3,33%);
         font-size: larger;
     }
 

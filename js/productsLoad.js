@@ -92,6 +92,38 @@ export async function msgWhatsapp(e){
         window.open(wbLink+text,"_blank");
     }
 }
+/*export async function zoomIt(e){
+    /*if (window.document.getElementById('popupElemt') ==undefined){
+        var popUpParent = await fetch("../class/popup.html").then((res) => {
+            console.log(res);
+            var val = res.text();
+            return val;
+        });
+        console.log(popUpParent);
+        var mainProd = window.document.getElementById('mainProdView');
+        var elemNew = (new DOMParser()).parseFromString(popUpParent, 'text/html');
+        //var elemNew = $.parseHTML(popUpParent);
+        console.log(elemNew);
+        mainProd.parentNode.insertBefore(popUpParent,mainProd);
+    }*//*
+    var popElem = window.document.getElementById('popupElemt');
+    popElem.style.display="block";
+    var obj = e.target;
+    //console.log(e);
+    var htmlText = obj.innerHTML;
+    //console.log(htmlText);
+    var popmatterElem = window.document.getElementById('popMatter');
+    popmatterElem.innerHTML=htmlText;
+    var overlayElem = popmatterElem.querySelector('.overlay');
+    var aspRatio = (window.screen.width / window.screen.height);
+    if (aspRatio > 1){
+        popElem.style.width = "30%";
+        overlayElem.style.left="40%";
+    }else{
+        popElem.style.width = "85%";
+        overlayElem.style.left="40%";
+    }
+}*/
 export async function loadItems(startNum, endNum) {
     var elemsParents = window.document.querySelectorAll('div[class^=grid]');
     //console.log(elemsParents);
@@ -100,6 +132,10 @@ export async function loadItems(startNum, endNum) {
         var elem = elemsParents[j];
         if (i < str.length) {
             elem.style.visibility = "visible";
+            /*elem.addEventListener("click",
+            function(e){
+                zoomIt(e);
+            });*/
             var valueData = str[i];
             //console.log(valueData.imgfile);
             //console.log(elem);
