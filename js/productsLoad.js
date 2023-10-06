@@ -11,6 +11,11 @@ export async function Func(section) {
         var results = fetch('https://api.github.com/gists/ea3f7fa9a39a62872983e2b813441d53').then(results => {
             return results.json();
         });
+        if (results == undefined || results.length ==0){
+            results = fetch('../json/prodFmData.json').then(results => {
+                return results.json();
+            }); 
+        }
         var data = await results.then(data => {
             return data.files["prodFmData.json"].content;
         });
@@ -57,6 +62,7 @@ export async function Func(section) {
             btn.setAttribute('onclick', 'window.loadItems(' + itemStart + ', ' + (itemStart + 8) + ')');
             itemStart = itemStart + 9;
         }
+        window.document.getElementById("btnNavProdView2").innerHTML = document.getElementById("btnNavProdView").innerHTML;
     }
     async function addItemViews(startNum, endNum) {
         for (var i = startNum; i < endNum; i++) {

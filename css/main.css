@@ -19,8 +19,8 @@ h1, #flexSpc, #flexSpcTxt,#flexSpcTel{
 }
 /*animation element setup*/
 #flexSpcTel{
-    font-size: larger;
-    font-weight: bolder;
+    font-size: large;
+    font-weight: bold;
     animation-duration: 4s;
     animation-iteration-count: infinite;
     animation-name: flash;
@@ -454,7 +454,7 @@ a.dailer{
     min-height: 50%;
     width: 80%;
 }
-/* Portrait orientation */
+/* Portrait orientation ||*/
 @media screen and (orientation: portrait) {
     .mainContent{
         display: flex;
@@ -509,16 +509,16 @@ a.dailer{
         padding-right: 5%;
     }
     .dropbtn,.sns-buttons,.slideName{
-        font-size: 110%;
+        font-size: 95%;
     }
     .header, #flexSpc, #flexSpcTxt{
-        font-size: 40px;
+        font-size: 34px;
     }
     #navbar div{
         font-size:medium;
     }
 }
-/* Landscape orientation */
+/* Landscape orientation = */
 @media screen and (orientation: landscape) {
     .mainContent{
         display: flex;
