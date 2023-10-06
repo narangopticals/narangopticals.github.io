@@ -485,7 +485,7 @@ a.dailer{
     #mainProdView{
         display: flex;
         flex-direction: column;
-        width: 85%;
+        width: 75%;
         align-content:center;
         text-align: center;
         font-size: large;
@@ -537,7 +537,7 @@ a.dailer{
         text-align: center;
         /*column-gap: 2%;*/
         row-gap: 2%;
-        grid-template-columns: repeat(3,33%);
+        grid-template-columns: repeat(3,28%);
         font-size: larger;
     }
 
