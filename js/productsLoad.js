@@ -15,7 +15,7 @@ export async function Func(section) {
             return data.files["prodFmData.json"].content;
         });
         setTimeout(data = JSON.parse(data), 3000);
-        console.log(data);
+        //console.log(data);
     } else {
         data = fetch("../json/prodSgdata.json").then((res) => {
             return res.json();
@@ -73,7 +73,7 @@ export async function Func(section) {
 export async function msgWhatsapp(e){
     var obj = e.currentTarget;
     var text = obj.values[0];
-    console.log(text.length);
+    //console.log(text.length);
     if(text.length > 0){
         var devType = navigator.userAgent;
         var wbLink = "";

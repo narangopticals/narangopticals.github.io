@@ -5,11 +5,27 @@ body {
 button{
     border-radius: 4px;
 }
-h1, #flexSpc, #flexSpcTxt{
+h1, #flexSpc, #flexSpcTxt,#flexSpcTel{
     color:rgb(255, 255, 255);
     text-shadow: 0 0 4px #c66666, 0 0 8px #6793c6;
     font-size: 250%;
 }
+/*animation event #start*/
+@keyframes flash {
+    25% {color: white;}
+    50% {color : gold;}
+    75% {color: beige;}
+    100% {color: goldenrod;}
+}
+/*animation element setup*/
+#flexSpcTel{
+    font-size: larger;
+    font-weight: bolder;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-name: flash;
+}
+/*animation event #end*/
 .logo{
     margin: 0.5%;
     margin-left: 0.1%;
@@ -29,8 +45,8 @@ nav{
     width: 100%;
     /*text-align: end;*/
 }
-#flexSpc, #flexSpcTxt{
-    flex-grow: 20%;
+#flexSpc, #flexSpcTxt,#flexSpcTel{
+    flex-grow: 0.75;
     text-align: center;
 }
 
@@ -518,7 +534,7 @@ a.dailer{
         width: 30%;
     }
     .logo{
-        max-width: 6%;
+        max-width: 12%;
     }
     #directionFrame{
         width: 60%;
