@@ -1,23 +1,21 @@
 <div id="popupElemt" style="
-        position: sticky;
         text-align: center;
         padding:3%;
         display: flex;
         flex-direction: column;
-        width: 25%;
-        aspect-ratio: 0.8;
+        min-width: 25%;
         background: black;
-        overflow: clip;
-        z-index: 1000000;
         display: none;
         top: 0;
         align-self: center;">
-            <button>X</button>
-            <div id="popMatter" style="
+        <button id="cartCloser" style="position: relative;
+                top: -50px;
+                right : -150px">X</button>
+        <div id="popMatter" style="
                     display: flex;
                     flex-direction: column;
                     border: 3px solid saddlebrown;
                     color: white;
                     border-radius: 3%;
                     margin-bottom: 10%;"></div>
-    </div>
+</div>

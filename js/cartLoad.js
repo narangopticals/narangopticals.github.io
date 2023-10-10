@@ -300,7 +300,11 @@ export async function loadItems(startNum, endNum, pgNum) {
     });
     cartView.innerHTML = await popElemText;
     var popElemt = cartView.querySelector('#popupElemt');
-
+    var cartCloseBtn = cartView.querySelector('#cartCloser');
+    cartCloseBtn.addEventListener("click",
+        function (e) {
+            cartToggle();
+        });
     var matterView = popElemt.querySelector('#popMatter');
     var costs = [];
     var cost = 0;
@@ -309,14 +313,20 @@ export async function loadItems(startNum, endNum, pgNum) {
         var tmp = cartItem[i].cost;
         costs.push(tmp);
         cost += Number.parseInt(tmp);
-        costBreakDown += "Item" + i + "." + cartItem[i].title + "(" + tmp + ")\n";
+        costBreakDown += "Item " + (i + 1) + ")" + cartItem[i].title + " = Rs." + tmp + "\n";
     }
-    costBreakDown += " = " + cost.toString();
+    costBreakDown += "Total Cost = " + cost.toString();
     matterView.textContent = costBreakDown;
     setTimeout(checkOutLater(null, null), 10000);
 }
 
-export async function showCart(e) {
+export async function cartToggle(e) {
     var popElemt = document.getElementById('cartViewMini').querySelector('#popupElemt');
-    popElemt.style.display = "";
+    if (popElemt.style.display == "none") {
+        popElemt.style.display = "";
+        popElemt.querySelector('#cartCloser').style.top = "-45px";
+    } else {
+        popElemt.style.display = "none";
+    }
+
 }

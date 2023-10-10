@@ -43,18 +43,18 @@
 
     </div>
     <div id="cartFloat">
-        <button id="cartExpand" onclick="showCart()">&#128722;<span id='cartCounter'>0</span>
+        <button id="cartExpand" onclick="cartToggle()" style="width: 100%;">&#128722;<span id='cartCounter'>0</span>
         </button>
         <div id="cartViewMini">
 
         </div>
     </div>
     <script type="module">
-        import { Func, loadItems, checkOutLater, showCart } from "./js/cartLoad.js";
+        import { Func, loadItems, checkOutLater, cartToggle } from "./js/cartLoad.js";
         window.Func = Func;
         window.loadItems = loadItems;
         window.checkOutLater = checkOutLater;
-        window.showCart = showCart;
+        window.cartToggle = cartToggle;
         Func();
     </script>
     <script type="module">
