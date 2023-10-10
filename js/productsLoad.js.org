@@ -97,129 +97,38 @@ export async function msgWhatsapp(e) {
         window.open(wbLink + text, "_blank");
     }
 }
-export var selectedItems = [];
-export async function checkOutLater(btnLoad, pressedBtn) {
-    if (btnLoad == null && pressedBtn == null) {
-        await loadCart();
-    } else if (pressedBtn != null) {
-        updateCart(pressedBtn);
-        console.log(pressedBtn);
-    } else if (btnLoad != null) {
-
-    }
-
-    function modifyCartCount() {
-        var cartView = document.getElementById('cartExpand');
-        var cartCounter = cartView.querySelector('#cartCounter');
-        console.log(cartCounter);
-        cartCounter.textContent = selectedItems.length;
-    }
-    function addProduct(id, btn) {
-        if (selectedItems.indexOf(id) < 0) {
-            selectedItems.push(id);
-            setCookie("incartItems", selectedItems, 10);
-            btn.textContent = "-";
-            btn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
-            console.log(selectedItems);
-            modifyCartCount();
-        }
-    }
-    function removeProduct(id, btn) {
-        if (selectedItems.indexOf(id) > -1) {
-            var newSelection = [];
-            for (let index = 0; index < selectedItems.length; index++) {
-                var element = selectedItems[index];
-                if (element != id) {
-                    newSelection.push(element);
-                }
-            }
-            btn.textContent = "+";
-            btn.style.background = 'linear-gradient(to bottom, rgb(107, 128, 0),rgb(150, 179, 3),rgb(107, 128, 0))';
-            selectedItems = newSelection;
-            setCookie("incartItems", selectedItems, 10);
-            modifyCartCount();
-        }
-    }
-    function updateProductCount() {
-        var totalSelected = selectedItems.length;
-        var prodView = window.document.getElementById('mainProdView');
-        var cartBtns = prodView.querySelectorAll('button[class^=cartBtn]');
-        console.log("updateProductCount:" + totalSelected);
-        var idBtnsLen = cartBtns.length;
-        console.log("updateProductCount: idBtnsLen =" + idBtnsLen);
-
-        for (var j = 0; j < idBtnsLen; j++) {
-            var currentBtn = cartBtns[j];
-            currentBtn.textContent = "+";
-            currentBtn.style.background = 'linear-gradient(to bottom, rgb(107, 128, 0),rgb(150, 179, 3),rgb(107, 128, 0))';
-            var currentBtnVal = currentBtn.value.toString();
-            console.log("updateProductCount: currentBtn.value =" + currentBtnVal);
-            console.log("updateProductCount: selItemID =" + selItemIdstr);
-            for (var i = 0; i < totalSelected; i++) {
-                var selItemID = selectedItems[i];
-                var selItemIdstr = selItemID.toString();
-                selItemIdstr = selItemIdstr.trim();
-                if (currentBtnVal == selItemIdstr) {
-                    console.log("match found");
-                    console.log(currentBtn);
-                    currentBtn.textContent = "-";
-                    currentBtn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
-                }
-            }
-        }
-        modifyCartCount();
-    }
-
-    function updateCart(btn) {
-        var idMod = "";
-        if (btn != undefined) {
-            idMod = btn.value;
-        }
-        console.log(idMod.length);
-        if (idMod.length > 0) {
-            if (selectedItems.length > 0) {
-                if (selectedItems.indexOf(idMod) > -1) {
-                    removeProduct(idMod, btn);
-                } else {
-                    addProduct(idMod, btn);
-                }
-            } else {
-                addProduct(idMod, btn);
-            }
-        }
-
-    }
-    async function loadCart() {
-        var cartString = await getCookie("incartItems");
-        console.log(cartString);
-        if (cartString.length > 0) {
-            selectedItems = cartString.split(",")
-        }
-        console.log(selectedItems);
-        updateProductCount();
-    }
-    async function setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        let expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
-    async function getCookie(cname) {
-        let name = cname + "=";
-        let decodedCookie = decodeURIComponent(document.cookie);
-        let ca = decodedCookie.split(';');
-        for (let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
+/*export async function zoomIt(e){
+    /*if (window.document.getElementById('popupElemt') ==undefined){
+        var popUpParent = await fetch("../class/popup.html").then((res) => {
+            console.log(res);
+            var val = res.text();
+            return val;
+        });
+        console.log(popUpParent);
+        var mainProd = window.document.getElementById('mainProdView');
+        var elemNew = (new DOMParser()).parseFromString(popUpParent, 'text/html');
+        //var elemNew = $.parseHTML(popUpParent);
+        console.log(elemNew);
+        mainProd.parentNode.insertBefore(popUpParent,mainProd);
+    }*//*
+var popElem = window.document.getElementById('popupElemt');
+popElem.style.display="block";
+var obj = e.target;
+//console.log(e);
+var htmlText = obj.innerHTML;
+//console.log(htmlText);
+var popmatterElem = window.document.getElementById('popMatter');
+popmatterElem.innerHTML=htmlText;
+var overlayElem = popmatterElem.querySelector('.overlay');
+var aspRatio = (window.screen.width / window.screen.height);
+if (aspRatio > 1){
+popElem.style.width = "30%";
+overlayElem.style.left="40%";
+}else{
+popElem.style.width = "85%";
+overlayElem.style.left="40%";
 }
+}*/
 
 export async function loadItems(startNum, endNum, pgNum) {
 
@@ -230,7 +139,13 @@ export async function loadItems(startNum, endNum, pgNum) {
         var elem = elemsParents[j];
         if (i < str.length) {
             elem.style.visibility = "visible";
+            /*elem.addEventListener("click",
+            function(e){
+                zoomIt(e);
+            });*/
             var valueData = str[i];
+            //console.log(valueData.imgfile);
+            //console.log(elem);
             elem.querySelector("iframe").src = valueData.imgfile;
             elem.querySelector("h1").textContent = valueData.title;
             var val = [encodeURIComponent("I want to know More About Your Products") +
@@ -239,20 +154,13 @@ export async function loadItems(startNum, endNum, pgNum) {
                 encodeURIComponent(",  Item ID :") +
                 encodeURIComponent(valueData.itemnum) +
                 "&type=phone_number&app_absent=0&send=1"];
-            var whatsappBtn = elem.querySelector("button[class^=whatsappBtn]");
-            whatsappBtn.values = val;
-            whatsappBtn.addEventListener("click",
+            elem.querySelector("button").values = val;
+            elem.querySelector("button").addEventListener("click",
                 function (e) {
                     msgWhatsapp(e);
                 });
-            var cartBtn = elem.querySelector("button[class^=cartBtn]");
-            cartBtn.value = valueData.itemnum;
-            checkOutLater(cartBtn, null);
-            cartBtn.addEventListener("click",
-                function (e) {
-                    checkOutLater(null, e.target);
-                });
             i++;
+            //elem.querySelector("h1").style.fontSize = "inherit";
         } else {
             elem.querySelector("iframe").src = "";
             elem.querySelector("h1").textContent = "";
@@ -268,5 +176,18 @@ export async function loadItems(startNum, endNum, pgNum) {
             }
         }
     }
-    setTimeout(checkOutLater(null, null), 10000);
+
+    /*removePopElem();
+    function removePopElem() {
+        var popElem = document.querySelectorAll('.ndfHFb-c4YZDc-Wrql6b');
+        for (var i = 0; i < popElem.length; i++) {
+            popElem[i].remove();
+        }
+        setTimeout(removePopElem, 15000);
+        //console.log("popup found = "+popElem.length);
+    }*/
+
+
 }
+
+//Func(0);

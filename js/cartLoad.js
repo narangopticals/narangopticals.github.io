@@ -1,80 +1,76 @@
 var str = "";
 //var section = 1;
+var prodParent = ""
+var prodParents = "";
+var selectedItems = [];
+var cartItem = [];
+export async function Func() {
 
-export async function Func(section) {
-    var prodParent = fetch("../class/prodview.html").then((res) => {
+    prodParent = fetch("../class/prodview.html").then((res) => {
         var val = res.text();
         return val;
     });
-    var data = "";
-    if (section == 0) {
-        var results = fetch('https://api.github.com/gists/ea3f7fa9a39a62872983e2b813441d53').then(results => {
+    var framesData = "";
+    var results = fetch('https://api.github.com/gists/ea3f7fa9a39a62872983e2b813441d53').then(results => {
+        return results.json();
+    });
+    var data = await results.then(data => {
+        return data.files["prodFmData.json"].content;
+    });
+    setTimeout(framesData = JSON.parse(data), 3000);
+    if (framesData == undefined || framesData.length == 0) {
+        framesData = fetch('../json/prodFmData.json').then(results => {
             return results.json();
         });
-        if (results == undefined || results.length == 0) {
-            results = fetch('../json/prodFmData.json').then(results => {
-                return results.json();
-            });
-        }
-        var data = await results.then(data => {
-            return data.files["prodFmData.json"].content;
-        });
-        setTimeout(data = JSON.parse(data), 3000);
-        //console.log(data);
-    } else {
-        data = fetch("../json/prodSgdata.json").then((res) => {
-            return res.json();
-        });
     }
-    str = Object.values((await data).valueOf("data"))[0];
-    //console.log(str.length);
-    var dataLength = str.length;
-    var prodParents = "";
-    if (dataLength > 8) {
-        await addPagesNavBtn(dataLength);
-        await addItemViews(0, 9);
-        await loadItems(0, 9, 0);
-    } else {
-        await addPagesNavBtn(dataLength);
-        await addItemViews(0, dataLength);
-        await loadItems(0, dataLength, 0);
-    }
+    //console.log(data);
+    var sunglassData = fetch("../json/prodSgdata.json").then((res) => {
+        return res.json();
+    });
 
-    async function addPagesNavBtn(dataLength) {
-        var dtl = dataLength + 1;
-        var pagesLen = Math.ceil(dtl / 9);
-        var pagesView = fetch("../class/pagesview.html").then((res) => {
-            return res.text();
-        });
-        var pagesBtns = "";
-        for (var i = 1; i <= pagesLen; i++) {
-            var pagesBtns = pagesBtns + "\n" + (await pagesView)
-                .replaceAll('prodPagesBtn', 'prodPagesBtn' + i)
-                .replaceAll('</button>', 'Page: ' + i + '</button>');
-        }
-        var btnParent = document.getElementById("btnNavProdView");
-        btnParent.innerHTML = pagesBtns;
-        btnParent = document.getElementById("btnNavProdView");
-        var btns = btnParent.querySelectorAll('button');
-        var itemStart = 0;
-        for (var i = 0; i < btns.length; i++) {
-            var btn = btns[i];
-            btn.setAttribute('onclick', 'window.loadItems(' + itemStart + ', ' + (itemStart + 8) + ', ' + i + ')');
-            itemStart = itemStart + 9;
-        }
-        window.document.getElementById("btnNavProdView2").innerHTML = document.getElementById("btnNavProdView").innerHTML;
+    const mergedJSON = Object.assign({}, framesData, sunglassData);
+    console.log(mergedJSON);
+    str = Object.values(mergedJSON.valueOf("data"))[0];
+    console.log(str);
+    //console.log(str.length);
+    //var dataLength = str.length;
+    checkOutLater(null, null, str);
+
+}
+async function addPagesNavBtn(dataLength) {
+    var dtl = dataLength + 1;
+    var pagesLen = Math.ceil(dtl / 9);
+    var pagesView = fetch("../class/pagesview.html").then((res) => {
+        return res.text();
+    });
+    var pagesBtns = "";
+    for (var i = 1; i <= pagesLen; i++) {
+        var pagesBtns = pagesBtns + "\n" + (await pagesView)
+            .replaceAll('prodPagesBtn', 'prodPagesBtn' + i)
+            .replaceAll('</button>', 'Page: ' + i + '</button>');
     }
-    async function addItemViews(startNum, endNum) {
-        for (var i = startNum; i < endNum; i++) {
-            //console.log(prodParent);
-            var vW = (await prodParent).replaceAll('grid', 'grid' + i);
-            //console.log(vW);
-            prodParents = prodParents + "\n" + vW;
-            //console.log(prodParents);
-        }
-        var pS = prodParents.toString();
-        document.getElementById("mainProdView").innerHTML = pS;
+    var btnParent = document.getElementById("btnNavProdView");
+    btnParent.innerHTML = pagesBtns;
+    btnParent = document.getElementById("btnNavProdView");
+    var btns = btnParent.querySelectorAll('button');
+    var itemStart = 0;
+    for (var i = 0; i < btns.length; i++) {
+        var btn = btns[i];
+        btn.setAttribute('onclick', 'window.loadItems(' + itemStart + ', ' + (itemStart + 8) + ', ' + i + ')');
+        itemStart = itemStart + 9;
     }
+    //window.document.getElementById("btnNavProdView2").innerHTML = document.getElementById("btnNavProdView").innerHTML;
+}
+async function addItemViews(startNum, endNum) {
+    for (var i = startNum; i < endNum; i++) {
+        //console.log(prodParent);
+        var vW = (await prodParent).replaceAll('grid', 'grid' + i);
+        //console.log(vW);
+        prodParents = prodParents + "\n" + vW;
+        //console.log(prodParents);
+    }
+    var pS = prodParents.toString();
+    document.getElementById("mainProdView").innerHTML = pS;
 }
 export async function msgWhatsapp(e) {
     var obj = e.currentTarget;
@@ -97,8 +93,7 @@ export async function msgWhatsapp(e) {
         window.open(wbLink + text, "_blank");
     }
 }
-export var selectedItems = [];
-export async function checkOutLater(btnLoad, pressedBtn) {
+export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
     if (btnLoad == null && pressedBtn == null) {
         await loadCart();
     } else if (pressedBtn != null) {
@@ -108,6 +103,23 @@ export async function checkOutLater(btnLoad, pressedBtn) {
 
     }
 
+    function getLoadingObjects(data, selection) {
+        var arrSelect = [];
+        for (var j = 0; j < selection.length; j++) {
+            //console.log(data);
+            var currentItemVal = selection[j];
+            //console.log(currentItemVal);
+            for (var i = 0; i < data.length; i++) {
+                var value = data[i];
+                if (value.itemnum.trim() == currentItemVal.trim()) {
+                    //console.log(value);
+                    arrSelect.push(value);
+                }
+            }
+        }
+        console.log(arrSelect);
+        cartItem = arrSelect;
+    }
     function modifyCartCount() {
         var cartView = document.getElementById('cartExpand');
         var cartCounter = cartView.querySelector('#cartCounter');
@@ -150,20 +162,22 @@ export async function checkOutLater(btnLoad, pressedBtn) {
 
         for (var j = 0; j < idBtnsLen; j++) {
             var currentBtn = cartBtns[j];
-            currentBtn.textContent = "+";
-            currentBtn.style.background = 'linear-gradient(to bottom, rgb(107, 128, 0),rgb(150, 179, 3),rgb(107, 128, 0))';
-            var currentBtnVal = currentBtn.value.toString();
-            console.log("updateProductCount: currentBtn.value =" + currentBtnVal);
-            console.log("updateProductCount: selItemID =" + selItemIdstr);
-            for (var i = 0; i < totalSelected; i++) {
-                var selItemID = selectedItems[i];
-                var selItemIdstr = selItemID.toString();
-                selItemIdstr = selItemIdstr.trim();
-                if (currentBtnVal == selItemIdstr) {
-                    console.log("match found");
-                    console.log(currentBtn);
-                    currentBtn.textContent = "-";
-                    currentBtn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
+            if (currentBtn.parentNode.parentNode.style.visibility != "hidden") {
+                currentBtn.textContent = "+";
+                currentBtn.style.background = 'linear-gradient(to bottom, rgb(107, 128, 0),rgb(150, 179, 3),rgb(107, 128, 0))';
+                var currentBtnVal = currentBtn.value.toString();
+                console.log("updateProductCount: currentBtn.value =" + currentBtnVal);
+                console.log("updateProductCount: selItemID =" + selItemIdstr);
+                for (var i = 0; i < totalSelected; i++) {
+                    var selItemID = selectedItems[i];
+                    var selItemIdstr = selItemID.toString();
+                    selItemIdstr = selItemIdstr.trim();
+                    if (currentBtnVal == selItemIdstr) {
+                        console.log("match found");
+                        console.log(currentBtn);
+                        currentBtn.textContent = "-";
+                        currentBtn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
+                    }
                 }
             }
         }
@@ -196,6 +210,17 @@ export async function checkOutLater(btnLoad, pressedBtn) {
             selectedItems = cartString.split(",")
         }
         console.log(selectedItems);
+        var dataLength = selectedItems.length;
+        getLoadingObjects(jsonData, selectedItems);
+        if (dataLength > 8) {
+            await addPagesNavBtn(dataLength);
+            await addItemViews(0, 9);
+            await loadItems(0, 9, 0);
+        } else {
+            await addPagesNavBtn(dataLength);
+            await addItemViews(0, 9);
+            await loadItems(0, dataLength, 0);
+        }
         updateProductCount();
     }
     async function setCookie(cname, cvalue, exdays) {
@@ -228,7 +253,7 @@ export async function loadItems(startNum, endNum, pgNum) {
     var i = startNum;
     for (var j = 0; j < 9; j++) {
         var elem = elemsParents[j];
-        if (i < str.length) {
+        if (i < selectedItems.length) {
             elem.style.visibility = "visible";
             var valueData = str[i];
             elem.querySelector("iframe").src = valueData.imgfile;
@@ -268,5 +293,30 @@ export async function loadItems(startNum, endNum, pgNum) {
             }
         }
     }
+
+    var cartView = document.getElementById('cartViewMini');
+    var popElemText = fetch("../class/cartcost.html").then((res) => {
+        return res.text();
+    });
+    cartView.innerHTML = await popElemText;
+    var popElemt = cartView.querySelector('#popupElemt');
+
+    var matterView = popElemt.querySelector('#popMatter');
+    var costs = [];
+    var cost = 0;
+    var costBreakDown = "";
+    for (var i = 0; i < cartItem.length; i++) {
+        var tmp = cartItem[i].cost;
+        costs.push(tmp);
+        cost += Number.parseInt(tmp);
+        costBreakDown += "Item" + i + "." + cartItem[i].title + "(" + tmp + ")\n";
+    }
+    costBreakDown += " = " + cost.toString();
+    matterView.textContent = costBreakDown;
     setTimeout(checkOutLater(null, null), 10000);
+}
+
+export async function showCart(e) {
+    var popElemt = document.getElementById('cartViewMini').querySelector('#popupElemt');
+    popElemt.style.display = "";
 }

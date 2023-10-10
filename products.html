@@ -47,22 +47,14 @@
             text-align: center;
             padding:1%;
             height: 100%;"></div>
-    <div id="cartFloat">
-        <button id="cartExpand" onclick="openWindow()">&#128722;<span id='cartCounter'>0</span>
-        </button>
-        <div id="cartViewMini">
 
-        </div>
-    </div>
     <script type="module">
-        import { Func, loadItems, checkOutLater } from "./js/productsLoad.js";
+        import { Func, loadItems } from "./js/productsLoad.js";
         window.Func = Func;
         window.loadItems = loadItems;
-        window.checkOutLater = checkOutLater;
         //window.text = text;
         //window.Func(1);
         switchSection(0);
-
     </script>
     <script type="module">
         import { navLoader, toggle } from "./js/navload.js";
@@ -71,9 +63,6 @@
         navLoader('menuBtns', 0, 'Products');
     </script>
     <script>
-        function openWindow() {
-            window.open("/cart.html", "_blank");
-        }
         var currentSection = 1;
         function switchSection(section) {
             if (currentSection != section) {
