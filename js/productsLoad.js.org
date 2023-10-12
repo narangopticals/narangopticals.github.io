@@ -117,9 +117,9 @@ var obj = e.target;
 //console.log(e);
 var htmlText = obj.innerHTML;
 //console.log(htmlText);
-var popmatterElem = window.document.getElementById('popMatter');
-popmatterElem.innerHTML=htmlText;
-var overlayElem = popmatterElem.querySelector('.overlay');
+var cartMatterElem = window.document.getElementById('cartMatter');
+cartMatterElem.innerHTML=htmlText;
+var overlayElem = cartMatterElem.querySelector('.overlay');
 var aspRatio = (window.screen.width / window.screen.height);
 if (aspRatio > 1){
 popElem.style.width = "30%";

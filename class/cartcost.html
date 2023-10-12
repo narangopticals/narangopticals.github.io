@@ -1,21 +1,29 @@
-<div id="popupElemt" style="
+<div id="cartElemt" style="
         text-align: center;
         padding:3%;
-        display: flex;
-        flex-direction: column;
-        min-width: 25%;
         background: black;
         display: none;
         top: 0;
         align-self: center;">
-        <button id="cartCloser" style="position: relative;
-                top: -50px;
-                right : -150px">X</button>
-        <div id="popMatter" style="
+        <table id="cartMatter" style="
                     display: flex;
                     flex-direction: column;
-                    border: 3px solid saddlebrown;
+                    border: 6px solid saddlebrown;
                     color: white;
                     border-radius: 3%;
-                    margin-bottom: 10%;"></div>
+                    margin-bottom: 2%;
+                    text-align: start;
+                    list-style: none;
+                    width: inherit;"></table>
+        <div id="cartButtons" style="display: flex;
+        flex-direction: row;
+        justify-content:space-evenly">
+                <button id="cartClear" style="flex-grow: 1;">Clear</button>
+                <button id="orderEnquiry" style="flex-grow: 1;">
+                        <img src="../imgs/wa.png" style="max-width: 25px;">
+                        <span style="position: relative;
+                                bottom: 6px;">Discuss</span>
+                        </img>
+                </button>
+        </div>
 </div>

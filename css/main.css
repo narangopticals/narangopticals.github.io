@@ -9,6 +9,14 @@ button {
     border-radius: 4px;
 }
 
+#nav-menu li {
+    float: left;
+    height: inherit;
+    width: 100%;
+    margin: 0 1%;
+    flex-grow: 1;
+}
+
 #cartFloat {
     position: fixed;
     right: 2%;
@@ -109,9 +117,10 @@ nav {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    /*width: 90%;*/
     padding: 1%;
     text-align: center;
+    justify-content: space-between;
+    font-family: Arial;
 }
 
 .header {
@@ -361,11 +370,6 @@ a.dailer {
 
 /*Test.html Trial*/
 /* nav-menu container */
-#nav-menu {
-    overflow: hidden;
-    /*background-color: #333;*/
-    font-family: Arial;
-}
 
 /* Links inside the nav-menu */
 /*.nav-menu a {
@@ -380,8 +384,9 @@ a.dailer {
 .dropdown {
     float: left;
     overflow: hidden;
-    padding-right: 3%;
-    min-width: 30%;
+    /*padding-right: 3%;
+    min-width: 30%;*/
+    width: 100%;
     align-self: center;
 }
 
@@ -398,7 +403,7 @@ a.dailer {
     margin: 0%;
     /* Important for vertical align on mobile phones */
     background: linear-gradient(#027f6e, #037667, #035549, #005d51, #00594d, #036a5c);
-    height: fit-content;
+    height: inherit;
     /*font-size: 140%;*/
     border: 2px solid powderblue;
     margin-top: 0.20%;
@@ -408,9 +413,12 @@ a.dailer {
     border-radius: 5px;
 }
 
-.menuBtn {
+/*.menuBtn {
     padding: 22% 22% 22% 22%;
     margin: 22% 22% 22% 22%;
+}*/
+.dropbtn {
+    width: 100%;
 }
 
 .menuBtns {

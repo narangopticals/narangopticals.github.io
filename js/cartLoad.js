@@ -4,6 +4,7 @@ var prodParent = ""
 var prodParents = "";
 var selectedItems = [];
 var cartItem = [];
+var cartCost;
 export async function Func() {
 
     prodParent = fetch("../class/prodview.html").then((res) => {
@@ -70,11 +71,52 @@ async function addItemViews(startNum, endNum) {
         //console.log(prodParents);
     }
     var pS = prodParents.toString();
-    document.getElementById("mainProdView").innerHTML = pS;
+    var prodView = document.getElementById("mainProdView");
+    prodView.innerHTML = pS;
+    var cartView = document.getElementById('cartViewMini');
+    var popElemText = fetch("../class/cartcost.html").then((res) => {
+        return res.text();
+    });
+    cartView.innerHTML = await popElemText;
+    var prodViews = prodView.querySelectorAll('#prodParent');
+    var clearBtn = cartView.querySelector('#cartClear');
+    clearBtn.addEventListener("click",
+        function (e) {
+            var cartBtns = prodView.querySelectorAll(".cartBtn");
+            for (var i = 0; i < prodViews.length; i++) {
+                var tmp = prodViews[i];
+                if (tmp.style.visibility != "hidden") {
+                    checkOutLater(null, cartBtns[i]);
+                    //console.log(e);
+                    //clearBtn.removeEventListener("click", e);
+                }
+            }
+            if (selectedItems.length > 0) {
+                clearBtn.textContent = "Clear";
+            } else {
+                clearBtn.textContent = "Undo";
+            }
+        });
+    cartView.querySelector('#orderEnquiry').addEventListener("click",
+        function (e) {
+            var whatsappBtns = prodView.querySelectorAll(".whatsappBtn");
+            var text = "";
+            for (var i = 0; i < prodViews.length; i++) {
+                var tmp = prodViews[i];
+                //console.log(whatsappBtn);
+                if (tmp.style.visibility != "hidden") {
+                    var tmp = whatsappBtns[i].values[0];
+                    tmp = tmp.replaceAll('&type=phone_number&app_absent=0&send=1', '');
+                    tmp = tmp.replaceAll('I%20want%20to%20know%20More%20About%20Your%20Products%0A', '');
+                    text += tmp + '%20%3A%20Rs' + cartItem[i].cost + '%0A';
+                }
+            }
+            text = 'I%20want%20to%20know%20More%20About%20Your%20Products%0A' + text + "%0ATotal%20%3A%20Rs" + cartCost + '&type=phone_number&app_absent=0&send=1';
+            console.log(text);
+            msgWhatsapp(text);
+        });
 }
-export async function msgWhatsapp(e) {
-    var obj = e.currentTarget;
-    var text = obj.values[0];
+export async function msgWhatsapp(text) {
     //console.log(text.length);
     if (text.length > 0) {
         var devType = navigator.userAgent;
@@ -94,8 +136,8 @@ export async function msgWhatsapp(e) {
     }
 }
 export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
-    if (btnLoad == null && pressedBtn == null) {
-        await loadCart();
+    if (btnLoad == null && pressedBtn == null && jsonData != undefined) {
+        await loadCart(jsonData);
     } else if (pressedBtn != null) {
         updateCart(pressedBtn);
         console.log(pressedBtn);
@@ -124,12 +166,17 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
         var cartView = document.getElementById('cartExpand');
         var cartCounter = cartView.querySelector('#cartCounter');
         console.log(cartCounter);
-        cartCounter.textContent = selectedItems.length;
+        cartCounter.textContent = selectedItems.length + " (Rs." + cartCost + ")";
     }
     function addProduct(id, btn) {
         if (selectedItems.indexOf(id) < 0) {
             selectedItems.push(id);
             setCookie("incartItems", selectedItems, 10);
+            for (var i = 0; i < cartItem.length; i++) {
+                if (cartItem[i].itemnum == id) {
+                    cartCost += Number.parseInt(cartItem[i].cost);
+                }
+            }
             btn.textContent = "-";
             btn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
             console.log(selectedItems);
@@ -137,21 +184,27 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
         }
     }
     function removeProduct(id, btn) {
+        var itemElems = document.getElementById('mainProdView').querySelectorAll('#prodParent');
+        cartCost = 0;
         if (selectedItems.indexOf(id) > -1) {
             var newSelection = [];
-            for (let index = 0; index < selectedItems.length; index++) {
-                var element = selectedItems[index];
+            cartCost = 0;
+            for (let i = 0; i < selectedItems.length; i++) {
+                var element = selectedItems[i];
                 if (element != id) {
                     newSelection.push(element);
+                    console.log("index " + i);
+                    cartCost += Number.parseInt(cartItem[i].cost);
                 }
             }
-            btn.textContent = "+";
-            btn.style.background = 'linear-gradient(to bottom, rgb(107, 128, 0),rgb(150, 179, 3),rgb(107, 128, 0))';
-            selectedItems = newSelection;
-            setCookie("incartItems", selectedItems, 10);
-            modifyCartCount();
         }
+        btn.textContent = "+";
+        btn.style.background = 'linear-gradient(to bottom, rgb(107, 128, 0),rgb(150, 179, 3),rgb(107, 128, 0))';
+        selectedItems = newSelection;
+        setCookie("incartItems", selectedItems, 10);
+        modifyCartCount();
     }
+
     function updateProductCount() {
         var totalSelected = selectedItems.length;
         var prodView = window.document.getElementById('mainProdView');
@@ -201,9 +254,11 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
                 addProduct(idMod, btn);
             }
         }
-
+        updateCartItem();
     }
-    async function loadCart() {
+
+
+    async function loadCart(jsonData) {
         var cartString = await getCookie("incartItems");
         console.log(cartString);
         if (cartString.length > 0) {
@@ -245,7 +300,31 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
         return "";
     }
 }
-
+function updateCartItem() {
+    var cartView = window.document.getElementById('cartViewMini');
+    var popElemt = cartView.querySelector('#cartElemt');
+    var matterView = popElemt.querySelector('#cartMatter');
+    var costs = [];
+    var cost = 0;
+    var costBreakDown = [];
+    for (var j = 0; j < selectedItems.length; j++) {
+        var selItemNum = selectedItems[j];
+        for (var i = 0; i < cartItem.length; i++) {
+            var curCartItem = cartItem[i];
+            var curCartItemNum = curCartItem.itemnum;
+            if (curCartItemNum == selItemNum) {
+                var tmp = curCartItem.cost;
+                costs.push(tmp);
+                cost += Number.parseInt(tmp);
+                var string = "<tr><td>\u25CF" + (i + 1) + ".</td><td>" + cartItem[i].title + "</td><td>= Rs." + tmp + "</td></tr>";
+                costBreakDown.push(string);
+            }
+        }
+    }
+    cartCost = cost;
+    var totalCost = "<tr><td>" + "</td><td>Total Cost</td><td>= Rs." + cost.toString() + "</td></tr>";
+    matterView.innerHTML = costBreakDown.join("") + totalCost;
+}
 export async function loadItems(startNum, endNum, pgNum) {
 
     var elemsParents = window.document.querySelectorAll('div[class^=grid]');
@@ -255,9 +334,9 @@ export async function loadItems(startNum, endNum, pgNum) {
         var elem = elemsParents[j];
         if (i < selectedItems.length) {
             elem.style.visibility = "visible";
-            var valueData = str[i];
-            elem.querySelector("iframe").src = valueData.imgfile;
-            elem.querySelector("h1").textContent = valueData.title;
+            var valueData = cartItem[i];
+            elem.querySelector("iframe").src = await valueData.imgfile;
+            elem.querySelector("h1").textContent = await valueData.title;
             var val = [encodeURIComponent("I want to know More About Your Products") +
                 encodeURIComponent("\nName : ") +
                 encodeURIComponent(valueData.title) +
@@ -268,11 +347,14 @@ export async function loadItems(startNum, endNum, pgNum) {
             whatsappBtn.values = val;
             whatsappBtn.addEventListener("click",
                 function (e) {
-                    msgWhatsapp(e);
+
+                    var obj = e.currentTarget;
+                    var text = obj.values[0];
+                    msgWhatsapp(text);
                 });
             var cartBtn = elem.querySelector("button[class^=cartBtn]");
             cartBtn.value = valueData.itemnum;
-            checkOutLater(cartBtn, null);
+            //checkOutLater(cartBtn, null);
             cartBtn.addEventListener("click",
                 function (e) {
                     checkOutLater(null, e.target);
@@ -293,38 +375,15 @@ export async function loadItems(startNum, endNum, pgNum) {
             }
         }
     }
-
-    var cartView = document.getElementById('cartViewMini');
-    var popElemText = fetch("../class/cartcost.html").then((res) => {
-        return res.text();
-    });
-    cartView.innerHTML = await popElemText;
-    var popElemt = cartView.querySelector('#popupElemt');
-    var cartCloseBtn = cartView.querySelector('#cartCloser');
-    cartCloseBtn.addEventListener("click",
-        function (e) {
-            cartToggle();
-        });
-    var matterView = popElemt.querySelector('#popMatter');
-    var costs = [];
-    var cost = 0;
-    var costBreakDown = "";
-    for (var i = 0; i < cartItem.length; i++) {
-        var tmp = cartItem[i].cost;
-        costs.push(tmp);
-        cost += Number.parseInt(tmp);
-        costBreakDown += "Item " + (i + 1) + ")" + cartItem[i].title + " = Rs." + tmp + "\n";
-    }
-    costBreakDown += "Total Cost = " + cost.toString();
-    matterView.textContent = costBreakDown;
-    setTimeout(checkOutLater(null, null), 10000);
+    updateCartItem();
+    //setTimeout(checkOutLater(null, null), 10000);
 }
 
 export async function cartToggle(e) {
-    var popElemt = document.getElementById('cartViewMini').querySelector('#popupElemt');
+    var popElemt = document.getElementById('cartViewMini').querySelector('#cartElemt');
     if (popElemt.style.display == "none") {
         popElemt.style.display = "";
-        popElemt.querySelector('#cartCloser').style.top = "-45px";
+        //popElemt.querySelector('#cartCloser').style.top = "-45px";
     } else {
         popElemt.style.display = "none";
     }

@@ -1,4 +1,4 @@
-var str = "";
+var str;
 //var section = 1;
 
 export async function Func(section) {
@@ -8,18 +8,26 @@ export async function Func(section) {
     });
     var data = "";
     if (section == 0) {
-        var results = fetch('https://api.github.com/gists/ea3f7fa9a39a62872983e2b813441d53').then(results => {
-            return results.json();
-        });
-        if (results == undefined || results.length == 0) {
-            results = fetch('../json/prodFmData.json').then(results => {
+        try {
+            var results = fetch('https://api.github.com/gists/ea3f7fa9a39a62872983e2b813441d53').then(results => {
                 return results.json();
             });
+            data = await results.then(data => {
+                return data.files["prodFmData.json"].content;
+            });
+        } catch (error) {
+            window.alert(error);
         }
-        var data = await results.then(data => {
+        data = await results.then(data => {
             return data.files["prodFmData.json"].content;
         });
         setTimeout(data = JSON.parse(data), 3000);
+        if (data == undefined || data.length == 0) {
+            data = fetch('../json/prodFmData.json').then(results => {
+                return results.json();
+            });
+        }
+
         //console.log(data);
     } else {
         data = fetch("../json/prodSgdata.json").then((res) => {
@@ -62,7 +70,7 @@ export async function Func(section) {
             btn.setAttribute('onclick', 'window.loadItems(' + itemStart + ', ' + (itemStart + 8) + ', ' + i + ')');
             itemStart = itemStart + 9;
         }
-        window.document.getElementById("btnNavProdView2").innerHTML = document.getElementById("btnNavProdView").innerHTML;
+        //window.document.getElementById("btnNavProdView2").innerHTML = document.getElementById("btnNavProdView").innerHTML;
     }
     async function addItemViews(startNum, endNum) {
         for (var i = startNum; i < endNum; i++) {
@@ -73,7 +81,24 @@ export async function Func(section) {
             //console.log(prodParents);
         }
         var pS = prodParents.toString();
-        document.getElementById("mainProdView").innerHTML = pS;
+        var prodView = document.getElementById("mainProdView");
+        prodView.innerHTML = pS;
+        prodView = document.getElementById("mainProdView");
+        var prodViews = prodView.querySelectorAll('#prodParent');
+        for (var i = startNum; i < endNum; i++) {
+            var elem = prodViews[i];
+            var whatsappBtn = elem.querySelector("button[class^=whatsappBtn]");
+            var cartBtn = elem.querySelector("button[class^=cartBtn]");
+            whatsappBtn.addEventListener("click",
+                function (e) {
+                    msgWhatsapp(e);
+                });
+            checkOutLater(cartBtn, null);
+            cartBtn.addEventListener("click",
+                function (e) {
+                    checkOutLater(null, e.target);
+                });
+        }
     }
 }
 export async function msgWhatsapp(e) {
@@ -118,7 +143,8 @@ export async function checkOutLater(btnLoad, pressedBtn) {
         if (selectedItems.indexOf(id) < 0) {
             selectedItems.push(id);
             setCookie("incartItems", selectedItems, 10);
-            btn.textContent = "-";
+            //btn.textContent = "-";
+            btn.innerHTML = "-";// <span style=\"background:black; font-size:larger;\">&#128722;</span>";
             btn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
             console.log(selectedItems);
             modifyCartCount();
@@ -133,7 +159,8 @@ export async function checkOutLater(btnLoad, pressedBtn) {
                     newSelection.push(element);
                 }
             }
-            btn.textContent = "+";
+            //btn.textContent = "+";
+            btn.innerHTML = "+";// <span style=\"background:black; font-size:larger;\">&#128722;</span>";
             btn.style.background = 'linear-gradient(to bottom, rgb(107, 128, 0),rgb(150, 179, 3),rgb(107, 128, 0))';
             selectedItems = newSelection;
             setCookie("incartItems", selectedItems, 10);
@@ -150,7 +177,8 @@ export async function checkOutLater(btnLoad, pressedBtn) {
 
         for (var j = 0; j < idBtnsLen; j++) {
             var currentBtn = cartBtns[j];
-            currentBtn.textContent = "+";
+            //currentBtn.textContent = "+";
+            currentBtn.innerHTML = "+";// <span style=\"background:black; font-size:larger;\">&#128722;</span>";
             currentBtn.style.background = 'linear-gradient(to bottom, rgb(107, 128, 0),rgb(150, 179, 3),rgb(107, 128, 0))';
             var currentBtnVal = currentBtn.value.toString();
             console.log("updateProductCount: currentBtn.value =" + currentBtnVal);
@@ -162,7 +190,8 @@ export async function checkOutLater(btnLoad, pressedBtn) {
                 if (currentBtnVal == selItemIdstr) {
                     console.log("match found");
                     console.log(currentBtn);
-                    currentBtn.textContent = "-";
+                    //currentBtn.textContent = "-";
+                    currentBtn.innerHTML = "-";// <span style=\"background:black; font-size:larger;\">&#128722;</span>";
                     currentBtn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
                 }
             }
@@ -239,33 +268,27 @@ export async function loadItems(startNum, endNum, pgNum) {
                 encodeURIComponent(",  Item ID :") +
                 encodeURIComponent(valueData.itemnum) +
                 "&type=phone_number&app_absent=0&send=1"];
+
             var whatsappBtn = elem.querySelector("button[class^=whatsappBtn]");
-            whatsappBtn.values = val;
-            whatsappBtn.addEventListener("click",
-                function (e) {
-                    msgWhatsapp(e);
-                });
             var cartBtn = elem.querySelector("button[class^=cartBtn]");
+            whatsappBtn.values = val;
             cartBtn.value = valueData.itemnum;
-            checkOutLater(cartBtn, null);
-            cartBtn.addEventListener("click",
-                function (e) {
-                    checkOutLater(null, e.target);
-                });
+
             i++;
         } else {
             elem.querySelector("iframe").src = "";
             elem.querySelector("h1").textContent = "";
             elem.style.visibility = "hidden";
         }
-        var btnParent = window.document.getElementById("btnNavProdView").getElementsByTagName('button');
-        var len = btnParent.length;
-        for (var k = 0; k < len; k++) {
-            if (k == pgNum) {
-                btnParent[k].style.background = 'linear-gradient(to bottom,rgb(48, 48, 48), rgb(132, 132, 132), rgb(105, 105, 105), rgb(63, 63, 63))';
-            } else {
-                btnParent[k].style.background = 'linear-gradient(to bottom,rgb(135, 134, 134), rgb(152, 144, 144), rgb(105, 105, 105), rgb(152, 144, 144), rgb(135, 134, 134)) ';
-            }
+
+    }
+    var btnParent = window.document.getElementById("btnNavProdView").getElementsByTagName('button');
+    var len = btnParent.length;
+    for (var k = 0; k < len; k++) {
+        if (k == pgNum) {
+            btnParent[k].style.background = 'linear-gradient(to bottom,rgb(48, 48, 48), rgb(132, 132, 132), rgb(105, 105, 105), rgb(63, 63, 63))';
+        } else {
+            btnParent[k].style.background = 'linear-gradient(to bottom,rgb(135, 134, 134), rgb(152, 144, 144), rgb(105, 105, 105), rgb(152, 144, 144), rgb(135, 134, 134)) ';
         }
     }
     setTimeout(checkOutLater(null, null), 10000);
