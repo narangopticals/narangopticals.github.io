@@ -12,14 +12,16 @@ export async function Func() {
         return val;
     });
     var framesData = "";
-    var results = fetch('https://api.github.com/gists/ea3f7fa9a39a62872983e2b813441d53').then(results => {
-        return results.json();
-    });
-    var data = await results.then(data => {
-        return data.files["prodFmData.json"].content;
-    });
-    setTimeout(framesData = JSON.parse(data), 3000);
-    if (framesData == undefined || framesData.length == 0) {
+    try {
+        var results = fetch('https://api.github.com/gists/ea3f7fa9a39a62872983e2b813441d53').then(results => {
+            return results.json();
+        });
+        framesData = await results.then(data => {
+            return data.files["prodFmData.json"].content;
+        });
+        setTimeout(framesData = JSON.parse(framesData), 3000);
+    } catch (error) {
+        window.alert(error);
         framesData = fetch('../json/prodFmData.json').then(results => {
             return results.json();
         });
@@ -29,7 +31,7 @@ export async function Func() {
         return res.json();
     });
 
-    const mergedJSON = Object.assign({}, framesData, sunglassData);
+    var mergedJSON = Object.assign({}, framesData, sunglassData);
     console.log(mergedJSON);
     str = Object.values(mergedJSON.valueOf("data"))[0];
     console.log(str);

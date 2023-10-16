@@ -15,18 +15,16 @@ export async function Func(section) {
             data = await results.then(data => {
                 return data.files["prodFmData.json"].content;
             });
+            setTimeout(data = JSON.parse(data), 3000);
         } catch (error) {
             window.alert(error);
-        }
-        data = await results.then(data => {
-            return data.files["prodFmData.json"].content;
-        });
-        setTimeout(data = JSON.parse(data), 3000);
-        if (data == undefined || data.length == 0) {
             data = fetch('../json/prodFmData.json').then(results => {
                 return results.json();
             });
         }
+        /*data = await results.then(data => {
+            return data.files["prodFmData.json"].content;
+        });*/
 
         //console.log(data);
     } else if (section == 1) {
@@ -265,7 +263,11 @@ export async function loadItems(startNum, endNum, pgNum) {
             elem.style.visibility = "visible";
             var valueData = str[i];
             elem.querySelector("iframe").src = valueData.imgfile;
-            elem.querySelector("h1").textContent = valueData.title;
+            var valString =
+                Number.parseInt(valueData.cost.trim()) > 0 ?
+                    ("Rs. " + valueData.cost + "<br>" + valueData.title) :
+                    (valueData.title);
+            elem.querySelector("h1").innerHTML = valString;
             var val = [encodeURIComponent("I want to know More About Your Products") +
                 encodeURIComponent("\nName : ") +
                 encodeURIComponent(valueData.title) +
