@@ -1,6 +1,6 @@
 var str;
 //var section = 1;
-
+var type = "";
 export async function Func(section) {
     var prodParent = fetch("../class/prodview.html").then((res) => {
         var val = res.text();
@@ -8,6 +8,7 @@ export async function Func(section) {
     });
     var data = "";
     if (section == 0) {
+        type = "frames";
         try {
             var results = fetch('https://api.github.com/gists/ea3f7fa9a39a62872983e2b813441d53').then(results => {
                 return results.json();
@@ -28,10 +29,12 @@ export async function Func(section) {
 
         //console.log(data);
     } else if (section == 1) {
+        type = "sunglass";
         data = fetch("../json/prodSgdata.json").then((res) => {
             return res.json();
         });
     } else if (section == 2) {
+        type = "lens";
         data = fetch("../json/prodLnsdata.json").then((res) => {
             return res.json();
         });
@@ -91,9 +94,16 @@ export async function Func(section) {
             var elem = prodViews[i];
             var whatsappBtn = elem.querySelector("button[class^=whatsappBtn]");
             var cartBtn = elem.querySelector("button[class^=cartBtn]");
+            var shareBtn = elem.querySelector("button[class^=shareBtn]");
             whatsappBtn.addEventListener("click",
                 function (e) {
                     msgWhatsapp(e);
+                });
+            shareBtn.addEventListener("click",
+                function (e) {
+                    var obj = e.currentTarget;
+                    var url = obj.value;
+                    window.open(url, "_blank");
                 });
             checkOutLater(cartBtn, null);
             cartBtn.addEventListener("click",
@@ -251,7 +261,11 @@ export async function checkOutLater(btnLoad, pressedBtn) {
         return "";
     }
 }
-
+export async function mainShareBtn(btn, type, itemnum) {
+    console.log(btn);
+    var url = "/product.html?type=" + type + "&itemnum=" + itemnum;
+    btn.href = url;
+}
 export async function loadItems(startNum, endNum, pgNum) {
 
     var elemsParents = window.document.querySelectorAll('div[class^=grid]');
@@ -274,11 +288,12 @@ export async function loadItems(startNum, endNum, pgNum) {
                 encodeURIComponent(",  Item ID :") +
                 encodeURIComponent(valueData.itemnum) +
                 "&type=phone_number&app_absent=0&send=1"];
-
+            var shareBtn = elem.querySelector("button[class^=shareBtn]");
             var whatsappBtn = elem.querySelector("button[class^=whatsappBtn]");
             var cartBtn = elem.querySelector("button[class^=cartBtn]");
             whatsappBtn.values = val;
             cartBtn.value = valueData.itemnum;
+            shareBtn.value = "/product.html?type=" + type + "&itemnum=" + valueData.itemnum;
 
             i++;
         } else {

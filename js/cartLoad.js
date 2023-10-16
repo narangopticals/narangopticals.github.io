@@ -338,7 +338,10 @@ export async function loadItems(startNum, endNum, pgNum) {
             elem.style.visibility = "visible";
             var valueData = cartItem[i];
             elem.querySelector("iframe").src = await valueData.imgfile;
-            elem.querySelector("h1").textContent = await valueData.title;
+            var valString = Number.parseInt(await valueData.cost) > 0 ?
+                ("<span>Rs." + valueData.cost + "<br>" + valueData.title + "</span>") :
+                ("<span>" + valueData.title + "</span>");
+            elem.querySelector("h1").innerHTML = valString;
             var val = [encodeURIComponent("I want to know More About Your Products") +
                 encodeURIComponent("\nName : ") +
                 encodeURIComponent(valueData.title) +
@@ -364,7 +367,7 @@ export async function loadItems(startNum, endNum, pgNum) {
             i++;
         } else {
             elem.querySelector("iframe").src = "";
-            elem.querySelector("h1").textContent = "";
+            elem.querySelector("h1").innerHTML = "";
             elem.style.visibility = "hidden";
         }
         var btnParent = window.document.getElementById("btnNavProdView").getElementsByTagName('button');
