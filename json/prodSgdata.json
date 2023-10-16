@@ -1,10 +1,11 @@
 {
    "data": [
       {  
-         "itemnum" : "",
+         "itemnum" : "ln1",
          "itemcode": "",
          "title": "",
-         "imgfile": "More Coming Soon"
+         "imgfile": "/preview",
+         "cost": ""
       }
-   ]
+    ]
 }

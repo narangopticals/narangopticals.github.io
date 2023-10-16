@@ -29,8 +29,12 @@ export async function Func(section) {
         }
 
         //console.log(data);
-    } else {
+    } else if (section == 1) {
         data = fetch("../json/prodSgdata.json").then((res) => {
+            return res.json();
+        });
+    } else if (section == 2) {
+        data = fetch("../json/prodLnsdata.json").then((res) => {
             return res.json();
         });
     }

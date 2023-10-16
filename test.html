@@ -2,32 +2,213 @@
 <html>
 
 <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
         Narang Opticals, Kashipur
     </title>
     <link rel="stylesheet" href="css/main.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
-    <nav id="navSpace">
-
+<body id="mainBody">
+    <nav id="navbar">
     </nav>
-    <div id="mainProdView">
+    <div id="google_translate_element"></div>
+    <script type="text/javascript">// <![CDATA[
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: true
+            }, 'google_translate_element');
 
+        }// ]]></script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <!--<div style="width: 100%; height:fit-content; text-align:center; margin: 0.5%;">
+        <button class="slideName" style="font-weight: bold;" onclick="switchSection(0)">Eyewear Frame</button>
+        <button class="slideName" style="font-weight: bold;" onclick="switchSection(1)">Sunglass</button>
+        <button class="slideName" style="font-weight: bold;" onclick="switchSection(2)">Lens</button>
+    </div>-->
+
+    <!--<div id="btnNavProdView" style="width: 85%;
+            align-items: center;
+            text-align: center;
+            padding:1%;
+            height: 100%;"></div>-->
+    <div id="prodView" style="height: 100%;">
+        <div id="prodParent" class="grid" style="
+        text-align: center;
+        padding:3%;
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+        border: 3px solid saddlebrown;
+        border-radius: 3%;
+        margin-bottom: 10%;
+        overflow: clip;">
+            <div class="imgCtrl" style="aspect-ratio: 1;width: 100%;">
+                <img class="overlay" style="  width: 113px;
+                    aspect-ratio: 1;
+                    position: relative;
+                    background: black;
+                    /*transform: translateX(146%) translateY(25%);*/
+                    border-radius: 50%;
+                    top: 3%;
+                    left: 47%;" src="../imgs/logo.jpg"></img>
+                <iframe class="gridImg" style="text-align: center;
+                    aspect-ratio: 1;
+                    width: 100%;
+                    margin-top: -57px" allow="autoplay"></iframe>
+            </div>
+            <h1 class="gridTitle" style="text-align: center;
+                margin: 0;
+                font-size: inherit;
+                font-weight:bold;
+                margin: 5px 0 5px 0;"></h1>
+
+            <div class="btnsHolder" style="display: flex;
+                flex-direction: row;
+                justify-content:stretch;
+                width: 100%;
+                height: fit-content;">
+                <button class="whatsappBtn" id="gridWhatsapp" style="text-align: center;
+                color: rgb(255, 255, 255);
+                background: linear-gradient(#325f59,#04433b,#043f37, #043f37, #04433b, #275750);
+                font-size: medium;
+                padding: 10px;
+                font-weight: bold;
+                border: 5px solid rgb(85, 141, 191);
+                margin-top: 2px;
+                margin-bottom: 2px;
+                border-radius: 10px;
+                align-items: center;
+                flex-grow: 0.8;">
+                    <img src="../imgs/wa.png" style="width: 20px;
+                        aspect-ratio: 1;">
+                    Know More</img></button>
+                <!--<button style="background:black;
+                font-size:larger;
+                padding: 0px;
+                margin: 2px -16px 0px 6px;
+                flex-grow: 0.2;">&#128722;</button>-->
+                <button class="cartBtn" id="gridIdTag" style="flex-grow: 0.2;
+                /*padding: 2px 0px 0px 0px;
+                margin: 2px 0px 0px -7px;*/
+                padding: 2px;
+                margin: 3px 0px 3px 3px;
+                font-weight: bolder;
+                border: 3px solid #e7e6c5;
+                font-size: xx-large;"></button>
+            </div>
+        </div>
     </div>
+    <!--<div id="btnNavProdView2" style="width: 85%;
+            align-items: center;
+            text-align: center;
+            padding:1%;
+            height: 100%;"></div>-->
+
+    <!--<script type="module">
+        import { Func, loadItems } from "./js/productsLoad.js";
+        window.Func = Func;
+        window.loadItems = loadItems;
+        //window.text = text;
+        //window.Func(1);
+        switchSection(0);
+    </script>-->
     <script type="module">
         import { navLoader, toggle } from "./js/navload.js";
         window.navLoader = navLoader;
         window.toggle = toggle;
-        navLoader('menuBtns', 4, 'Test');
+        navLoader('menuBtns', 0, 'Products');
     </script>
-    <script type="text/javascript">// <![CDATA[
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'mainProdView');
+    <script>
+        /*var currentSection = 1;
+        function switchSection(section) {
+            if (currentSection != section) {
+                let slideName = document.getElementsByClassName("slideName");
+                for (i = 0; i < slideName.length; i++) {
+                    slideName[i].className = slideName[i].className.replace("active", "");
+                    slideName[i].textContent = slideName[i].textContent.replace("*", "");
+                    slideName[i].title = "Click To Switch"
+                }
+                slideName[section].className += " active";
+                slideName[section].textContent += "*";
+                slideName[section].title = "Currently Open";
+                Func(section);
+                currentSection = section;
+            }
+        }*/
+    </script>
+
+    <script>
+        grabUrlProd();
+        function grabUrlProd() {
+            const searchParams = new URLSearchParams(window.location.search);
+            if (searchParams.has('type') && searchParams.has('itemnum')) {
+                var fetchFile = searchParams.get('type');
+                console.log(fetchFile);
+                var itemnum = searchParams.get('itemnum');
+                console.log(itemnum);
+                if (fetchFile == "frames") {
+                    console.log("framesLoading");
+                    framesDataFetch(itemnum);
+                } else if (fetchFile == "sunglass") {
+                    console.log("sunglassLoading");
+                    sunglassDataFetch(itemnum);
+                } else if (fetchFile == "lens") {
+                    console.log("lensLoading");
+                    lensDataFetch(itemnum);
+                } else if (fetchFile == "bluefilter") {
+                    console.log("bluefilterLoading");
+                    blueFilterDataFetch(itemnum);
+                }
+            }
         }
-        // ]]></script>
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-        type="text/javascript"></script>
+        async function framesDataFetch(itemnum) {
+            try {
+                var results = fetch('https://api.github.com/gists/ea3f7fa9a39a62872983e2b813441d53').then(results => {
+                    return results.json();
+                });
+                data = await results.then(data => {
+                    return data.files["prodFmData.json"].content;
+                });
+            } catch (error) {
+                window.alert(error);
+            }
+            data = await results.then(data => {
+                return data.files["prodFmData.json"].content;
+            });
+            setTimeout(data = JSON.parse(data), 3000);
+            if (data == undefined || data.length == 0) {
+                data = fetch('../json/prodFmData.json').then(results => {
+                    return results.json();
+                });
+            }
+            if (data != undefined || data.length > 0) {
+                str = Object.values((await data).valueOf("data"))[0];
+                if (str.length > 0) {
+                    for (var j = 0; j < str.length; j++) {
+                        var item = str[j];
+                        if (item.itemnum == itemnum) {
+                            loadItem(item);
+                        }
+                    }
+                }
+            }
+        }
+        async function loadItem(item) {
+            var prodMain = document.getElementById("prodView");
+            prodMain.querySelector('.gridImg').src = item.imgfile
+            prodMain.querySelector('.gridTitle').innerHTML = "Rs. " + item.cost + "<br>" + item.title;
+        }
+
+    </script>
 </body>
 
 </html>
