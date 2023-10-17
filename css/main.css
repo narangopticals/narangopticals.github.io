@@ -63,7 +63,7 @@ h1,
 
 /*animation element setup*/
 #flexSpcTel {
-    font-size: large;
+    font-size: 15px;
     font-weight: bold;
     animation-duration: 4s;
     animation-iteration-count: infinite;
@@ -585,7 +585,8 @@ a.dailer {
     }
 
     #nav-menu {
-        width: 90%;
+        width: 100%;
+        margin-bottom: 2px;
     }
 
     .logo {
@@ -619,13 +620,14 @@ a.dailer {
     .dropbtn,
     .sns-buttons,
     .slideName {
-        font-size: 95%;
+        font-size: 15px;
     }
 
     .header,
     #flexSpc,
     #flexSpcTxt {
-        font-size: 34px;
+        font-size: 30px;
+        margin-bottom: 2px;
     }
 
     #nav-menu div {

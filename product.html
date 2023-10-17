@@ -222,6 +222,63 @@
                 }
             }
         }
+        async function sunglassDataFetch(itemnum) {
+            var data;
+            try {
+                var results = fetch('https://api.github.com/gists/8fef5a38ff904a0c42df470064dda3f9').then(results => {
+                    return results.json();
+                });
+                data = await results.then(data => {
+                    return data.files["prodSgData.json"].content;
+                });
+                setTimeout(data = JSON.parse(data), 3000);
+            } catch (error) {
+                window.alert(error);
+                data = fetch('../json/prodSgData.json').then(results => {
+                    return results.json();
+                });
+            }
+            if (data != undefined || data.length > 0) {
+                str = Object.values((await data).valueOf("data"))[0];
+                if (str.length > 0) {
+                    for (var j = 0; j < str.length; j++) {
+                        var item = str[j];
+                        if (item.itemnum == itemnum) {
+                            loadItem(item);
+                        }
+                    }
+                }
+            }
+        }
+
+        async function lensDataFetch(itemnum) {
+            var data;
+            try {
+                var results = fetch('https://api.github.com/gists/2a9920dd79543db4549056de07cc83e7').then(results => {
+                    return results.json();
+                });
+                data = await results.then(data => {
+                    return data.files["prodLnsData.json"].content;
+                });
+                setTimeout(data = JSON.parse(data), 3000);
+            } catch (error) {
+                window.alert(error);
+                data = fetch('../json/prodLnsData.json').then(results => {
+                    return results.json();
+                });
+            }
+            if (data != undefined || data.length > 0) {
+                str = Object.values((await data).valueOf("data"))[0];
+                if (str.length > 0) {
+                    for (var j = 0; j < str.length; j++) {
+                        var item = str[j];
+                        if (item.itemnum == itemnum) {
+                            loadItem(item);
+                        }
+                    }
+                }
+            }
+        }
         async function loadItem(item) {
             var prodMain = document.getElementById("prodView");
             prodMain.querySelector('.gridImg').src = item.imgfile

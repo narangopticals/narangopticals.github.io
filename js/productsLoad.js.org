@@ -22,7 +22,7 @@ export async function Func(section) {
         setTimeout(data = JSON.parse(data), 3000);
         //console.log(data);
     } else {
-        data = fetch("../json/prodSgdata.json").then((res) => {
+        data = fetch("../json/prodSgData.json").then((res) => {
             return res.json();
         });
     }

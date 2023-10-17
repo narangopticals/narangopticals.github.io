@@ -30,17 +30,41 @@ export async function Func(section) {
         //console.log(data);
     } else if (section == 1) {
         type = "sunglass";
-        data = fetch("../json/prodSgdata.json").then((res) => {
-            return res.json();
-        });
+        try {
+            var results = fetch('https://api.github.com/gists/8fef5a38ff904a0c42df470064dda3f9').then(results => {
+                return results.json();
+            });
+            data = await results.then(data => {
+                return data.files["prodSgData.json"].content;
+            });
+            setTimeout(data = JSON.parse(data), 3000);
+            //framesData = (framesData.valueOf("data"))[0];
+        } catch (error) {
+            window.alert(error);
+            data = fetch('../json/prodSgData.json').then(results => {
+                return results.json();
+            });
+        }
     } else if (section == 2) {
         type = "lens";
-        data = fetch("../json/prodLnsdata.json").then((res) => {
-            return res.json();
-        });
+        try {
+            var results = fetch('https://api.github.com/gists/2a9920dd79543db4549056de07cc83e7').then(results => {
+                return results.json();
+            });
+            data = await results.then(data => {
+                return data.files["prodLnsData.json"].content;
+            });
+            setTimeout(data = JSON.parse(data), 3000);
+            //framesData = (framesData.valueOf("data"))[0];
+        } catch (error) {
+            window.alert(error);
+            data = fetch('../json/prodLnsData.json').then(results => {
+                return results.json();
+            });
+        }
     }
     str = Object.values((await data).valueOf("data"))[0];
-    //console.log(str.length);
+    console.log(str);
     var dataLength = str.length;
     var prodParents = "";
     if (dataLength > 8) {
@@ -94,11 +118,12 @@ export async function Func(section) {
             var elem = prodViews[i];
             var whatsappBtn = elem.querySelector("button[class^=whatsappBtn]");
             var cartBtn = elem.querySelector("button[class^=cartBtn]");
-            var shareBtn = elem.querySelector("button[class^=shareBtn]");
             whatsappBtn.addEventListener("click",
                 function (e) {
                     msgWhatsapp(e);
                 });
+
+            var shareBtn = elem.querySelector("button[class^=shareBtn]");
             shareBtn.addEventListener("click",
                 function (e) {
                     var obj = e.currentTarget;
@@ -277,10 +302,15 @@ export async function loadItems(startNum, endNum, pgNum) {
             elem.style.visibility = "visible";
             var valueData = str[i];
             elem.querySelector("iframe").src = valueData.imgfile;
-            var valString =
-                Number.parseInt(valueData.cost.trim()) > 0 ?
-                    ("Rs. " + valueData.cost + "<br>" + valueData.title) :
-                    (valueData.title);
+            var valString = "";
+            if (valueData.type == 'lens') {
+                valString = valueData.title;
+            } else {
+                valString =
+                    Number.parseInt(valueData.cost.trim()) > 0 ?
+                        ("Rs. " + valueData.cost + "<br>" + valueData.title) :
+                        (valueData.title);
+            }
             elem.querySelector("h1").innerHTML = valString;
             var val = [encodeURIComponent("I want to know More About Your Products") +
                 encodeURIComponent("\nName : ") +
@@ -288,13 +318,12 @@ export async function loadItems(startNum, endNum, pgNum) {
                 encodeURIComponent(",  Item ID :") +
                 encodeURIComponent(valueData.itemnum) +
                 "&type=phone_number&app_absent=0&send=1"];
-            var shareBtn = elem.querySelector("button[class^=shareBtn]");
             var whatsappBtn = elem.querySelector("button[class^=whatsappBtn]");
             var cartBtn = elem.querySelector("button[class^=cartBtn]");
             whatsappBtn.values = val;
             cartBtn.value = valueData.itemnum;
+            var shareBtn = elem.querySelector("button[class^=shareBtn]");
             shareBtn.value = "/product.html?type=" + type + "&itemnum=" + valueData.itemnum;
-
             i++;
         } else {
             elem.querySelector("iframe").src = "";

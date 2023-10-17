@@ -4,7 +4,8 @@ var prodParent = ""
 var prodParents = "";
 var selectedItems = [];
 var cartItem = [];
-var cartCost;
+var cartCost = 0;
+var type = "";
 export async function Func() {
 
     prodParent = fetch("../class/prodview.html").then((res) => {
@@ -20,6 +21,7 @@ export async function Func() {
             return data.files["prodFmData.json"].content;
         });
         setTimeout(framesData = JSON.parse(framesData), 3000);
+        //framesData = (framesData.valueOf("data"))[0];
     } catch (error) {
         window.alert(error);
         framesData = fetch('../json/prodFmData.json').then(results => {
@@ -27,13 +29,50 @@ export async function Func() {
         });
     }
     //console.log(data);
-    var sunglassData = fetch("../json/prodSgdata.json").then((res) => {
-        return res.json();
-    });
+    var sunglassData = "";
+    try {
+        var results = fetch('https://api.github.com/gists/8fef5a38ff904a0c42df470064dda3f9').then(results => {
+            return results.json();
+        });
+        sunglassData = await results.then(data => {
+            return data.files["prodSgData.json"].content;
+        });
+        setTimeout(sunglassData = JSON.parse(sunglassData), 3000);
+        //framesData = (framesData.valueOf("data"))[0];
+    } catch (error) {
+        window.alert(error);
+        sunglassData = fetch('../json/prodSgData.json').then(results => {
+            return results.json();
+        });
+    }
 
-    var mergedJSON = Object.assign({}, framesData, sunglassData);
-    console.log(mergedJSON);
-    str = Object.values(mergedJSON.valueOf("data"))[0];
+    var lensData = "";
+    try {
+        var results = fetch('https://api.github.com/gists/2a9920dd79543db4549056de07cc83e7').then(results => {
+            return results.json();
+        });
+        lensData = await results.then(data => {
+            return data.files["prodLnsData.json"].content;
+        });
+        setTimeout(lensData = JSON.parse(lensData), 3000);
+        //framesData = (framesData.valueOf("data"))[0];
+    } catch (error) {
+        window.alert(error);
+        lensData = fetch('../json/prodLnsData.json').then(results => {
+            return results.json();
+        });
+    }
+    //console.log("framesData");
+    //console.log(framesData['data']);
+    //console.log("sunglassData");
+    //console.log(sunglassData['data']);
+    //console.log("lensData");
+    //console.log(lensData);
+    var dbArray = Array.prototype.concat(framesData['data'], sunglassData['data'], lensData['data'])
+    //console.log("mergedJSON");
+    //console.log(mergedJSON);
+    //console.log(mergedJSON.valueOf("data"));
+    str = dbArray;
     console.log(str);
     //console.log(str.length);
     //var dataLength = str.length;
@@ -117,6 +156,20 @@ async function addItemViews(startNum, endNum) {
             console.log(text);
             msgWhatsapp(text);
         });
+
+}
+
+export function shareLinkOpen(e) {
+
+    var obj = e.currentTarget;
+    var url = "";
+    if (window.document.href == "narangopticals") {
+        url = "/product" + obj.value;
+    } else {
+        url = "/product.html" + obj.value;
+    }
+
+    window.open(url, "_blank");
 }
 export async function msgWhatsapp(text) {
     //console.log(text.length);
@@ -161,6 +214,9 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
                 }
             }
         }
+        if (arrSelect.length != selection.length) {
+            setCookie("incartItems", "", 10);
+        }
         console.log(arrSelect);
         cartItem = arrSelect;
     }
@@ -196,7 +252,9 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
                 if (element != id) {
                     newSelection.push(element);
                     console.log("index " + i);
-                    cartCost += Number.parseInt(cartItem[i].cost);
+                    if (cartItem[i].cost.length > 0) {
+                        cartCost += Number.parseInt(cartItem[i].cost);
+                    }
                 }
             }
         }
@@ -336,35 +394,44 @@ export async function loadItems(startNum, endNum, pgNum) {
         var elem = elemsParents[j];
         if (i < selectedItems.length) {
             elem.style.visibility = "visible";
-            var valueData = cartItem[i];
-            elem.querySelector("iframe").src = await valueData.imgfile;
-            var valString = Number.parseInt(await valueData.cost) > 0 ?
-                ("<span>Rs." + valueData.cost + "<br>" + valueData.title + "</span>") :
-                ("<span>" + valueData.title + "</span>");
-            elem.querySelector("h1").innerHTML = valString;
-            var val = [encodeURIComponent("I want to know More About Your Products") +
-                encodeURIComponent("\nName : ") +
-                encodeURIComponent(valueData.title) +
-                encodeURIComponent(",  Item ID :") +
-                encodeURIComponent(valueData.itemnum) +
-                "&type=phone_number&app_absent=0&send=1"];
-            var whatsappBtn = elem.querySelector("button[class^=whatsappBtn]");
-            whatsappBtn.values = val;
-            whatsappBtn.addEventListener("click",
-                function (e) {
+            if (i < cartItem.length) {
+                var valueData = cartItem[i];
+                elem.querySelector("iframe").src = await valueData.imgfile;
+                var valString = Number.parseInt(await valueData.cost) > 0 ?
+                    ("<span>Rs." + valueData.cost + "<br>" + valueData.title + "</span>") :
+                    ("<span>" + valueData.title + "</span>");
+                elem.querySelector("h1").innerHTML = valString;
+                var val = [encodeURIComponent("I want to know More About Your Products") +
+                    encodeURIComponent("\nName : ") +
+                    encodeURIComponent(valueData.title) +
+                    encodeURIComponent(",  Item ID :") +
+                    encodeURIComponent(valueData.itemnum) +
+                    "&type=phone_number&app_absent=0&send=1"];
+                var whatsappBtn = elem.querySelector("button[class^=whatsappBtn]");
+                whatsappBtn.values = val;
+                whatsappBtn.addEventListener("click",
+                    function (e) {
 
-                    var obj = e.currentTarget;
-                    var text = obj.values[0];
-                    msgWhatsapp(text);
-                });
-            var cartBtn = elem.querySelector("button[class^=cartBtn]");
-            cartBtn.value = valueData.itemnum;
-            //checkOutLater(cartBtn, null);
-            cartBtn.addEventListener("click",
-                function (e) {
-                    checkOutLater(null, e.target);
-                });
-            i++;
+                        var obj = e.currentTarget;
+                        var text = obj.values[0];
+                        msgWhatsapp(text);
+                    });
+                var cartBtn = elem.querySelector("button[class^=cartBtn]");
+                cartBtn.value = valueData.itemnum;
+                //checkOutLater(cartBtn, null);
+                cartBtn.addEventListener("click",
+                    function (e) {
+                        checkOutLater(null, e.target);
+                    });
+                var shareBtn = elem.querySelector("button[class^=shareBtn]");
+                var urlValue = "?type=" + cartItem[i].type + "&itemnum=" + cartItem[i].itemnum;
+                shareBtn.value = urlValue;
+                shareBtn.addEventListener("click",
+                    function (e) {
+                        shareLinkOpen(e);
+                    });
+                i++;
+            }
         } else {
             elem.querySelector("iframe").src = "";
             elem.querySelector("h1").innerHTML = "";
