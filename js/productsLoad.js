@@ -303,14 +303,14 @@ export async function loadItems(startNum, endNum, pgNum) {
             var valueData = str[i];
             elem.querySelector("iframe").src = valueData.imgfile;
             var valString = "";
-            if (valueData.type == 'lens') {
-                valString = valueData.title;
-            } else {
+            //if (valueData.type == 'lens') {
+            valString = valueData.title;
+            /*} else {
                 valString =
                     Number.parseInt(valueData.cost.trim()) > 0 ?
                         ("Rs. " + valueData.cost + "<br>" + valueData.title) :
                         (valueData.title);
-            }
+            }*/
             elem.querySelector("h1").innerHTML = valString;
             var val = [encodeURIComponent("I want to know More About Your Products") +
                 encodeURIComponent("\nName : ") +
