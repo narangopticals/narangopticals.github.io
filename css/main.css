@@ -560,8 +560,8 @@ a.dailer {
     height: fit-content;
     display: flex;
     flex-direction: column;
-    margin: 2%;
-    padding: 2%;
+    margin: 1%;
+    padding: 1%;
     text-align: center;
     align-items: center;
 }
