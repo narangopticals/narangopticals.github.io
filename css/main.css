@@ -12,7 +12,7 @@ button {
 #nav-menu li {
     float: left;
     height: inherit;
-    width: 100%;
+    /*width: 100%;*/
     margin: 0 1%;
     flex-grow: 1;
 }
@@ -29,7 +29,7 @@ button {
 #cartCount {
     min-width: 20px;
     min-height: 20px;
-    font-size: larger;
+    font-size: x-large;
     font-weight: bolder;
 }
 
@@ -39,7 +39,7 @@ h1,
 #flexSpcTel {
     color: rgb(255, 255, 255);
     text-shadow: 0 0 4px #c66666, 0 0 8px #6793c6;
-    font-size: 250%;
+    font-size: xx-large;
 }
 
 /*animation event #start*/
@@ -410,6 +410,7 @@ a.dailer {
     margin-bottom: 0.20%;
     position: relative;
     font-weight: bold;
+    font-size: larger;
     border-radius: 5px;
 }
 
@@ -685,10 +686,7 @@ a.dailer {
     .dropbtn,
     .sns-buttons,
     .slideName {
-        font-size: 140%;
+        font-size: larger;
     }
 
-    .header {
-        font-size: 40px;
-    }
 }

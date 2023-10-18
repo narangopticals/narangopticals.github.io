@@ -153,6 +153,8 @@ export async function msgWhatsapp(e) {
             || devType.match(/BlackBerry/i)
             || devType.match(/Windows Phone/i)) {
             wbLink = "https://wa.me/+919756231332?text=";
+        } else if (devType.match(/Linux/i)) {
+            wbLink = "https://web.whatsapp.com/send/?phone=919756231332&text=";
         } else {
             wbLink = "https://api.whatsapp.com/send/?phone=919756231332&text=";
         }
@@ -167,9 +169,24 @@ export async function checkOutLater(btnLoad, pressedBtn) {
         updateCart(pressedBtn);
         console.log(pressedBtn);
     } else if (btnLoad != null) {
-
+        loadButton(btnLoad);
     }
-
+    function loadButton(btn) {
+        var idMod = "";
+        if (btn != undefined) {
+            idMod = btn.value;
+        }
+        console.log(idMod.length);
+        if (idMod.length > 0) {
+            if (selectedItems.length > 0) {
+                if (selectedItems.indexOf(idMod) > -1) {
+                    btn.innerHTML = "-";
+                    btn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
+                    console.log(selectedItems);
+                }
+            }
+        }
+    }
     function modifyCartCount() {
         var cartView = document.getElementById('cartExpand');
         var cartCounter = cartView.querySelector('#cartCounter');
@@ -303,14 +320,14 @@ export async function loadItems(startNum, endNum, pgNum) {
             var valueData = str[i];
             elem.querySelector("iframe").src = valueData.imgfile;
             var valString = "";
-            if (valueData.type == 'lens') {
-                valString = valueData.title;
-            } else {
+            //if (valueData.type == 'lens') {
+            valString = valueData.title;
+            /*} else {
                 valString =
                     Number.parseInt(valueData.cost.trim()) > 0 ?
                         ("Rs. " + valueData.cost + "<br>" + valueData.title) :
                         (valueData.title);
-            }
+            }*/
             elem.querySelector("h1").innerHTML = valString;
             var val = [encodeURIComponent("I want to know More About Your Products") +
                 encodeURIComponent("\nName : ") +

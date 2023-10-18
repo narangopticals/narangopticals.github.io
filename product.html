@@ -120,14 +120,28 @@
                 padding: 0px;
                 margin: 2px -16px 0px 6px;
                 flex-grow: 0.2;">&#128722;</button>-->
-                <button class="cartBtn" id="gridIdTag" style="flex-grow: 0.2;
+                <button class="cartBtn" id="gridIdTag" style="flex-grow: 0.15;
                 /*padding: 2px 0px 0px 0px;
                 margin: 2px 0px 0px -7px;*/
                 padding: 2px;
                 margin: 3px 0px 3px 3px;
                 font-weight: bolder;
+                min-width: 50px;
                 border: 3px solid #e7e6c5;
                 font-size: xx-large;"></button>
+                <button class="shareBtn" id="gridShareBtn" style="/*! aspect-ratio: -0.3; */
+                                        flex-grow: 0.15;
+                                        /*padding: 2px 0px 0px 0px;
+                                        margin: 2px 0px 0px -7px;*/
+                                        padding: 1px;
+                                        margin: 3px;
+                                        /*! font-weight: bolder; */
+                                        border: 3px solid #e7e6c5;
+                                        /*! font-size: xx-large; */
+                                        width: 38px;">
+                    <img id="shareIcon" src="../imgs/shareicon.png" style="  aspect-ratio: 1"></img>
+
+                </button>
             </div>
         </div>
     </div>
@@ -146,10 +160,11 @@
         switchSection(0);
     </script>-->
     <script type="module">
-        import { navLoader, toggle } from "./js/navload.js";
+        import { navLoader, toggle, navScroll } from "./js/navload.js";
         window.navLoader = navLoader;
         window.toggle = toggle;
         navLoader('menuBtns', 0, 'Products');
+        window.onscroll = navScroll;
     </script>
     <script>
         /*var currentSection = 1;
@@ -169,7 +184,11 @@
             }
         }*/
     </script>
-
+    <script type="module">
+        import { checkOutLater, } from '/js/productsLoad.js';
+        window.checkOutLater = checkOutLater;
+        checkOutLater(null, null);
+    </script>
     <script>
         grabUrlProd();
         function grabUrlProd() {
@@ -281,8 +300,47 @@
         }
         async function loadItem(item) {
             var prodMain = document.getElementById("prodView");
-            prodMain.querySelector('.gridImg').src = item.imgfile
-            prodMain.querySelector('.gridTitle').innerHTML = "Rs. " + item.cost + "<br>" + item.title;
+            if (item.imgfile.length > 0) {
+                prodMain.querySelector('.gridImg').style.display = "";
+                prodMain.querySelector('.gridImg').src = item.imgfile;
+            } else {
+                prodMain.querySelector('.gridImg').style.display = "none";
+            }
+
+            var details = "";
+            if (item.cost.length > 0) {
+                details += "<span>Rs." + item.cost + "</span>";
+            }
+            if (item.title.length > 0) {
+                details += "<br><span>Title : " + item.title + "</span>";
+            }
+            if (item.dscrpt.length > 0) {
+                details += "<br><br><span>Description:<br><br>" + item.dscrpt + "<br></span>";
+            }
+            prodMain.querySelector('.gridTitle').innerHTML = details;
+            var crtBtn = prodMain.querySelector('.cartBtn');
+            if (crtBtn != undefined) {
+
+                crtBtn.value = item.itemnum;
+
+                window.checkOutLater(crtBtn, null);
+                crtBtn.addEventListener("click",
+                    function (e) {
+                        window.checkOutLater(null, e.target);
+                    });
+            }
+            var shareBtn = prodMain.querySelector('.shareBtn');
+            if (shareBtn != undefined) {
+                shareBtn.value = window.href;
+                console.log(window.href);
+                shareBtn.addEventListener("click",
+                    function (e) {
+                        window.navigator.clipboard.writeText(window.href);
+
+                        // Alert the copied text
+                        window.alert("Copied Link: " + window.href);
+                    });
+            }
         }
 
     </script>

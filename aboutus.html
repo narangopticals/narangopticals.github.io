@@ -80,12 +80,11 @@
     </div>
     <br>
     <script type="module">
-        import { navLoader, toggle } from "./js/navload.js";
+        import { navLoader, toggle, navScroll } from "./js/navload.js";
         window.navLoader = navLoader;
         window.toggle = toggle;
-        navLoader('menuBtns', 1, 'About Us');
-    </script>
-    <script>
+        navLoader('menuBtns', 2, 'About Us');
+        window.onscroll = navScroll;
     </script>
     <script>
         let slideIndex = 0;

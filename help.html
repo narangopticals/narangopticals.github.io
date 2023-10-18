@@ -55,11 +55,11 @@
             </div>
         </div>
     </div>
-
     <script type="module">
-        import { navLoader, toggle } from "./js/navload.js";
+        import { navLoader, toggle, navScroll } from "./js/navload.js";
         window.navLoader = navLoader;
         window.toggle = toggle;
         navLoader('sns-buttons', 6, 'Guide Tour');
+        window.onscroll = navScroll;
     </script>
 </body>

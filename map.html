@@ -19,12 +19,12 @@
             allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
     <script type="module">
-        import { navLoader, toggle } from "./js/navload.js";
+        import { navLoader, toggle, navScroll } from "./js/navload.js";
         window.navLoader = navLoader;
         window.toggle = toggle;
-        navLoader('menuBtns', 3, 'Google Maps');
+        navLoader('menuBtns', 4, 'Google Maps');
+        window.onscroll = navScroll;
     </script>
-
 </body>
 
 </html>

@@ -199,6 +199,8 @@ export async function msgWhatsapp(text) {
             || devType.match(/BlackBerry/i)
             || devType.match(/Windows Phone/i)) {
             wbLink = "https://wa.me/+919756231332?text=";
+        } else if (devType.match(/Linux/i)) {
+            wbLink = "https://web.whatsapp.com/send/?phone=919756231332&text=";
         } else {
             wbLink = "https://api.whatsapp.com/send/?phone=919756231332&text=";
         }

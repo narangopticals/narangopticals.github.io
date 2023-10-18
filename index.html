@@ -66,10 +66,11 @@
 
     </script>
     <script type="module">
-        import { navLoader, toggle } from "./js/navload.js";
+        import { navLoader, toggle, navScroll } from "./js/navload.js";
         window.navLoader = navLoader;
         window.toggle = toggle;
         navLoader('menuBtns', 0, 'Products');
+        window.onscroll = navScroll;
     </script>
     <script>
         function openWindow() {
@@ -92,6 +93,25 @@
             }
         }
     </script>
+    <!--<script type="text/javascript">
+        console.log("window.scrollY" + window.scrollY);
+        var prevScrollpos = window.scrollY;
+        window.addEventListener("scroll", (event) => {
+            //window.onscroll = (event) => {
+            console.log(event);
+            console.log(prevScrollpos);
+            var currentScrollPos = window.scrollY;
+            console.log(currentScrollPos);
+            if (prevScrollpos > currentScrollPos) {
+                document.getElementById("logoHeader").style.display = "";
+                console.log("logoHeader visible");
+            } else {
+                document.getElementById("logoHeader").style.display = "none";
+                console.log("logoHeader Hidden");
+            }
+            prevScrollpos = currentScrollPos;
+        });
+    </script>-->
 </body>
 
 </html>

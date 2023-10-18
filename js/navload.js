@@ -1,3 +1,5 @@
+var prevScrollpos = "";
+
 export async function navLoader(cls, ind, headTxt) {
     await fetch("../class/navbar.html")
         .then((res) => {
@@ -11,7 +13,7 @@ export async function navLoader(cls, ind, headTxt) {
             toggle();
             markCurrent(cls, ind, headTxt);
         });
-
+    prevScrollpos = window.scrollY;
 }
 //Func();
 export function toggle() {
@@ -42,3 +44,12 @@ function markCurrent(cls, ind, headTxt) {
 }
 
 //document.getElementById('navbar');
+export function navScroll() {
+    var currentScrollPos = window.scrollY;
+    if (prevScrollpos > currentScrollPos) {
+        window.document.getElementById("logoHeader").style.display = "";
+    } else {
+        window.document.getElementById("logoHeader").style.display = "none";
+    }
+    prevScrollpos = currentScrollPos;
+} 
