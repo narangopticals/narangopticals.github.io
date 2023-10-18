@@ -140,21 +140,36 @@ async function addItemViews(startNum, endNum) {
         });
     cartView.querySelector('#orderEnquiry').addEventListener("click",
         function (e) {
-            var whatsappBtns = prodView.querySelectorAll(".whatsappBtn");
+            //var whatsappBtns = prodView.querySelectorAll(".whatsappBtn");
             var text = "";
             for (var i = 0; i < prodViews.length; i++) {
                 var tmp = prodViews[i];
-                //console.log(whatsappBtn);
+                //console.log("line 148");
+                //console.log(tmp);
                 if (tmp.style.visibility != "hidden") {
-                    var tmp = whatsappBtns[i].values[0];
-                    tmp = tmp.replaceAll('&type=phone_number&app_absent=0&send=1', '');
-                    tmp = tmp.replaceAll('I%20want%20to%20know%20More%20About%20Your%20Products%0A', '');
-                    text += tmp + '%20%3A%20Rs' + cartItem[i].cost + '%0A';
+                    console.log("line 152 : not hidden");
+                    var cartBtn = tmp.querySelector('.cartBtn');
+                    var shareBtn = tmp.querySelector('.shareBtn');
+                    if (cartBtn.textContent == "-") {
+                        console.log("line 156 : cartBtn.textContent = " + cartBtn.textContent);
+                        var tmptxt = encodeURIComponent("\n\nName : ") +
+                            encodeURIComponent(cartItem[i].title) +
+                            encodeURIComponent("&  Item ID :") +
+                            encodeURIComponent(cartItem[i].itemnum) +
+                            encodeURIComponent("\t& Rs") + cartItem[i].cost +
+                            encodeURIComponent("\nProduct Link : \n") +
+                            encodeURIComponent("https://narangopticals.github.io/product" + shareBtn.value);
+                        console.log("line 159 test:");
+                        console.log(tmptxt);
+                        text += tmptxt;
+                    }
+
                 }
             }
-            text = 'I%20want%20to%20know%20More%20About%20Your%20Products%0A' + text + "%0ATotal%20%3A%20Rs" + cartCost + '&type=phone_number&app_absent=0&send=1';
-            console.log(text);
-            msgWhatsapp(text);
+            var val = [encodeURIComponent("I want to know More About Your Products") + text +
+                "&type=phone_number&app_absent=0&send=1" + encodeURIComponent("\n\nTotal : Rs.") + cartCost];
+            console.log("line 169 :" + val);
+            msgWhatsapp(val);
         });
 
 }
