@@ -552,6 +552,46 @@ a.dailer {
     width: 80%;
 }
 
+.trackingField,
+#trackingDetailView {
+    border: 6px solid rgb(210, 179, 27);
+    border-radius: 10px;
+    width: 80%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    margin: 2%;
+    padding: 2%;
+    text-align: center;
+    align-items: center;
+}
+
+.trackSubmitBtn {
+    margin: 5px 0 5px 0;
+    padding: 5px 0 5px 0;
+    font-size: large;
+    font-weight: bold;
+    min-width: 10%;
+    align-self: center;
+    flex-grow: 1;
+}
+
+.inputDetails,
+.trackIdInput {
+    padding: 8px 0 8px 0;
+    min-width: 30%;
+    align-self: center;
+    flex-grow: 1;
+    font-weight: bold;
+    font-size: large;
+}
+
+#trackingDetailView {
+    font-weight: bold;
+    color: white;
+    font-size: larger;
+}
+
 /* Portrait orientation ||*/
 @media screen and (orientation: portrait) {
     .mainContent {

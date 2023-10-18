@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        Narang Opticals, Kashipur
+    </title>
+    <link rel="stylesheet" href="css/main.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body id="mainBody">
+    <nav id="navbar">
+    </nav>
+    <!--<div id="google_translate_element"></div>
+    <script type="text/javascript">// <![CDATA[
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: true
+            }, 'google_translate_element');
+
+        }// ]]></script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+--->
+    <div id="mainView" style="height: fit-content;
+    display: flex;
+    flex-direction: column;
+    /*margin:2%;
+    padding: 2%;*/
+    text-align: center;
+    align-items: center;">
+        <div id="trackingDetailView"></div>
+        <div class="trackingField" id="trackIdHolder">
+            <h3 class="titleInstr" style="width:auto;align-self:center;">
+                Enter Given Tracking ID:
+            </h3>
+            <input type="text" placeholder="N-123456-1234-12345" id="inputTrackId" class="trackIdInput"></input>
+            <button class="trackSubmitBtn" id="trackIdSubmit" onclick="getThatId('inputTrackId')">Submit</button>
+        </div>
+        <h3>OR</h3>
+        <div class="trackingField" id="detailsTrackHolder">
+            <h3 class="titleInstr" style="width:auto;align-self:center;">
+                Registered Name:
+            </h3>
+            <input type="text" placeholder="Enter Registered Name During Order" id="nameInput" class="inputDetails">
+            </input>
+            <h3 class="titleInstr" style="width:auto;align-self:center;">
+                Order Date:
+            </h3>
+            <input type="date" value="date" id="dateInput" class="inputDetails">
+            </input>
+            <h3 class="titleInstr" style="width:auto;align-self:center;">
+                Registered Number:
+            </h3>
+            <input type="tel" placeholder="Phone Number Registered (without country code)" id="numMainInput"
+                class="inputDetails">
+            </input>
+            <button class="trackSubmitBtn" id="detailsSubmit"
+                onclick="formThatID('nameInput','dateInput','numMainInput')">Submit</button>
+        </div>
+
+    </div>
+    <script type="module">
+        import { initId, getThatId, formThatID } from "../js/track.js"
+        window.getThatId = getThatId;
+        window.formThatID = formThatID;
+        initId();
+        //trackOrder("N-171023-0001-93870");
+    </script>
+    <script type="text/javascript">
+        var elements = document.querySelectorAll('input');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].value = "";
+        }
+    </script>
+    <script type="module">
+        import { navLoader, toggle, navScroll } from "./js/navload.js";
+        window.navLoader = navLoader;
+        window.toggle = toggle;
+        navLoader('menuBtns', 0, 'Products');
+        window.onscroll = navScroll;
+    </script>
+</body>
+
+</html>
