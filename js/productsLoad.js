@@ -64,7 +64,7 @@ export async function Func(section) {
         }
     }
     str = Object.values((await data).valueOf("data"))[0];
-    console.log(str);
+    //console.log(str);
     var dataLength = str.length;
     var prodParents = "";
     if (dataLength > 8) {
@@ -167,7 +167,7 @@ export async function checkOutLater(btnLoad, pressedBtn) {
         await loadCart();
     } else if (pressedBtn != null) {
         updateCart(pressedBtn);
-        console.log(pressedBtn);
+        //console.log(pressedBtn);
     } else if (btnLoad != null) {
         loadButton(btnLoad);
     }
@@ -176,13 +176,13 @@ export async function checkOutLater(btnLoad, pressedBtn) {
         if (btn != undefined) {
             idMod = btn.value;
         }
-        console.log(idMod.length);
+        //console.log(idMod.length);
         if (idMod.length > 0) {
             if (selectedItems.length > 0) {
                 if (selectedItems.indexOf(idMod) > -1) {
-                    btn.innerHTML = "-";
+                    //btn.innerHTML = "-";
                     btn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
-                    console.log(selectedItems);
+                    //console.log(selectedItems);
                 }
             }
         }
@@ -190,7 +190,7 @@ export async function checkOutLater(btnLoad, pressedBtn) {
     function modifyCartCount() {
         var cartView = document.getElementById('cartExpand');
         var cartCounter = cartView.querySelector('#cartCounter');
-        console.log(cartCounter);
+        //console.log(cartCounter);
         cartCounter.textContent = selectedItems.length;
     }
     function addProduct(id, btn) {
@@ -198,9 +198,9 @@ export async function checkOutLater(btnLoad, pressedBtn) {
             selectedItems.push(id);
             setCookie("incartItems", selectedItems, 10);
             //btn.textContent = "-";
-            btn.innerHTML = "-";// <span style=\"background:black; font-size:larger;\">&#128722;</span>";
+            //btn.innerHTML = "-";// <span style=\"background:black; font-size:larger;\">&#128722;</span>";
             btn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
-            console.log(selectedItems);
+            //console.log(selectedItems);
             modifyCartCount();
         }
     }
@@ -214,8 +214,8 @@ export async function checkOutLater(btnLoad, pressedBtn) {
                 }
             }
             //btn.textContent = "+";
-            btn.innerHTML = "+";// <span style=\"background:black; font-size:larger;\">&#128722;</span>";
-            btn.style.background = 'linear-gradient(to bottom, rgb(107, 128, 0),rgb(150, 179, 3),rgb(107, 128, 0))';
+            //btn.innerHTML = "+";// <span style=\"background:black; font-size:larger;\">&#128722;</span>";
+            btn.style.background = 'linear-gradient(to bottom, rgb(55, 55, 55),rgb(22, 22, 22),rgb(0, 0, 0),rgb(22, 22, 22),rgb(55, 55, 55))';
             selectedItems = newSelection;
             setCookie("incartItems", selectedItems, 10);
             modifyCartCount();
@@ -225,27 +225,27 @@ export async function checkOutLater(btnLoad, pressedBtn) {
         var totalSelected = selectedItems.length;
         var prodView = window.document.getElementById('mainProdView');
         var cartBtns = prodView.querySelectorAll('button[class^=cartBtn]');
-        console.log("updateProductCount:" + totalSelected);
+        //console.log("updateProductCount:" + totalSelected);
         var idBtnsLen = cartBtns.length;
-        console.log("updateProductCount: idBtnsLen =" + idBtnsLen);
+        //console.log("updateProductCount: idBtnsLen =" + idBtnsLen);
 
         for (var j = 0; j < idBtnsLen; j++) {
             var currentBtn = cartBtns[j];
             //currentBtn.textContent = "+";
-            currentBtn.innerHTML = "+";// <span style=\"background:black; font-size:larger;\">&#128722;</span>";
-            currentBtn.style.background = 'linear-gradient(to bottom, rgb(107, 128, 0),rgb(150, 179, 3),rgb(107, 128, 0))';
+            //currentBtn.innerHTML = "+";// <span style=\"background:black; font-size:larger;\">&#128722;</span>";
+            currentBtn.style.background = 'linear-gradient(to bottom, rgb(55, 55, 55),rgb(22, 22, 22),rgb(0, 0, 0),rgb(22, 22, 22),rgb(55, 55, 55))';
             var currentBtnVal = currentBtn.value.toString();
-            console.log("updateProductCount: currentBtn.value =" + currentBtnVal);
-            console.log("updateProductCount: selItemID =" + selItemIdstr);
+            //console.log("updateProductCount: currentBtn.value =" + currentBtnVal);
+            //console.log("updateProductCount: selItemID =" + selItemIdstr);
             for (var i = 0; i < totalSelected; i++) {
                 var selItemID = selectedItems[i];
-                var selItemIdstr = selItemID.toString();
+                var selItemIdstr = selItemID.toString()
                 selItemIdstr = selItemIdstr.trim();
                 if (currentBtnVal == selItemIdstr) {
-                    console.log("match found");
-                    console.log(currentBtn);
+                    //console.log("match found");
+                    //console.log(currentBtn);
                     //currentBtn.textContent = "-";
-                    currentBtn.innerHTML = "-";// <span style=\"background:black; font-size:larger;\">&#128722;</span>";
+                    //currentBtn.innerHTML = "-";// <span style=\"background:black; font-size:larger;\">&#128722;</span>";
                     currentBtn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
                 }
             }
@@ -258,7 +258,7 @@ export async function checkOutLater(btnLoad, pressedBtn) {
         if (btn != undefined) {
             idMod = btn.value;
         }
-        console.log(idMod.length);
+        //console.log(idMod.length);
         if (idMod.length > 0) {
             if (selectedItems.length > 0) {
                 if (selectedItems.indexOf(idMod) > -1) {
@@ -274,11 +274,11 @@ export async function checkOutLater(btnLoad, pressedBtn) {
     }
     async function loadCart() {
         var cartString = await getCookie("incartItems");
-        console.log(cartString);
+        //console.log(cartString);
         if (cartString.length > 0) {
             selectedItems = cartString.split(",")
         }
-        console.log(selectedItems);
+        //console.log(selectedItems);
         updateProductCount();
     }
     async function setCookie(cname, cvalue, exdays) {
@@ -304,7 +304,7 @@ export async function checkOutLater(btnLoad, pressedBtn) {
     }
 }
 export async function mainShareBtn(btn, type, itemnum) {
-    console.log(btn);
+    //console.log(btn);
     var url = "/product.html?type=" + type + "&itemnum=" + itemnum;
     btn.href = url;
 }

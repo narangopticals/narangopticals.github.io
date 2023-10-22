@@ -73,7 +73,7 @@ export async function Func() {
     //console.log(mergedJSON);
     //console.log(mergedJSON.valueOf("data"));
     str = dbArray;
-    console.log(str);
+    //console.log(str);
     //console.log(str.length);
     //var dataLength = str.length;
     checkOutLater(null, null, str);
@@ -147,11 +147,11 @@ async function addItemViews(startNum, endNum) {
                 //console.log("line 148");
                 //console.log(tmp);
                 if (tmp.style.visibility != "hidden") {
-                    console.log("line 152 : not hidden");
+                    //console.log("line 152 : not hidden");
                     var cartBtn = tmp.querySelector('.cartBtn');
                     var shareBtn = tmp.querySelector('.shareBtn');
                     if (cartBtn.textContent == "-") {
-                        console.log("line 156 : cartBtn.textContent = " + cartBtn.textContent);
+                        //console.log("line 156 : cartBtn.textContent = " + cartBtn.textContent);
                         var tmptxt = encodeURIComponent("\n\nName : ") +
                             encodeURIComponent(cartItem[i].title) +
                             encodeURIComponent("&  Item ID :") +
@@ -159,8 +159,8 @@ async function addItemViews(startNum, endNum) {
                             encodeURIComponent("\t& Rs") + cartItem[i].cost +
                             encodeURIComponent("\nProduct Link : \n") +
                             encodeURIComponent("https://narangopticals.github.io/product" + shareBtn.value);
-                        console.log("line 159 test:");
-                        console.log(tmptxt);
+                        //console.log("line 159 test:");
+                        //console.log(tmptxt);
                         text += tmptxt;
                     }
 
@@ -168,7 +168,7 @@ async function addItemViews(startNum, endNum) {
             }
             var val = [encodeURIComponent("I want to know More About Your Products") + text +
                 "&type=phone_number&app_absent=0&send=1" + encodeURIComponent("\n\nTotal : Rs.") + cartCost];
-            console.log("line 169 :" + val);
+            //console.log("line 169 :" + val);
             msgWhatsapp(val);
         });
 
@@ -212,7 +212,7 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
         await loadCart(jsonData);
     } else if (pressedBtn != null) {
         updateCart(pressedBtn);
-        console.log(pressedBtn);
+        //console.log(pressedBtn);
     } else if (btnLoad != null) {
 
     }
@@ -234,13 +234,13 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
         if (arrSelect.length != selection.length) {
             setCookie("incartItems", "", 10);
         }
-        console.log(arrSelect);
+        //console.log(arrSelect);
         cartItem = arrSelect;
     }
     function modifyCartCount() {
         var cartView = document.getElementById('cartExpand');
         var cartCounter = cartView.querySelector('#cartCounter');
-        console.log(cartCounter);
+        //console.log(cartCounter);
         cartCounter.textContent = selectedItems.length + " (Rs." + cartCost + ")";
     }
     function addProduct(id, btn) {
@@ -254,7 +254,7 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
             }
             btn.textContent = "-";
             btn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
-            console.log(selectedItems);
+            //console.log(selectedItems);
             modifyCartCount();
         }
     }
@@ -268,7 +268,7 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
                 var element = selectedItems[i];
                 if (element != id) {
                     newSelection.push(element);
-                    console.log("index " + i);
+                    //console.log("index " + i);
                     if (cartItem[i].cost.length > 0) {
                         cartCost += Number.parseInt(cartItem[i].cost);
                     }
@@ -286,9 +286,9 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
         var totalSelected = selectedItems.length;
         var prodView = window.document.getElementById('mainProdView');
         var cartBtns = prodView.querySelectorAll('button[class^=cartBtn]');
-        console.log("updateProductCount:" + totalSelected);
+        //console.log("updateProductCount:" + totalSelected);
         var idBtnsLen = cartBtns.length;
-        console.log("updateProductCount: idBtnsLen =" + idBtnsLen);
+        //console.log("updateProductCount: idBtnsLen =" + idBtnsLen);
 
         for (var j = 0; j < idBtnsLen; j++) {
             var currentBtn = cartBtns[j];
@@ -296,15 +296,15 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
                 currentBtn.textContent = "+";
                 currentBtn.style.background = 'linear-gradient(to bottom, rgb(107, 128, 0),rgb(150, 179, 3),rgb(107, 128, 0))';
                 var currentBtnVal = currentBtn.value.toString();
-                console.log("updateProductCount: currentBtn.value =" + currentBtnVal);
-                console.log("updateProductCount: selItemID =" + selItemIdstr);
+                //console.log("updateProductCount: currentBtn.value =" + currentBtnVal);
+                //console.log("updateProductCount: selItemID =" + selItemIdstr);
                 for (var i = 0; i < totalSelected; i++) {
                     var selItemID = selectedItems[i];
                     var selItemIdstr = selItemID.toString();
                     selItemIdstr = selItemIdstr.trim();
                     if (currentBtnVal == selItemIdstr) {
-                        console.log("match found");
-                        console.log(currentBtn);
+                        //console.log("match found");
+                        //console.log(currentBtn);
                         currentBtn.textContent = "-";
                         currentBtn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
                     }
@@ -319,7 +319,7 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
         if (btn != undefined) {
             idMod = btn.value;
         }
-        console.log(idMod.length);
+        //console.log(idMod.length);
         if (idMod.length > 0) {
             if (selectedItems.length > 0) {
                 if (selectedItems.indexOf(idMod) > -1) {
@@ -337,11 +337,11 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
 
     async function loadCart(jsonData) {
         var cartString = await getCookie("incartItems");
-        console.log(cartString);
+        //console.log(cartString);
         if (cartString.length > 0) {
             selectedItems = cartString.split(",")
         }
-        console.log(selectedItems);
+        //console.log(selectedItems);
         var dataLength = selectedItems.length;
         getLoadingObjects(jsonData, selectedItems);
         if (dataLength > 8) {

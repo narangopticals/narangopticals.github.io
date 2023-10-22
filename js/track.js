@@ -56,6 +56,8 @@ export async function initId() {
     var id = urlParams.get('id');
     if (id != null) {
         trackOrder(id);
+        window.document.getElementById('trackIdHolder').style.display = "none";
+        window.document.getElementById('detailsTrackHolder').style.display = "none";
     }
 }
 
@@ -64,7 +66,7 @@ export async function getThatId(btnid) {
     var inputfield = window.document.getElementById(btnid);
     if (inputfield != null) {
         var id = inputfield.value;
-        console.log(id);
+        //console.log(id);
         trackOrder(id);
     }
 }
@@ -78,8 +80,8 @@ export async function formThatID(nameBtnId, dateBtnId, numBtnId) {
     var nameBtn = window.document.getElementById(nameBtnId);
     if (nameBtn != null) {
         name = nameBtn.value;
-        console.log("line 81:");
-        console.log(name);
+        //console.log("line 81:");
+        //console.log(name);
     }
 
     var dateBtn = window.document.getElementById(dateBtnId);
@@ -90,26 +92,26 @@ export async function formThatID(nameBtnId, dateBtnId, numBtnId) {
         for (var j = dateArr.length - 1; j >= 0; j--) {
             date += dateArr[j];
         }
-        console.log("line 87:");
-        console.log(date);
+        //console.log("line 87:");
+        //console.log(date);
     }
     var numBtn = window.document.getElementById(numBtnId);
     if (numBtn != null) {
         num = numBtn.value;
-        console.log("line 95:");
-        console.log(num);
+        //console.log("line 95:");
+        //console.log(num);
         for (var i = 0; i < num.length; i++) {
             if (i % 2 == 0) {
                 numCode += num[i];
             }
         }
 
-        console.log("line 107:");
-        console.log(numCode);
+        //console.log("line 107:");
+        //console.log(numCode);
     }
     var idPart = date + "-" + numCode;
-    console.log("line 113:");
-    console.log(idPart);
+    //console.log("line 113:");
+    //console.log(idPart);
     for (var i = 0; i < str.length; i++) {
         var item = str[i];
         if (item.trackid.trim().indexOf(idPart) > 0) {

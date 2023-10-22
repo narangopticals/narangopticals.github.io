@@ -26,7 +26,8 @@ overflow: clip;">
         margin: 0;
         font-size: inherit;
         font-weight:bold;
-        margin: 5px 0 5px 0;"></h1>
+        margin: 5px 0 5px 0;
+        min-height: 40px;"></h1>
 
     <div class="btnsHolder" style="display: flex;
         flex-direction: row;
@@ -39,7 +40,7 @@ overflow: clip;">
         font-size: medium;
         padding: 2px;
         font-weight: bold;
-        border: 5px solid rgb(85, 141, 191);
+        border: 3px solid #e7e6c5;
         margin-top: 2px;
         margin-bottom: 2px;
         border-radius: 10px;
@@ -59,19 +60,25 @@ overflow: clip;">
         padding: 2px;*/
         margin: 3px 0px 3px 3px;
         font-weight: bolder;
-        border: 3px solid #e7e6c5;
-        font-size: xx-large;"></button>
-        <button class="shareBtn" id="gridShareBtn" style="/*! aspect-ratio: -0.3; */
+        border: 2px solid #e7e6c5;
+        border-radius: 10px;
+        font-size: xx-large;">&#128722;</button>
+        <button class="shareBtn" id="gridShareBtn"
+            style="/*! aspect-ratio: -0.3; */
                         flex-grow: 0.15;
                         /*padding: 2px 0px 0px 0px;
                         margin: 2px 0px 0px -7px;*/
                         padding: 1px;
                         margin: 3px;
                         /*! font-weight: bolder; */
-                        border: 3px solid #e7e6c5;
+                        border: 2px solid #e7e6c5;
                         /*! font-size: xx-large; */
-                        width: 38px;">
-            <img id="shareIcon" src="../imgs/shareicon.png" style="  aspect-ratio: 1;width: 100%;"></img>
+                        width: 40px;
+                        border-radius: 10px;
+                        background: linear-gradient(to bottom, rgb(35, 96, 150),rgb(11, 41, 102),rgb(16, 52, 118),rgb(11, 41, 102),rgb(35, 96, 150));
+                        /*background: linear-gradient(to bottom, rgb(45, 53, 69),rgb(48, 52, 58),rgb(36, 42, 49),rgb(48, 52, 58),rgb(45, 53, 69));*/">
+            <img id="shareIcon" src="../imgs/shareicon.png" style="aspect-ratio: 1;
+            width: 100%;"></img>
 
         </button>
     </div>
