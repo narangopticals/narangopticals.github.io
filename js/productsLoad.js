@@ -255,10 +255,15 @@ export async function checkOutLater(btnLoad, pressedBtn) {
 
     function updateCart(btn) {
         var idMod = "";
+        console.log("line 258:");
+        console.log(btn);
         if (btn != undefined) {
             idMod = btn.value;
+            console.log("line 262:");
+            console.log(idMod);
         }
         //console.log(idMod.length);
+        //if (idMod != null) {
         if (idMod.length > 0) {
             if (selectedItems.length > 0) {
                 if (selectedItems.indexOf(idMod) > -1) {
@@ -270,6 +275,7 @@ export async function checkOutLater(btnLoad, pressedBtn) {
                 addProduct(idMod, btn);
             }
         }
+        //}
 
     }
     async function loadCart() {
@@ -353,9 +359,9 @@ export async function loadItems(startNum, endNum, pgNum) {
     var len = btnParent.length;
     for (var k = 0; k < len; k++) {
         if (k == pgNum) {
-            btnParent[k].style.background = 'linear-gradient(to bottom,rgb(48, 48, 48), rgb(132, 132, 132), rgb(105, 105, 105), rgb(63, 63, 63))';
+            btnParent[k].style.background = 'linear-gradient(#292929, #252525,#212121, #252525, #292929)';
         } else {
-            btnParent[k].style.background = 'linear-gradient(to bottom,rgb(135, 134, 134), rgb(152, 144, 144), rgb(105, 105, 105), rgb(152, 144, 144), rgb(135, 134, 134)) ';
+            btnParent[k].style.background = 'linear-gradient(#545454, #3e3e3e,#292929, #3e3e3e, #545454)';
         }
     }
     setTimeout(checkOutLater(null, null), 10000);

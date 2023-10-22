@@ -400,14 +400,15 @@ a.dailer {
     background-color: inherit;
     font-family: inherit;
     /* Important for vertical align on mobile phones */
-    margin: 0%;
+    margin: 0.20% 0 0.20% 0;
     /* Important for vertical align on mobile phones */
-    background: linear-gradient(#027f6e, #037667, #035549, #005d51, #00594d, #036a5c);
+    background: linear-gradient(#027f6e, #026658, #01594d, #014c42, #01594d, #026658, #027f6e);
     height: inherit;
     /*font-size: 140%;*/
-    border: 2px solid powderblue;
-    margin-top: 0.20%;
-    margin-bottom: 0.20%;
+    border: 3px solid #acbec7;
+    /*margin-top: 0.20%;
+    margin-bottom: 0.20%;*/
+    padding: 2px 0 2px 0;
     position: relative;
     font-weight: bold;
     font-size: larger;
@@ -497,17 +498,18 @@ a.dailer {
     width: fit-content;
     margin: 0.5%;
     padding: 0.5%;
-    background: linear-gradient(#6cace5, #4c92cf, #4c92cf, #6cace5);
-    border-radius: 5%;
+    background: linear-gradient(#2f4d67, #284156, #203444, #284156, #2f4d67);
+    border-radius: 8px;
     display: inline-block;
     transition: background-color 0.6s ease;
     color: rgb(255, 255, 255);
-    text-shadow: 0 0 12px #3c1010, 0 0 8px #000;
+    /*text-shadow: 0 0 12px #3c1010, 0 0 8px #000;*/
     font-size: x-large;
 }
 
 .active {
-    background: linear-gradient(#2d6493, #1e517d, #1e517d, #2d6493);
+    background: linear-gradient(#3f6789, #375a78, #2f4d67, #375a78, #3f6789);
+    ;
 }
 
 .fade {

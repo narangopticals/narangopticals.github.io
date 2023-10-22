@@ -20,6 +20,8 @@
     </div>
     <script type="module">
         import { navLoader, toggle, navScroll } from "./js/navload.js";
+        import { browserDetect } from "./js/general.js";
+        browserDetect();
         window.navLoader = navLoader;
         window.toggle = toggle;
         navLoader('menuBtns', 5, 'Google Maps');
