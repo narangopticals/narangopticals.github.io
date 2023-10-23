@@ -110,10 +110,14 @@ export async function Func(section) {
             //console.log(prodParents);
         }
         var pS = prodParents.toString();
-        var prodView = document.getElementById("mainProdView");
-        prodView.innerHTML = pS;
-        prodView = document.getElementById("mainProdView");
-        var prodViews = prodView.querySelectorAll('#prodParent');
+        //var prodView = document.getElementById("mainProdView");
+        var mainView = window.document.getElementById('mainProdView');
+        if (mainView == null) {
+            mainView = window.document.getElementById('prodView');
+        }
+        mainView.innerHTML = pS;
+        mainView = document.getElementById("mainProdView");
+        var prodViews = mainView.querySelectorAll('#prodParent');
         for (var i = startNum; i < endNum; i++) {
             var elem = prodViews[i];
             var whatsappBtn = elem.querySelector("button[class^=whatsappBtn]");
@@ -135,6 +139,62 @@ export async function Func(section) {
                 function (e) {
                     checkOutLater(null, e.target);
                 });
+            var prevBtn = elem.querySelector("button[id^=grid" + i + "Prev]");
+            prevBtn.value = "grid" + i;
+            prevBtn.addEventListener("click",
+                function (e) {
+                    imgSwitch('prev', e.currentTarget.value, '');
+                });
+            var nextBtn = elem.querySelector("button[id^=grid" + i + "Next]");
+            nextBtn.value = "grid" + i;
+            nextBtn.addEventListener("click",
+                function (e) {
+                    imgSwitch('next', e.currentTarget.value, '');
+                });
+        }
+    }
+
+}
+export async function imgSwitch(func, grid, setItem) {
+    //console.log("line 143 : imgSwitch : func = " + func + "\n grid = " + grid);
+    var mainView = window.document.getElementById('mainProdView');
+    if (mainView == null) {
+        mainView = window.document.getElementById('prodView');
+    }
+    var elem = mainView.querySelector('div[class^=' + grid);
+    var iframeHolder = elem.querySelector('#iframeHolder');
+    //console.log("line 158 : imgSwitch : iframeHolder = ");
+    //console.log(iframeHolder);
+    var frames = iframeHolder.querySelectorAll('iframe');
+    var lenIframes = frames.length;
+    //console.log("line 162 : imgSwitch : lenIframes = " + lenIframes);
+    var current = Number.parseInt(iframeHolder.value);
+    //var setItem;
+    if (setItem.length == 0) {
+
+        if (func.trim() == "prev") {
+            if (current == 0) {
+                setItem = lenIframes - 1;
+            } else if (current > 0) {
+                setItem = current - 1;
+            }
+        } else {
+            if (current == lenIframes - 1) {
+                setItem = 0;
+            } else if (current < lenIframes - 1) {
+                setItem = current + 1;
+            }
+        }
+    }
+    //console.log("line 177 : imgSwitch : setItem = " + setItem + "\n current=" + current);
+    if (setItem > -1 && setItem < lenIframes) {
+        //console.log("line 179 : imgSwitch : setItem = " + setItem);
+        iframeHolder.value = setItem;
+        for (var i = 0; i < lenIframes; i++) {
+            frames[i].style.display = "none";
+            if (i == setItem) {
+                frames[i].style.display = "";
+            }
         }
     }
 }
@@ -182,6 +242,7 @@ export async function checkOutLater(btnLoad, pressedBtn) {
                 if (selectedItems.indexOf(idMod) > -1) {
                     //btn.innerHTML = "-";
                     btn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
+                    btn.dataCart = 'true';
                     //console.log(selectedItems);
                 }
             }
@@ -200,6 +261,7 @@ export async function checkOutLater(btnLoad, pressedBtn) {
             //btn.textContent = "-";
             //btn.innerHTML = "-";// <span style=\"background:black; font-size:larger;\">&#128722;</span>";
             btn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
+            btn.dataCart = 'true';
             //console.log(selectedItems);
             modifyCartCount();
         }
@@ -216,6 +278,7 @@ export async function checkOutLater(btnLoad, pressedBtn) {
             //btn.textContent = "+";
             //btn.innerHTML = "+";// <span style=\"background:black; font-size:larger;\">&#128722;</span>";
             btn.style.background = 'linear-gradient(to bottom, rgb(55, 55, 55),rgb(22, 22, 22),rgb(0, 0, 0),rgb(22, 22, 22),rgb(55, 55, 55))';
+            btn.dataCart = 'false';
             selectedItems = newSelection;
             setCookie("incartItems", selectedItems, 10);
             modifyCartCount();
@@ -223,8 +286,12 @@ export async function checkOutLater(btnLoad, pressedBtn) {
     }
     function updateProductCount() {
         var totalSelected = selectedItems.length;
-        var prodView = window.document.getElementById('mainProdView');
-        var cartBtns = prodView.querySelectorAll('button[class^=cartBtn]');
+        //var prodView = window.document.getElementById('mainProdView');
+        var mainView = window.document.getElementById('mainProdView');
+        if (mainView == null) {
+            mainView = window.document.getElementById('prodView');
+        }
+        var cartBtns = mainView.querySelectorAll('button[class^=cartBtn]');
         //console.log("updateProductCount:" + totalSelected);
         var idBtnsLen = cartBtns.length;
         //console.log("updateProductCount: idBtnsLen =" + idBtnsLen);
@@ -234,6 +301,7 @@ export async function checkOutLater(btnLoad, pressedBtn) {
             //currentBtn.textContent = "+";
             //currentBtn.innerHTML = "+";// <span style=\"background:black; font-size:larger;\">&#128722;</span>";
             currentBtn.style.background = 'linear-gradient(to bottom, rgb(55, 55, 55),rgb(22, 22, 22),rgb(0, 0, 0),rgb(22, 22, 22),rgb(55, 55, 55))';
+            currentBtn.dataCart = 'false';
             var currentBtnVal = currentBtn.value.toString();
             //console.log("updateProductCount: currentBtn.value =" + currentBtnVal);
             //console.log("updateProductCount: selItemID =" + selItemIdstr);
@@ -247,6 +315,7 @@ export async function checkOutLater(btnLoad, pressedBtn) {
                     //currentBtn.textContent = "-";
                     //currentBtn.innerHTML = "-";// <span style=\"background:black; font-size:larger;\">&#128722;</span>";
                     currentBtn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
+                    currentBtn.dataCart = 'true';
                 }
             }
         }
@@ -255,12 +324,12 @@ export async function checkOutLater(btnLoad, pressedBtn) {
 
     function updateCart(btn) {
         var idMod = "";
-        console.log("line 258:");
-        console.log(btn);
+        //console.log("line 258:");
+        //console.log(btn);
         if (btn != undefined) {
             idMod = btn.value;
-            console.log("line 262:");
-            console.log(idMod);
+            //console.log("line 262:");
+            //console.log(idMod);
         }
         //console.log(idMod.length);
         //if (idMod != null) {
@@ -316,25 +385,41 @@ export async function mainShareBtn(btn, type, itemnum) {
 }
 export async function loadItems(startNum, endNum, pgNum) {
 
-    var elemsParents = window.document.querySelectorAll('div[class^=grid]');
+    var elemsParents = window.document.querySelectorAll('div[id^=prodParent]');
     //console.log(elemsParents);
     var i = startNum;
     for (var j = 0; j < 9; j++) {
         var elem = elemsParents[j];
         if (i < str.length) {
+            var iframeHolder = elem.querySelector("#iframeHolder");
+            //console.log("Line 325 : Loading Item: " + i + "\nin view number : " + j);
+            iframeHolder.innerHTML = "";
             elem.style.visibility = "visible";
             var valueData = str[i];
-            elem.querySelector("iframe").src = valueData.imgfile;
-            var valString = "";
+            var imgs = valueData.imgfile;
+            //console.log(imgs);
+            for (var k = 0; k < imgs.length; k++) {
+                //console.log("Line 331 : i= " + i + "\nj = " + j + "\nk = " + k);
+                iframeHolder.innerHTML += "<iframe style=\"height: 100%;width: 100%;\" id=\"iframe" + j + "img" + k + "\" src=\"" + imgs[k] + "\"></iframe>";
+            }
+            imgSwitch('', 'grid' + j, 0);
+            iframeHolder.value = 0;
+            //console.log("ling 335 : elem : ");
+            //console.log(elem);
+            //var valString = "";
             //if (valueData.type == 'lens') {
-            valString = valueData.title;
+            var valString = valueData.title;
             /*} else {
                 valString =
                     Number.parseInt(valueData.cost.trim()) > 0 ?
                         ("Rs. " + valueData.cost + "<br>" + valueData.title) :
                         (valueData.title);
             }*/
-            elem.querySelector("h1").innerHTML = valString;
+            elem = elemsParents[j];
+            if (valString != null) {
+                elem.querySelector("h1").textContent = valString;
+            }
+
             var val = [encodeURIComponent("I want to know More About Your Products") +
                 encodeURIComponent("\nName : ") +
                 encodeURIComponent(valueData.title) +

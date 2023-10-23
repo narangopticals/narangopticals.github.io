@@ -16,7 +16,8 @@
 <body id="mainBody">
     <nav id="navbar">
     </nav>
-    <div id="google_translate_element"></div>
+    <div id="google_translate_element" style="
+    margin: 5px 2px 0 0;"></div>
     <script type="text/javascript">// <![CDATA[
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
@@ -56,10 +57,11 @@
         </div>
     </div>
     <script type="module">
-        import { Func, loadItems, checkOutLater } from "./js/productsLoad.js";
+        import { Func, loadItems, checkOutLater, imgSwitch } from "./js/productsLoad.js";
         window.Func = Func;
         window.loadItems = loadItems;
         window.checkOutLater = checkOutLater;
+        window.imgSwitch = imgSwitch;
         //window.text = text;
         //window.Func(1);
         switchSection(0);

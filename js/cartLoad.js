@@ -150,7 +150,7 @@ async function addItemViews(startNum, endNum) {
                     //console.log("line 152 : not hidden");
                     var cartBtn = tmp.querySelector('.cartBtn');
                     var shareBtn = tmp.querySelector('.shareBtn');
-                    if (cartBtn.textContent == "-") {
+                    if (cartBtn.dataCart == 'true') {
                         //console.log("line 156 : cartBtn.textContent = " + cartBtn.textContent);
                         var tmptxt = encodeURIComponent("\n\nName : ") +
                             encodeURIComponent(cartItem[i].title) +
@@ -165,6 +165,19 @@ async function addItemViews(startNum, endNum) {
                     }
 
                 }
+
+                var prevBtn = tmp.querySelector("button[id^=grid" + i + "Prev]");
+                prevBtn.value = "grid" + i;
+                prevBtn.addEventListener("click",
+                    function (e) {
+                        imgSwitch('prev', e.currentTarget.value, '');
+                    });
+                var nextBtn = tmp.querySelector("button[id^=grid" + i + "Next]");
+                nextBtn.value = "grid" + i;
+                nextBtn.addEventListener("click",
+                    function (e) {
+                        imgSwitch('next', e.currentTarget.value, '');
+                    });
             }
             var val = [encodeURIComponent("I want to know More About Your Products") + text +
                 "&type=phone_number&app_absent=0&send=1" + encodeURIComponent("\n\nTotal : Rs.") + cartCost];
@@ -172,8 +185,47 @@ async function addItemViews(startNum, endNum) {
             msgWhatsapp(val);
         });
 
-}
 
+}
+export async function imgSwitch(func, grid, setItem) {
+    //console.log("line 143 : imgSwitch : func = " + func + "\n grid = " + grid);
+    var elem = window.document.getElementById('mainProdView').querySelector('div[class^=' + grid);
+    var iframeHolder = elem.querySelector('#iframeHolder');
+    //console.log("line 158 : imgSwitch : iframeHolder = ");
+    //console.log(iframeHolder);
+    var frames = iframeHolder.querySelectorAll('iframe');
+    var lenIframes = frames.length;
+    //console.log("line 162 : imgSwitch : lenIframes = " + lenIframes);
+    var current = Number.parseInt(iframeHolder.value);
+    //var setItem;
+    if (setItem.length == 0) {
+
+        if (func.trim() == "prev") {
+            if (current == 0) {
+                setItem = lenIframes - 1;
+            } else if (current > 0) {
+                setItem = current - 1;
+            }
+        } else {
+            if (current == lenIframes - 1) {
+                setItem = 0;
+            } else if (current < lenIframes - 1) {
+                setItem = current + 1;
+            }
+        }
+    }
+    //console.log("line 177 : imgSwitch : setItem = " + setItem + "\n current=" + current);
+    if (setItem > -1 && setItem < lenIframes) {
+        //console.log("line 179 : imgSwitch : setItem = " + setItem);
+        iframeHolder.value = setItem;
+        for (var i = 0; i < lenIframes; i++) {
+            frames[i].style.display = "none";
+            if (i == setItem) {
+                frames[i].style.display = "";
+            }
+        }
+    }
+}
 export function shareLinkOpen(e) {
 
     var obj = e.currentTarget;
@@ -252,14 +304,15 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
                     cartCost += Number.parseInt(cartItem[i].cost);
                 }
             }
-            btn.textContent = "-";
+            //btn.textContent = "-";
             btn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
+            btn.dataCart = 'true';
             //console.log(selectedItems);
             modifyCartCount();
         }
     }
     function removeProduct(id, btn) {
-        var itemElems = document.getElementById('mainProdView').querySelectorAll('#prodParent');
+        //var itemElems = document.getElementById('mainProdView').querySelectorAll('#prodParent');
         cartCost = 0;
         if (selectedItems.indexOf(id) > -1) {
             var newSelection = [];
@@ -275,8 +328,9 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
                 }
             }
         }
-        btn.textContent = "+";
-        btn.style.background = 'linear-gradient(to bottom, rgb(107, 128, 0),rgb(150, 179, 3),rgb(107, 128, 0))';
+        //btn.textContent = "+";
+        btn.style.background = 'linear-gradient(to bottom, rgb(55, 55, 55),rgb(22, 22, 22),rgb(0, 0, 0),rgb(22, 22, 22),rgb(55, 55, 55))';
+        btn.dataCart = 'false';
         selectedItems = newSelection;
         setCookie("incartItems", selectedItems, 10);
         modifyCartCount();
@@ -293,8 +347,9 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
         for (var j = 0; j < idBtnsLen; j++) {
             var currentBtn = cartBtns[j];
             if (currentBtn.parentNode.parentNode.style.visibility != "hidden") {
-                currentBtn.textContent = "+";
-                currentBtn.style.background = 'linear-gradient(to bottom, rgb(107, 128, 0),rgb(150, 179, 3),rgb(107, 128, 0))';
+                //currentBtn.textContent = "+";
+                currentBtn.style.background = 'linear-gradient(to bottom, rgb(55, 55, 55),rgb(22, 22, 22),rgb(0, 0, 0),rgb(22, 22, 22),rgb(55, 55, 55))';
+                currentBtn.dataCart = 'false';
                 var currentBtnVal = currentBtn.value.toString();
                 //console.log("updateProductCount: currentBtn.value =" + currentBtnVal);
                 //console.log("updateProductCount: selItemID =" + selItemIdstr);
@@ -305,8 +360,9 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
                     if (currentBtnVal == selItemIdstr) {
                         //console.log("match found");
                         //console.log(currentBtn);
-                        currentBtn.textContent = "-";
+                        //currentBtn.textContent = "-";
                         currentBtn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
+                        currentBtn.dataCart = 'true';
                     }
                 }
             }
@@ -404,7 +460,7 @@ function updateCartItem() {
 }
 export async function loadItems(startNum, endNum, pgNum) {
 
-    var elemsParents = window.document.querySelectorAll('div[class^=grid]');
+    var elemsParents = window.document.querySelectorAll('div[id^=prodParent]');
     //console.log(elemsParents);
     var i = startNum;
     for (var j = 0; j < 9; j++) {
@@ -413,7 +469,17 @@ export async function loadItems(startNum, endNum, pgNum) {
             elem.style.visibility = "visible";
             if (i < cartItem.length) {
                 var valueData = cartItem[i];
-                elem.querySelector("iframe").src = await valueData.imgfile;
+                var imgs = valueData.imgfile;
+                var ilen = imgs.length;
+                var iframeHolder = elem.querySelector("#iframeHolder");
+                iframeHolder.innerHTML = '';
+                if (ilen > 0) {
+                    iframeHolder.value = 0;
+                    for (var k = 0; k < ilen; k++) {
+                        iframeHolder.innerHTML += "<iframe style=\"height: 100%;width: 100%;\" id=\"iframe" + j + "img" + k + "\" src=\"" + imgs[k] + "\"></iframe>";
+                    }
+                }
+                imgSwitch('', 'grid' + j, 0);
                 var valString = Number.parseInt(await valueData.cost) > 0 ?
                     ("<span>Rs." + valueData.cost + "<br>" + valueData.title + "</span>") :
                     ("<span>" + valueData.title + "</span>");
@@ -450,7 +516,7 @@ export async function loadItems(startNum, endNum, pgNum) {
                 i++;
             }
         } else {
-            elem.querySelector("iframe").src = "";
+            elem.querySelector("#iframeHolder").innerHTML = "";
             elem.querySelector("h1").innerHTML = "";
             elem.style.visibility = "hidden";
         }
