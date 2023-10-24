@@ -15,24 +15,28 @@
 
     </nav>
     <div class="mainContent">
-        <iframe id="youtube-holder" src="https://www.youtube-nocookie.com/embed/gbTUQSuL4i8?autoplay=1"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; autoplay"
-            allowfullscreen></iframe>
+
         <div class="contentSlider">
             <div style="text-align:center; margin:0.2%; display: flex; flex-direction: column;">
-                <div style="margin: 0.5%;">
-                    <button class="slideName" style=" font-weight: bold;" onclick="manualSlide(1)">Info</button>
-                    <button class="slideName" style=" font-weight: bold;" onclick="manualSlide(2)">About Us</button>
-                    <button class="slideName" style=" font-weight: bold;" onclick="manualSlide(3)">Google Maps</button>
+                <div style="margin: 0.8%;">
+                    <button class="slideName" style=" font-weight: bold;" onclick="manualSlide(1)">Intro</button>
+                    <button class="slideName" style=" font-weight: bold;" onclick="manualSlide(2)">Info</button>
+                    <button class="slideName" style=" font-weight: bold;" onclick="manualSlide(3)">About Us</button>
+                    <button class="slideName" style=" font-weight: bold;" onclick="manualSlide(4)">Google Maps</button>
                 </div>
                 <button id="playPause" style=" font-weight: bold;" onclick="autoSlide()"></button>
             </div>
-
+            <div class="mySlides fade">
+                <iframe id="youtube-holder" src="https://www.youtube-nocookie.com/embed/gbTUQSuL4i8?autoplay=1"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; autoplay"
+                    allowfullscreen></iframe>
+            </div>
             <div class="mySlides fade">
                 <div class="info-holder">
-                    <div class="flexs">
-                        <h4>Phone : <a class="dailer" href="tel:+919756231332">+919756231332</a></h4>
+                    <div class="flexs"
+                        style="background: linear-gradient(rgba(66, 55, 66, 0.8),rgba(50, 44, 50, 0.8),rgba(44, 33,44, 0.8),rgba(44, 33,44, 0.8),rgba(50, 44, 50, 0.8),rgba(66, 55, 66, 0.8));">
+                        <h4>Phone : <a class=" dailer" href="tel:+919756231332">+919756231332</a></h4>
                         <h4>Address : </h4>
                         <h3>Main Market Road</h3>
                         <h3>City : Kashipur</h3>
@@ -40,7 +44,8 @@
                         <h3>State : Uttarakhand</h3>
                         <h3>Pin : 244713</h3>
                     </div>
-                    <div class="flexs">
+                    <div class="flexs"
+                        style="background: linear-gradient(rgba(66, 55, 66, 0.8),rgba(50, 44, 50, 0.8),rgba(44, 33,44, 0.8),rgba(44, 33,44, 0.8),rgba(50, 44, 50, 0.8),rgba(66, 55, 66, 0.8));">
                         <h4>Facilities : </h4>
                         <h3>Wholesale & Retail - Complete Eyewear's Range</h3>
                         <ul>
@@ -53,18 +58,42 @@
                             <li>
                                 <h3>Lens</h3>
                             </li>
+                            <li>
+                                <h3>Free EyeTest @ store</h3>
+                            </li>
+                            <li>
+                                <h3>Home EyeTest Booking Available.<br>
+                                    Register :<a href="/connect.html" style="color: rgb(35, 164, 121);">Booking</a>
+                                </h3>
+                            </li>
+                            <li>
+                                <h3>Powered Sunglass</h3>
+                            </li>
+                            <li>
+                                <h3>Computer Eyewear</h3>
+                            </li>
+                            <li>
+                                <h3>NightDrive Eyewear</h3>
+                            </li>
+                            <li>
+                                <h3>Progressive Eyewear Specialist</h3>
+                            </li>
                             <h3>& more</h3>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="mySlides fade">
-                <div class="aboutus-container">
+                <div class="aboutus-container"
+                    style="background: linear-gradient(rgba(66, 55, 66, 0.8),rgba(55, 44, 55, 0.8),rgba(44, 33,44, 0.8),rgba(44, 33,44, 0.8),rgba(55, 44, 55, 0.8),rgba(66, 55, 66, 0.8));">
                     <h4>About us:</h4>
-                    <article>First & Most Popular Optician Shop in district Udham Singh Nagar,Uttarakhand. We have
+                    <article>Trusted Since 1979, First & Most Popular Optician Shop, in district Udham Singh
+                        Nagar,Uttarakhand.<br><br>We deal in all kind
+                        of eyewear, and in vast variety of Frames, Sunglasses, Spectacles.<br><br> We have
                         served customers more than 100km from the establishment, to name few notable cities including
-                        Kashipur are Ramnagar, Almora, Ranikhet, Haldwani and the towns in between. We deal in all kind
-                        of eyewear, and in vast variety of Frames, Sunglasses, Spectacles. </article>
+                        Kashipur are Ramnagar, Almora, Ranikhet, Haldwani,
+                        Bazpur,Jaspur, Gadarpur, Mahuakheraganj, Peerumadara, Kundeshwari, Jaspur Khurd and the towns in
+                        between. </article>
                 </div>
             </div>
 
@@ -117,7 +146,7 @@
         }
 
         function secondRun() {
-            if (slideCount < 9) {
+            if (slideCount < 12) {
                 firstRun();
                 slideCount++;
                 playBtn.innerHTML = "&#9632 Stop";
@@ -127,7 +156,7 @@
             }
         }
         function manualSlide(n) {
-            slideCount = 9;
+            slideCount = 12;
             showSlides(n);
         }
         function autoSlide() {
@@ -136,7 +165,7 @@
                 secondRun();
                 playBtn.innerHTML = "&#9632 Stop";
             } else {
-                slideCount = 9;
+                slideCount = 12;
                 playBtn.innerHTML = "&#9654 Play";
             }
         }

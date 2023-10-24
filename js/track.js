@@ -22,7 +22,7 @@ export async function trackOrder(orderId) {
                     //console.log(status);
 
                     for (var j = 0; j < status.length; j++) {
-                        record += "<br><span>" + status[j] + "<br></span><br>";
+                        record += "<span><br>" + status[j] + "<br><br></span>";
                     }
                 }
             }

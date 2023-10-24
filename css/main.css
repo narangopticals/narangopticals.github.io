@@ -178,7 +178,7 @@ h4 {
 }
 
 h3 {
-    color: powderblue;
+    color: #a1dfe7;
     font-size: 115%;
     font-stretch: expanded;
     letter-spacing: 1px;
@@ -302,7 +302,7 @@ article {
 .flexs {
     flex-wrap: wrap;
     word-wrap: normal;
-    width: auto;
+    min-width: 45%;
     overflow-wrap: normal;
     text-align: left;
     margin: 0.50%;
@@ -482,12 +482,10 @@ a.dailer {
     position: relative;
     margin: auto;
     text-align: center;
+    align-items: center;
+    align-self: center;
 }
 
-.contentSlider {
-    min-width: 50%;
-    min-height: 50%;
-}
 
 .mySlides {
     width: 100%;
@@ -534,11 +532,11 @@ a.dailer {
 }
 
 .mapView {
-    min-width: 60%;
+    width: 85%;
     min-height: 70%;
     border-radius: 3.5%;
     border-style: groove;
-    width: 70%;
+    max-width: 100%;
 }
 
 /* mod-5aug23 -v1.0.6*/
@@ -552,14 +550,13 @@ a.dailer {
     aspect-ratio: 1.76;
     min-width: 40%;
     min-height: 50%;
-    width: 80%;
 }
 
 .trackingField,
 #trackingDetailView {
     border: 6px solid rgb(210, 179, 27);
     border-radius: 10px;
-    width: 80%;
+    width: 70%;
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -567,6 +564,9 @@ a.dailer {
     padding: 1%;
     text-align: center;
     align-items: center;
+    text-align: start;
+    align-items: start;
+    padding: 2% 5% 2% 10%;
 }
 
 .trackSubmitBtn {
@@ -592,14 +592,27 @@ a.dailer {
 #trackingDetailView {
     font-weight: bold;
     color: white;
-    font-size: larger;
+}
+
+.mainContent {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.contentSlider {
+    width: 95%;
+    min-height: 50%;
 }
 
 /* Portrait orientation ||*/
 @media screen and (orientation: portrait) {
     .mainContent {
-        display: flex;
         flex-direction: column;
+    }
+
+    .mapView {
+        aspect-ratio: 0.76;
     }
 
     #youtube-holder {
@@ -682,12 +695,19 @@ a.dailer {
 /* Landscape orientation = */
 @media screen and (orientation: landscape) {
     .mainContent {
-        display: flex;
         flex-direction: row;
     }
 
+    .mapView {
+        aspect-ratio: 1.96;
+    }
+
+    #trackingDetailView {
+        font-size: larger;
+    }
+
     #youtube-holder {
-        width: 40%;
+        width: 75%;
     }
 
     #staticbar {

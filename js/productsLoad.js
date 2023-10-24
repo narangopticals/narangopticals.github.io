@@ -434,7 +434,7 @@ export async function loadItems(startNum, endNum, pgNum) {
             shareBtn.value = "/product.html?type=" + type + "&itemnum=" + valueData.itemnum;
             i++;
         } else {
-            elem.querySelector("iframe").src = "";
+            elem.querySelector("#iframeHolder").innerHtml = "";
             elem.querySelector("h1").textContent = "";
             elem.style.visibility = "hidden";
         }
