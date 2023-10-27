@@ -406,7 +406,10 @@ export async function loadItems(startNum, endNum, pgNum) {
             iframeHolder.value = 0;
             //console.log("ling 335 : elem : ");
             //console.log(elem);
-            var valString = "";
+            var valString = Number.parseInt(valueData.cost.trim()) > 0 ?
+                        ("Rs. " + valueData.cost + "<br>" + valueData.title) :
+                        (valueData.title);
+            /*var valString = "";
             if (valueData.type == 'lens') {
             valString = valueData.title;
             } else {
@@ -414,7 +417,7 @@ export async function loadItems(startNum, endNum, pgNum) {
                     Number.parseInt(valueData.cost.trim()) > 0 ?
                         ("Rs. " + valueData.cost + "<br>" + valueData.title) :
                         (valueData.title);
-            }
+            }*/
             elem = elemsParents[j];
             if (valString != null) {
                 elem.querySelector("h1").innerHtml = valString;
