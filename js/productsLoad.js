@@ -1,82 +1,100 @@
+import { grabData } from "../js/fetDt.js"
 var str;
 //var section = 1;
 var type = "";
 export async function Func(section) {
+    var data = "";
     var prodParent = fetch("../class/prodview.html").then((res) => {
         var val = res.text();
         return val;
     });
-    var data = "";
-    if (section == 0) {
-        type = "frames";
-        try {
-            var results = fetch('https://api.github.com/gists/ea3f7fa9a39a62872983e2b813441d53').then(results => {
-                return results.json();
-            });
-            data = await results.then(data => {
+    async function initMain(section) {
+        if (section == 0) {
+            type = "frames";
+            try {
+                var results = fetch('https://api.github.com/gists/ea3f7fa9a39a62872983e2b813441d53').then(results => {
+                    return results.json();
+                });
+                data = await results.then(data => {
+                    return data.files["prodFmData.json"].content;
+                });
+                setTimeout(data = JSON.parse(data), 3000);
+            } catch (error) {
+                window.alert(error);
+                data = fetch('../json/prodFmData.json').then(results => {
+                    return results.json();
+                });
+            }
+            /*data = await results.then(data => {
                 return data.files["prodFmData.json"].content;
-            });
-            setTimeout(data = JSON.parse(data), 3000);
-        } catch (error) {
-            window.alert(error);
-            data = fetch('../json/prodFmData.json').then(results => {
-                return results.json();
-            });
-        }
-        /*data = await results.then(data => {
-            return data.files["prodFmData.json"].content;
-        });*/
+            });*/
 
-        //console.log(data);
-    } else if (section == 1) {
-        type = "sunglass";
-        try {
-            var results = fetch('https://api.github.com/gists/8fef5a38ff904a0c42df470064dda3f9').then(results => {
-                return results.json();
-            });
-            data = await results.then(data => {
-                return data.files["prodSgData.json"].content;
-            });
-            setTimeout(data = JSON.parse(data), 3000);
-            //framesData = (framesData.valueOf("data"))[0];
-        } catch (error) {
-            window.alert(error);
-            data = fetch('../json/prodSgData.json').then(results => {
-                return results.json();
-            });
+            //console.log(data);
+        } else if (section == 1) {
+            type = "sunglass";
+            try {
+                var results = fetch('https://api.github.com/gists/8fef5a38ff904a0c42df470064dda3f9').then(results => {
+                    return results.json();
+                });
+                data = await results.then(data => {
+                    return data.files["prodSgData.json"].content;
+                });
+                setTimeout(data = JSON.parse(data), 3000);
+                //framesData = (framesData.valueOf("data"))[0];
+            } catch (error) {
+                window.alert(error);
+                data = fetch('../json/prodSgData.json').then(results => {
+                    return results.json();
+                });
+            }
+        } else if (section == 2) {
+            type = "lens";
+            try {
+                var results = fetch('https://api.github.com/gists/2a9920dd79543db4549056de07cc83e7').then(results => {
+                    return results.json();
+                });
+                data = await results.then(data => {
+                    return data.files["prodLnsData.json"].content;
+                });
+                setTimeout(data = JSON.parse(data), 3000);
+                //framesData = (framesData.valueOf("data"))[0];
+            } catch (error) {
+                window.alert(error);
+                data = fetch('../json/prodLnsData.json').then(results => {
+                    return results.json();
+                });
+            }
         }
-    } else if (section == 2) {
-        type = "lens";
-        try {
-            var results = fetch('https://api.github.com/gists/2a9920dd79543db4549056de07cc83e7').then(results => {
-                return results.json();
-            });
-            data = await results.then(data => {
-                return data.files["prodLnsData.json"].content;
-            });
-            setTimeout(data = JSON.parse(data), 3000);
-            //framesData = (framesData.valueOf("data"))[0];
-        } catch (error) {
-            window.alert(error);
-            data = fetch('../json/prodLnsData.json').then(results => {
-                return results.json();
-            });
-        }
+        str = Object.values((await data).valueOf("data"))[0];
     }
-    str = Object.values((await data).valueOf("data"))[0];
+
+    async function initTest(section) {
+        if (section == 0) {
+            type = "frames";
+        } else if (section == 1) {
+            type = "sunglass";
+        } else if (section == 2) {
+            type = "lens";
+        }
+        str = await grabData(type);
+    }
+    //initMain();
+    await initTest(section);
+
     //console.log(str);
-    var dataLength = str.length;
-    var prodParents = "";
-    if (dataLength > 8) {
-        await addPagesNavBtn(dataLength);
-        await addItemViews(0, 9);
-        await loadItems(0, 9, 0);
-    } else {
-        await addPagesNavBtn(dataLength);
-        await addItemViews(0, dataLength);
-        await loadItems(0, dataLength, 0);
+    if ((await str) != null) {
+        var dataLength = (await str).length;
+        var prodParents = "";
+        if (dataLength > 8) {
+            await addPagesNavBtn(dataLength);
+            await addItemViews(0, 9);
+            await loadItems(0, 9, 0);
+        } else {
+            await addPagesNavBtn(dataLength);
+            await addItemViews(0, dataLength);
+            await loadItems(0, dataLength, 0);
+        }
     }
-
     async function addPagesNavBtn(dataLength) {
         var dtl = dataLength + 1;
         var pagesLen = Math.ceil(dtl / 9);
@@ -444,7 +462,7 @@ export async function loadItems(startNum, endNum, pgNum) {
             var shareBtn = elem.querySelector("button[class^=shareBtn]");
             shareBtn.value = "/product.html?type=" + type + "&itemnum=" + valueData.itemnum;
             i++;
-        } else {
+        } else if (elem != null) {
             elem.querySelector("#iframeHolder").innerHTML = "";
             elem.querySelector("h1").textContent = "";
             elem.style.visibility = "hidden";

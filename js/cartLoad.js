@@ -1,3 +1,5 @@
+import { grabData } from "../js/fetDt.js"
+
 var str = "";
 //var section = 1;
 var prodParent = ""
@@ -12,71 +14,79 @@ export async function Func() {
         var val = res.text();
         return val;
     });
-    var framesData = "";
-    try {
-        var results = fetch('https://api.github.com/gists/ea3f7fa9a39a62872983e2b813441d53').then(results => {
-            return results.json();
-        });
-        framesData = await results.then(data => {
-            return data.files["prodFmData.json"].content;
-        });
-        setTimeout(framesData = JSON.parse(framesData), 3000);
-        //framesData = (framesData.valueOf("data"))[0];
-    } catch (error) {
-        window.alert(error);
-        framesData = fetch('../json/prodFmData.json').then(results => {
-            return results.json();
-        });
-    }
-    //console.log(data);
-    var sunglassData = "";
-    try {
-        var results = fetch('https://api.github.com/gists/8fef5a38ff904a0c42df470064dda3f9').then(results => {
-            return results.json();
-        });
-        sunglassData = await results.then(data => {
-            return data.files["prodSgData.json"].content;
-        });
-        setTimeout(sunglassData = JSON.parse(sunglassData), 3000);
-        //framesData = (framesData.valueOf("data"))[0];
-    } catch (error) {
-        window.alert(error);
-        sunglassData = fetch('../json/prodSgData.json').then(results => {
-            return results.json();
-        });
+    async function initMain() {
+        var framesData = "";
+        try {
+            var results = fetch('https://api.github.com/gists/ea3f7fa9a39a62872983e2b813441d53').then(results => {
+                return results.json();
+            });
+            framesData = await results.then(data => {
+                return data.files["prodFmData.json"].content;
+            });
+            setTimeout(framesData = JSON.parse(framesData), 3000);
+            //framesData = (framesData.valueOf("data"))[0];
+        } catch (error) {
+            window.alert(error);
+            framesData = fetch('../json/prodFmData.json').then(results => {
+                return results.json();
+            });
+        }
+        //console.log(data);
+        var sunglassData = "";
+        try {
+            var results = fetch('https://api.github.com/gists/8fef5a38ff904a0c42df470064dda3f9').then(results => {
+                return results.json();
+            });
+            sunglassData = await results.then(data => {
+                return data.files["prodSgData.json"].content;
+            });
+            setTimeout(sunglassData = JSON.parse(sunglassData), 3000);
+            //framesData = (framesData.valueOf("data"))[0];
+        } catch (error) {
+            window.alert(error);
+            sunglassData = fetch('../json/prodSgData.json').then(results => {
+                return results.json();
+            });
+        }
+
+        var lensData = "";
+        try {
+            var results = fetch('https://api.github.com/gists/2a9920dd79543db4549056de07cc83e7').then(results => {
+                return results.json();
+            });
+            lensData = await results.then(data => {
+                return data.files["prodLnsData.json"].content;
+            });
+            setTimeout(lensData = JSON.parse(lensData), 3000);
+            //framesData = (framesData.valueOf("data"))[0];
+        } catch (error) {
+            window.alert(error);
+            lensData = fetch('../json/prodLnsData.json').then(results => {
+                return results.json();
+            });
+        }
+        //console.log("framesData");
+        //console.log(framesData['data']);
+        //console.log("sunglassData");
+        //console.log(sunglassData['data']);
+        //console.log("lensData");
+        //console.log(lensData);
+        var dbArray = Array.prototype.concat(framesData['data'], sunglassData['data'], lensData['data'])
+        //console.log("mergedJSON");
+        //console.log(mergedJSON);
+        //console.log(mergedJSON.valueOf("data"));
+        str = dbArray;
+        //console.log(str);
+        //console.log(str.length);
+        //var dataLength = str.length;
     }
 
-    var lensData = "";
-    try {
-        var results = fetch('https://api.github.com/gists/2a9920dd79543db4549056de07cc83e7').then(results => {
-            return results.json();
-        });
-        lensData = await results.then(data => {
-            return data.files["prodLnsData.json"].content;
-        });
-        setTimeout(lensData = JSON.parse(lensData), 3000);
-        //framesData = (framesData.valueOf("data"))[0];
-    } catch (error) {
-        window.alert(error);
-        lensData = fetch('../json/prodLnsData.json').then(results => {
-            return results.json();
-        });
+    async function initTest() {
+        str = await grabData(null);
     }
-    //console.log("framesData");
-    //console.log(framesData['data']);
-    //console.log("sunglassData");
-    //console.log(sunglassData['data']);
-    //console.log("lensData");
-    //console.log(lensData);
-    var dbArray = Array.prototype.concat(framesData['data'], sunglassData['data'], lensData['data'])
-    //console.log("mergedJSON");
-    //console.log(mergedJSON);
-    //console.log(mergedJSON.valueOf("data"));
-    str = dbArray;
-    //console.log(str);
-    //console.log(str.length);
-    //var dataLength = str.length;
-    checkOutLater(null, null, str);
+
+    await initTest();
+    checkOutLater(null, null, (await str));
 
 }
 async function addPagesNavBtn(dataLength) {

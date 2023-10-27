@@ -16,13 +16,15 @@ export async function trackOrder(orderId) {
                 if (item.trackid.trim() == orderId.trim()) {
                     // console.log("track : line 27:");
                     //console.log(item.trackid.trim());
-                    var status = item.status;
+                    if (item.trackid.trim().indexOf('/e') < 0) {
+                        var status = item.status;
 
-                    //console.log("track : line 31:");
-                    //console.log(status);
+                        //console.log("track : line 31:");
+                        //console.log(status);
 
-                    for (var j = 0; j < status.length; j++) {
-                        record += "<span><br>" + status[j] + "<br><br></span>";
+                        for (var j = 0; j < status.length; j++) {
+                            record += "<span><br>" + status[j] + "<br><br></span>";
+                        }
                     }
                 }
             }
