@@ -406,9 +406,16 @@ export async function loadItems(startNum, endNum, pgNum) {
             iframeHolder.value = 0;
             //console.log("ling 335 : elem : ");
             //console.log(elem);
-            var valString = Number.parseInt(valueData.cost.trim()) > 0 ?
-                        ("Rs. " + valueData.cost + "<br>" + valueData.title) :
-                        (valueData.title);
+            var cost = "";
+            var title = "";
+            if (valueData.cost.trim().indexOf('/e') < 0) {
+                cost = Number.parseInt(valueData.cost.trim()) > 0 ? ("Rs. " + valueData.cost + "<br>") : "";
+            }
+            if (valueData.title.trim().indexOf('/e') < 0) {
+                title = valueData.title;
+            }
+            var valString = cost + title;
+            //console.log(valString);
             /*var valString = "";
             if (valueData.type == 'lens') {
             valString = valueData.title;
@@ -420,7 +427,8 @@ export async function loadItems(startNum, endNum, pgNum) {
             }*/
             elem = elemsParents[j];
             if (valString != null) {
-                elem.querySelector("h1").innerHtml = valString;
+                console.log("valString :" + valString + "\nlength :" + valString.length);
+                elem.querySelector("h1").innerHTML = valString;
             }
 
             var val = [encodeURIComponent("I want to know More About Your Products") +
@@ -437,7 +445,7 @@ export async function loadItems(startNum, endNum, pgNum) {
             shareBtn.value = "/product.html?type=" + type + "&itemnum=" + valueData.itemnum;
             i++;
         } else {
-            elem.querySelector("#iframeHolder").innerHtml = "";
+            elem.querySelector("#iframeHolder").innerHTML = "";
             elem.querySelector("h1").textContent = "";
             elem.style.visibility = "hidden";
         }
