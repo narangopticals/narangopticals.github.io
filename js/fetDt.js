@@ -7,7 +7,12 @@ export async function grabData(type) {
             return results.json();
         });
         data = await results.then(data => {
-            return data.files["fetchData.json"].content;
+            if (data != null) {
+                return data.files["fetchData.json"].content;
+            } else {
+                return null;
+            }
+
         });
         setTimeout(data = JSON.parse(data), 3000);
     } catch (error) {

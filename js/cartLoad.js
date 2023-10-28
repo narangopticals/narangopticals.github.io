@@ -85,7 +85,7 @@ export async function Func() {
         str = await grabData(null);
     }
 
-    await initTest();
+    await initMain();
     checkOutLater(null, null, (await str));
 
 }
@@ -168,7 +168,7 @@ async function addItemViews(startNum, endNum) {
                             encodeURIComponent(cartItem[i].itemnum) +
                             encodeURIComponent("\t& Rs") + cartItem[i].cost +
                             encodeURIComponent("\nProduct Link : \n") +
-                            encodeURIComponent("https://narangopticals.github.io/product" + shareBtn.value);
+                            encodeURIComponent("https://narangopticals.com/product" + shareBtn.value);
                         //console.log("line 159 test:");
                         //console.log(tmptxt);
                         text += tmptxt;

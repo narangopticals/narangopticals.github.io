@@ -1,0 +1,129 @@
+<style>
+    .labelContainer {
+        display: flex;
+        flex-direction: column;
+        margin: 1px;
+        flex-grow: 1;
+    }
+
+    @media screen and (orientation: portrait) {
+        #inputFields {
+
+            flex-direction: column;
+        }
+
+        #submitBtn {
+            margin: 2px 2px 2px 30px;
+        }
+    }
+
+    @media screen and (orientation: landscape) {
+        #inputFields {
+
+            flex-direction: row;
+        }
+
+        #submitBtn {
+            margin: 2px 2px 2px 450px;
+        }
+    }
+</style>
+
+<div id="inputFields" style="display: flex;
+    width: fit-content; 
+    margin: 1% 0 1% 0%;
+    align-self: center;">
+
+    <div class="labelContainer">
+        <label for="range" id="minRange">Cost Starts:</label>
+        <div style="text-align: center;">0
+            <input type="range" min="0" step="10" max="400" id="costLow" style="width: 60%;"
+                oninput="setValueLow()"></input>400
+        </div>
+    </div>
+    <div class="labelContainer">
+        <label for="range" id="maxRange">Cost Maximum:</label>
+        <div style="text-align: center;">600
+            <input type="range" min="600" step="10" max="2000" id="costHigh" style="width: 60%;"
+                oninput="setValueHigh()"></input>
+            2000
+        </div>
+    </div>
+    <div class="labelContainer">
+        <label for="front">Frame Front Material:</label>
+
+        <select name="front" id="front">
+            <option value="" onclick=unsetAll()></option>
+            <option value="plastic" onclick=unsetSolid()>plastic</option>
+            <option value="metal" onclick=setSolid()>metal</option>
+        </select>
+    </div>
+
+    <div class="labelContainer">
+        <label for="pattern">Frame Color Pattern:</label>
+
+        <select name="pattern" id="pattern">
+            <option value=""></option>
+            <option value="halfshade">halfshade</option>
+            <option value="multicolor">multicolor</option>
+            <option value="onecolor">onecolor</option>
+        </select>
+    </div>
+
+    <div class="labelContainer">
+        <label for="side">Frame side Material:</label>
+
+        <select name="side" id="side">
+            <option value=""></option>
+            <option value="plastic">plastic</option>
+            <option value="metal">metal</option>
+        </select>
+    </div>
+    <div class="labelContainer">
+        <label for="opacity">Frame transparent:</label>
+
+        <select name="opacity" id="opacity">
+            <option value=""></option>
+            <option value="semitransparent">semitransparent</option>
+            <option value="transparent">transparent</option>
+            <option value="solid">solid</option>
+        </select>
+    </div>
+    <div class="labelContainer">
+        <label for="resistance">Material Strength:</label>
+        <select name="resistance" id="resistance">
+            <option value=""></option>
+            <option value="normal">normal</option>
+            <option value="breakresistant">breakresistant</option>
+        </select>
+    </div>
+    <div class="labelContainer">
+        <label for="joint">Frames joint:</label>
+        <select name="joint" id="joint">
+            <option value=""></option>
+            <option value="spring">spring</option>
+            <option value="metal">metal</option>
+            <option value="plastic">plastic</option>
+        </select>
+    </div>
+    <div class="labelContainer">
+        <label for="surfacing">Frames Surface Finish:</label>
+        <select name="surfacing" id="surfacing">
+            <option value=""></option>
+            <option value="shine">shine</option>
+            <option value="matt">Matt</option>
+        </select>
+    </div>
+</div>
+<div id="filterBtnContainer" style="display: flex;
+    flex-direction: row;
+    width: fit-content; 
+    margin: 1% 0 1% 0%;
+    align-self: center;
+    align-content: center;
+    width: inherit;
+    flex-wrap: nowrap;">
+    <button id="submitBtn" onclick="submitFilter()" style="padding: 2px; ">submit</button>
+    <button onclick="closeFilterView()">close</button>
+    <button onclick="clearFilterView()">Clear Filter</button>
+</div>

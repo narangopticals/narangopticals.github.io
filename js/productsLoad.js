@@ -1,7 +1,20 @@
 import { grabData } from "../js/fetDt.js"
+import { filterKeys, getFiltered } from "../js/general.js";
 var str;
 //var section = 1;
 var type = "";
+var keys = null;
+var minCost = null;
+var maxCost = null;
+export function setKeys(keysnew) {
+    keys = keysnew;
+}
+export function setHigh(cost) {
+    maxCost = cost;
+}
+export function setLow(cost) {
+    minCost = cost;
+}
 export async function Func(section) {
     var data = "";
     var prodParent = fetch("../class/prodview.html").then((res) => {
@@ -78,11 +91,15 @@ export async function Func(section) {
         }
         str = await grabData(type);
     }
-    //initMain();
-    await initTest(section);
+    await initMain(section);
+    //await initTest(section);
 
     //console.log(str);
     if ((await str) != null) {
+        /*var keys = new filterKeys();
+        keys.front = "plastic";
+        keys.pattern = "multicolor";*/
+        str = await getFiltered(str, minCost, maxCost, keys);
         var dataLength = (await str).length;
         var prodParents = "";
         if (dataLength > 8) {
@@ -369,7 +386,7 @@ export async function checkOutLater(btnLoad, pressedBtn) {
         var cartString = await getCookie("incartItems");
         //console.log(cartString);
         if (cartString.length > 0) {
-            selectedItems = cartString.split(",")
+            selectedItems = cartString.split(",");
         }
         //console.log(selectedItems);
         updateProductCount();
@@ -410,20 +427,20 @@ export async function loadItems(startNum, endNum, pgNum) {
         var elem = elemsParents[j];
         if (i < str.length) {
             var iframeHolder = elem.querySelector("#iframeHolder");
-            //console.log("Line 325 : Loading Item: " + i + "\nin view number : " + j);
+            console.log("Line 325 : Loading Item: " + i + "\nin view number : " + j);
             iframeHolder.innerHTML = "";
             elem.style.visibility = "visible";
             var valueData = str[i];
             var imgs = valueData.imgfile;
-            //console.log(imgs);
+            console.log(imgs);
             for (var k = 0; k < imgs.length; k++) {
                 //console.log("Line 331 : i= " + i + "\nj = " + j + "\nk = " + k);
                 iframeHolder.innerHTML += "<iframe style=\"height: 100%;width: 100%;\" id=\"iframe" + j + "img" + k + "\" src=\"" + imgs[k] + "\"></iframe>";
             }
             imgSwitch('', 'grid' + j, 0);
             iframeHolder.value = 0;
-            //console.log("ling 335 : elem : ");
-            //console.log(elem);
+            console.log("ling 335 : elem : ");
+            console.log(elem);
             var cost = "";
             var title = "";
             if (valueData.cost.trim().indexOf('/e') < 0) {
@@ -462,11 +479,12 @@ export async function loadItems(startNum, endNum, pgNum) {
             var shareBtn = elem.querySelector("button[class^=shareBtn]");
             shareBtn.value = "/product.html?type=" + type + "&itemnum=" + valueData.itemnum;
             i++;
-        } else if (elem != null) {
+        } else {
             elem.querySelector("#iframeHolder").innerHTML = "";
             elem.querySelector("h1").textContent = "";
             elem.style.visibility = "hidden";
         }
+
 
     }
     var btnParent = window.document.getElementById("btnNavProdView").getElementsByTagName('button');
