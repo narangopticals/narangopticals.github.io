@@ -113,26 +113,31 @@ export async function Func(section) {
         }
     }
     async function addPagesNavBtn(dataLength) {
+        var btnParent = document.getElementById("btnNavProdView");
         var dtl = dataLength + 1;
         var pagesLen = Math.ceil(dtl / 9);
-        var pagesView = fetch("../class/pagesview.html").then((res) => {
-            return res.text();
-        });
-        var pagesBtns = "";
-        for (var i = 1; i <= pagesLen; i++) {
-            var pagesBtns = pagesBtns + "\n" + (await pagesView)
-                .replaceAll('prodPagesBtn', 'prodPagesBtn' + i)
-                .replaceAll('</button>', 'Page: ' + i + '</button>');
-        }
-        var btnParent = document.getElementById("btnNavProdView");
-        btnParent.innerHTML = pagesBtns;
-        btnParent = document.getElementById("btnNavProdView");
-        var btns = btnParent.querySelectorAll('button');
-        var itemStart = 0;
-        for (var i = 0; i < btns.length; i++) {
-            var btn = btns[i];
-            btn.setAttribute('onclick', 'window.loadItems(' + itemStart + ', ' + (itemStart + 8) + ', ' + i + ')');
-            itemStart = itemStart + 9;
+        if (pagesLen > 1) {
+            btnParent.style.visibility = 'visible';
+            var pagesView = fetch("../class/pagesview.html").then((res) => {
+                return res.text();
+            });
+            var pagesBtns = "";
+            for (var i = 1; i <= pagesLen; i++) {
+                var pagesBtns = pagesBtns + "\n" + (await pagesView)
+                    .replaceAll('prodPagesBtn', 'prodPagesBtn' + i)
+                    .replaceAll('</button>', 'Page: ' + i + '</button>');
+            }
+            btnParent.innerHTML = pagesBtns;
+            btnParent = document.getElementById("btnNavProdView");
+            var btns = btnParent.querySelectorAll('button');
+            var itemStart = 0;
+            for (var i = 0; i < btns.length; i++) {
+                var btn = btns[i];
+                btn.setAttribute('onclick', 'window.loadItems(' + itemStart + ', ' + (itemStart + 8) + ', ' + i + ')');
+                itemStart = itemStart + 9;
+            }
+        } else {
+            btnParent.style.visibility = 'hidden';
         }
         //window.document.getElementById("btnNavProdView2").innerHTML = document.getElementById("btnNavProdView").innerHTML;
     }
@@ -480,9 +485,11 @@ export async function loadItems(startNum, endNum, pgNum) {
             shareBtn.value = "/product.html?type=" + type + "&itemnum=" + valueData.itemnum;
             i++;
         } else {
-            elem.querySelector("#iframeHolder").innerHTML = "";
-            elem.querySelector("h1").textContent = "";
-            elem.style.visibility = "hidden";
+            if (elem != undefined) {
+                elem.querySelector("#iframeHolder").innerHTML = "";
+                elem.querySelector("h1").textContent = "";
+                elem.style.visibility = "hidden";
+            }
         }
 
 
@@ -491,9 +498,9 @@ export async function loadItems(startNum, endNum, pgNum) {
     var len = btnParent.length;
     for (var k = 0; k < len; k++) {
         if (k == pgNum) {
-            btnParent[k].style.background = 'linear-gradient(#292929, #252525,#212121, #252525, #292929)';
+            btnParent[k].style.background = 'linear-gradient(#7f7c72, #69665b,#545143, #69665b, #7f7c72)';
         } else {
-            btnParent[k].style.background = 'linear-gradient(#545454, #3e3e3e,#292929, #3e3e3e, #545454)';
+            btnParent[k].style.background = 'linear-gradient(#212121, #252525,#292929, #252525, #212121)';
         }
     }
     setTimeout(checkOutLater(null, null), 10000);

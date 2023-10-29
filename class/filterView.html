@@ -54,8 +54,10 @@
 
         <select name="front" id="front">
             <option value="" onclick=unsetAll()></option>
-            <option value="plastic" onclick=unsetSolid()>plastic</option>
-            <option value="metal" onclick=setSolid()>metal</option>
+            <option value="plastic" onclick=unsetSolid()>Plastic/Acetate</option>
+            <option value="metal" onclick=setSolid()>Full Metal</option>
+            <option value="halfrim" onclick=setSolid()>halfrim</option>
+            <option value="frameless" onclick=setSolid()>frameless</option>
         </select>
     </div>
 
@@ -75,8 +77,8 @@
 
         <select name="side" id="side">
             <option value=""></option>
-            <option value="plastic">plastic</option>
-            <option value="metal">metal</option>
+            <option value="plastic">Plastic/Acetate</option>
+            <option value="metal">Metal</option>
         </select>
     </div>
     <div class="labelContainer">
@@ -84,16 +86,16 @@
 
         <select name="opacity" id="opacity">
             <option value=""></option>
-            <option value="semitransparent">semitransparent</option>
-            <option value="transparent">transparent</option>
-            <option value="solid">solid</option>
+            <option value="semitransparent">Semi Transparent</option>
+            <option value="transparent">Transparent</option>
+            <option value="solid">Solid</option>
         </select>
     </div>
     <div class="labelContainer">
         <label for="resistance">Material Strength:</label>
         <select name="resistance" id="resistance">
             <option value=""></option>
-            <option value="normal">normal</option>
+            <option value="normal">Normal</option>
             <option value="breakresistant">breakresistant</option>
         </select>
     </div>
@@ -101,16 +103,16 @@
         <label for="joint">Frames joint:</label>
         <select name="joint" id="joint">
             <option value=""></option>
-            <option value="spring">spring</option>
-            <option value="metal">metal</option>
-            <option value="plastic">plastic</option>
+            <option value="spring">Spring</option>
+            <option value="metal">Metal</option>
+            <option value="plastic">Plastic</option>
         </select>
     </div>
     <div class="labelContainer">
         <label for="surfacing">Frames Surface Finish:</label>
         <select name="surfacing" id="surfacing">
             <option value=""></option>
-            <option value="shine">shine</option>
+            <option value="shine">Shine</option>
             <option value="matt">Matt</option>
         </select>
     </div>
@@ -123,7 +125,7 @@
     align-content: center;
     width: inherit;
     flex-wrap: nowrap;">
-    <button id="submitBtn" onclick="submitFilter()" style="padding: 2px; ">submit</button>
+    <button id="submitBtn" onclick="submitFilter(),setSolid.setsurfacing()" style="padding: 2px; ">submit</button>
     <button onclick="closeFilterView()">close</button>
     <button onclick="clearFilterView()">Clear Filter</button>
 </div>
