@@ -1,12 +1,19 @@
 var lowCost = null;
 var highCost = null;
 var keys = null;
+//export var filterVisible = false;
 export async function setValueHigh() {
     var maxLabel = window.document.getElementById('maxRange');
     //var minLabel = window.document.getElementById('minRange');
     var input_maxCost = window.document.getElementById('costHigh');
     highCost = input_maxCost.value;
     maxLabel.innerHTML = "Cost Maximum: " + highCost;
+    var highCost_int = Number.parseInt(highCost);
+    if (highCost_int <= 400) {
+        window.document.getElementById('costLow').value = highCost_int - 100;
+        setValueLow();
+
+    }
 }
 export async function setValueLow() {
     var maxLabel = window.document.getElementById('minRange');
@@ -19,6 +26,7 @@ export async function closeFilterView() {
     highCost = null;
     lowCost = null;
     restoreProduts();
+    //filterVisible = false;
 }
 export async function clearFilterView() {
     highCost = null;

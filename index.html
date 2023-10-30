@@ -99,7 +99,7 @@
         window.setValueLow = setValueLow;
         window.setValueHigh = setValueHigh;
         window.unsetAll = unsetAll;
-
+        //window.filterVisible = filterVisible
     </script>
     <script type="module">
         import { setHigh, setLow, setKeys, Func, loadItems, checkOutLater, imgSwitch } from "./js/productsLoad.js";
@@ -125,7 +125,7 @@
         window.onscroll = navScroll;
     </script>
     <script type="text/javascript">
-        var filterVisible = false;
+        //var filterVisible = false;
         function openWindow() {
             window.open("/cart.html", "_blank");
         }
@@ -152,19 +152,23 @@
             }
         }
         async function processFilter() {
+            var filterView = window.document.getElementById('filterView');
+            var filterVisible = filterView.checkVisibility();
             if (currentSection == 0) {
+                //console.log("line156");
                 if (!filterVisible) {
-                    filterVisible = true;
-                    var filterView = window.document.getElementById('filterView');
-                    filterView.style.display = 'block';
+                    //console.log("line158");
+                    //filterVisible = true;
                     var view = await fetch("/class/filterView.html").then((res) => {
                         return res.text();
                     });
+                    filterView.style.display = 'block';
                     filterView.innerHTML = view;
                     window.document.getElementById('mainProdView').style.display = "none";
                 } else {
+                    console.log("line168");
                     closeFilterView();
-                    filterVisible = false;
+                    //filterVisible = false;
                 }
             }
         }

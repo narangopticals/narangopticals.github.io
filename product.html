@@ -254,6 +254,37 @@
                 } else if (fetchFile == "bluefilter") {
                     //console.log("bluefilterLoading");
                     blueFilterDataFetch(itemnum);
+                } else if (fetchFile == "readymade") {
+                    //console.log("readymadeLoading");
+                    readymadeDataFetch(itemnum);
+                }
+            }
+        }
+        async function readymadeDataFetch(itemnum) {
+            var data;
+            try {
+                var results = fetch('https://api.github.com/gists/2999fc336989306ae76d3e11611c44fe').then(results => {
+                    return results.json();
+                });
+                data = await results.then(data => {
+                    return data.files["prodRdyData.json"].content;
+                });
+                setTimeout(data = JSON.parse(data), 3000);
+            } catch (error) {
+                window.alert(error);
+                /*data = fetch('../json/prodFmData.json').then(results => {
+                    return results.json();
+                });*/
+            }
+            if (data != undefined || data.length > 0) {
+                str = Object.values((await data).valueOf("data"))[0];
+                if (str.length > 0) {
+                    for (var j = 0; j < str.length; j++) {
+                        var item = str[j];
+                        if (item.itemnum == itemnum) {
+                            loadItem(item);
+                        }
+                    }
                 }
             }
         }
