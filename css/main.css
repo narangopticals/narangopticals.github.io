@@ -492,7 +492,8 @@ a.dailer {
     display: none;
 }
 
-.slideName {
+.slideName,
+#filter {
     height: fit-content;
     width: fit-content;
     margin: 0.5%;
@@ -504,6 +505,10 @@ a.dailer {
     color: rgb(255, 255, 255);
     /*text-shadow: 0 0 12px #3c1010, 0 0 8px #000;*/
     font-size: x-large;
+}
+
+#filter {
+    background: linear-gradient(#027263, #027f6e, #1b8c7d, #027f6e, #027263);
 }
 
 .active {

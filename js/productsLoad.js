@@ -34,13 +34,10 @@ export async function Func(section) {
                 setTimeout(data = JSON.parse(data), 3000);
             } catch (error) {
                 window.alert(error);
-                data = fetch('../json/prodFmData.json').then(results => {
+                /*data = fetch('../json/prodFmData.json').then(results => {
                     return results.json();
-                });
+                });*/
             }
-            /*data = await results.then(data => {
-                return data.files["prodFmData.json"].content;
-            });*/
 
             //console.log(data);
         } else if (section == 1) {
@@ -56,9 +53,9 @@ export async function Func(section) {
                 //framesData = (framesData.valueOf("data"))[0];
             } catch (error) {
                 window.alert(error);
-                data = fetch('../json/prodSgData.json').then(results => {
+                /*data = fetch('../json/prodSgData.json').then(results => {
                     return results.json();
-                });
+                });*/
             }
         } else if (section == 2) {
             type = "lens";
@@ -73,9 +70,26 @@ export async function Func(section) {
                 //framesData = (framesData.valueOf("data"))[0];
             } catch (error) {
                 window.alert(error);
-                data = fetch('../json/prodLnsData.json').then(results => {
+                /*data = fetch('../json/prodLnsData.json').then(results => {
+                    return results.json();
+                });*/
+            }
+        } else if (section == 3) {
+            type = "readymade";
+            try {
+                var results = fetch('https://api.github.com/gists/2999fc336989306ae76d3e11611c44fe').then(results => {
                     return results.json();
                 });
+                data = await results.then(data => {
+                    return data.files["prodRdyData.json"].content;
+                });
+                setTimeout(data = JSON.parse(data), 3000);
+                //framesData = (framesData.valueOf("data"))[0];
+            } catch (error) {
+                window.alert(error);
+                /*data = fetch('../json/prodRdyData.json').then(results => {
+                    return results.json();
+                });*/
             }
         }
         str = Object.values((await data).valueOf("data"))[0];
@@ -88,6 +102,8 @@ export async function Func(section) {
             type = "sunglass";
         } else if (section == 2) {
             type = "lens";
+        } else if (section == 2) {
+            type = "readymade";
         }
         str = await grabData(type);
     }

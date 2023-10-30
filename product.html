@@ -367,7 +367,7 @@
                 details += "<span>Rs." + item.cost + "</span>";
             }
             if (item.title.length > 0) {
-                details += "<br><span>Title : " + item.title + "</span>";
+                details += "<br><span>Title : " + item.title.replaceAll('/e', '') + "</span>";
             }
             if (item.dscrpt.length > 0) {
                 details += "<br><br><span>Description:<br><br>" + item.dscrpt + "<br></span>";

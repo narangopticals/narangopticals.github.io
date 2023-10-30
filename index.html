@@ -54,13 +54,15 @@
         <button class="slideName" style="font-weight: bold;" onclick="switchSection(0)">Eyewear Frame</button>
         <button class="slideName" style="font-weight: bold;" onclick="switchSection(1)">Sunglass</button>
         <button class="slideName" style="font-weight: bold;" onclick="switchSection(2)">Lens</button>
+        <button class="slideName" style="font-weight: bold;" onclick="switchSection(3)">Readymade</button>
     </div>
 
     <div id="btnNavProdView" style="width: 85%;
             align-items: center;
             text-align: center;
             padding:1%;
-            height: 100%;"></div>
+            height: 100%;
+            visibility:hidden;"></div>
     <div id="filterView" style="  display: none;
             top: 10%;
             width: fit-content;
@@ -85,6 +87,20 @@
 
         </div>
     </div>
+
+    <script type="module">
+        import { unsetSolid, setSolid, submitFilter, clearFilterView, closeFilterView, setValueLow, setValueHigh, unsetAll }
+            from "./js/filterFrames.js"
+        window.unsetSolid = unsetSolid;
+        window.setSolid = setSolid;
+        window.submitFilter = submitFilter;
+        window.clearFilterView = clearFilterView;
+        window.closeFilterView = closeFilterView;
+        window.setValueLow = setValueLow;
+        window.setValueHigh = setValueHigh;
+        window.unsetAll = unsetAll;
+
+    </script>
     <script type="module">
         import { setHigh, setLow, setKeys, Func, loadItems, checkOutLater, imgSwitch } from "./js/productsLoad.js";
         window.Func = Func;
@@ -108,7 +124,8 @@
         navLoader('menuBtns', 0, 'HomePage');
         window.onscroll = navScroll;
     </script>
-    <script>
+    <script type="text/javascript">
+        var filterVisible = false;
         function openWindow() {
             window.open("/cart.html", "_blank");
         }
@@ -125,38 +142,37 @@
                 slideName[section].textContent += "*";
                 slideName[section].title = "Currently Open";
                 currentSection = section;
-                clearFilterView()
+                try {
+                    clearFilterView();
+                } catch (error) {
+                    console.log(error);
+                }
+
                 //Func(section);
             }
         }
         async function processFilter() {
             if (currentSection == 0) {
-                var filterView = window.document.getElementById('filterView');
-                filterView.style.display = 'block';
-                var view = await fetch("/class/filterView.html").then((res) => {
-                    return res.text();
-                });
-                filterView.innerHTML = view;
+                if (!filterVisible) {
+                    filterVisible = true;
+                    var filterView = window.document.getElementById('filterView');
+                    filterView.style.display = 'block';
+                    var view = await fetch("/class/filterView.html").then((res) => {
+                        return res.text();
+                    });
+                    filterView.innerHTML = view;
+                    window.document.getElementById('mainProdView').style.display = "none";
+                } else {
+                    closeFilterView();
+                    filterVisible = false;
+                }
             }
         }
     </script>
     <script type="module">
-        import { setCookie, filterKeys } from "/js/general.js"
+        import { setCookie, filterKeys } from "./js/general.js"
         window.filterKeys = filterKeys;
         window.setCookie = setCookie;
-    </script>
-
-    <script type="module">
-        import { unsetSolid, setSolid, submitFilter, clearFilterView, closeFilterView, setValueLow, setValueHigh, unsetAll } from "/js/filterFrames.js"
-        window.unsetSolid = unsetSolid;
-        window.setSolid = setSolid;
-        window.submitFilter = submitFilter;
-        window.clearFilterView = clearFilterView;
-        window.closeFilterView = closeFilterView;
-        window.setValueLow = setValueLow;
-        window.setValueHigh = setValueHigh;
-        window.unsetAll = unsetAll;
-        setSolid.setsurfacing();
     </script>
 </body>
 

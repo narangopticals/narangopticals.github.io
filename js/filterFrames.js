@@ -18,8 +18,7 @@ export async function setValueLow() {
 export async function closeFilterView() {
     highCost = null;
     lowCost = null;
-    var filterView = window.document.getElementById('filterView');
-    filterView.style.display = 'none';
+    restoreProduts();
 }
 export async function clearFilterView() {
     highCost = null;
@@ -30,34 +29,37 @@ export async function clearFilterView() {
     setHigh(highCost);
     setLow(lowCost);
     setKeys(keys);
+    restoreProduts();
     Func(currentSection);
 }
 export async function submitFilter() {
     keys = new filterKeys();
-    keys.pattern = document.getElementById("pattern").value;
+    for (var key in keys) {
+        console.log(key);
+        keys[key] = document.getElementById(key).value;
+    }
+    /*keys.pattern = document.getElementById("pattern").value;
     keys.front = document.getElementById("front").value;
     keys.side = document.getElementById("side").value;
     keys.opacity = document.getElementById("opacity").value;
     keys.resistance = document.getElementById("resistance").value;
     keys.joint = document.getElementById("joint").value;
-    keys.surfacing = document.getElementById("surfacing").value;
-    /*var string =
-        "pattern=" + document.getElementById("pattern").value + "," +
-        "front=" + document.getElementById("front").value + "," +
-        "side=" + document.getElementById("side").value + "," +
-        "opacity=" + document.getElementById("opacity").value + "," +
-        "resistance=" + document.getElementById("resistance").value + "," +
-        "joint=" + document.getElementById("joint").value + "," +
-        "surfacing=" + document.getElementById("surfacing").value;
-    setCookie("keys", string, 10);*/
+    keys.surfacing = document.getElementById("surfacing").value;*/
     setHigh(highCost);
     setLow(lowCost);
-    var filterView = window.document.getElementById('filterView');
-    filterView.style.display = 'none';
     console.log("keys =");
     console.log(keys);
     setKeys(keys);
+    highCost = null;
+    lowCost = null;
+    keys = null;
+    restoreProduts();
     Func(currentSection);
+}
+export async function restoreProduts() {
+    var filterView = window.document.getElementById('filterView');
+    filterView.style.display = 'none';
+    window.document.getElementById('mainProdView').style.display = "";
 }
 export async function setSolid() {
     //document.getElementById("opacity").value = "solid";
