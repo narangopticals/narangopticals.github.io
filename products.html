@@ -96,20 +96,20 @@
         }
     </script>
     <!--<script type="text/javascript">
-        console.log("window.scrollY" + window.scrollY);
+        //console.log("window.scrollY" + window.scrollY);
         var prevScrollpos = window.scrollY;
         window.addEventListener("scroll", (event) => {
             //window.onscroll = (event) => {
-            console.log(event);
-            console.log(prevScrollpos);
+            //console.log(event);
+            //console.log(prevScrollpos);
             var currentScrollPos = window.scrollY;
-            console.log(currentScrollPos);
+            //console.log(currentScrollPos);
             if (prevScrollpos > currentScrollPos) {
                 document.getElementById("logoHeader").style.display = "";
-                console.log("logoHeader visible");
+                //console.log("logoHeader visible");
             } else {
                 document.getElementById("logoHeader").style.display = "none";
-                console.log("logoHeader Hidden");
+                //console.log("logoHeader Hidden");
             }
             prevScrollpos = currentScrollPos;
         });

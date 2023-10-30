@@ -448,20 +448,20 @@ export async function loadItems(startNum, endNum, pgNum) {
         var elem = elemsParents[j];
         if (i < str.length) {
             var iframeHolder = elem.querySelector("#iframeHolder");
-            console.log("Line 325 : Loading Item: " + i + "\nin view number : " + j);
+            //console.log("Line 325 : Loading Item: " + i + "\nin view number : " + j);
             iframeHolder.innerHTML = "";
             elem.style.visibility = "visible";
             var valueData = str[i];
             var imgs = valueData.imgfile;
-            console.log(imgs);
+            //console.log(imgs);
             for (var k = 0; k < imgs.length; k++) {
                 //console.log("Line 331 : i= " + i + "\nj = " + j + "\nk = " + k);
                 iframeHolder.innerHTML += "<iframe style=\"height: 100%;width: 100%;\" id=\"iframe" + j + "img" + k + "\" src=\"" + imgs[k] + "\"></iframe>";
             }
             imgSwitch('', 'grid' + j, 0);
             iframeHolder.value = 0;
-            console.log("ling 335 : elem : ");
-            console.log(elem);
+            //console.log("ling 335 : elem : ");
+            //console.log(elem);
             var cost = "";
             var title = "";
             if (valueData.cost.trim().indexOf('/e') < 0) {
@@ -483,7 +483,7 @@ export async function loadItems(startNum, endNum, pgNum) {
             }*/
             elem = elemsParents[j];
             if (valString != null) {
-                console.log("valString :" + valString + "\nlength :" + valString.length);
+                //console.log("valString :" + valString + "\nlength :" + valString.length);
                 elem.querySelector("h1").innerHTML = valString;
             }
 

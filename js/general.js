@@ -73,9 +73,9 @@ export async function fetchGistArr(link, file) {
 export async function getFiltered(itemArr, costlow, costHigh, keywords) {
     /*var keys = new filterKeys();
     keys.front = "plastic";
-    console.log('line 57 : filterKeys = ');
-    console.log(keys);
-    console.log(keys.valuedKeys());
+    //console.log('line 57 : filterKeys = ');
+    //console.log(keys);
+    //console.log(keys.valuedKeys());
     var valuedKeys = keys.valuedKeys();*/
     //console.log('itemArr = ');
     //console.log(itemArr);
@@ -89,7 +89,7 @@ export async function getFiltered(itemArr, costlow, costHigh, keywords) {
     var filteredItems = [];
     var finalItems = [];
     var hasFilter = (costlow_loc != null || costHigh_loc != null || keywords_loc != null);
-    console.log("Line 45 : hasFilter = " + hasFilter);
+    //console.log("Line 45 : hasFilter = " + hasFilter);
     if (itemArr != null && hasFilter) {
         if (costHigh_loc != null || costlow_loc != null) {
 
@@ -123,30 +123,30 @@ export async function getFiltered(itemArr, costlow, costHigh, keywords) {
         }
 
         if (filteredItems.length < 1) {
-            console.log("line 75: filteredItems.length < 1");
+            //console.log("line 75: filteredItems.length < 1");
             filteredItems = itemArr;
         }
 
-        console.log('filteredItems = ');
-        console.log(filteredItems);
+        //console.log('filteredItems = ');
+        //console.log(filteredItems);
         if (keywords_loc != null) {
-            console.log("line 133: keywords != null");
+            //console.log("line 133: keywords != null");
             var keywords_locLength = keywords_loc.length();
             var valuedKeys = keywords_loc.valuedKeys();
             if (keywords_locLength > 0) {
-                console.log("line 136: valuedKeysLength = " + keywords_locLength);
+                //console.log("line 136: valuedKeysLength = " + keywords_locLength);
                 var minMatch = keywords_locLength > 3 ? Math.round(keywords_locLength / 2) : keywords_locLength;
-                console.log("line 138: minMatch = " + minMatch);
+                //console.log("line 138: minMatch = " + minMatch);
                 for (let j = 0; j < filteredItems.length; j++) {
                     var item = filteredItems[j];
                     var matches = 0;
                     for (var key in valuedKeys) {
-                        console.log("line 143 : item.keywords[key] = " + item.keywords[key]);
+                        //console.log("line 143 : item.keywords[key] = " + item.keywords[key]);
                         if (keywords_loc[key] == item.keywords[key]) {
                             matches++;
                         }
                     }
-                    console.log("line 147: matches = " + matches);
+                    //console.log("line 147: matches = " + matches);
                     /*for (var k = 0; k < kewords_loc.length; k++) {
 
                         if (item.keywords.indexOf(kewords_loc[k]) >= 0) {
@@ -179,12 +179,12 @@ export async function setCookie(cname, cvalue, exdays) {
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     let expires = "expires=" + d.toUTCString();
     var string = cname + "=" + cvalue + ";" + expires + "; SameSite=Strict;path=/";
-    console.log(string);
+    //console.log(string);
     document.cookie = string;
     var cookie = await getCookie(cname);
-    console.log(cookie);
+    //console.log(cookie);
     var cookieArr = cookie.split(",");
-    console.log(cookieArr);
+    //console.log(cookieArr);
 }
 export async function getCookie(cname) {
     let name = cname + "=";

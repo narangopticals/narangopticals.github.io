@@ -239,20 +239,20 @@
             const searchParams = new URLSearchParams(window.location.search);
             if (searchParams.has('type') && searchParams.has('itemnum')) {
                 var fetchFile = searchParams.get('type');
-                console.log(fetchFile);
+                //console.log(fetchFile);
                 var itemnum = searchParams.get('itemnum');
-                console.log(itemnum);
+                //console.log(itemnum);
                 if (fetchFile == "frames") {
-                    console.log("framesLoading");
+                    //console.log("framesLoading");
                     framesDataFetch(itemnum);
                 } else if (fetchFile == "sunglass") {
-                    console.log("sunglassLoading");
+                    //console.log("sunglassLoading");
                     sunglassDataFetch(itemnum);
                 } else if (fetchFile == "lens") {
-                    console.log("lensLoading");
+                    //console.log("lensLoading");
                     lensDataFetch(itemnum);
                 } else if (fetchFile == "bluefilter") {
-                    console.log("bluefilterLoading");
+                    //console.log("bluefilterLoading");
                     blueFilterDataFetch(itemnum);
                 }
             }
@@ -387,7 +387,7 @@
             var shareBtn = prodMain.querySelector('.shareBtn');
             if (shareBtn != undefined) {
                 shareBtn.value = window.href;
-                console.log(window.href);
+                //console.log(window.href);
                 shareBtn.addEventListener("click",
                     function (e) {
                         window.navigator.clipboard.writeText(window.href);

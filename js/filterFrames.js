@@ -35,7 +35,7 @@ export async function clearFilterView() {
 export async function submitFilter() {
     keys = new filterKeys();
     for (var key in keys) {
-        console.log(key);
+        //console.log(key);
         keys[key] = document.getElementById(key).value;
     }
     /*keys.pattern = document.getElementById("pattern").value;
@@ -47,8 +47,8 @@ export async function submitFilter() {
     keys.surfacing = document.getElementById("surfacing").value;*/
     setHigh(highCost);
     setLow(lowCost);
-    console.log("keys =");
-    console.log(keys);
+    //console.log("keys =");
+    //console.log(keys);
     setKeys(keys);
     highCost = null;
     lowCost = null;
@@ -64,12 +64,12 @@ export async function restoreProduts() {
 export async function setSolid() {
     //document.getElementById("opacity").value = "solid";
     var childs = document.getElementById("opacity").querySelectorAll('option');
-    console.log(childs);
+    //console.log(childs);
     for (var i = 0; i < childs.length; i++) {
         var elem = childs[i];
-        console.log(elem);
+        //console.log(elem);
         if (elem.value == 'solid') {
-            console.log("elem.value == 'solid'");
+            //console.log("elem.value == 'solid'");
             elem.disabled = false;
         } else {
             elem.disabled = true;
@@ -78,7 +78,7 @@ export async function setSolid() {
     setpattern();
     setjoint();
     setsurfacing();
-    console.log(document.getElementById("pattern"));
+    //console.log(document.getElementById("pattern"));
 
 
     function setsurfacing() {
@@ -94,15 +94,15 @@ export async function setSolid() {
             }
         }
 
-        console.log(document.getElementById("surfacing"));
+        //console.log(document.getElementById("surfacing"));
     }
     function setpattern() {
         //document.getElementById("opacity").value = "solid";
         var childs = document.getElementById("pattern").querySelectorAll('option');
-        console.log(childs);
+        //console.log(childs);
         for (var i = 0; i < childs.length; i++) {
             var elem = childs[i];
-            console.log(elem);
+            //console.log(elem);
             if (elem.value == 'halfshade') {
                 elem.disabled = true;
                 //console.log("elem.value == 'solid'");
@@ -111,15 +111,15 @@ export async function setSolid() {
             }
         }
 
-        console.log(document.getElementById("opacity"));
+        //console.log(document.getElementById("opacity"));
     }
     function setjoint() {
         //document.getElementById("joint").value = "solid";
         var childs = document.getElementById("joint").querySelectorAll('option');
-        console.log(childs);
+        //console.log(childs);
         for (var i = 0; i < childs.length; i++) {
             var elem = childs[i];
-            console.log(elem);
+            //console.log(elem);
             if (elem.value == 'plastic') {
                 elem.disabled = true;
                 //console.log("elem.value == 'solid'");
@@ -128,7 +128,7 @@ export async function setSolid() {
             }
         }
 
-        console.log(document.getElementById("joint"));
+        //console.log(document.getElementById("joint"));
     }
 }
 export async function unsetSolid() {
@@ -138,7 +138,7 @@ export async function unsetSolid() {
     for (var i = 0; i < childs.length; i++) {
         var elem = childs[i].disabled = false;
     }
-    console.log(document.getElementById("opacity"));
+    //console.log(document.getElementById("opacity"));
     unsetpattern();
     unsetjoint();
     unsetsurfacing();
@@ -154,40 +154,40 @@ export async function unsetSolid() {
             elem.disabled = false;
         }
 
-        console.log(document.getElementById("surfacing"));
+        //console.log(document.getElementById("surfacing"));
     }
     function unsetpattern() {
         document.getElementById("pattern").value = "";
         var childs = document.getElementById("pattern").querySelectorAll('option');
-        console.log(childs);
+        //console.log(childs);
         for (var i = 0; i < childs.length; i++) {
             var elem = childs[i];
-            console.log(elem);
+            //console.log(elem);
             elem.disabled = false;
         }
 
-        console.log(document.getElementById("pattern"));
+        //console.log(document.getElementById("pattern"));
     }
     function unsetjoint() {
         document.getElementById("joint").value = "";
         var childs = document.getElementById("joint").querySelectorAll('option');
-        console.log(childs);
+        //console.log(childs);
         for (var i = 0; i < childs.length; i++) {
             var elem = childs[i];
-            console.log(elem);
+            //console.log(elem);
             elem.disabled = false;
 
         }
 
-        console.log(document.getElementById("joint"));
+        //console.log(document.getElementById("joint"));
     }
 }
 export async function unsetAll() {
     var childs = document.querySelectorAll('option');
-    console.log(childs);
+    //console.log(childs);
     for (var i = 0; i < childs.length; i++) {
         var elem = childs[i];
-        console.log(elem);
+        //console.log(elem);
         elem.disabled = false;
         elem.parentNode.value = "";
     }
