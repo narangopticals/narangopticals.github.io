@@ -180,8 +180,8 @@
                                         border-radius: 10px;
                                         background: linear-gradient(to bottom, rgb(35, 96, 150),rgb(11, 41, 102),rgb(16, 52, 118),rgb(11, 41, 102),rgb(35, 96, 150));
                                         /*background: linear-gradient(to bottom, rgb(45, 53, 69),rgb(48, 52, 58),rgb(36, 42, 49),rgb(48, 52, 58),rgb(45, 53, 69));*/">
-                    <img id="shareIcon" src="../imgs/shareicon.png" style="aspect-ratio: 1;
-                            width: 100%;"></img>
+                    <img id="shareIcon" src="../svg/share-button.svg" style="aspect-ratio: 1;
+                            width: 60%; margin:5px; padding: 5px"></img>
 
                 </button>
             </div>
@@ -421,10 +421,10 @@
                 //console.log(window.href);
                 shareBtn.addEventListener("click",
                     function (e) {
-                        window.navigator.clipboard.writeText(window.href);
+                        window.navigator.clipboard.writeText(window.location.href);
 
                         // Alert the copied text
-                        window.alert("Copied Link: " + window.href);
+                        window.alert("Current Page Copied Link: \n" + window.location.href);
                     });
             }
         }

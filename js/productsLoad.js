@@ -1,21 +1,34 @@
 import { grabData } from "../js/fetDt.js"
 import { filterKeys, getFiltered } from "../js/general.js";
 var str;
+var currentPgNum = -1;
 //var section = 1;
 var type = "";
 var keys = null;
 var minCost = null;
 var maxCost = null;
+var sectionCurrent = 0;
+var filtered = false;
+
+export function setFiltered(boolVal) {
+    //console.log('setFiltered(boolVal) = ' + boolVal);
+    filtered = boolVal;
+}
 export function setKeys(keysnew) {
+    //console.log('setKeys(keysnew) = ');
+    //console.log(keysnew);
     keys = keysnew;
 }
 export function setHigh(cost) {
+    //console.log('setHigh(cost) = ' + cost);
     maxCost = cost;
 }
 export function setLow(cost) {
+    //console.log('setLow(cost) = ' + cost);
     minCost = cost;
 }
-export async function Func(section) {
+export async function Func(section, page) {
+    sectionCurrent = section;
     var data = "";
     var prodParent = fetch("../class/prodview.html").then((res) => {
         var val = res.text();
@@ -121,7 +134,16 @@ export async function Func(section) {
         if (dataLength > 8) {
             await addPagesNavBtn(dataLength);
             await addItemViews(0, 9);
-            await loadItems(0, 9, 0);
+            var starts = 0;
+            var pgNum = 0;
+            if (page <= Math.ceil(dataLength / 9) && page > 0) {
+                //console.log("line 134");
+                pgNum = (page - 1);
+                starts = (pgNum * 9);
+            }
+
+            //console.log("line 137 : starts = " + starts + "\n page=" + pgNum);
+            await loadItems(starts, dataLength, pgNum);
         } else {
             await addPagesNavBtn(dataLength);
             await addItemViews(0, dataLength);
@@ -149,6 +171,7 @@ export async function Func(section) {
             var itemStart = 0;
             for (var i = 0; i < btns.length; i++) {
                 var btn = btns[i];
+                //btn.setAttribute('onclick', 'window.loadItems(' + itemStart + ', ' + (itemStart + 8) + ', ' + i + ')');
                 btn.setAttribute('onclick', 'window.loadItems(' + itemStart + ', ' + (itemStart + 8) + ', ' + i + ')');
                 itemStart = itemStart + 9;
             }
@@ -306,9 +329,11 @@ export async function checkOutLater(btnLoad, pressedBtn) {
     }
     function modifyCartCount() {
         var cartView = document.getElementById('cartExpand');
-        var cartCounter = cartView.querySelector('#cartCounter');
-        //console.log(cartCounter);
-        cartCounter.textContent = selectedItems.length;
+        if (cartView != undefined) {
+            var cartCounter = cartView.querySelector('#cartCounter');
+            //console.log(cartCounter);
+            cartCounter.textContent = selectedItems.length;
+        }
     }
     function addProduct(id, btn) {
         if (selectedItems.indexOf(id) < 0) {
@@ -440,7 +465,19 @@ export async function mainShareBtn(btn, type, itemnum) {
     btn.href = url;
 }
 export async function loadItems(startNum, endNum, pgNum) {
+    if (filtered) {
+        window.history.pushState('Page ' + (pgNum + 1), '', '/');
+    } else {
+        window.history.pushState('Page ' + (pgNum + 1), '', '/?sect=' + sectionCurrent + '&page=' + (pgNum + 1));
+    }
 
+    currentPgNum = pgNum;
+    /*var home = window.location.origin + "/?";
+    var loc = window.location.href;
+    if (loc.indexOf(home) > -1 && window.location.pathname.trim() == "/") {
+        //console.log("line 451");
+        //window.location.href = window.location.origin + "/?sect=" + currentSection + "&page=" + pgNum;
+    }*/
     var elemsParents = window.document.querySelectorAll('div[id^=prodParent]');
     //console.log(elemsParents);
     var i = startNum;
@@ -508,8 +545,10 @@ export async function loadItems(startNum, endNum, pgNum) {
             }
         }
 
-
     }
+
+
+
     var btnParent = window.document.getElementById("btnNavProdView").getElementsByTagName('button');
     var len = btnParent.length;
     for (var k = 0; k < len; k++) {

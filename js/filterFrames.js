@@ -25,6 +25,7 @@ export async function setValueLow() {
 export async function closeFilterView() {
     highCost = null;
     lowCost = null;
+    setFiltered(false);
     restoreProduts();
     //filterVisible = false;
 }
@@ -37,8 +38,9 @@ export async function clearFilterView() {
     setHigh(highCost);
     setLow(lowCost);
     setKeys(keys);
+    setFiltered(false);
     restoreProduts();
-    Func(currentSection);
+    Func(currentSection, page);
 }
 export async function submitFilter() {
     keys = new filterKeys();
@@ -55,6 +57,7 @@ export async function submitFilter() {
     keys.surfacing = document.getElementById("surfacing").value;*/
     setHigh(highCost);
     setLow(lowCost);
+    setFiltered(true);
     //console.log("keys =");
     //console.log(keys);
     setKeys(keys);
@@ -62,7 +65,7 @@ export async function submitFilter() {
     lowCost = null;
     keys = null;
     restoreProduts();
-    Func(currentSection);
+    Func(currentSection, page);
 }
 export async function restoreProduts() {
     var filterView = window.document.getElementById('filterView');

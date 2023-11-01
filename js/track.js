@@ -14,7 +14,7 @@ export async function trackOrder(orderId) {
                 //console.log("track : line 24:");
                 //console.log(item);
                 if (item.trackid.trim() == orderId.trim()) {
-                    // console.log("track : line 27:");
+                    // //console.log("track : line 27:");
                     //console.log(item.trackid.trim());
                     if (item.trackid.trim().indexOf('/e') < 0) {
                         var status = item.status;

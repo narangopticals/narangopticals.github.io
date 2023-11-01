@@ -49,12 +49,16 @@
         }// ]]></script>
     <script type="text/javascript"
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <div style="width: 100%; height:fit-content; text-align:center; margin: 0.5%;">
+    <div id="sectionSwitch" style="">
         <button id="filter" style="font-weight: bold;" onclick="processFilter()">Filter</button>
-        <button class="slideName" style="font-weight: bold;" onclick="switchSection(0)">Eyewear Frame</button>
-        <button class="slideName" style="font-weight: bold;" onclick="switchSection(1)">Sunglass</button>
-        <button class="slideName" style="font-weight: bold;" onclick="switchSection(2)">Lens</button>
-        <button class="slideName" style="font-weight: bold;" onclick="switchSection(3)">Readymade</button>
+        <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(0,1)">Eyewear Frame</button>
+        <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(1,1)">Sunglass</button>
+        <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(2,1)">Lens</button>
+        <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(3,1)">Readymade</button>
+        <button id="share" onclick="shareLink()">
+            <img src="./svg/share-button.svg" style="aspect-ratio: 1; height: 100%;
+                align-self: center;
+                text-align: center;"></img><span style="margin: 0.2%;">Share</span></button>
     </div>
 
     <div id="btnNavProdView" style="width: 85%;
@@ -102,7 +106,7 @@
         //window.filterVisible = filterVisible
     </script>
     <script type="module">
-        import { setHigh, setLow, setKeys, Func, loadItems, checkOutLater, imgSwitch } from "./js/productsLoad.js";
+        import { setFiltered, setHigh, setLow, setKeys, Func, loadItems, checkOutLater, imgSwitch } from "./js/productsLoad.js";
         window.Func = Func;
         window.loadItems = loadItems;
         window.checkOutLater = checkOutLater;
@@ -110,9 +114,10 @@
         window.setKeys = setKeys;
         window.setLow = setLow;
         window.setHigh = setHigh;
+        window.setFiltered = setFiltered;
         //window.text = text;
         //window.Func(1);
-        switchSection(0);
+        grabUrlProd();
 
     </script>
     <script type="module">
@@ -129,8 +134,28 @@
         function openWindow() {
             window.open("/cart.html", "_blank");
         }
-        var currentSection = 1;
-        function switchSection(section) {
+        function shareLink() {
+            window.navigator.clipboard.writeText(window.location.href);
+            // Alert the copied text
+            window.alert("Current Page Copied Link: \n" + window.location.href);
+        }
+        var page = 1;
+        async function grabUrlProd() {
+            const searchParams = new URLSearchParams(window.location.search);
+            var section = 0;
+            if (searchParams.has('sect')) {
+                var sect = Number.parseInt(searchParams.get('sect'));
+                if (sect >= 0 && sect < 4) {
+                    section = sect;
+                }
+            }
+            if (searchParams.has('page')) {
+                page = Number.parseInt(searchParams.get('page'));
+            }
+            switchSection(section, page);
+        }
+        var currentSection = -1;
+        async function switchSection(section, page) {
             if (currentSection != section) {
                 let slideName = document.getElementsByClassName("slideName");
                 for (i = 0; i < slideName.length; i++) {
@@ -143,7 +168,7 @@
                 slideName[section].title = "Currently Open";
                 currentSection = section;
                 try {
-                    clearFilterView();
+                    await clearFilterView();
                 } catch (error) {
                     //console.log(error);
                 }
@@ -166,11 +191,15 @@
                     filterView.innerHTML = view;
                     window.document.getElementById('mainProdView').style.display = "none";
                 } else {
-                    console.log("line168");
+                    //console.log("line168");
                     closeFilterView();
                     //filterVisible = false;
                 }
             }
+        }
+
+        async function switchUrlSection(sect, pg) {
+            window.location = window.location.origin + "/?sect=" + sect + "&page=" + pg;
         }
     </script>
     <script type="module">

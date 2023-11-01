@@ -157,19 +157,23 @@ export async function getFiltered(itemArr, costlow, costHigh, keywords) {
                         //console.log('matches = ');
                         //console.log(matches);
                         //console.log('kewords = ');
-                        //console.log(kewords_loc);
+                        //console.log(keywords);
                         finalItems.push(item);
                     }
                 }
+                //console.log(finalItems);
                 return finalItems;
             } else {
                 finalItems = filteredItems;
             }
+            //console.log(finalItems);
             return finalItems;
         } else {
+            //console.log(filteredItems);
             return filteredItems;
         }
     } else {
+        //console.log(itemArr);
         return itemArr;
     }
 }
