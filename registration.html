@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Narang Opticals, Kashipur
+    </title>
+    <link rel="stylesheet" href="css/main.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <nav id="navbar">
+
+    </nav>
+    <div class="contact-form-holder">
+        <iframe class="contact-form"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSc-aGQTwFXOkthFMcucHcXOv_-GQU9HCM2rXaHiBBpe7-2qCg/viewform?embedded=true"
+            frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    </div>
+    <script type="module">
+        import { navLoader, toggle, navScroll } from "./js/navload.js";
+        import { browserDetect } from "./js/general.js";
+        browserDetect();
+        window.navLoader = navLoader;
+        window.toggle = toggle;
+        navLoader('menuBtns', 4, 'Contact Us');
+        window.onscroll = navScroll;
+    </script>
+</body>
+
+</html>
