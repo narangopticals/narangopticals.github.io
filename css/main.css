@@ -96,7 +96,6 @@ h1,
     animation-duration: 2s;
     animation-iteration-count: infinite;
     animation-name: bgflash;
-    min-width: 70%;
 }
 
 /*animation event #start*/
@@ -688,6 +687,11 @@ a.dailer {
 
 /* Portrait orientation ||*/
 @media screen and (orientation: portrait) {
+
+
+    #flashBannerBg {
+        min-width : 30%;
+    }
     #share {
         height: 30px;
     }
@@ -779,6 +783,12 @@ a.dailer {
 
 /* Landscape orientation = */
 @media screen and (orientation: landscape) {
+
+
+    #flashBannerBg {
+        min-width : 50%;
+    }
+
     #share {
         height: 45px;
     }
