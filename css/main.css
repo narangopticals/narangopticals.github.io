@@ -62,12 +62,60 @@ h1,
 }
 
 /*animation element setup*/
-#flexSpcTel {
+#flexSpcTel,
+#flashBannerTxt {
     font-size: 15px;
     font-weight: bold;
     animation-duration: 4s;
     animation-iteration-count: infinite;
     animation-name: flash;
+}
+
+#flashBanner {
+    margin: 8px;
+    opacity: 0.8;
+    background-color: #626262;
+    flex-grow: 1;
+    border-radius: 25px;
+    text-align: center;
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    align-items: center;
+}
+
+#flashBannerBg {
+    min-width: 25%;
+    width: fit-content;
+    padding: 2px;
+    height: 54px;
+    border-radius: 35px;
+    align-content: center;
+    display: flex;
+    height: fit-content;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-name: bgflash;
+    min-width: 70%;
+}
+
+/*animation event #start*/
+@keyframes bgflash {
+    25% {
+        background-color: rgb(165, 20, 20);
+    }
+
+    50% {
+        background-color: rgb(135, 26, 135);
+    }
+
+    75% {
+        background-color: rgb(195, 56, 84);
+    }
+
+    100% {
+        background-color: rgb(140, 103, 10);
+    }
 }
 
 /*animation event #end*/
@@ -102,7 +150,8 @@ nav {
 }
 
 #staticbar,
-#logoHeader {
+#logoHeader,
+#navBanner {
     display: flex;
     /*flex-direction:row;*/
     align-items: center;
