@@ -71,6 +71,11 @@ h1,
     animation-name: flash;
 }
 
+#flashBannerTxt {
+    display: block;
+    position: relative;
+}
+
 #flashBanner {
     margin: 8px;
     opacity: 0.8;
@@ -81,7 +86,6 @@ h1,
     display: flex;
     width: 100%;
     height: fit-content;
-    align-items: center;
 }
 
 #flashBannerBg {
@@ -686,11 +690,14 @@ a.dailer {
 
 /* Portrait orientation ||*/
 @media screen and (orientation: portrait) {
-
+    #flashBannerTxt {
+        left: 6%;
+    }
 
     #flashBannerBg {
-        min-width : 20%;
+        min-width: 30%;
     }
+
     #share {
         height: 30px;
     }
@@ -782,10 +789,12 @@ a.dailer {
 
 /* Landscape orientation = */
 @media screen and (orientation: landscape) {
-
+    #flashBannerTxt {
+        left: 11%;
+    }
 
     #flashBannerBg {
-        min-width : 50%;
+        min-width: 25%;
     }
 
     #share {
