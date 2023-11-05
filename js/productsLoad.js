@@ -273,6 +273,7 @@ export async function imgSwitch(func, grid, setItem) {
             frames[i].style.display = "none";
             if (i == setItem) {
                 frames[i].style.display = "";
+                elem.querySelector('#imgCount').textContent = (i + 1) + '/' + lenIframes;
             }
         }
     }
@@ -491,10 +492,13 @@ export async function loadItems(startNum, endNum, pgNum) {
             var valueData = str[i];
             var imgs = valueData.imgfile;
             //console.log(imgs);
-            for (var k = 0; k < imgs.length; k++) {
+            var imgLen = imgs.length;
+            for (var k = 0; k < imgLen; k++) {
                 //console.log("Line 331 : i= " + i + "\nj = " + j + "\nk = " + k);
                 iframeHolder.innerHTML += "<iframe style=\"height: 100%;width: 100%;\" id=\"iframe" + j + "img" + k + "\" src=\"" + imgs[k] + "\"></iframe>";
             }
+
+            //elem.querySelector('#imgCount').textContent = '1/' + imgLen;
             imgSwitch('', 'grid' + j, 0);
             iframeHolder.value = 0;
             //console.log("ling 335 : elem : ");

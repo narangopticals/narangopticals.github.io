@@ -51,11 +51,11 @@ export async function navScroll() {
     //console.log("currentScrollPos :" + currentScrollPos.toPrecision() + "prevScrollpos : " + prevScrollpos.toPrecision());
     if (prevScrollpos > currentScrollPos) {// && hidden) {
         if (currentScrollPos == 0) {
-            window.document.getElementById("logoHeader").style.display = "";
+            window.document.getElementById("navBanner").style.display = "";
         }
         //hidden = false;
     } else {
-        window.document.getElementById("logoHeader").style.display = "none";
+        window.document.getElementById("navBanner").style.display = "none";
         //hidden = true;
     }
     prevScrollpos = currentScrollPos;
