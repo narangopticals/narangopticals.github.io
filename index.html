@@ -9,7 +9,7 @@
         Narang Opticals, Kashipur
     </title>
     <link rel="stylesheet" href="css/main.css">
-
+    <link rel="stylesheet" href="css/index.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Meta Pixel Code -->
     <script>
@@ -31,92 +31,6 @@
             src="https://www.facebook.com/tr?id=617363537143394&ev=PageView&noscript=1" /></noscript>
     <!-- End Meta Pixel Code -->
 </head>
-<style>
-    #productIntroHolder {
-        width: 100%;
-        height: fit-content;
-    }
-
-    .overlayImagesBlur {
-        width: var(--elemWH);
-        height: var(--elemWH);
-        opacity: 0.40;
-        background-color: rgb(209, 209, 209);
-        display: block;
-        position: relative;
-        top: var(--blurTop);
-        /*! visibility: hidden; */
-    }
-
-    .typeHolder {
-        aspect-ratio: 1;
-        width: var(--elemWH);
-        height: var(--elemWH);
-        overflow: clip;
-        margin: 2%;
-        align-self: center;
-        text-align: center;
-        border: 3px solid whitesmoke;
-    }
-
-    .catgryText {
-        font-size: var(--catTxtSize);
-        font-weight: bold;
-        display: block;
-        position: relative;
-        top: var(--catTxtTop);
-    }
-
-    .displayImg {
-        width: var(--framW);
-        height: var(--framH);
-        padding: 2%;
-        display: block;
-        position: relative;
-        top: var(--disImgTop);
-        left: var(--disImgLeft);
-    }
-
-    /* Portrait orientation ||*/
-    @media screen and (orientation: portrait) {
-        #productIntroHolder {
-            display: flex;
-            flex-direction: column;
-        }
-
-        :root {
-            --elemWH: 350px;
-            --framW: 365px;
-            --framH: 380px;
-            --blurTop: -113%;
-            --catTxtSize: 30px;
-            --catTxtTop: -170%;
-            --disImgTop: 0px;
-            --disImgLeft: 0px;
-        }
-    }
-
-    /* landscape orientation ||*/
-    @media screen and (orientation: landscape) {
-        #productIntroHolder {
-            display: grid;
-            row-gap: 2%;
-            column-gap: 5%;
-            grid-template-columns: repeat(2, var(--elemWH));
-        }
-
-        :root {
-            --elemWH: 800px;
-            --framW: 893px;
-            --framH: 931px;
-            --blurTop: -120%;
-            --catTxtSize: 70px;
-            --catTxtTop: -180%;
-            --disImgTop: -69px;
-            --disImgLeft: -62px;
-        }
-    }
-</style>
 
 <body id="mainBody">
     <nav id="navbar">
