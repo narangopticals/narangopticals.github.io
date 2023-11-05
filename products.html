@@ -11,12 +11,32 @@
     <link rel="stylesheet" href="css/main.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '617363537143394');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=617363537143394&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
 </head>
 
 <body id="mainBody">
     <nav id="navbar">
     </nav>
-    <div id="google_translate_element"></div>
+    <div id="google_translate_element" style="
+    margin: 5px 2px 0 0;"></div>
     <script type="text/javascript">// <![CDATA[
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
@@ -29,17 +49,34 @@
         }// ]]></script>
     <script type="text/javascript"
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <div style="width: 100%; height:fit-content; text-align:center; margin: 0.5%;">
-        <button class="slideName" style="font-weight: bold;" onclick="switchSection(0)">Eyewear Frame</button>
-        <button class="slideName" style="font-weight: bold;" onclick="switchSection(1)">Sunglass</button>
-        <button class="slideName" style="font-weight: bold;" onclick="switchSection(2)">Lens</button>
+    <div id="sectionSwitch">
+        <button id="filter" style="font-weight: bold;" onclick="processFilter()">Filter</button>
+        <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(0,1)">Eyewear Frame</button>
+        <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(1,1)">Sunglass</button>
+        <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(2,1)">Lens</button>
+        <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(3,1)">Readymade</button>
+        <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(4,1)">Watch</button>
+        <button id="share" onclick="shareLink()">
+            <img src="./svg/share-button.svg" style="aspect-ratio: 1; height: 100%;
+                align-self: center;
+                text-align: center;"></img><span style="margin: 0.2%;">Share</span></button>
     </div>
 
     <div id="btnNavProdView" style="width: 85%;
             align-items: center;
             text-align: center;
             padding:1%;
-            height: 100%;"></div>
+            height: 100%;
+            visibility:hidden;"></div>
+    <div id="filterView" style="  display: none;
+            top: 10%;
+            width: fit-content;
+            height: fit-content;
+            background: rgb(161, 158, 158);
+            z-index: 1000;
+            margin: 0px 2px 0px 3%;
+            position: sticky;
+            padding: 0px 4px;"></div>
     <div id="mainProdView" style="height: 100%;">
 
     </div>
@@ -55,14 +92,38 @@
 
         </div>
     </div>
+
     <script type="module">
-        import { Func, loadItems, checkOutLater } from "./js/productsLoad.js";
+        import {
+            unsetSolid,
+            setSolid, submitFilter,
+            clearFilterView, closeFilterView,
+            setValueLow, setValueHigh, unsetAll
+        }
+            from "./js/filterFrames.js"
+        window.unsetSolid = unsetSolid;
+        window.setSolid = setSolid;
+        window.submitFilter = submitFilter;
+        window.clearFilterView = clearFilterView;
+        window.closeFilterView = closeFilterView;
+        window.setValueLow = setValueLow;
+        window.setValueHigh = setValueHigh;
+        window.unsetAll = unsetAll;
+        //window.filterVisible = filterVisible
+    </script>
+    <script type="module">
+        import { setFiltered, setHigh, setLow, setKeys, Func, loadItems, checkOutLater, imgSwitch } from "./js/productsLoad.js";
         window.Func = Func;
         window.loadItems = loadItems;
         window.checkOutLater = checkOutLater;
+        window.imgSwitch = imgSwitch;
+        window.setKeys = setKeys;
+        window.setLow = setLow;
+        window.setHigh = setHigh;
+        window.setFiltered = setFiltered;
         //window.text = text;
         //window.Func(1);
-        switchSection(0);
+        grabUrlProd();
 
     </script>
     <script type="module">
@@ -71,15 +132,36 @@
         browserDetect();
         window.navLoader = navLoader;
         window.toggle = toggle;
-        navLoader('menuBtns', 1, 'Products');
+        navLoader('menuBtns', 0, 'HomePage');
         window.onscroll = navScroll;
     </script>
-    <script>
+    <script type="text/javascript">
+        //var filterVisible = false;
         function openWindow() {
             window.open("/cart.html", "_blank");
         }
-        var currentSection = 1;
-        function switchSection(section) {
+        function shareLink() {
+            window.navigator.clipboard.writeText(window.location.href);
+            // Alert the copied text
+            window.alert("Current Page Copied Link: \n" + window.location.href);
+        }
+        var page = 1;
+        async function grabUrlProd() {
+            const searchParams = new URLSearchParams(window.location.search);
+            var section = 0;
+            if (searchParams.has('sect')) {
+                var sect = Number.parseInt(searchParams.get('sect'));
+                if (sect >= 0 && sect < 5) {
+                    section = sect;
+                }
+            }
+            if (searchParams.has('page')) {
+                page = Number.parseInt(searchParams.get('page'));
+            }
+            switchSection(section, page);
+        }
+        var currentSection = -1;
+        async function switchSection(section, page) {
             if (currentSection != section) {
                 let slideName = document.getElementsByClassName("slideName");
                 for (i = 0; i < slideName.length; i++) {
@@ -90,30 +172,47 @@
                 slideName[section].className += " active";
                 slideName[section].textContent += "*";
                 slideName[section].title = "Currently Open";
-                Func(section);
                 currentSection = section;
+                try {
+                    await clearFilterView();
+                } catch (error) {
+                    //console.log(error);
+                }
+
+                //Func(section);
             }
         }
-    </script>
-    <!--<script type="text/javascript">
-        //console.log("window.scrollY" + window.scrollY);
-        var prevScrollpos = window.scrollY;
-        window.addEventListener("scroll", (event) => {
-            //window.onscroll = (event) => {
-            //console.log(event);
-            //console.log(prevScrollpos);
-            var currentScrollPos = window.scrollY;
-            //console.log(currentScrollPos);
-            if (prevScrollpos > currentScrollPos) {
-                document.getElementById("logoHeader").style.display = "";
-                //console.log("logoHeader visible");
-            } else {
-                document.getElementById("logoHeader").style.display = "none";
-                //console.log("logoHeader Hidden");
+        async function processFilter() {
+            var filterView = window.document.getElementById('filterView');
+            var filterVisible = filterView.checkVisibility();
+            if (currentSection == 0) {
+                //console.log("line156");
+                if (!filterVisible) {
+                    //console.log("line158");
+                    //filterVisible = true;
+                    var view = await fetch("/class/filterView.html").then((res) => {
+                        return res.text();
+                    });
+                    filterView.style.display = 'block';
+                    filterView.innerHTML = view;
+                    window.document.getElementById('mainProdView').style.display = "none";
+                } else {
+                    //console.log("line168");
+                    closeFilterView();
+                    //filterVisible = false;
+                }
             }
-            prevScrollpos = currentScrollPos;
-        });
-    </script>-->
+        }
+
+        async function switchUrlSection(sect, pg) {
+            window.location = window.location.origin + "/products.html?sect=" + sect + "&page=" + pg;
+        }
+    </script>
+    <script type="module">
+        import { setCookie, filterKeys } from "./js/general.js"
+        window.filterKeys = filterKeys;
+        window.setCookie = setCookie;
+    </script>
 </body>
 
 </html>

@@ -484,9 +484,9 @@ export async function mainShareBtn(btn, type, itemnum) {
 }
 export async function loadItems(startNum, endNum, pgNum) {
     if (filtered) {
-        window.history.pushState('Page ' + (pgNum + 1), '', '/');
+        window.history.pushState('Page ' + (pgNum + 1), '', '/products.html');
     } else {
-        window.history.pushState('Page ' + (pgNum + 1), '', '/?sect=' + sectionCurrent + '&page=' + (pgNum + 1));
+        window.history.pushState('Page ' + (pgNum + 1), '', '/products.html?sect=' + sectionCurrent + '&page=' + (pgNum + 1));
     }
 
     currentPgNum = pgNum;

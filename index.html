@@ -31,6 +31,92 @@
             src="https://www.facebook.com/tr?id=617363537143394&ev=PageView&noscript=1" /></noscript>
     <!-- End Meta Pixel Code -->
 </head>
+<style>
+    #productIntroHolder {
+        width: 100%;
+        height: fit-content;
+    }
+
+    .overlayImagesBlur {
+        width: var(--elemWH);
+        height: var(--elemWH);
+        opacity: 0.40;
+        background-color: rgb(209, 209, 209);
+        display: block;
+        position: relative;
+        top: var(--blurTop);
+        /*! visibility: hidden; */
+    }
+
+    .typeHolder {
+        aspect-ratio: 1;
+        width: var(--elemWH);
+        height: var(--elemWH);
+        overflow: clip;
+        margin: 2%;
+        align-self: center;
+        text-align: center;
+        border: 3px solid whitesmoke;
+    }
+
+    .catgryText {
+        font-size: var(--catTxtSize);
+        font-weight: bold;
+        display: block;
+        position: relative;
+        top: var(--catTxtTop);
+    }
+
+    .displayImg {
+        width: var(--framW);
+        height: var(--framH);
+        padding: 2%;
+        display: block;
+        position: relative;
+        top: var(--disImgTop);
+        left: var(--disImgLeft);
+    }
+
+    /* Portrait orientation ||*/
+    @media screen and (orientation: portrait) {
+        #productIntroHolder {
+            display: flex;
+            flex-direction: column;
+        }
+
+        :root {
+            --elemWH: 350px;
+            --framW: 365px;
+            --framH: 380px;
+            --blurTop: -113%;
+            --catTxtSize: 30px;
+            --catTxtTop: -170%;
+            --disImgTop: 0px;
+            --disImgLeft: 0px;
+        }
+    }
+
+    /* landscape orientation ||*/
+    @media screen and (orientation: landscape) {
+        #productIntroHolder {
+            display: grid;
+            row-gap: 2%;
+            column-gap: 5%;
+            grid-template-columns: repeat(2, var(--elemWH));
+        }
+
+        :root {
+            --elemWH: 800px;
+            --framW: 893px;
+            --framH: 931px;
+            --blurTop: -120%;
+            --catTxtSize: 70px;
+            --catTxtTop: -180%;
+            --disImgTop: -69px;
+            --disImgLeft: -62px;
+        }
+    }
+</style>
 
 <body id="mainBody">
     <nav id="navbar">
@@ -47,85 +133,61 @@
             }, 'google_translate_element');
 
         }// ]]></script>
-    <script type="text/javascript"
-        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <div id="sectionSwitch">
-        <button id="filter" style="font-weight: bold;" onclick="processFilter()">Filter</button>
-        <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(0,1)">Eyewear Frame</button>
-        <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(1,1)">Sunglass</button>
-        <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(2,1)">Lens</button>
-        <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(3,1)">Readymade</button>
-        <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(4,1)">Watch</button>
-        <button id="share" onclick="shareLink()">
-            <img src="./svg/share-button.svg" style="aspect-ratio: 1; height: 100%;
-                align-self: center;
-                text-align: center;"></img><span style="margin: 0.2%;">Share</span></button>
-    </div>
 
-    <div id="btnNavProdView" style="width: 85%;
-            align-items: center;
-            text-align: center;
-            padding:1%;
-            height: 100%;
-            visibility:hidden;"></div>
-    <div id="filterView" style="  display: none;
-            top: 10%;
-            width: fit-content;
-            height: fit-content;
-            background: rgb(161, 158, 158);
-            z-index: 1000;
-            margin: 0px 2px 0px 3%;
-            position: sticky;
-            padding: 0px 4px;"></div>
-    <div id="mainProdView" style="height: 100%;">
+    <div id="productIntroHolder">
+        <div id="frameProdIntroHolder" class="typeHolder">
+            <a href="products.html?sect=0&page1" target="_blank">
+                <iframe class="displayImg"
+                    src="https://drive.google.com/file/d/1Mj5NSrD6q3Eo1auwYP4Fh4qztF9YbjDa/preview">
 
-    </div>
-    <div id="btnNavProdView2" style="width: 85%;
-            align-items: center;
-            text-align: center;
-            padding:1%;
-            height: 100%;"></div>
-    <div id="cartFloat">
-        <button id="cartExpand" onclick="openWindow()">&#128722;<span id='cartCounter'>0</span>
-        </button>
-        <div id="cartViewMini">
+                </iframe>
+                <div class="overlayImagesBlur"></div><span class="catgryText">Frames</span>
+            </a>
 
         </div>
+        <div id="sunglassProdIntroHolder" class="typeHolder">
+            <a href="products.html?sect=1&page1" target="_blank">
+                <iframe class="displayImg"
+                    src="https://drive.google.com/file/d/1sefCpBWqxtdeuuwOlvOEmdTF51ThfAEN/preview">
+
+                </iframe>
+                <div class="overlayImagesBlur">
+                </div><span class="catgryText">Sunglass</span>
+            </a>
+        </div>
+
+        <div id="lensProdIntroHolder" class="typeHolder">
+            <a href="products.html?sect=2&page1" target="_blank">
+                <iframe class="displayImg"
+                    src="https://drive.google.com/file/d/17hJ-LZPDdWbz3ddXLtchN5MpZinQsZOu/preview">
+                </iframe>
+                <div class="overlayImagesBlur"></div><span class="catgryText">Lens</span>
+            </a>
+        </div>
+        <div id="readyMadeProdIntroHolder" class="typeHolder">
+            <a href="products.html?sect=3&page1" target="_blank">
+                <iframe class="displayImg"
+                    src="https://drive.google.com/file/d/16PrT9ecvMgyJDfB8rhDB3arMhL6LrYTT/preview">
+
+                </iframe>
+                <div class="overlayImagesBlur">
+                </div><span class="catgryText">Readymade</span>
+            </a>
+        </div>
+        <div id="watchProdIntroHolder" class="typeHolder">
+            <a href="products.html?sect=4&page1" target="_blank">
+                <iframe class="displayImg"
+                    src="https://drive.google.com/file/d/1nN0AJKcZYHcvAgMITuaHiM4F8wjnhh6b/preview">
+
+                </iframe>
+                <div class="overlayImagesBlur">
+                </div><span class="catgryText">Watch</span>
+            </a>
+        </div>
+
+
     </div>
 
-    <script type="module">
-        import {
-            unsetSolid,
-            setSolid, submitFilter,
-            clearFilterView, closeFilterView,
-            setValueLow, setValueHigh, unsetAll
-        }
-            from "./js/filterFrames.js"
-        window.unsetSolid = unsetSolid;
-        window.setSolid = setSolid;
-        window.submitFilter = submitFilter;
-        window.clearFilterView = clearFilterView;
-        window.closeFilterView = closeFilterView;
-        window.setValueLow = setValueLow;
-        window.setValueHigh = setValueHigh;
-        window.unsetAll = unsetAll;
-        //window.filterVisible = filterVisible
-    </script>
-    <script type="module">
-        import { setFiltered, setHigh, setLow, setKeys, Func, loadItems, checkOutLater, imgSwitch } from "./js/productsLoad.js";
-        window.Func = Func;
-        window.loadItems = loadItems;
-        window.checkOutLater = checkOutLater;
-        window.imgSwitch = imgSwitch;
-        window.setKeys = setKeys;
-        window.setLow = setLow;
-        window.setHigh = setHigh;
-        window.setFiltered = setFiltered;
-        //window.text = text;
-        //window.Func(1);
-        grabUrlProd();
-
-    </script>
     <script type="module">
         import { navLoader, toggle, navScroll } from "./js/navload.js";
         import { browserDetect } from "./js/general.js";
@@ -134,21 +196,18 @@
         window.toggle = toggle;
         navLoader('menuBtns', 0, 'HomePage');
         window.onscroll = navScroll;
+        grabUrlProd();
+    </script>
+
+    <script type="module">
+
     </script>
     <script type="text/javascript">
         //var filterVisible = false;
-        function openWindow() {
-            window.open("/cart.html", "_blank");
-        }
-        function shareLink() {
-            window.navigator.clipboard.writeText(window.location.href);
-            // Alert the copied text
-            window.alert("Current Page Copied Link: \n" + window.location.href);
-        }
-        var page = 1;
+        var page;
         async function grabUrlProd() {
             const searchParams = new URLSearchParams(window.location.search);
-            var section = 0;
+            var section;
             if (searchParams.has('sect')) {
                 var sect = Number.parseInt(searchParams.get('sect'));
                 if (sect >= 0 && sect < 5) {
@@ -158,60 +217,16 @@
             if (searchParams.has('page')) {
                 page = Number.parseInt(searchParams.get('page'));
             }
-            switchSection(section, page);
+            if (section != null) {
+                if (page == null) {
+                    page = 1;
+                }
+                window.history.pushState('Homepage', '', '/');
+                window.location = window.location.origin + "/products.html?sect=" + section + "&page=" + page;
+            }
+
         }
         var currentSection = -1;
-        async function switchSection(section, page) {
-            if (currentSection != section) {
-                let slideName = document.getElementsByClassName("slideName");
-                for (i = 0; i < slideName.length; i++) {
-                    slideName[i].className = slideName[i].className.replace("active", "");
-                    slideName[i].textContent = slideName[i].textContent.replace("*", "");
-                    slideName[i].title = "Click To Switch"
-                }
-                slideName[section].className += " active";
-                slideName[section].textContent += "*";
-                slideName[section].title = "Currently Open";
-                currentSection = section;
-                try {
-                    await clearFilterView();
-                } catch (error) {
-                    //console.log(error);
-                }
-
-                //Func(section);
-            }
-        }
-        async function processFilter() {
-            var filterView = window.document.getElementById('filterView');
-            var filterVisible = filterView.checkVisibility();
-            if (currentSection == 0) {
-                //console.log("line156");
-                if (!filterVisible) {
-                    //console.log("line158");
-                    //filterVisible = true;
-                    var view = await fetch("/class/filterView.html").then((res) => {
-                        return res.text();
-                    });
-                    filterView.style.display = 'block';
-                    filterView.innerHTML = view;
-                    window.document.getElementById('mainProdView').style.display = "none";
-                } else {
-                    //console.log("line168");
-                    closeFilterView();
-                    //filterVisible = false;
-                }
-            }
-        }
-
-        async function switchUrlSection(sect, pg) {
-            window.location = window.location.origin + "/?sect=" + sect + "&page=" + pg;
-        }
-    </script>
-    <script type="module">
-        import { setCookie, filterKeys } from "./js/general.js"
-        window.filterKeys = filterKeys;
-        window.setCookie = setCookie;
     </script>
 </body>
 
