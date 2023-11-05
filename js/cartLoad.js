@@ -65,13 +65,45 @@ export async function Func() {
                 return results.json();
             });
         }
+        var rdyData = "";
+        try {
+            var results = fetch('https://api.github.com/gists/2999fc336989306ae76d3e11611c44fe').then(results => {
+                return results.json();
+            });
+            rdyData = await results.then(data => {
+                return data.files["prodRdyData.json"].content;
+            });
+            setTimeout(rdyData = JSON.parse(rdyData), 3000);
+            //framesData = (framesData.valueOf("data"))[0];
+        } catch (error) {
+            window.alert(error);
+            rdyData = fetch('../json/prodLnsData.json').then(results => {
+                return results.json();
+            });
+        }
+        var watchData = "";
+        try {
+            var results = fetch('https://api.github.com/gists/a54c544dee909008b0cb98db283c9f64').then(results => {
+                return results.json();
+            });
+            watchData = await results.then(data => {
+                return data.files["prodWatchData.json"].content;
+            });
+            setTimeout(watchData = JSON.parse(watchData), 3000);
+            //framesData = (framesData.valueOf("data"))[0];
+        } catch (error) {
+            window.alert(error);
+            watchData = fetch('../json/prodLnsData.json').then(results => {
+                return results.json();
+            });
+        }
         //console.log("framesData");
         //console.log(framesData['data']);
         //console.log("sunglassData");
         //console.log(sunglassData['data']);
         //console.log("lensData");
         //console.log(lensData);
-        var dbArray = Array.prototype.concat(framesData['data'], sunglassData['data'], lensData['data'])
+        var dbArray = Array.prototype.concat(framesData['data'], sunglassData['data'], lensData['data'], rdyData['data'], watchData['data']);
         //console.log("mergedJSON");
         //console.log(mergedJSON);
         //console.log(mergedJSON.valueOf("data"));
@@ -163,7 +195,7 @@ async function addItemViews(startNum, endNum) {
                     if (cartBtn.dataCart == 'true') {
                         //console.log("line 156 : cartBtn.textContent = " + cartBtn.textContent);
                         var tmptxt = encodeURIComponent("\n\nName : ") +
-                            encodeURIComponent(cartItem[i].title) +
+                            encodeURIComponent(cartItem[i].title.replaceAll('/e', '')) +
                             encodeURIComponent("&  Item ID :") +
                             encodeURIComponent(cartItem[i].itemnum) +
                             encodeURIComponent("\t& Rs") + cartItem[i].cost +
@@ -232,6 +264,7 @@ export async function imgSwitch(func, grid, setItem) {
             frames[i].style.display = "none";
             if (i == setItem) {
                 frames[i].style.display = "";
+                elem.querySelector('#imgCount').textContent = (i + 1) + '/' + lenIframes;
             }
         }
     }
@@ -459,7 +492,7 @@ function updateCartItem() {
                 var tmp = curCartItem.cost;
                 costs.push(tmp);
                 cost += Number.parseInt(tmp);
-                var string = "<tr><td>\u25CF" + (i + 1) + ".</td><td>" + cartItem[i].title + "</td><td>= Rs." + tmp + "</td></tr>";
+                var string = "<tr><td>\u25CF" + (i + 1) + ".</td><td>" + cartItem[i].title.replaceAll('/e', '') + "</td><td>= Rs." + tmp + "</td></tr>";
                 costBreakDown.push(string);
             }
         }
@@ -491,12 +524,12 @@ export async function loadItems(startNum, endNum, pgNum) {
                 }
                 imgSwitch('', 'grid' + j, 0);
                 var valString = Number.parseInt(await valueData.cost) > 0 ?
-                    ("<span>Rs." + valueData.cost + "<br>" + valueData.title + "</span>") :
-                    ("<span>" + valueData.title + "</span>");
+                    ("<span>Rs." + valueData.cost + "<br>" + valueData.title.replaceAll('/e', '') + "</span>") :
+                    ("<span>" + valueData.title.replaceAll('/e', '') + "</span>");
                 elem.querySelector("h1").innerHTML = valString;
                 var val = [encodeURIComponent("I want to know More About Your Products") +
                     encodeURIComponent("\nName : ") +
-                    encodeURIComponent(valueData.title) +
+                    encodeURIComponent(valueData.title.replaceAll('/e', '')) +
                     encodeURIComponent(",  Item ID :") +
                     encodeURIComponent(valueData.itemnum) +
                     "&type=phone_number&app_absent=0&send=1"];
