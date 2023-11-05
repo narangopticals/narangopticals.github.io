@@ -104,6 +104,23 @@ export async function Func(section, page) {
                     return results.json();
                 });*/
             }
+        } else if (section == 4) {
+            type = "watch";
+            try {
+                var results = fetch('https://api.github.com/gists/a54c544dee909008b0cb98db283c9f64').then(results => {
+                    return results.json();
+                });
+                data = await results.then(data => {
+                    return data.files["prodWatchData.json"].content;
+                });
+                setTimeout(data = JSON.parse(data), 3000);
+                //framesData = (framesData.valueOf("data"))[0];
+            } catch (error) {
+                window.alert(error);
+                /*data = fetch('../json/prodRdyData.json').then(results => {
+                    return results.json();
+                });*/
+            }
         }
         str = Object.values((await data).valueOf("data"))[0];
     }
