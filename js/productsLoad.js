@@ -266,33 +266,42 @@ export async function imgSwitch(func, grid, setItem) {
     //console.log("line 162 : imgSwitch : lenIframes = " + lenIframes);
     var current = Number.parseInt(iframeHolder.value);
     //var setItem;
-    if (setItem.length == 0) {
+    if (lenIframes != 0) {
+        if (setItem.length == 0) {
 
-        if (func.trim() == "prev") {
-            if (current == 0) {
-                setItem = lenIframes - 1;
-            } else if (current > 0) {
-                setItem = current - 1;
-            }
-        } else {
-            if (current == lenIframes - 1) {
-                setItem = 0;
-            } else if (current < lenIframes - 1) {
-                setItem = current + 1;
-            }
-        }
-    }
-    //console.log("line 177 : imgSwitch : setItem = " + setItem + "\n current=" + current);
-    if (setItem > -1 && setItem < lenIframes) {
-        //console.log("line 179 : imgSwitch : setItem = " + setItem);
-        iframeHolder.value = setItem;
-        for (var i = 0; i < lenIframes; i++) {
-            frames[i].style.display = "none";
-            if (i == setItem) {
-                frames[i].style.display = "";
-                elem.querySelector('#imgCount').textContent = (i + 1) + '/' + lenIframes;
+            if (func.trim() == "prev") {
+                if (current == 0) {
+                    setItem = lenIframes - 1;
+                } else if (current > 0) {
+                    setItem = current - 1;
+                }
+            } else {
+                if (current == lenIframes - 1) {
+                    setItem = 0;
+                } else if (current < lenIframes - 1) {
+                    setItem = current + 1;
+                }
             }
         }
+        //console.log("line 177 : imgSwitch : setItem = " + setItem + "\n current=" + current);
+        if (setItem > -1 && setItem < lenIframes) {
+            //console.log("line 179 : imgSwitch : setItem = " + setItem);
+            iframeHolder.value = setItem;
+            for (var i = 0; i < lenIframes; i++) {
+                frames[i].style.display = "none";
+                if (i == setItem) {
+                    frames[i].style.display = "";
+                    console.log("line 293 " + frames[i].src);
+                    if (frames[i].src.length > 0) {
+                        elem.querySelector('#imgCount').textContent = (i + 1) + '/' + lenIframes;
+                    } else {
+                        elem.querySelector('#imgCount').textContent = 0 + '/' + 0;
+                    }
+                }
+            }
+        }
+    } else {
+        elem.querySelector('#imgCount').textContent = 0 + '/' + 0;
     }
 }
 export async function msgWhatsapp(e) {
@@ -512,7 +521,9 @@ export async function loadItems(startNum, endNum, pgNum) {
             var imgLen = imgs.length;
             for (var k = 0; k < imgLen; k++) {
                 //console.log("Line 331 : i= " + i + "\nj = " + j + "\nk = " + k);
-                iframeHolder.innerHTML += "<iframe style=\"height: 100%;width: 100%;\" id=\"iframe" + j + "img" + k + "\" src=\"" + imgs[k] + "\"></iframe>";
+                if (imgs[k].length > 0) {
+                    iframeHolder.innerHTML += "<iframe style=\"height: 100%;width: 100%;\" id=\"iframe" + j + "img" + k + "\" src=\"" + imgs[k] + "\"></iframe>";
+                }
             }
 
             //elem.querySelector('#imgCount').textContent = '1/' + imgLen;
