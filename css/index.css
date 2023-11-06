@@ -1,7 +1,9 @@
 #productIntroHolder {
-    width: 100%;
+    width: 35%;
     height: fit-content;
+    align-self: center;
 }
+
 
 .overlayImagesBlur {
     width: var(--elemW);
@@ -49,16 +51,27 @@
 
 /* Portrait orientation ||*/
 @media screen and (orientation: portrait) {
+    #indexBody {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #mainContent {
+        width: 100%;
+        height: fit-content;
+        align-self: center;
+    }
+
     #productIntroHolder {
         display: flex;
-        /*flex-direction: column;*/
+        flex-direction: column;
     }
 
     :root {
-        --elemW: 350px;
-        --elemH: 350px;
-        --framW: 350px;
-        --framH: 350px;
+        --elemW: 300px;
+        --elemH: 300px;
+        --framW: 300px;
+        --framH: 300px;
         --blurTop: -104%;
         --catTxtSize: 30px;
         --catTxtTop: -175%;
@@ -69,6 +82,16 @@
 
 /* landscape orientation ||*/
 @media screen and (orientation: landscape) {
+    #indexBody {
+        display: flex;
+        flex-direction: row;
+    }
+
+    #mainContent {
+        width: 65%;
+        height: fit-content;
+    }
+
     #productIntroHolder {
         /*display: grid;
         row-gap: 2%;

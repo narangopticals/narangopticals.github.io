@@ -522,7 +522,11 @@ export async function loadItems(startNum, endNum, pgNum) {
             for (var k = 0; k < imgLen; k++) {
                 //console.log("Line 331 : i= " + i + "\nj = " + j + "\nk = " + k);
                 if (imgs[k].length > 0) {
-                    iframeHolder.innerHTML += "<img style=\"height: 100%;width: 100%;\" id=\"iframe" + j + "img" + k + "\" src=\"https://drive.google.com/thumbnail?id=" + imgs[k] + "&sz=w450-h450" + "\"></img>";
+                    //v1.1.4b until
+                    //var link = "https://drive.google.com/file/d/" + imgs[k] + "/preview";
+                    //v1.1.4c [update]
+                    var link = "https://drive.google.com/thumbnail?id=" + imgs[k] + "&sz=w450-h450";
+                    iframeHolder.innerHTML += "<img style=\"height: 100%;width: 100%;\" id=\"iframe" + j + "img" + k + "\" src=\"" + link + "\"></img>";
                 }
             }
 
