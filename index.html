@@ -51,20 +51,20 @@
     <div id="productIntroHolder">
         <div id="frameProdIntroHolder" class="typeHolder">
             <a href="products.html?sect=0&page1" target="_blank">
-                <iframe class="displayImg"
-                    src="https://drive.google.com/file/d/1Mj5NSrD6q3Eo1auwYP4Fh4qztF9YbjDa/preview">
+                <img class="displayImg"
+                    src="https://drive.google.com/thumbnail?id=1Mj5NSrD6q3Eo1auwYP4Fh4qztF9YbjDa&sz=w500-h500">
 
-                </iframe>
+                </img>
                 <div class="overlayImagesBlur"></div><span class="catgryText">Frames</span>
             </a>
 
         </div>
         <div id="sunglassProdIntroHolder" class="typeHolder">
             <a href="products.html?sect=1&page1" target="_blank">
-                <iframe class="displayImg"
-                    src="https://drive.google.com/file/d/1sefCpBWqxtdeuuwOlvOEmdTF51ThfAEN/preview">
+                <img class="displayImg"
+                    src="https://drive.google.com/thumbnail?id=1sefCpBWqxtdeuuwOlvOEmdTF51ThfAEN&sz=w500-h500">
 
-                </iframe>
+                </img>
                 <div class="overlayImagesBlur">
                 </div><span class="catgryText">Sunglass</span>
             </a>
@@ -72,28 +72,28 @@
 
         <div id="lensProdIntroHolder" class="typeHolder">
             <a href="products.html?sect=2&page1" target="_blank">
-                <iframe class="displayImg"
-                    src="https://drive.google.com/file/d/17hJ-LZPDdWbz3ddXLtchN5MpZinQsZOu/preview">
-                </iframe>
+                <img class="displayImg"
+                    src="https://drive.google.com/thumbnail?id=17hJ-LZPDdWbz3ddXLtchN5MpZinQsZOu&sz=w500-h500">
+                </img>
                 <div class="overlayImagesBlur"></div><span class="catgryText">Lens</span>
             </a>
         </div>
         <div id="readyMadeProdIntroHolder" class="typeHolder">
             <a href="products.html?sect=3&page1" target="_blank">
-                <iframe class="displayImg"
-                    src="https://drive.google.com/file/d/16PrT9ecvMgyJDfB8rhDB3arMhL6LrYTT/preview">
+                <img class="displayImg"
+                    src="https://drive.google.com/thumbnail?id=16PrT9ecvMgyJDfB8rhDB3arMhL6LrYTT&sz=w500-h500">
 
-                </iframe>
+                </img>
                 <div class="overlayImagesBlur">
                 </div><span class="catgryText">Readymade</span>
             </a>
         </div>
         <div id="watchProdIntroHolder" class="typeHolder">
             <a href="products.html?sect=4&page1" target="_blank">
-                <iframe class="displayImg"
-                    src="https://drive.google.com/file/d/1nN0AJKcZYHcvAgMITuaHiM4F8wjnhh6b/preview">
+                <img class="displayImg"
+                    src="https://drive.google.com/thumbnail?id=1nN0AJKcZYHcvAgMITuaHiM4F8wjnhh6b&sz=w500-h500">
 
-                </iframe>
+                </img>
                 <div class="overlayImagesBlur">
                 </div><span class="catgryText">Watch</span>
             </a>
@@ -105,16 +105,17 @@
     <script type="module">
         import { navLoader, toggle, navScroll } from "./js/navload.js";
         import { browserDetect } from "./js/general.js";
+        import { animateFlexs } from "./js/indexAnimate.js";
         browserDetect();
         window.navLoader = navLoader;
         window.toggle = toggle;
         navLoader('menuBtns', 0, 'HomePage');
         window.onscroll = navScroll;
         grabUrlProd();
+        animateFlexs();
     </script>
 
     <script type="module">
-
     </script>
     <script type="text/javascript">
         //var filterVisible = false;

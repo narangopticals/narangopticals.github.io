@@ -4,8 +4,8 @@
 }
 
 .overlayImagesBlur {
-    width: var(--elemWH);
-    height: var(--elemWH);
+    width: var(--elemW);
+    aspect-ratio: 1;
     opacity: 0.40;
     background-color: rgb(209, 209, 209);
     display: block;
@@ -16,13 +16,16 @@
 
 .typeHolder {
     aspect-ratio: 1;
-    width: var(--elemWH);
-    height: var(--elemWH);
+    width: var(--elemW);
+    height: var(--elemH);
     overflow: clip;
     margin: 2%;
     align-self: center;
     text-align: center;
     border: 3px solid whitesmoke;
+    display: block;
+    position: relative;
+    left: 0%;
 }
 
 .catgryText {
@@ -31,6 +34,7 @@
     display: block;
     position: relative;
     top: var(--catTxtTop);
+    color: #ffffff;
 }
 
 .displayImg {
@@ -47,38 +51,43 @@
 @media screen and (orientation: portrait) {
     #productIntroHolder {
         display: flex;
-        flex-direction: column;
+        /*flex-direction: column;*/
     }
 
     :root {
-        --elemWH: 350px;
-        --framW: 365px;
-        --framH: 380px;
-        --blurTop: -113%;
+        --elemW: 350px;
+        --elemH: 350px;
+        --framW: 350px;
+        --framH: 350px;
+        --blurTop: -104%;
         --catTxtSize: 30px;
-        --catTxtTop: -170%;
-        --disImgTop: 0px;
-        --disImgLeft: 0px;
+        --catTxtTop: -175%;
+        --disImgTop: -7px;
+        --disImgLeft: -7px;
     }
 }
 
 /* landscape orientation ||*/
 @media screen and (orientation: landscape) {
     #productIntroHolder {
-        display: grid;
+        /*display: grid;
         row-gap: 2%;
         column-gap: 5%;
-        grid-template-columns: repeat(2, var(--elemWH));
+        grid-template-columns: repeat(2, var(--elemWH));*/
+        display: flex;
+        flex-direction: row;
+        overflow: clip;
     }
 
     :root {
-        --elemWH: 800px;
-        --framW: 893px;
-        --framH: 931px;
-        --blurTop: -120%;
-        --catTxtSize: 70px;
-        --catTxtTop: -180%;
-        --disImgTop: -69px;
-        --disImgLeft: -62px;
+        --elemW: 550px;
+        --elemH: 550px;
+        --framW: 550px;
+        --framH: 550px;
+        --blurTop: -104%;
+        --catTxtSize: 47px;
+        --catTxtTop: -158%;
+        --disImgTop: -10px;
+        --disImgLeft: -10px;
     }
 }

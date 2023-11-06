@@ -257,11 +257,11 @@ export async function imgSwitch(func, grid, setItem) {
     if (mainView == null) {
         mainView = window.document.getElementById('prodView');
     }
-    var elem = mainView.querySelector('div[class^=' + grid);
+    var elem = mainView.querySelector('div[class^=' + grid + ']');
     var iframeHolder = elem.querySelector('#iframeHolder');
     //console.log("line 158 : imgSwitch : iframeHolder = ");
     //console.log(iframeHolder);
-    var frames = iframeHolder.querySelectorAll('iframe');
+    var frames = iframeHolder.querySelectorAll('[id^=iframe]');
     var lenIframes = frames.length;
     //console.log("line 162 : imgSwitch : lenIframes = " + lenIframes);
     var current = Number.parseInt(iframeHolder.value);
@@ -522,7 +522,7 @@ export async function loadItems(startNum, endNum, pgNum) {
             for (var k = 0; k < imgLen; k++) {
                 //console.log("Line 331 : i= " + i + "\nj = " + j + "\nk = " + k);
                 if (imgs[k].length > 0) {
-                    iframeHolder.innerHTML += "<iframe style=\"height: 100%;width: 100%;\" id=\"iframe" + j + "img" + k + "\" src=\"" + imgs[k] + "\"></iframe>";
+                    iframeHolder.innerHTML += "<img style=\"height: 100%;width: 100%;\" id=\"iframe" + j + "img" + k + "\" src=\"https://drive.google.com/thumbnail?id=" + imgs[k] + "&sz=w450-h450" + "\"></img>";
                 }
             }
 
