@@ -617,7 +617,7 @@ a.dailer {
     align-content: center;
     align-items: center;
     padding: 0.5%;
-    aspect-ratio: 1.76;
+    aspect-ratio: 1;
     min-width: 40%;
     min-height: 50%;
 }
@@ -821,7 +821,7 @@ a.dailer {
     }
 
     #youtube-holder {
-        width: 75%;
+        width: 55%;
     }
 
     #staticbar {
