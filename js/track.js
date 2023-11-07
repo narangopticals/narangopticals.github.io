@@ -45,11 +45,12 @@ export async function initId() {
             return results.json();
         });
         data = await results.then(data => {
+            console.log(data);
             return data.files["trackOrder.json"].content;
         });
         setTimeout(data = JSON.parse(data), 3000);
     } catch (error) {
-        window.alert(error);
+        window.alert("error:loading . Network Issue Or Too many Requests");
     }
     if (data != null) {
         str = Object.values((await data).valueOf("trackdata"))[0];

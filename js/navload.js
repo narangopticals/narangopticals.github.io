@@ -47,17 +47,27 @@ function markCurrent(cls, ind, headTxt) {
 //document.getElementById('navbar');
 export async function navScroll() {
     //setInterval(function (e) {
-    var currentScrollPos = window.scrollY;
-    //console.log("currentScrollPos :" + currentScrollPos.toPrecision() + "prevScrollpos : " + prevScrollpos.toPrecision());
-    if (prevScrollpos > currentScrollPos) {// && hidden) {
-        if (currentScrollPos == 0) {
-            window.document.getElementById("navBanner").style.display = "";
+    var body = document.body,
+        html = document.documentElement;
+
+    var height = Math.max(body.scrollHeight, body.offsetHeight,
+        html.clientHeight, html.scrollHeight, html.offsetHeight);
+
+    //console.log(height);
+    if (window.screen.availHeight < (height * 0.9)) {
+        var currentScrollPos = window.scrollY;
+        //console.log("currentScrollPos :" + currentScrollPos.toPrecision() + "prevScrollpos : " + prevScrollpos.toPrecision());
+        if (prevScrollpos > currentScrollPos) {// && hidden) {
+            if (currentScrollPos == 0) {
+                window.document.getElementById("navBanner").style.display = "";
+            }
+            //hidden = false;
+        } else {
+            window.document.getElementById("navBanner").style.display = "none";
+            //hidden = true;
         }
-        //hidden = false;
-    } else {
-        window.document.getElementById("navBanner").style.display = "none";
-        //hidden = true;
+        prevScrollpos = currentScrollPos;
     }
-    prevScrollpos = currentScrollPos;
+
     //}, 1000);
 } 

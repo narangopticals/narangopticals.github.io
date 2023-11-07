@@ -4,6 +4,11 @@
     align-self: center;
 }
 
+#swipeHolder {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+}
 
 .overlayImagesBlur {
     width: var(--elemW);
@@ -41,6 +46,7 @@
 
 .displayImg {
     width: var(--framW);
+    aspect-ratio: 1;
     height: var(--framH);
     padding: 2%;
     display: block;
@@ -49,15 +55,37 @@
     left: var(--disImgLeft);
 }
 
+#indexBody {
+    display: flex;
+    flex-direction: column;
+}
+
 /* Portrait orientation ||*/
 @media screen and (orientation: portrait) {
     #indexBody {
-        display: flex;
         flex-direction: column;
     }
 
+    #swipeHolder {
+        min-width: calc(var(--widthPercent) + 10vw);
+    }
+
+    .contentSlider {
+        min-width: calc(var(--widthPercent) + 20vw);
+    }
+
+    .mySlides {
+        min-width: calc(var(--widthPercent) + 20vw);
+    }
+
+    #youtube-holder {
+        min-width: calc(var(--widthPercent) + 20vw);
+        aspect-ratio: 1;
+    }
+
     #mainContent {
-        width: 100%;
+        /*width: 100%;*/
+        min-width: calc(var(--widthPercent) + 10vw);
         height: fit-content;
         align-self: center;
     }
@@ -68,27 +96,45 @@
     }
 
     :root {
-        --elemW: 300px;
-        --elemH: 300px;
-        --framW: 300px;
-        --framH: 300px;
+        --elemW: var(--widthPercent);
+        --elemH: var(--widthPercent);
+        --framW: var(--widthPercent);
+        --framH: var(--widthPercent);
         --blurTop: -104%;
         --catTxtSize: 30px;
         --catTxtTop: -175%;
         --disImgTop: -7px;
         --disImgLeft: -7px;
+        --widthPercent: 70vw;
     }
 }
 
 /* landscape orientation ||*/
 @media screen and (orientation: landscape) {
     #indexBody {
-        display: flex;
         flex-direction: row;
     }
 
+    .contentSlider {
+        min-width: calc(var(--widthPercent) + 20vh);
+    }
+
+    .mySlides {
+        min-width: calc(var(--widthPercent) + 20vh);
+    }
+
+    #swipeHolder {
+        min-width: calc(var(--widthPercent) + 10vh);
+        margin: 0 2vw 0 0;
+    }
+
+    #youtube-holder {
+        min-width: calc(var(--widthPercent) + 20vh);
+        aspect-ratio: 1;
+    }
+
     #mainContent {
-        width: 65%;
+        min-width: calc(var(--widthPercent) + 10vh);
         height: fit-content;
     }
 
@@ -103,14 +149,15 @@
     }
 
     :root {
-        --elemW: 550px;
-        --elemH: 550px;
-        --framW: 550px;
-        --framH: 550px;
+        --elemW: var(--widthPercent);
+        --elemH: var(--widthPercent);
+        --framW: var(--widthPercent);
+        --framH: var(--widthPercent);
         --blurTop: -104%;
         --catTxtSize: 47px;
         --catTxtTop: -158%;
         --disImgTop: -10px;
         --disImgLeft: -10px;
+        --widthPercent: 50vh;
     }
 }

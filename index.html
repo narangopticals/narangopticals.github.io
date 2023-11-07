@@ -49,9 +49,10 @@
         }// ]]></script>
 
     <div id="indexBody">
-        <div id="swipeHolder" style="display: flex; flex-direction: row;">
+        <div id="swipeHolder">
             <img src="/imgs/swipe-left-64.png"
-                style="background-color:aliceblue; opacity: 0.8; width: 40px; height: 40px;align-self: center;"></img>
+                style="background-color:aliceblue; opacity: 0.8; width: 40px; height: 40px;align-self: center;"
+                onclick="swipeRight()"></img>
             <div id="productIntroHolder">
                 <div id="frameProdIntroHolder" class="typeHolder">
                     <a href="products.html?sect=0&page1" target="_blank">
@@ -106,7 +107,8 @@
 
             </div>
             <img src="/imgs/swipe-right-64.png"
-                style="background-color:aliceblue; opacity: 0.8;width: 40px; height: 40px;align-self: center;"></img>
+                style="  margin: 1.2%;background-color:aliceblue; opacity: 0.8;width: 40px; height: 40px;align-self: center;"
+                onclick="swipeLeft()"></img>
         </div>
         <div id="mainContent">
 
@@ -213,14 +215,19 @@
     <script type="module">
         import { navLoader, toggle, navScroll } from "./js/navload.js";
         import { browserDetect } from "./js/general.js";
-        import { animateFlexs } from "./js/indexAnimate.js";
+        import { animateFlexs, swipeLeft, swipeRight } from "./js/indexAnimate.js";
         browserDetect();
         window.navLoader = navLoader;
         window.toggle = toggle;
         navLoader('menuBtns', 0, 'HomePage');
         window.onscroll = navScroll;
         grabUrlProd();
-        animateFlexs();
+        //animateFlexs();
+        window.animt = animateFlexs;
+        animt();
+        window.swipeLeft = swipeLeft;
+        window.swipeRight = swipeRight;
+        console.log("avail =" + screen.availHeight + ", window =" + window.innerHeight)
     </script>
 
     <script type="module">

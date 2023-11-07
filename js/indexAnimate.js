@@ -106,6 +106,9 @@ export async function loadAnimation() {
 
 }
 var autoSwipe = true;
+var catFrames;
+var currentSlide = 0;
+var framesTotal = 0;
 export async function animateFlexs() {
     let slideIndex = 0;
     //showSlides(slideIndex);
@@ -181,8 +184,8 @@ export async function animateFlexs() {
 
     function swipeFeature() {
         var touchableElement = document.getElementById('productIntroHolder');
-        var catFrames = touchableElement.querySelectorAll('.typeHolder');
-        var framesTotal = catFrames.length;
+        catFrames = touchableElement.querySelectorAll('.typeHolder');
+        framesTotal = catFrames.length;
         var touchstartX, touchstartY, touchendX, touchendY;
         touchableElement.addEventListener('touchstart', function (event) {
             touchstartX = event.changedTouches[0].screenX;
@@ -198,23 +201,10 @@ export async function animateFlexs() {
 
 
         function handleGesture() {
-            var currentSlide = 0;
-            for (var i = 0; i < framesTotal; i++) {
-                if (catFrames[i].style.display == 'block') {
-                    currentSlide = i;
-                    break;
-                }
-            }
             console.log('currentSlide:' + currentSlide);
             if (touchendX < touchstartX) {
                 console.log('Swiped Left');
-                if (currentSlide >= 0 && currentSlide < framesTotal - 1) {
-                    catFrames[currentSlide].style.display = 'none';
-                    catFrames[currentSlide + 1].style.display = 'block';
-                } else if (currentSlide == (framesTotal - 1)) {
-                    catFrames[currentSlide].style.display = 'none';
-                    catFrames[0].style.display = 'block';
-                }
+                swipeLeft();
                 //autoSwipe = true;
                 //setTimeout(firstRun, 5000);
             }
@@ -222,13 +212,7 @@ export async function animateFlexs() {
             if (touchendX > touchstartX) {
                 console.log('Swiped Right');
 
-                if (currentSlide > 0 && currentSlide < framesTotal) {
-                    catFrames[currentSlide].style.display = 'none';
-                    catFrames[currentSlide - 1].style.display = 'block';
-                } else if (currentSlide == 0) {
-                    catFrames[currentSlide].style.display = 'none';
-                    catFrames[framesTotal - 1].style.display = 'block';
-                }
+                swipeRight();
                 //autoSwipe = true;
                 //setTimeout(firstRun, 5000);
             }
@@ -247,4 +231,37 @@ export async function animateFlexs() {
         }
     }
 
+
+}
+export function swipeLeft() {
+    autoSwipe = false;
+    for (var i = 0; i < framesTotal; i++) {
+        if (catFrames[i].style.display == 'block') {
+            currentSlide = i;
+            break;
+        }
+    }
+    if (currentSlide >= 0 && currentSlide < framesTotal - 1) {
+        catFrames[currentSlide].style.display = 'none';
+        catFrames[currentSlide + 1].style.display = 'block';
+    } else if (currentSlide == (framesTotal - 1)) {
+        catFrames[currentSlide].style.display = 'none';
+        catFrames[0].style.display = 'block';
+    }
+}
+export function swipeRight() {
+    autoSwipe = false;
+    for (var i = 0; i < framesTotal; i++) {
+        if (catFrames[i].style.display == 'block') {
+            currentSlide = i;
+            break;
+        }
+    }
+    if (currentSlide > 0 && currentSlide < framesTotal) {
+        catFrames[currentSlide].style.display = 'none';
+        catFrames[currentSlide - 1].style.display = 'block';
+    } else if (currentSlide == 0) {
+        catFrames[currentSlide].style.display = 'none';
+        catFrames[framesTotal - 1].style.display = 'block';
+    }
 }

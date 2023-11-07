@@ -257,6 +257,8 @@
                 } else if (fetchFile == "readymade") {
                     //console.log("readymadeLoading");
                     readymadeDataFetch(itemnum);
+                } else if (fetchFile == "watch") {
+                    watchDataFetch(itemnum);
                 }
             }
         }
@@ -373,6 +375,34 @@
                 }
             }
         }
+        async function watchDataFetch(itemnum) {
+            var data;
+            try {
+                var results = fetch('https://api.github.com/gists/a54c544dee909008b0cb98db283c9f64').then(results => {
+                    return results.json();
+                });
+                data = await results.then(data => {
+                    return data.files["prodWatchData.json"].content;
+                });
+                setTimeout(data = JSON.parse(data), 3000);
+            } catch (error) {
+                window.alert(error);
+                /*data = fetch('../json/prodLnsData.json').then(results => {
+                    return results.json();
+                });*/
+            }
+            if (data != undefined || data.length > 0) {
+                str = Object.values((await data).valueOf("data"))[0];
+                if (str.length > 0) {
+                    for (var j = 0; j < str.length; j++) {
+                        var item = str[j];
+                        if (item.itemnum == itemnum) {
+                            loadItem(item);
+                        }
+                    }
+                }
+            }
+        }
         async function loadItem(item) {
             var prodMain = document.getElementById("prodView");
             var iframeHolder = prodMain.querySelector('#iframeHolder');
@@ -384,7 +414,7 @@
                 iframeHolder.style.display = "";
                 iframeHolder.innerHTML = "";
                 for (var i = 0; i < ilen; i++) {
-                    iframeHolder.innerHTML += "<iframe style=\"height: 100%;width: 100%;\" id=\"iframe" + i + "\" src=\"" + imgs[i] + "\"></iframe>";
+                    iframeHolder.innerHTML += "<iframe style=\"height: 100%;width: 100%;\" id=\"iframe" + i + "\" src=\"https://drive.google.com/file/d/" + imgs[i] + "/preview\"></iframe>";
                 }
                 imgSwitch('', 0);
                 /*prodMain.querySelector('.gridImg').style.display = "";

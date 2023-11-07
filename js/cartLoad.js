@@ -208,18 +208,7 @@ async function addItemViews(startNum, endNum) {
 
                 }
 
-                var prevBtn = tmp.querySelector("button[id^=grid" + i + "Prev]");
-                prevBtn.value = "grid" + i;
-                prevBtn.addEventListener("click",
-                    function (e) {
-                        imgSwitch('prev', e.currentTarget.value, '');
-                    });
-                var nextBtn = tmp.querySelector("button[id^=grid" + i + "Next]");
-                nextBtn.value = "grid" + i;
-                nextBtn.addEventListener("click",
-                    function (e) {
-                        imgSwitch('next', e.currentTarget.value, '');
-                    });
+
             }
             var val = [encodeURIComponent("I want to know More About Your Products") + text +
                 "&type=phone_number&app_absent=0&send=1" + encodeURIComponent("\n\nTotal : Rs.") + cartCost];
@@ -227,7 +216,23 @@ async function addItemViews(startNum, endNum) {
             msgWhatsapp(val);
         });
 
-
+    for (var i = 0; i < prodViews.length; i++) {
+        var tmp = prodViews[i];
+        var prevBtn = tmp.querySelector("button[id^=grid" + i + "Prev]");
+        console.log(prevBtn);
+        prevBtn.value = "grid" + i;
+        prevBtn.addEventListener("click",
+            function (e) {
+                imgSwitch('prev', e.currentTarget.value, '');
+            });
+        var nextBtn = tmp.querySelector("button[id^=grid" + i + "Next]");
+        nextBtn.value = "grid" + i;
+        console.log(nextBtn);
+        nextBtn.addEventListener("click",
+            function (e) {
+                imgSwitch('next', e.currentTarget.value, '');
+            });
+    }
 }
 export async function imgSwitch(func, grid, setItem) {
     //console.log("line 143 : imgSwitch : func = " + func + "\n grid = " + grid);
@@ -235,7 +240,7 @@ export async function imgSwitch(func, grid, setItem) {
     var iframeHolder = elem.querySelector('#iframeHolder');
     //console.log("line 158 : imgSwitch : iframeHolder = ");
     //console.log(iframeHolder);
-    var frames = iframeHolder.querySelectorAll('iframe');
+    var frames = iframeHolder.querySelectorAll('img');
     var lenIframes = frames.length;
     //console.log("line 162 : imgSwitch : lenIframes = " + lenIframes);
     var current = Number.parseInt(iframeHolder.value);
@@ -519,7 +524,13 @@ export async function loadItems(startNum, endNum, pgNum) {
                 if (ilen > 0) {
                     iframeHolder.value = 0;
                     for (var k = 0; k < ilen; k++) {
-                        iframeHolder.innerHTML += "<iframe style=\"height: 100%;width: 100%;\" id=\"iframe" + j + "img" + k + "\" src=\"" + imgs[k] + "\"></iframe>";
+                        if (imgs[k].length > 0) {
+                            //v1.1.4b until
+                            //var link = "https://drive.google.com/file/d/" + imgs[k] + "/preview";
+                            //v1.1.4c [update]
+                            var link = "https://drive.google.com/thumbnail?id=" + imgs[k] + "&sz=w450-h450";
+                            iframeHolder.innerHTML += "<img style=\"height: 100%;width: 100%;\" id=\"iframe" + j + "img" + k + "\" src=\"" + link + "\"></img>";
+                        }
                     }
                 }
                 imgSwitch('', 'grid' + j, 0);
