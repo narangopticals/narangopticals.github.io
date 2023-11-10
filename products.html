@@ -126,6 +126,10 @@
         //window.text = text;
         //window.Func(1);
         grabUrlProd();
+        window.matchMedia("(orientation:portrait)").addEventListener("change", function (e) {
+            //console.log('Orientation change' + e);
+            location.reload();
+        });
 
     </script>
     <script type="module">

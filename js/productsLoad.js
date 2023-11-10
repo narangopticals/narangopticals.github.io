@@ -9,7 +9,8 @@ var minCost = null;
 var maxCost = null;
 var sectionCurrent = 0;
 var filtered = false;
-
+var viewOrientation = '';
+var imgWidth = '100%';
 export function setFiltered(boolVal) {
     //console.log('setFiltered(boolVal) = ' + boolVal);
     filtered = boolVal;
@@ -30,10 +31,26 @@ export function setLow(cost) {
 export async function Func(section, page) {
     sectionCurrent = section;
     var data = "";
-    var prodParent = fetch("../class/prodview.html").then((res) => {
-        var val = res.text();
-        return val;
-    });
+    if (viewOrientation == undefined) {
+        viewOrientation = window.screen.orientation.type;
+    } if (viewOrientation.length <= 0) {
+        viewOrientation = window.screen.orientation.type;
+    }
+    var prodParent;
+    if (viewOrientation.indexOf('portrait') >= 0) {
+
+        prodParent = fetch("../class/prodviewP.html").then((res) => {
+            var val = res.text();
+            return val;
+        });
+        imgWidth = '100vw';
+    } else if (viewOrientation.indexOf('landscape') >= 0) {
+        prodParent = fetch("../class/prodviewL.html").then((res) => {
+            var val = res.text();
+            return val;
+        });
+        imgWidth = '100%';
+    }
     async function initMain(section) {
         if (section == 0) {
             type = "frames";
@@ -295,14 +312,14 @@ export async function Func(section, page) {
         function handleGesture() {
             //console.log('currentSlide:' + currentSlide);
             if (touchendX < touchstartX) {
-                console.log('Swiped Left');
+                //console.log('Swiped Left');
                 imgSwitch('prev', prevBtn.value, '');
                 //autoSwipe = true;
                 //setTimeout(firstRun, 5000);
             }
 
             if (touchendX > touchstartX) {
-                console.log('Swiped Right');
+                //console.log('Swiped Right');
 
                 imgSwitch('next', nextBtn.value, '');
                 //autoSwipe = true;
@@ -310,15 +327,15 @@ export async function Func(section, page) {
             }
 
             if (touchendY < touchstartY) {
-                console.log('Swiped Up');
+                //console.log('Swiped Up');
             }
 
             if (touchendY > touchstartY) {
-                console.log('Swiped Down');
+                //console.log('Swiped Down');
             }
 
             if (touchendY === touchstartY) {
-                console.log('Tap');
+                //console.log('Tap');
             }
         }
     }
@@ -364,7 +381,7 @@ export async function imgSwitch(func, grid, setItem) {
                 frames[i].style.display = "none";
                 if (i == setItem) {
                     frames[i].style.display = "";
-                    console.log("line 293 " + frames[i].src);
+                    //console.log("line 293 " + frames[i].src);
                     if (frames[i].src.length > 0) {
                         elem.querySelector('#imgCount').textContent = (i + 1) + '/' + lenIframes;
                     } else {
@@ -599,7 +616,7 @@ export async function loadItems(startNum, endNum, pgNum) {
                     //var link = "https://drive.google.com/file/d/" + imgs[k] + "/preview";
                     //v1.1.4c [update]
                     var link = "https://drive.google.com/thumbnail?id=" + imgs[k] + "&sz=w450-h450";
-                    iframeHolder.innerHTML += "<img style=\"width: 100vw;\" id=\"iframe" + j + "img" + k + "\" src=\"" + link + "\"></img>";
+                    iframeHolder.innerHTML += "<img style=\"width: " + imgWidth + ";\" id=\"iframe" + j + "img" + k + "\" src=\"" + link + "\"></img>";
                 }
             }
 
