@@ -247,6 +247,79 @@ export async function Func(section, page) {
                 function (e) {
                     imgSwitch('next', e.currentTarget.value, '');
                 });
+            var imgParent = elem.querySelector('.grid' + i + 'Img');
+            swipeFeature(imgParent);
+        }
+    }
+
+    function swipeFeature(imgParent) {
+
+        var prevBtn = imgParent.parentNode.querySelector("button[id^=grid" + i + "Prev]");
+        var nextBtn = imgParent.parentNode.querySelector("button[id^=grid" + i + "Next]");
+        //framesTotal = catFrames.length;
+        var touchstartX, touchstartY, touchendX, touchendY;
+        imgParent.addEventListener('touchstart', function (event) {
+            touchstartX = event.changedTouches[0].screenX;
+            touchstartY = event.changedTouches[0].screenY;
+        }, false);
+
+        imgParent.addEventListener('touchend', function (event) {
+            //console.log("event.target:");
+            //console.log(event.target);
+            //console.log('imgParent:');
+            var imgParent = event.target.parentNode.parentNode.parentNode;
+            //console.log(imgParent);
+            //console.log();
+            var prevBtn = imgParent.querySelector('#' + imgParent.className.replaceAll('Img', 'Prev'));
+            var nextBtn = imgParent.querySelector('#' + imgParent.className.replaceAll('Img', 'Next'));
+            touchendX = event.changedTouches[0].screenX;
+            touchendY = event.changedTouches[0].screenY;
+            //autoSwipe = false;
+            /*setTimeout(handleGesture();, 500);*/
+            if (touchendX < touchstartX) {
+                //console.log('Swiped Left');
+                imgSwitch('next', nextBtn.value, '');
+                //autoSwipe = true;
+                //setTimeout(firstRun, 5000);
+            }
+
+            if (touchendX > touchstartX) {
+                //console.log('Swiped Right');
+                imgSwitch('prev', prevBtn.value, '');
+                //autoSwipe = true;
+                //setTimeout(firstRun, 5000);
+            }
+        }, false);
+
+
+        function handleGesture() {
+            //console.log('currentSlide:' + currentSlide);
+            if (touchendX < touchstartX) {
+                console.log('Swiped Left');
+                imgSwitch('prev', prevBtn.value, '');
+                //autoSwipe = true;
+                //setTimeout(firstRun, 5000);
+            }
+
+            if (touchendX > touchstartX) {
+                console.log('Swiped Right');
+
+                imgSwitch('next', nextBtn.value, '');
+                //autoSwipe = true;
+                //setTimeout(firstRun, 5000);
+            }
+
+            if (touchendY < touchstartY) {
+                console.log('Swiped Up');
+            }
+
+            if (touchendY > touchstartY) {
+                console.log('Swiped Down');
+            }
+
+            if (touchendY === touchstartY) {
+                console.log('Tap');
+            }
         }
     }
 
@@ -526,7 +599,7 @@ export async function loadItems(startNum, endNum, pgNum) {
                     //var link = "https://drive.google.com/file/d/" + imgs[k] + "/preview";
                     //v1.1.4c [update]
                     var link = "https://drive.google.com/thumbnail?id=" + imgs[k] + "&sz=w450-h450";
-                    iframeHolder.innerHTML += "<img style=\"height: 100%;width: 100%;\" id=\"iframe" + j + "img" + k + "\" src=\"" + link + "\"></img>";
+                    iframeHolder.innerHTML += "<img style=\"width: 100vw;\" id=\"iframe" + j + "img" + k + "\" src=\"" + link + "\"></img>";
                 }
             }
 
@@ -582,7 +655,6 @@ export async function loadItems(startNum, endNum, pgNum) {
         }
 
     }
-
 
 
     var btnParent = window.document.getElementById("btnNavProdView").getElementsByTagName('button');

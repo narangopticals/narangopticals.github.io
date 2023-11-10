@@ -3,6 +3,7 @@ body {
     /*background color grey*/
     font-family: Arial, Helvetica, sans-serif;
     /*font style change*/
+    margin: 0;
 }
 
 button {
@@ -758,18 +759,17 @@ a.dailer {
     }
 
     #prodParent {
-        width: 80%;
+        width: 100vw;
     }
 
     #mainProdView {
         display: flex;
         flex-direction: column;
-        width: 90%;
+        width: 100vw;
         align-content: center;
         text-align: center;
         font-size: large;
-        padding-left: 10%;
-        padding-right: 5%;
+        padding: 0;
     }
 
     .dropbtn,

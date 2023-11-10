@@ -1,6 +1,6 @@
 <div id="prodParent" class="grid" style="
 text-align: center;
-padding:3%;
+padding:0%;
 display: flex;
 flex-direction: column;
 height: fit-content;
@@ -9,7 +9,7 @@ border-radius: 3%;
 margin-bottom: 10%;
 overflow: clip;">
     <div class="gridImg" style="  aspect-ratio: 1 / 1;
-        width: 100%;
+        width: 100vw;
         /*visibility: visible;*/
         display: flex;
         flex-direction: row;
@@ -20,21 +20,31 @@ overflow: clip;">
             display: flex;
             flex-direction: row;*/">
         <button id=gridPrev style="min-height: 20%;
-            margin: 40% 0 40% 0;">&#x25C0;</button>
+            margin: 40% 0 40% 0;
+            display: block;
+            position: relative;
+  z-index: 10;
+            ">&#x25C0;</button>
         <div class="imgCtrl" style="width: 100%;
-            height: 100%;">
-            <img class="overlay" style="  width: 80px;
-                aspect-ratio: 1;
-                position: relative;
-                background: black;
-                /*transform: translateX(146%) translateY(25%);*/
-                border-radius: 50%;
-                top: -3%;
-                left: 40%;" src="../imgs/logo.jpg"></img>
+            height: 100%;width: 100vw;
+  height: 100%;
+  display: block;
+  position: relative;
+  left: -5%;
+  right: 0%;
+">
+            <img class="overlay" style="  width: 68px;
+            aspect-ratio: 1;
+            position: relative;
+            background: black;
+            border-radius: 50%;
+            top: 0%;
+            left: 40%;
+            /*transform: translateX(146%) translateY(25%);*/
+                " src="../imgs/logo.jpg"></img>
             <div id="iframeHolder" style="  text-align: center;
-                /*aspect-ratio: 1;*/
-                height: 100%;
-                margin-top: -90px;">
+                  height: 100%;
+  margin-top: -70px;">
 
             </div>
             <span id="imgCount" style="  opacity: 0.5;
@@ -51,7 +61,11 @@ overflow: clip;">
                 font-weight: bold;"></span>
         </div>
         <button id="gridNext" style="min-height: 20%;
-            margin: 40% 0 40% 0;">&#x25B6;</button>
+            margin: 40% 0 40% 0;
+            display: block;
+            position: relative;  left: -11%;
+  z-index: 10;
+            ">&#x25B6;</button>
     </div>
     <h1 class="gridTitle" style="text-align: center;
         margin: 0;

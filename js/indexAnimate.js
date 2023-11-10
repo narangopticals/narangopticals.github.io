@@ -145,6 +145,7 @@ export async function animateFlexs() {
             slides[slideIndex - 1].style.left = pr + '%';
             slides[slideIndex - 1].style.visibility = 'visible';
             console.log("line 127:pr= " + pr + ", slideIndex=" + slideIndex);*/
+            currentSlide = slideIndex - 1;
             slides[slideIndex - 1].style.display = '';
             //slides[slideIndex - 1].style.top = '10%';
             setTimeout(firstRun, 5000); // Change image every 2 seconds
