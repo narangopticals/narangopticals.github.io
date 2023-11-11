@@ -53,6 +53,7 @@ export async function Func(section, page) {
     }
     async function initMain(section) {
         if (section == 0) {
+            document.title = "loading, Frames | Narang Opticals, Kashipur";
             type = "frames";
             try {
                 var results = fetch('https://api.github.com/gists/ea3f7fa9a39a62872983e2b813441d53').then(results => {
@@ -71,6 +72,7 @@ export async function Func(section, page) {
 
             //console.log(data);
         } else if (section == 1) {
+            document.title = "loading, Sunglasses | Narang Opticals, Kashipur";
             type = "sunglass";
             try {
                 var results = fetch('https://api.github.com/gists/8fef5a38ff904a0c42df470064dda3f9').then(results => {
@@ -88,6 +90,7 @@ export async function Func(section, page) {
                 });*/
             }
         } else if (section == 2) {
+            document.title = "loading, Lenses | Narang Opticals, Kashipur";
             type = "lens";
             try {
                 var results = fetch('https://api.github.com/gists/2a9920dd79543db4549056de07cc83e7').then(results => {
@@ -105,6 +108,7 @@ export async function Func(section, page) {
                 });*/
             }
         } else if (section == 3) {
+            document.title = "loading, Readymade | Narang Opticals, Kashipur";
             type = "readymade";
             try {
                 var results = fetch('https://api.github.com/gists/2999fc336989306ae76d3e11611c44fe').then(results => {
@@ -122,6 +126,7 @@ export async function Func(section, page) {
                 });*/
             }
         } else if (section == 4) {
+            document.title = "loading, Watches | Narang Opticals, Kashipur";
             type = "watch";
             try {
                 var results = fetch('https://api.github.com/gists/a54c544dee909008b0cb98db283c9f64').then(results => {
@@ -293,18 +298,26 @@ export async function Func(section, page) {
             touchendY = event.changedTouches[0].screenY;
             //autoSwipe = false;
             /*setTimeout(handleGesture();, 500);*/
-            if (touchendX < touchstartX) {
+            var changeY = Math.abs(touchendY - touchstartY);
+            var changeX = Math.abs(touchendX - touchstartX);
+            if (touchendX < touchstartX && changeX > changeY) {
                 //console.log('Swiped Left');
                 imgSwitch('next', nextBtn.value, '');
                 //autoSwipe = true;
                 //setTimeout(firstRun, 5000);
             }
 
-            if (touchendX > touchstartX) {
+            if (touchendX > touchstartX && changeX > changeY) {
                 //console.log('Swiped Right');
                 imgSwitch('prev', prevBtn.value, '');
                 //autoSwipe = true;
                 //setTimeout(firstRun, 5000);
+            }
+            if (touchendY === touchstartY && touchendX === touchstartX) {
+                //console.log('Tap');
+                var shareBtn = imgParent.parentNode.querySelector('.shareBtn');
+                var url = shareBtn.value;
+                window.open(url, "_blank");
             }
         }, false);
 
@@ -683,5 +696,6 @@ export async function loadItems(startNum, endNum, pgNum) {
             btnParent[k].style.background = 'linear-gradient(#212121, #252525,#292929, #252525, #212121)';
         }
     }
+    document.title = document.title.replaceAll('loading, ', '');
     setTimeout(checkOutLater(null, null), 10000);
 }

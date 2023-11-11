@@ -4,6 +4,8 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     /*font style change*/
     margin: 0;
+    background-image: url('../imgs/bg/tt_Spectacles_200px.png');
+    width: fit-content;
 }
 
 button {
@@ -135,9 +137,13 @@ h1,
 nav {
     /*background: linear-gradient(rgb(42, 42, 45),rgb(23, 23, 23),rgb(16, 16, 16), rgb(23, 23, 23), rgb(45, 42, 42));*/
     /*background: linear-gradient(rgb(42, 42, 45),rgb(23, 23, 23),rgb(16, 15, 15), rgb(23, 23, 14), rgb(23, 14, 14), rgb(34, 9, 9));*/
-    background: linear-gradient(#2e0000, #290000, #290000, #290000, #2e0000, #330000, #471a1a, #5c3333);
+    /*background: linear-gradient(#2e0000, #290000, #290000, #290000, #2e0000, #330000, #471a1a, #5c3333);*/
+    background: linear-gradient(rgba(71, 26, 26, 0.9), rgba(41, 0, 0, 0.9),
+            rgba(56, 21, 21, 0.9), rgba(74, 28, 28, 0.9),
+            rgba(93, 34, 34, 0.95), rgba(112, 41, 41, 0.95));
     text-align: left;
     position: sticky;
+    /*opacity: 0.8;*/
     top: 0;
     z-index: 1000000;
     width: 100%;
