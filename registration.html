@@ -29,6 +29,10 @@
         navLoader('menuBtns', 7, 'Premium Membership');
         window.onscroll = navScroll;
         document.title = "Premium Membership | Narang Opticals, Kashipur";
+        window.matchMedia("(orientation:portrait)").addEventListener("change", function (e) {
+            //console.log('Orientation change' + e);
+            location.reload();
+        });
     </script>
 </body>
 

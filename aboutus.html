@@ -116,6 +116,10 @@
         window.toggle = toggle;
         navLoader('menuBtns', 3, 'About Us');
         window.onscroll = navScroll;
+        window.matchMedia("(orientation:portrait)").addEventListener("change", function (e) {
+            //console.log('Orientation change' + e);
+            location.reload();
+        });
     </script>
     <script>
         let slideIndex = 0;

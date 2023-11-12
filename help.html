@@ -61,5 +61,9 @@
         window.toggle = toggle;
         navLoader('sns-buttons', 6, 'Guide Tour');
         window.onscroll = navScroll;
+        window.matchMedia("(orientation:portrait)").addEventListener("change", function (e) {
+            //console.log('Orientation change' + e);
+            location.reload();
+        });
     </script>
 </body>

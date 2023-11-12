@@ -28,6 +28,10 @@
         navLoader('menuBtns', 4, 'Contact Us');
         window.onscroll = navScroll;
         document.title = "Contact Us | Narang Opticals, Kashipur";
+        window.matchMedia("(orientation:portrait)").addEventListener("change", function (e) {
+            //console.log('Orientation change' + e);
+            location.reload();
+        });
     </script>
 </body>
 

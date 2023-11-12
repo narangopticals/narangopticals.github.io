@@ -321,36 +321,6 @@ export async function Func(section, page) {
             }
         }, false);
 
-
-        function handleGesture() {
-            //console.log('currentSlide:' + currentSlide);
-            if (touchendX < touchstartX) {
-                //console.log('Swiped Left');
-                imgSwitch('prev', prevBtn.value, '');
-                //autoSwipe = true;
-                //setTimeout(firstRun, 5000);
-            }
-
-            if (touchendX > touchstartX) {
-                //console.log('Swiped Right');
-
-                imgSwitch('next', nextBtn.value, '');
-                //autoSwipe = true;
-                //setTimeout(firstRun, 5000);
-            }
-
-            if (touchendY < touchstartY) {
-                //console.log('Swiped Up');
-            }
-
-            if (touchendY > touchstartY) {
-                //console.log('Swiped Down');
-            }
-
-            if (touchendY === touchstartY) {
-                //console.log('Tap');
-            }
-        }
     }
 
 }

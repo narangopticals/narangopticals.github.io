@@ -8,12 +8,30 @@ var selectedItems = [];
 var cartItem = [];
 var cartCost = 0;
 var type = "";
+var viewOrientation = '';
+var imgWidth = '100%';
 export async function Func() {
 
-    prodParent = fetch("../class/prodview.html").then((res) => {
-        var val = res.text();
-        return val;
-    });
+    if (viewOrientation == undefined) {
+        viewOrientation = window.screen.orientation.type;
+    } if (viewOrientation.length <= 0) {
+        viewOrientation = window.screen.orientation.type;
+    }
+    //var prodParent;
+    if (viewOrientation.indexOf('portrait') >= 0) {
+
+        prodParent = fetch("../class/prodviewP.html").then((res) => {
+            var val = res.text();
+            return val;
+        });
+        imgWidth = '100vw';
+    } else if (viewOrientation.indexOf('landscape') >= 0) {
+        prodParent = fetch("../class/prodviewL.html").then((res) => {
+            var val = res.text();
+            return val;
+        });
+        imgWidth = '100%';
+    }
     async function initMain() {
         var framesData = "";
         try {
@@ -27,9 +45,9 @@ export async function Func() {
             //framesData = (framesData.valueOf("data"))[0];
         } catch (error) {
             window.alert(error);
-            framesData = fetch('../json/prodFmData.json').then(results => {
+            /*framesData = fetch('../json/prodFmData.json').then(results => {
                 return results.json();
-            });
+            });*/
         }
         //console.log(data);
         var sunglassData = "";
@@ -44,9 +62,9 @@ export async function Func() {
             //framesData = (framesData.valueOf("data"))[0];
         } catch (error) {
             window.alert(error);
-            sunglassData = fetch('../json/prodSgData.json').then(results => {
+            /*sunglassData = fetch('../json/prodSgData.json').then(results => {
                 return results.json();
-            });
+            });*/
         }
 
         var lensData = "";
@@ -61,9 +79,9 @@ export async function Func() {
             //framesData = (framesData.valueOf("data"))[0];
         } catch (error) {
             window.alert(error);
-            lensData = fetch('../json/prodLnsData.json').then(results => {
+            /*lensData = fetch('../json/prodLnsData.json').then(results => {
                 return results.json();
-            });
+            });*/
         }
         var rdyData = "";
         try {
@@ -77,9 +95,9 @@ export async function Func() {
             //framesData = (framesData.valueOf("data"))[0];
         } catch (error) {
             window.alert(error);
-            rdyData = fetch('../json/prodLnsData.json').then(results => {
+            /*rdyData = fetch('../json/prodLnsData.json').then(results => {
                 return results.json();
-            });
+            });*/
         }
         var watchData = "";
         try {
@@ -93,9 +111,9 @@ export async function Func() {
             //framesData = (framesData.valueOf("data"))[0];
         } catch (error) {
             window.alert(error);
-            watchData = fetch('../json/prodLnsData.json').then(results => {
+            /*watchData = fetch('../json/prodLnsData.json').then(results => {
                 return results.json();
-            });
+            });*/
         }
         //console.log("framesData");
         //console.log(framesData['data']);
@@ -232,6 +250,58 @@ async function addItemViews(startNum, endNum) {
             function (e) {
                 imgSwitch('next', e.currentTarget.value, '');
             });
+        var imgParent = tmp.querySelector('.grid' + i + 'Img');
+        swipeFeature(imgParent);
+    }
+
+
+    function swipeFeature(imgParent) {
+
+        var prevBtn = imgParent.parentNode.querySelector("button[id^=grid" + i + "Prev]");
+        var nextBtn = imgParent.parentNode.querySelector("button[id^=grid" + i + "Next]");
+        //framesTotal = catFrames.length;
+        var touchstartX, touchstartY, touchendX, touchendY;
+        imgParent.addEventListener('touchstart', function (event) {
+            touchstartX = event.changedTouches[0].screenX;
+            touchstartY = event.changedTouches[0].screenY;
+        }, false);
+
+        imgParent.addEventListener('touchend', function (event) {
+            //console.log("event.target:");
+            //console.log(event.target);
+            //console.log('imgParent:');
+            var imgParent = event.target.parentNode.parentNode.parentNode;
+            //console.log(imgParent);
+            //console.log();
+            var prevBtn = imgParent.querySelector('#' + imgParent.className.replaceAll('Img', 'Prev'));
+            var nextBtn = imgParent.querySelector('#' + imgParent.className.replaceAll('Img', 'Next'));
+            touchendX = event.changedTouches[0].screenX;
+            touchendY = event.changedTouches[0].screenY;
+            //autoSwipe = false;
+            /*setTimeout(handleGesture();, 500);*/
+            var changeY = Math.abs(touchendY - touchstartY);
+            var changeX = Math.abs(touchendX - touchstartX);
+            if (touchendX < touchstartX && changeX > changeY) {
+                //console.log('Swiped Left');
+                imgSwitch('next', nextBtn.value, '');
+                //autoSwipe = true;
+                //setTimeout(firstRun, 5000);
+            }
+
+            if (touchendX > touchstartX && changeX > changeY) {
+                //console.log('Swiped Right');
+                imgSwitch('prev', prevBtn.value, '');
+                //autoSwipe = true;
+                //setTimeout(firstRun, 5000);
+            }
+            if (touchendY === touchstartY && touchendX === touchstartX) {
+                //console.log('Tap');
+                var shareBtn = imgParent.parentNode.querySelector('.shareBtn');
+                var url = shareBtn.value;
+                window.open(url, "_blank");
+            }
+        }, false);
+
     }
 }
 export async function imgSwitch(func, grid, setItem) {

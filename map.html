@@ -27,6 +27,10 @@
         navLoader('menuBtns', 5, 'Google Maps');
         window.onscroll = navScroll;
         document.title = "Maps Google | Narang Opticals, Kashipur";
+        window.matchMedia("(orientation:portrait)").addEventListener("change", function (e) {
+            //console.log('Orientation change' + e);
+            location.reload();
+        });
     </script>
 </body>
 

@@ -235,6 +235,12 @@
     </script>
     <script>
         grabUrlProd();
+
+        window.matchMedia("(orientation:portrait)").addEventListener("change", function (e) {
+            //console.log('Orientation change' + e);
+            location.reload();
+        });
+
         function grabUrlProd() {
             const searchParams = new URLSearchParams(window.location.search);
             if (searchParams.has('type') && searchParams.has('itemnum')) {

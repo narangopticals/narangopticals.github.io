@@ -228,11 +228,13 @@
         window.swipeLeft = swipeLeft;
         window.swipeRight = swipeRight;
         document.title = "HomePage | Narang Opticals, Kashipur";
+        window.matchMedia("(orientation:portrait)").addEventListener("change", function (e) {
+            //console.log('Orientation change' + e);
+            location.reload();
+        });
         //console.log("avail =" + screen.availHeight + ", window =" + window.innerHeight)
     </script>
 
-    <script type="module">
-    </script>
     <script type="text/javascript">
         //var filterVisible = false;
         var page;
