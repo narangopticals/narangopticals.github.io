@@ -599,7 +599,7 @@ export async function loadItems(startNum, endNum, pgNum) {
                             //var link = "https://drive.google.com/file/d/" + imgs[k] + "/preview";
                             //v1.1.4c [update]
                             var link = "https://drive.google.com/thumbnail?id=" + imgs[k] + "&sz=w450-h450";
-                            iframeHolder.innerHTML += "<img style=\"height: 100%;width: 100%;\" id=\"iframe" + j + "img" + k + "\" src=\"" + link + "\"></img>";
+                            iframeHolder.innerHTML += "<img style=\"width: " + imgWidth + ";\" id=\"iframe" + j + "img" + k + "\" src=\"" + link + "\"></img>";
                         }
                     }
                 }
