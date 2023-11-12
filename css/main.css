@@ -644,6 +644,7 @@ a.dailer {
     text-align: start;
     align-items: start;
     padding: 2% 5% 2% 10%;
+    background-color: rgba(50, 50, 50, 0.80);
 }
 
 .trackSubmitBtn {
@@ -669,6 +670,7 @@ a.dailer {
 #trackingDetailView {
     font-weight: bold;
     color: white;
+    background-color: rgba(50, 50, 50, 0.80);
 }
 
 .mainContent {
