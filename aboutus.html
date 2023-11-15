@@ -34,8 +34,7 @@
             </div>
             <div class="mySlides fade">
                 <div class="info-holder">
-                    <div class="flexs"
-                        style="background: linear-gradient(rgba(66, 55, 66, 0.8),rgba(50, 44, 50, 0.8),rgba(44, 33,44, 0.8),rgba(44, 33,44, 0.8),rgba(50, 44, 50, 0.8),rgba(66, 55, 66, 0.8));">
+                    <div class="flexs">
                         <h4>Phone : <a class=" dailer" href="tel:+919756231332">+919756231332</a></h4>
                         <h4>Address : </h4>
                         <h3>Main Market Road</h3>
@@ -44,8 +43,7 @@
                         <h3>State : Uttarakhand</h3>
                         <h3>Pin : 244713</h3>
                     </div>
-                    <div class="flexs"
-                        style="background: linear-gradient(rgba(66, 55, 66, 0.8),rgba(50, 44, 50, 0.8),rgba(44, 33,44, 0.8),rgba(44, 33,44, 0.8),rgba(50, 44, 50, 0.8),rgba(66, 55, 66, 0.8));">
+                    <div class="flexs">
                         <h4>Facilities : </h4>
                         <h3>Wholesale & Retail - Complete Eyewear's Range</h3>
                         <ul>
@@ -84,8 +82,7 @@
                 </div>
             </div>
             <div class="mySlides fade">
-                <div class="aboutus-container"
-                    style="background: linear-gradient(rgba(66, 55, 66, 0.8),rgba(55, 44, 55, 0.8),rgba(44, 33,44, 0.8),rgba(44, 33,44, 0.8),rgba(55, 44, 55, 0.8),rgba(66, 55, 66, 0.8));">
+                <div class="aboutus-container">
                     <h4>About us:</h4>
                     <article>Trusted Since 1979, First & Most Popular Optician Shop, in district Udham Singh
                         Nagar,Uttarakhand.<br><br>We deal in all kind
@@ -109,17 +106,22 @@
     </div>
     <br>
     <script type="module">
-        import { navLoader, toggle, navScroll } from "./js/navload.js";
+        import { navLoader, toggle, navScroll, switchTheme, loadThemeBtn } from "./js/navload.js";
         import { browserDetect } from "./js/general.js";
         browserDetect();
         window.navLoader = navLoader;
         window.toggle = toggle;
         navLoader('menuBtns', 3, 'About Us');
+
+        window.switchTheme = switchTheme;
         window.onscroll = navScroll;
+        document.title = "About Us | Narang Opticals, Kashipur";
         window.matchMedia("(orientation:portrait)").addEventListener("change", function (e) {
             //console.log('Orientation change' + e);
             location.reload();
         });
+
+        window.document.body.onload = loadThemeBtn;
     </script>
     <script>
         let slideIndex = 0;

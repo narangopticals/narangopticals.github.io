@@ -70,23 +70,23 @@
     background-color: #67626a !important
 }
 
-.w3-text-theme {
+.ng-text-theme {
     color: #67626a !important
 }
 
-.w3-border-theme {
+.ng-border-theme {
     border-color: #67626a !important
 }
 
-.w3-hover-theme:hover {
+.ng-hover-theme:hover {
     color: #fff !important;
     background-color: #67626a !important
 }
 
-.w3-hover-text-theme:hover {
+.ng-hover-text-theme:hover {
     color: #67626a !important
 }
 
-.w3-hover-border-theme:hover {
+.ng-hover-border-theme:hover {
     border-color: #67626a !important
 }

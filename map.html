@@ -19,18 +19,21 @@
             allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
     <script type="module">
-        import { navLoader, toggle, navScroll } from "./js/navload.js";
+        import { navLoader, toggle, navScroll, switchTheme, loadThemeBtn } from "./js/navload.js";
         import { browserDetect } from "./js/general.js";
         browserDetect();
         window.navLoader = navLoader;
         window.toggle = toggle;
         navLoader('menuBtns', 5, 'Google Maps');
+
+        window.switchTheme = switchTheme;
         window.onscroll = navScroll;
         document.title = "Maps Google | Narang Opticals, Kashipur";
         window.matchMedia("(orientation:portrait)").addEventListener("change", function (e) {
             //console.log('Orientation change' + e);
             location.reload();
         });
+        window.document.body.onload = loadThemeBtn;
     </script>
 </body>
 

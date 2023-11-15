@@ -1,21 +1,68 @@
+@font-face {
+    font-family: "Sofia";
+    src: local("./font/Sofia-Regular.ttf"),
+        url("./font/Sofia-Regular.ttf");
+}
+
 body {
-    background: rgb(50, 50, 50);
-    /*background color grey*/
-    font-family: Arial, Helvetica, sans-serif;
-    /*font style change*/
+    background: var(--bg-color);
+    /*!background color grey*/
+    /*!font style change*/
     margin: 0;
     background-image: url('../imgs/bg/tt_Spectacles_200px.png');
     width: fit-content;
+    font-family: var(--fontfamily-header-large);
+}
+
+:root {
+    --fontfamily-header-large: Garamond, serif;
+    --fontfamily-fancy-text: Sofia, serif;
+    --fontfamily-readable: 'Courier New', Courier, monospace;
+}
+
+.theme-dark {
+    --bg-color: rgb(50, 50, 50);
+    --font-color-primary: #fff;
+    --font-color-secondary: #cbc4c4;
+    --navbar-bg-color: linear-gradient(rgba(71, 26, 26, 0.9), rgba(41, 0, 0, 0.9),
+            rgba(56, 21, 21, 0.9), rgba(74, 28, 28, 0.9),
+            rgba(93, 34, 34, 0.95), rgba(112, 41, 41, 0.95));
+    --text-shadow: 0 0 4px #c66666, 0 0 8px #6793c6;
+    --btn-active-color: linear-gradient(#3f6789, #375a78, #2f4d67, #375a78, #3f6789);
+    --btn-filter-bg-color: linear-gradient(#027263, #027f6e, #1b8c7d, #027f6e, #027263);
+    --flex-bg-color: linear-gradient(rgba(66, 55, 66, 0.8), rgba(50, 44, 50, 0.8), rgba(44, 33, 44, 0.8), rgba(44, 33, 44, 0.8), rgba(50, 44, 50, 0.8), rgba(66, 55, 66, 0.8));
+    --btn-inactive-color: linear-gradient(#2f4d67, #284156, #203444, #284156, #2f4d67);
+    --btn-share-color: linear-gradient(#4b4b59, #353544, #1e1e2f, #1e1e2f, #353544, #4b4b59);
+    --color-filter-invert: '';
+}
+
+.theme-light {
+    --bg-color: #EFEAEA;
+    --font-color-primary: #2e2e2e;
+    --font-color-secondary: #828282;
+    --navbar-bg-color: linear-gradient(rgba(160, 170, 170, 0.9), rgba(170, 180, 180, 0.9), rgba(180, 187, 187, 0.9), rgba(180, 187, 187, 0.9), rgba(170, 180, 180, 0.9), rgba(160, 170, 170, 0.9));
+    --text-shadow: 0 0 4px #eadcba, 0 0 8px #f5edc0;
+    --btn-active-color: linear-gradient(#6399c7, #70ace0, #7cbff9, #70ace0, #6399c7);
+    --btn-filter-bg-color: linear-gradient(#358e82, #4e9c92, #67aaa1, #4e9c92, #358e82);
+    --flex-bg-color: linear-gradient(rgba(201, 245, 225, 0.8), rgba(207, 246, 229, 0.8), rgba(214, 247, 232, 0.8), rgba(214, 247, 232, 0.8), rgba(207, 246, 229, 0.8), rgba(201, 245, 225, 0.8));
+    --btn-inactive-color: linear-gradient(rgb(54, 116, 170), rgb(54, 116, 190), rgb(54, 116, 210), rgb(54, 116, 190), rgb(54, 116, 170));
+    --btn-share-color: linear-gradient(rgb(149, 180, 183), rgb(155, 192, 196), rgb(185, 217, 220), rgb(155, 192, 196), rgb(149, 180, 183));
+    --color-filter-invert: invert(100%) sepia(0%) saturate(0%) hue-rotate(263deg) brightness(108%) contrast(108%);
+}
+
+#prodParent {
+    background: var(--flex-bg-color);
 }
 
 button {
     border-radius: 4px;
+    font-family: var(--fontfamily-fancy-text);
 }
 
 #nav-menu li {
     float: left;
     height: inherit;
-    /*width: 100%;*/
+    /*!width: 100%;*/
     margin: 0 1%;
     flex-grow: 1;
 }
@@ -40,49 +87,61 @@ h1,
 #flexSpc,
 #flexSpcTxt,
 #flexSpcTel {
-    color: rgb(255, 255, 255);
-    text-shadow: 0 0 4px #c66666, 0 0 8px #6793c6;
+    color: var(--font-color-primary);
+    text-shadow: var(--text-shadow);
     font-size: xx-large;
 }
 
-/*animation event #start*/
+/**animation event #start**/
 @keyframes flash {
     25% {
-        color: white;
+        color: var(--font-color-primary);
+        /* color: wheat;*/
     }
 
     50% {
-        color: gold;
+        color: var(--font-color-secondary);
+        /*color: gold;*/
     }
 
     75% {
-        color: beige;
+        color: var(--font-color-primary);
+        /*color: rosybrown;*/
     }
 
     100% {
-        color: goldenrod;
+        color: var(--font-color-secondary);
+        /*color: goldenrod;*/
     }
 }
 
-/*animation element setup*/
+/**animation element setup**/
 #flexSpcTel,
 #flashBannerTxt {
     font-size: 15px;
     font-weight: bold;
     animation-duration: 4s;
     animation-iteration-count: infinite;
+    color: var(--flex-bg-color);
     animation-name: flash;
+    /** line 88**/
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    transition: all 0.5s linear;
 }
 
 #flashBannerTxt {
     display: block;
     position: relative;
+    font-family: var(--fontfamily-fancy-text);
+    font-size: 72%;
 }
 
 #flashBanner {
     margin: 8px;
     opacity: 0.8;
-    background-color: #626262;
+    background-color: var(--bg-color);
     flex-grow: 1;
     border-radius: 25px;
     text-align: center;
@@ -138,15 +197,13 @@ nav {
     /*background: linear-gradient(rgb(42, 42, 45),rgb(23, 23, 23),rgb(16, 16, 16), rgb(23, 23, 23), rgb(45, 42, 42));*/
     /*background: linear-gradient(rgb(42, 42, 45),rgb(23, 23, 23),rgb(16, 15, 15), rgb(23, 23, 14), rgb(23, 14, 14), rgb(34, 9, 9));*/
     /*background: linear-gradient(#2e0000, #290000, #290000, #290000, #2e0000, #330000, #471a1a, #5c3333);*/
-    background: linear-gradient(rgba(71, 26, 26, 0.9), rgba(41, 0, 0, 0.9),
-            rgba(56, 21, 21, 0.9), rgba(74, 28, 28, 0.9),
-            rgba(93, 34, 34, 0.95), rgba(112, 41, 41, 0.95));
+    background: var(--navbar-bg-color);
     text-align: left;
     position: sticky;
     /*opacity: 0.8;*/
     top: 0;
     z-index: 1000000;
-    width: 100%;
+    width: 100vw;
     margin: 0 2px 0 0;
     /*text-align: end;*/
 }
@@ -183,7 +240,7 @@ nav {
 }
 
 .header {
-    color: rgb(255, 255, 255);
+    color: var(--font-color-primary);
     width: fit-content;
     position: relative;
     left: 0;
@@ -209,7 +266,7 @@ nav {
 }
 
 /*a{
-    color: rgb(255, 255, 255);
+    color: var(--font-color-primary);
     background: linear-gradient(#027f6e,#037667,#035549, #005d51, #00594d, #036a5c);
     width: fit-content;
     height: fit-content;
@@ -228,23 +285,25 @@ p {
 }
 
 h4 {
-    color: rgb(255, 255, 255);
+    color: var(--font-color-primary);
     font-size: 170%;
     font-stretch: expanded;
     letter-spacing: 2.5px;
     text-shadow: 0 0 8px #c66666, 0 0 12px #6793c6;
+    font-family: var(--fontfamily-fancy-text);
 }
 
 h3 {
-    color: #a1dfe7;
+    color: var(--font-color-primary);
     font-size: 115%;
     font-stretch: expanded;
     letter-spacing: 1px;
     margin: 0.50%;
+    font-family: var(--fontfamily-readable);
 }
 
 li {
-    color: gainsboro;
+    color: var(--font-color-secondary);
     width: fit-content;
     height: fit-content;
     /*padding-top: 25px;
@@ -269,7 +328,7 @@ ul {
     font-size: x-large;
     border-radius: 5px;
     font-weight: bolder;
-    color: rgb(255, 255, 255);
+    color: var(--font-color-primary);
     background: linear-gradient(#027f6e,#037667,#035549, #005d51, #00594d, #036a5c);
     width: fit-content;
     height: fit-content;
@@ -286,7 +345,7 @@ ul {
     text-align: center;
     border-radius: 5px;
     font-weight: bolder;
-    color: rgb(255, 255, 255);
+    color: var(--font-color-primary);
     background: linear-gradient(#027f6e, #037667, #035549, #005d51, #00594d, #036a5c);
     height: fit-content;
     /*
@@ -332,11 +391,13 @@ ul {
 }
 
 article {
-    color: rgb(255, 255, 255);
+    color: var(--font-color-primary);
     font-size: 145%;
     font-stretch: expanded;
     word-wrap: normal;
     text-align: left;
+    font-family: var(--fontfamily-readable);
+    font-weight: bold;
 }
 
 .content-holder {
@@ -373,6 +434,8 @@ article {
     padding-left: 1.25%;
     padding-right: 1.25%;
     padding-bottom: 0.50%;
+    background: var(--flex-bg-color);
+    /*font-family: var(--fontfamily-header-large);*/
 }
 
 .aboutus-container {
@@ -393,6 +456,7 @@ article {
     width: 80%;
     align-items: center;
     justify-content: center;
+    background: var(--flex-bg-color);
 }
 
 iframe.contact-form {
@@ -424,9 +488,10 @@ iframe {
 }
 
 a.dailer {
-    font-size: 75%;
+    font-size: x-large;
     width: fit-content;
     padding: 0.3%;
+    font-family: var(--fontfamily-readable);
 }
 
 /*Test.html Trial*/
@@ -463,7 +528,7 @@ a.dailer {
     /* Important for vertical align on mobile phones */
     margin: 0.20% 0 0.20% 0;
     /* Important for vertical align on mobile phones */
-    background: linear-gradient(#027f6e, #026658, #01594d, #014c42, #01594d, #026658, #027f6e);
+    background: var(--btn-filter-bg-color);
     height: inherit;
     /*font-size: 140%;*/
     border: 3px solid #acbec7;
@@ -502,7 +567,7 @@ a.dailer {
     position: absolute;
     background-color: #9e9e9e;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
+    z-index: 15;
     width: fit-content;
 }
 
@@ -570,22 +635,21 @@ a.dailer {
     width: fit-content;
     margin: 0.5%;
     padding: 0.5%;
-    background: linear-gradient(#2f4d67, #284156, #203444, #284156, #2f4d67);
+    background: var(--btn-inactive-color);
     border-radius: 8px;
     display: inline-block;
     transition: background-color 0.6s ease;
-    color: rgb(255, 255, 255);
+    color: var(--font-color-primary);
     /*text-shadow: 0 0 12px #3c1010, 0 0 8px #000;*/
     font-size: x-large;
 }
 
 #filter {
-    background: linear-gradient(#027263, #027f6e, #1b8c7d, #027f6e, #027263);
+    background: var(--btn-filter-bg-color);
 }
 
 .active {
-    background: linear-gradient(#3f6789, #375a78, #2f4d67, #375a78, #3f6789);
-    ;
+    background: var(--btn-active-color);
 }
 
 .fade {
@@ -644,7 +708,7 @@ a.dailer {
     text-align: start;
     align-items: start;
     padding: 2% 5% 2% 10%;
-    background-color: rgba(50, 50, 50, 0.80);
+    background: var(--flex-bg-color);
 }
 
 .trackSubmitBtn {
@@ -669,7 +733,7 @@ a.dailer {
 
 #trackingDetailView {
     font-weight: bold;
-    color: white;
+    color: var(--font-color-primary);
     background-color: rgba(50, 50, 50, 0.80);
 }
 
@@ -687,17 +751,23 @@ a.dailer {
 #share {
     font-weight: bold;
     border: 1px solid rgb(221, 214, 175);
-    background: linear-gradient(#4b4b59, #353544, #1e1e2f, #1e1e2f, #353544, #4b4b59);
+    /*background: linear-gradient(#4b4b59, #353544, #1e1e2f, #1e1e2f, #353544, #4b4b59);*/
+    background: var(--btn-share-color);
     border-radius: 4px;
     margin: 0.5%;
     padding: 0.5%;
     display: inline-block;
     transition: background-color 0.6s ease;
-    color: rgb(255, 255, 255);
+    color: var(--font-color-primary);
     align-self: center;
     align-items: center;
     display: flex;
     flex-direction: row;
+    text-shadow: var(--font-color-secondary)
+}
+
+#sharesvg {
+    filter: var(--color-filter-invert);
 }
 
 /* Portrait orientation ||*/
@@ -875,3 +945,175 @@ a.dailer {
     }
 
 }
+
+
+/***INDEX PAGE CSS****/
+
+#productIntroHolder {
+    /*width: 35%;*/
+    height: fit-content;
+    align-self: center;
+}
+
+#swipeHolder {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+}
+
+.overlayImagesBlur {
+    width: var(--elemW);
+    aspect-ratio: 1;
+    opacity: 0.6;
+    background-color: rgb(207, 208, 208);
+    display: block;
+    position: relative;
+    top: var(--blurTop);
+    /*! visibility: hidden; */
+}
+
+.typeHolder {
+    aspect-ratio: 1;
+    width: var(--elemW);
+    height: var(--elemH);
+    overflow: clip;
+    /*!margin: 2%;*/
+    align-self: center;
+    text-align: center;
+    border: 7px solid whitesmoke;
+    display: block;
+    position: relative;
+    left: 0%;
+    border-radius: 45px
+}
+
+.catgryText {
+    font-size: var(--catTxtSize);
+    font-weight: bold;
+    display: block;
+    position: relative;
+    top: var(--catTxtTop);
+    color: #fff;
+    font-family: var(--fontfamily-fancy-text);
+}
+
+.displayImg {
+    width: var(--framW);
+    aspect-ratio: 1;
+    height: var(--framH);
+    padding: 2%;
+    display: block;
+    position: relative;
+    top: var(--disImgTop);
+    left: var(--disImgLeft);
+}
+
+#indexBody {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Portrait orientation ||*/
+@media screen and (orientation: portrait) {
+    #indexBody {
+        flex-direction: column;
+    }
+
+    #swipeHolder {
+        min-width: calc(var(--widthPercent) + 10vw);
+    }
+
+    .contentSlider {
+        min-width: calc(var(--widthPercent) + 20vw);
+    }
+
+    .mySlides {
+        min-width: calc(var(--widthPercent) + 20vw);
+    }
+
+    #youtube-holder {
+        min-width: calc(var(--widthPercent) + 20vw);
+        aspect-ratio: 1;
+    }
+
+    #mainContent {
+        /*!width: 100%;*/
+        min-width: calc(var(--widthPercent) + 10vw);
+        height: fit-content;
+        align-self: center;
+    }
+
+    #productIntroHolder {
+        display: flex;
+        flex-direction: column;
+    }
+
+    :root {
+        --elemW: var(--widthPercent);
+        --elemH: var(--widthPercent);
+        --framW: var(--widthPercent);
+        --framH: var(--widthPercent);
+        --blurTop: -104%;
+        --catTxtSize: 30px;
+        --catTxtTop: -175%;
+        --disImgTop: -7px;
+        --disImgLeft: -7px;
+        --widthPercent: 70vw;
+    }
+}
+
+/* landscape orientation ||*/
+@media screen and (orientation: landscape) {
+
+    #indexBody {
+        flex-direction: row;
+    }
+
+    .contentSlider {
+        min-width: calc(var(--widthPercent) + 20vh);
+    }
+
+    .mySlides {
+        min-width: calc(var(--widthPercent) + 30vh);
+    }
+
+    #swipeHolder {
+        min-width: calc(var(--widthPercent) + 10vh);
+        margin: 0 2vw 0 0;
+    }
+
+    #youtube-holder {
+        min-width: calc(var(--widthPercent) + 20vh);
+        aspect-ratio: 1;
+    }
+
+    #mainContent {
+        min-width: calc(var(--widthPercent) + 10vh);
+        height: fit-content;
+    }
+
+    #productIntroHolder {
+        /*display: grid;
+        row-gap: 2%;
+        column-gap: 5%;
+        grid-template-columns: repeat(2, var(--elemWH));*/
+        display: flex;
+        flex-direction: row;
+        overflow: clip;
+    }
+
+    :root {
+        --elemW: var(--widthPercent);
+        --elemH: var(--widthPercent);
+        --framW: var(--widthPercent);
+        --framH: var(--widthPercent);
+        --blurTop: -104%;
+        --catTxtSize: 47px;
+        --catTxtTop: -158%;
+        --disImgTop: -10px;
+        --disImgLeft: -10px;
+        --widthPercent: 50vh;
+    }
+}
+
+/***INDEX PAGE CSS****/

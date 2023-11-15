@@ -1,5 +1,6 @@
 var prevScrollpos = "";
 var hidden = false;
+var switchOff = false;
 
 export async function navLoader(cls, ind, headTxt) {
     await fetch("../class/navbar.html")
@@ -30,7 +31,7 @@ export function toggle() {
         bar.style.display = 'flex';
         hider.textContent = '\u21D6Hide Navigator';
         hider.title = "Click to Hide Navigation Bar Temporarily, Click Again to Show"
-        navSpc.style.width = '100%';
+        navSpc.style.width = '100vw';
     }
 }
 function markCurrent(cls, ind, headTxt) {
@@ -70,4 +71,55 @@ export async function navScroll() {
     }
 
     //}, 1000);
-} 
+}
+
+
+export async function switchTheme(event) {
+    console.log(event);
+    const root = document.documentElement;
+    if (switchOff) {
+        /*root.style.setProperty(`--bg-color`, "rgb(50,50,50)");*/
+        setTheme('theme-dark');
+        switchOff = false;
+        //document.querySelector('label.switch span.slider.round p.before').textContent = "☾";
+    } else {
+        /*root.style.setProperty(`--bg-color`, "#EFEAEA");*/
+        setTheme('theme-light');
+        switchOff = true;
+        //document.querySelector('label.switch span.slider.round p.before').textContent = "☀";
+    }
+
+    // function to set a given theme/color-scheme
+
+}
+export async function setTheme(themeName) {
+    localStorage.setItem('theme', themeName);
+    document.documentElement.className = themeName;
+}
+
+// function to toggle between light and dark theme
+export async function toggleTheme() {
+    if (localStorage.getItem('theme') === 'theme-dark') {
+        setTheme('theme-light');
+    } else {
+        setTheme('theme-dark');
+    }
+}
+// Immediately invoked function to set the theme on initial load
+(function () {
+    if (localStorage.getItem('theme') === 'theme-dark') {
+        setTheme('theme-dark');
+        switchOff = false;
+    } else {
+        setTheme('theme-light');
+        switchOff = true;
+    }
+})();
+export async function loadThemeBtn() {
+    console.log('document body loaded');
+    console.log('switchOff:' + switchOff);
+    if (switchOff) {
+        window.document.querySelector('.switch>input').click();
+    }
+}
+

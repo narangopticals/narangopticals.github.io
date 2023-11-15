@@ -57,7 +57,7 @@
         <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(3,1)">Readymade</button>
         <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(4,1)">Watch</button>
         <button id="share" onclick="shareLink()">
-            <img src="./svg/share-button.svg" style="aspect-ratio: 1; height: 100%;
+            <img id="sharesvg" src="./svg/share-button.svg" style="aspect-ratio: 1; height: 100%;
                 align-self: center;
                 text-align: center;"></img><span style="margin: 0.2%;">Share</span></button>
     </div>
@@ -133,13 +133,16 @@
 
     </script>
     <script type="module">
-        import { navLoader, toggle, navScroll } from "./js/navload.js";
+        import { navLoader, toggle, navScroll, switchTheme, loadThemeBtn } from "./js/navload.js";
         import { browserDetect } from "./js/general.js";
         browserDetect();
         window.navLoader = navLoader;
         window.toggle = toggle;
         navLoader('menuBtns', 1, 'Products');
+
+        window.switchTheme = switchTheme;
         window.onscroll = navScroll;
+        window.document.body.onload = loadThemeBtn;
     </script>
     <script type="text/javascript">
         //var filterVisible = false;
