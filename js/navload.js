@@ -119,7 +119,10 @@ export async function loadThemeBtn() {
     console.log('document body loaded');
     console.log('switchOff:' + switchOff);
     if (switchOff) {
-        window.document.querySelector('.switch>input').click();
+        var switchBtn = window.document.querySelector('.switch>input');
+        if (switchBtn != undefined) {
+            switchBtn.click();
+        }
     }
 }
 

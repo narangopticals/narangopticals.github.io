@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        Narang Opticals, Kashipur
+    </title>
+    <link rel="stylesheet" href="css/main.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body id="mainBody">
+    <nav id="navbar">
+    </nav>
+    <div id="pageView">
+        <div id="prespHolder" style="display: flex;flex-direction: row;text-align: center;align-items: center;">
+            <div id="prespSideHolder"
+                style="display: flex;flex-direction: column;text-align: center;align-items: center;">
+                <span><br></span>
+                <span>Right</span>
+                <span>Left</span>
+            </div>
+            <div id="sphHolder" style="display: flex;flex-direction: column;text-align: center;align-items: center;">
+                <span id="sphPower">sph</span>
+                <select id="r_sphPower" type="number" step="0.25" id="reSph" style="min-width: 50%;"></select>
+                <select id="l_sphPower" step="0.25" id="leSph" style="min-width: 50%;"></select>
+            </div>
+            <div id="cylHolder" style="display: flex;flex-direction: column;text-align: center;align-items: center;">
+                <span id="cylPower">cyl</span>
+                <select id="r_cylPower" type="number" step="0.25" id="reSph" style="min-width: 50%;"></select>
+                <select id="l_cylPower" step="0.25" id="leSph" style="min-width: 50%;"></select>
+            </div>
+            <div id="axisHolder" style="display: flex;flex-direction: column;">
+                <span>Axis</span>
+                <input type="number" min="1" max="180" id="reAxis" placeholder="1-180" style="min-width: 50%;"></input>
+                <input type="number" id="leAxis" min="1" max="180" placeholder="1-180" style="min-width: 50%;"></input>
+            </div>
+            <div id="addHolder" style="display: flex;flex-direction: column;">
+                <span>Add.</span>
+                <input type="number" step="0.25" min="0.75" max="4.00" id="reAdd" style="min-width: 50%;"></input>
+                <input type="number" step="0.25" min="0.75" max="4.00" id="leAdd" style="min-width: 50%;"></input>
+            </div>
+        </div>
+        <label>
+            <input type="radio" name="lenstype" value="singlevision" checked>
+            Single Vision<br>
+
+            <input type="radio" name="lenstype" value="bifocal">
+            Dual Vision with Visible Seperation<br>
+
+            <input type="radio" name="lenstype" value="progressive">
+            Multi Vision with InVisible Seperation<br>
+        </label>
+    </div>
+
+    <script type="text/javascript">
+        var rightSph = document.querySelector('#r_sphPower');
+        var leftSph = document.querySelector('#l_sphPower');
+        var rightCyl = document.querySelector('#r_cylPower');
+        var leftCyl = document.querySelector('#l_cylPower');
+        var i = -20;
+        var opt = '<option value=""></option>';
+        rightSph.innerHTML = rightSph.innerHTML + opt;
+        leftSph.innerHTML = leftSph.innerHTML + opt;
+        rightCyl.innerHTML = rightCyl.innerHTML + opt;
+        leftCyl.innerHTML = leftCyl.innerHTML + opt;
+        while (i <= 20) {
+            var opt = '<option value="' + i.toFixed(2) + '">' + i.toFixed(2) + '</option>';
+            rightSph.innerHTML = rightSph.innerHTML + opt;
+            leftSph.innerHTML = leftSph.innerHTML + opt;
+            if (i >= -10 && i <= 10) {
+                rightCyl.innerHTML = rightCyl.innerHTML + opt;
+                leftCyl.innerHTML = leftCyl.innerHTML + opt;
+            }
+            if (i <= -10 || i >= 10) {
+                i = i + 1;
+            } else if (i <= -6 || i >= 6) {
+                i = i + 0.50;
+            } else {
+                i = i + 0.25;
+            }
+        }
+    </script>
+    <!--<div id="formBody" style="width: 100%;
+    height: fit-content;">
+        <iframe src="https://vyaparapp.in/store/NarangOpticalsKashipur" style="width: 100%;
+        height: fit-content;"></iframe>
+        <iframe src="https://discordapp.com/widget?id=1169342295129211040&theme=dark" width="80%" height="fit-content"
+            allowtransparency="true" frameborder="0"
+            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+
+    </div>-->
+
+
+
+    <script type="module">
+
+        import { navLoader, toggle, navScroll, switchTheme, loadThemeBtn } from "./js/navload.js";
+        import { browserDetect } from "./js/general.js";
+        import { animateFlexs, swipeLeft, swipeRight } from "./js/indexAnimate.js";
+        browserDetect();
+        window.navLoader = navLoader;
+        window.toggle = toggle;
+        navLoader('menuBtns', 0, 'HomePage');
+        window.switchTheme = switchTheme;
+
+        window.switchTheme = switchTheme;
+        window.onscroll = navScroll;
+        window.swipeLeft = swipeLeft;
+        window.swipeRight = swipeRight;
+
+        document.title = "Test | Narang Opticals, Kashipur";
+        window.matchMedia("(orientation:portrait)").addEventListener("change", function (e) {
+            //console.log('Orientation change' + e);
+            location.reload();
+        });
+        window.document.body.onload = loadThemeBtn;
+    </script>
+</body>
