@@ -662,7 +662,8 @@ a.dailer {
     background-color: #717171;
 }
 
-#playPause {
+#playPause,
+button {
     align-self: center;
     background: #022e45;
     color: white;

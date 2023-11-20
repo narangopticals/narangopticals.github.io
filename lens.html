@@ -18,63 +18,204 @@
     </nav>
     <div id="pageView">
         <div id="prespHolder" style="display: flex;flex-direction: row;text-align: center;align-items: center;">
-            <div id="prespSideHolder"
+            <label id="prespSideHolder"
                 style="display: flex;flex-direction: column;text-align: center;align-items: center;">
                 <span><br></span>
                 <span>Right</span>
                 <span>Left</span>
-            </div>
-            <div id="sphHolder" style="display: flex;flex-direction: column;text-align: center;align-items: center;">
+            </label>
+            <label id="sphLabel" style="display: flex;flex-direction: column;text-align: center;align-items: center;">
                 <span id="sphPower">sph</span>
                 <select id="r_sphPower" type="number" step="0.25" id="reSph" style="min-width: 50%;"></select>
                 <select id="l_sphPower" step="0.25" id="leSph" style="min-width: 50%;"></select>
-            </div>
-            <div id="cylHolder" style="display: flex;flex-direction: column;text-align: center;align-items: center;">
+            </label>
+            <label id="cylLabel" style="display: flex;flex-direction: column;text-align: center;align-items: center;">
                 <span id="cylPower">cyl</span>
                 <select id="r_cylPower" type="number" step="0.25" id="reSph" style="min-width: 50%;"></select>
                 <select id="l_cylPower" step="0.25" id="leSph" style="min-width: 50%;"></select>
-            </div>
-            <div id="axisHolder" style="display: flex;flex-direction: column;">
+            </label>
+            <label id="axisLabel" style="display: flex;flex-direction: column;">
                 <span>Axis</span>
-                <input type="number" min="1" max="180" id="reAxis" placeholder="1-180" style="min-width: 50%;"></input>
-                <input type="number" id="leAxis" min="1" max="180" placeholder="1-180" style="min-width: 50%;"></input>
-            </div>
-            <div id="addHolder" style="display: flex;flex-direction: column;">
+                <input id="reAxis" type="number" min="1" max="180" placeholder="1-180" style="min-width: 50%;"></input>
+                <input id="leAxis" type="number" min="1" max="180" placeholder="1-180" style="min-width: 50%;"></input>
+            </label>
+            <label id="additionLabel" style="display: flex;flex-direction: column;">
                 <span>Add.</span>
-                <input type="number" step="0.25" min="0.75" max="4.00" id="reAdd" style="min-width: 50%;"></input>
-                <input type="number" step="0.25" min="0.75" max="4.00" id="leAdd" style="min-width: 50%;"></input>
-            </div>
+                <select for="reAdd" onchange="addition()" type="number" step="0.25" min="0.75" max="4.00" id="reAdd"
+                    style="min-width: 50%;"></select>
+                <select onchange="addition()" type="number" step="0.25" min="0.75" max="4.00" id="leAdd"
+                    style="min-width: 50%;"></select>
+            </label>
         </div>
-        <label>
+        <label for="lenstype" id="lensType">
             <input type="radio" name="lenstype" value="singlevision" checked>
             Single Vision<br>
 
-            <input type="radio" name="lenstype" value="bifocal">
+            <input type="radio" name="lenstype" value="bifocal" disabled="true">
             Dual Vision with Visible Seperation<br>
 
-            <input type="radio" name="lenstype" value="progressive">
+            <input type="radio" name="lenstype" value="progressive" disabled="true">
             Multi Vision with InVisible Seperation<br>
         </label>
+        <button onclick="submit()">Submit</button>
     </div>
-
+    <div id="detailsView"></div>
     <script type="text/javascript">
-        var rightSph = document.querySelector('#r_sphPower');
-        var leftSph = document.querySelector('#l_sphPower');
-        var rightCyl = document.querySelector('#r_cylPower');
-        var leftCyl = document.querySelector('#l_cylPower');
+
+        var disabled = true;
+        function submit() {
+            var rightType = "";
+            var leftType = "";
+            var rightSph_elem = document.querySelector('#r_sphPower');
+            var leftSph_elem = document.querySelector('#l_sphPower');
+            var rightCyl_elem = document.querySelector('#r_cylPower');
+            var leftCyl_elem = document.querySelector('#l_cylPower');
+            var rightAxis_elem = document.querySelector('#reAxis');
+            var leftAxis_elem = document.querySelector('#leAxis');
+            var rightAdd_elem = document.querySelector('#reAdd');
+            var leftAdd_elem = document.querySelector('#leAdd');
+            var rightSph = Number.parseFloat(rightSph_elem.value);
+            var leftSph = Number.parseFloat(leftSph_elem.value);
+            var rightCyl = Number.parseFloat(rightCyl_elem.value);
+            var leftCyl = Number.parseFloat(leftCyl_elem.value);
+            if (disabled) {
+                rightType = testTypeSV(rightSph, rightCyl);
+                leftType = testTypeSV(leftSph, leftCyl);
+            }
+            var textString = "Right Type : " + rightType + "<br>Left Type : " + leftType;
+            console.log(textString);
+            document.querySelector('#detailsView').innerHTML = textString;
+        }
+
+        function testTypeSV(sphPower, cylPower) {
+            console.log("sphPower :" + sphPower + "\n cylPower : " + cylPower);
+            console.log(cylPower);
+            var type = "";
+            var sphType = "";
+            var cylType = "";
+            if (sphPower >= -6 && sphPower <= 0) {
+                sphType = "-6";
+                console.log("line : 98");
+            } else if (sphPower >= -8 && sphPower <= -6.25) {
+                sphType = "-8";
+                console.log("line : 101");
+            } else if (sphPower >= -10 && sphPower <= -8.25) {
+                sphType = "-10";
+                console.log("line : 104");
+            } else if (sphPower <= -10.25) {
+                sphType = "Rx";
+                console.log("line : 107");
+            }
+            if (cylPower >= -2 && cylPower <= 0) {
+                cylType = "-2";
+                console.log("line : 111");
+            } else if (cylPower >= -4 && cylPower <= -2.25) {
+                cylType = "-4";
+                console.log("line : 114");
+            } else if (cylPower <= -4.25) {
+                cylType = "Rx";
+                console.log("line : 117");
+            }
+            if (sphType.length == 0) {
+                console.log("line : 120");
+                if (cylType.length > 0 && (cylType.indexOf('Rx') < 0)) {
+                    console.log("line : 122");
+                    if (cylPower > 0) {
+                        type = "+6/" + cylType;
+                        console.log("line : 125");
+                    } else if (cylPower <= 0) {
+                        type = "-6/" + cylType;
+                        console.log("line : 127");
+                    } else {
+                        type = "-6/-2";
+                        console.log("line : 131");
+                    }
+                } else if (cylType.indexOf('Rx') >= 0) {
+                    type = "Rx";
+                    console.log("line : 135");
+                } else {
+                    type = "Error";
+                    console.log("line : 137");
+                }
+            }
+            if (sphType.length > 0) {
+                console.log("line : 142");
+                if (cylType.length > 0 && (cylType.indexOf('Rx') < 0) && (sphType.indexOf('Rx') < 0)) {
+                    console.log("line : 144");
+                    if (cylPower > 0) {
+                        type = sphType + "/" + cylType;
+                        console.log("line : 147");
+                    } else if (cylPower < 0) {
+                        type = sphType + "/" + cylType;
+                        console.log("line : 150");
+                    } else if (sphPower <= 0) {
+                        type = sphType + "/-2";
+                        console.log("line : 153");
+                    } else if (sphPower > 0) {
+                        type = sphType + "/+2";
+                        console.log("line : 156");
+                    }
+                } else if (cylType.indexOf('Rx') >= 0 || (sphType.indexOf('Rx') >= 0)) {
+                    console.log("line : 159");
+                    type = "Rx";
+                } else if (cylType.length == 0 && sphPower <= 0) {
+                    type = sphType + "/-2";
+                    console.log("line : 163");
+                } else if (cylType.length == 0 && sphPower > 0) {
+                    type = sphType + "/+2";
+                    console.log("line : 166");
+                } else {
+                    type = "Error";
+                    console.log("line : 169");
+                }
+            }
+            return type;
+        }
+        function addition() {
+            var add_elems = document.querySelector('#additionLabel').querySelectorAll('select');
+            console.log(add_elems);
+            for (var i = 0; i < add_elems.length; i++) {
+                var inp = add_elems[i].value;
+                if (inp.length > 0) {
+                    disabled = false;
+                    break;
+                } else {
+                    disabled = true;
+                }
+            }
+            var lensType_elem = document.querySelector('#lensType');
+            var input_elems = lensType_elem.querySelectorAll('input');
+            if (disabled) {
+                input_elems[0].click();
+            }
+            for (var i = 1; i < input_elems.length; i++) {
+                var inp = input_elems[i];
+                inp.disabled = disabled;
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        var rightSph_elem = document.querySelector('#r_sphPower');
+        var leftSph_elem = document.querySelector('#l_sphPower');
+        var rightCyl_elem = document.querySelector('#r_cylPower');
+        var leftCyl_elem = document.querySelector('#l_cylPower');
+        var rightAdd_elem = document.querySelector('#reAdd');
+        var leftAdd_elem = document.querySelector('#leAdd');
         var i = -20;
         var opt = '<option value=""></option>';
-        rightSph.innerHTML = rightSph.innerHTML + opt;
-        leftSph.innerHTML = leftSph.innerHTML + opt;
-        rightCyl.innerHTML = rightCyl.innerHTML + opt;
-        leftCyl.innerHTML = leftCyl.innerHTML + opt;
+        rightSph_elem.innerHTML = rightSph_elem.innerHTML + opt;
+        leftSph_elem.innerHTML = leftSph_elem.innerHTML + opt;
+        rightCyl_elem.innerHTML = rightCyl_elem.innerHTML + opt;
+        leftCyl_elem.innerHTML = leftCyl_elem.innerHTML + opt;
+        rightAdd_elem.innerHTML = rightAdd_elem.innerHTML + opt;
+        leftAdd_elem.innerHTML = leftAdd_elem.innerHTML + opt;
         while (i <= 20) {
             var opt = '<option value="' + i.toFixed(2) + '">' + i.toFixed(2) + '</option>';
-            rightSph.innerHTML = rightSph.innerHTML + opt;
-            leftSph.innerHTML = leftSph.innerHTML + opt;
+            rightSph_elem.innerHTML = rightSph_elem.innerHTML + opt;
+            leftSph_elem.innerHTML = leftSph_elem.innerHTML + opt;
             if (i >= -10 && i <= 10) {
-                rightCyl.innerHTML = rightCyl.innerHTML + opt;
-                leftCyl.innerHTML = leftCyl.innerHTML + opt;
+                rightCyl_elem.innerHTML = rightCyl_elem.innerHTML + opt;
+                leftCyl_elem.innerHTML = leftCyl_elem.innerHTML + opt;
             }
             if (i <= -10 || i >= 10) {
                 i = i + 1;
@@ -82,6 +223,10 @@
                 i = i + 0.50;
             } else {
                 i = i + 0.25;
+                if (i > 0.50 && i < 4.25) {
+                    rightAdd_elem.innerHTML = rightAdd_elem.innerHTML + opt;
+                    leftAdd_elem.innerHTML = leftAdd_elem.innerHTML + opt;
+                }
             }
         }
     </script>
