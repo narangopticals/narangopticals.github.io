@@ -105,16 +105,37 @@
             } else if (sphPower <= -10.25) {
                 sphType = "Rx";
                 console.log("line : 107");
+            } if (sphPower >= 0 && sphPower <= 4) {
+                sphType = "+4";
+                console.log("line : 110");
+            } else if (sphPower > 4 && sphPower <= 6) {
+                sphType = "+6";
+                console.log("line : 113");
+            } else if (sphPower > 6 && sphPower <= 8) {
+                sphType = "+8";
+                console.log("line : 116");
+            } else if (sphPower > 8.00) {
+                sphType = "Rx";
+                console.log("line : 119");
             }
             if (cylPower >= -2 && cylPower <= 0) {
                 cylType = "-2";
-                console.log("line : 111");
+                console.log("line : 123");
             } else if (cylPower >= -4 && cylPower <= -2.25) {
                 cylType = "-4";
-                console.log("line : 114");
+                console.log("line : 126");
             } else if (cylPower <= -4.25) {
                 cylType = "Rx";
-                console.log("line : 117");
+                console.log("line : 129");
+            } else if (cylPower >= 0 && cylPower <= 2) {
+                cylType = "+2";
+                console.log("line : 123");
+            } else if (cylPower > 2 && cylPower <= 4) {
+                cylType = "+4";
+                console.log("line : 126");
+            } else if (cylPower > 4.00) {
+                cylType = "Rx";
+                console.log("line : 129");
             }
             if (sphType.length == 0) {
                 console.log("line : 120");
