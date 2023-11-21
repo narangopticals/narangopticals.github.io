@@ -4,8 +4,10 @@ export async function browserDetect() {
     var detectCookie = getCookie('browserDetect');
     if ((await detectCookie).length < 1) {
         if (!(usrAgnt.indexOf('Firefox') > 20) || usrAgnt.indexOf('Safari') > 20) {
-            window.alert("Use Firefox or Chrome for Best Experience. Untested Browser, some features may not work as intended.");
-            setCookie('browserDetect', 'false', 10);
+            setTimeout(function () {
+                window.alert("Use Firefox or Chrome for Best Experience. Untested Browser, some features may not work as intended.");
+            }, 7000);
+            setCookie('browserDetect', 'false', 1);
         }
     } else {
         console.log("Use Firefox or Chrome for Best Experience. Untested Browser, some features may not work as intended.");
