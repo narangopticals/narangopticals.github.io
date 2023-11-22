@@ -8,7 +8,7 @@ export async function browserDetect() {
             setCookie('browserDetect', 'false', 10);
         }
     } else {
-        console.log("Use Firefox or Chrome for Best Experience. Untested Browser, some features may not work as intended.");
+        //   console.log("Use Firefox or Chrome for Best Experience. Untested Browser, some features may not work as intended.");
     }
     //window.alert(usrAgnt);
 }

@@ -129,7 +129,7 @@ export async function animateFlexs() {
             for (i = 0; i < slides.length; i++) {
                 /*var perc = ((i - slideIndex) * 100);
                 slides[i].style.left = + '%';
-                console.log("line 127: i =" + i + ", perc= " + perc + ", slideIndex=" + slideIndex);*/
+             //   console.log("line 127: i =" + i + ", perc= " + perc + ", slideIndex=" + slideIndex);*/
                 //slides[i].style.position = 'relative';
                 slides[i].style.display = 'none';
             }
@@ -144,7 +144,7 @@ export async function animateFlexs() {
             }
             slides[slideIndex - 1].style.left = pr + '%';
             slides[slideIndex - 1].style.visibility = 'visible';
-            console.log("line 127:pr= " + pr + ", slideIndex=" + slideIndex);*/
+         //   console.log("line 127:pr= " + pr + ", slideIndex=" + slideIndex);*/
             currentSlide = slideIndex - 1;
             slides[slideIndex - 1].style.display = '';
             //slides[slideIndex - 1].style.top = '10%';
@@ -202,16 +202,16 @@ export async function animateFlexs() {
 
 
         function handleGesture() {
-            console.log('currentSlide:' + currentSlide);
+            //   console.log('currentSlide:' + currentSlide);
             if (touchendX < touchstartX) {
-                console.log('Swiped Left');
+                //   console.log('Swiped Left');
                 swipeLeft();
                 //autoSwipe = true;
                 //setTimeout(firstRun, 5000);
             }
 
             if (touchendX > touchstartX) {
-                console.log('Swiped Right');
+                //   console.log('Swiped Right');
 
                 swipeRight();
                 //autoSwipe = true;
@@ -219,15 +219,15 @@ export async function animateFlexs() {
             }
 
             if (touchendY < touchstartY) {
-                console.log('Swiped Up');
+                //   console.log('Swiped Up');
             }
 
             if (touchendY > touchstartY) {
-                console.log('Swiped Down');
+                //   console.log('Swiped Down');
             }
 
             if (touchendY === touchstartY) {
-                console.log('Tap');
+                //   console.log('Tap');
             }
         }
     }

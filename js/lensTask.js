@@ -60,7 +60,7 @@ export async function submit() {
     var textString = "R: " + numberStringR + "<br>" +
         "L: " + numberStringL + "<br>" +
         "Right Type : " + rightType + "<br>Left Type : " + leftType + cost;
-    //    console.log(textString);
+    //  console.log(textString);
     document.querySelector('#detailsView').innerHTML = textString;
 }
 export function generateString(sph, cyl, axis, add) {
@@ -127,7 +127,7 @@ export async function getPrice(rightType, leftType, type) {
         }
     }
     data = Object.values((await data).valueOf("data"))[0];
-    console.log(data);
+    ////   console.log(data);
     if (data.length > 0) {
         var keys = ["CRHC", "BRC", "Violet", "PGlite",
             "PGdark", "PolyHC", "PolyViolet", "PGViolet", "PhotoBrown"];
@@ -149,9 +149,9 @@ export async function getPrice(rightType, leftType, type) {
         //console.log("rightCost : " + rightCost);
         //console.log("leftCost : " + leftCost);
         for (var j in keys) {
-            console.log("j:" + j + "\nkey=" + keys[j]);
-            console.log(rightCost['"' + keys[j] + '"']);
-            console.log(leftCost['"' + keys[j] + '"']);
+            //   console.log("j:" + j + "\nkey=" + keys[j]);
+            //   console.log(rightCost['"' + keys[j] + '"']);
+            //   console.log(leftCost['"' + keys[j] + '"']);
             var totalCost = Number.parseFloat(rightCost[keys[j]]) + Number.parseFloat(leftCost[keys[j]]);
             if (!isNaN(totalCost)) {
                 totalCosts += "<br><br> " + keys[j] + " Rs." + (totalCost * 3);
@@ -172,7 +172,7 @@ export class powerTranspose {
         this.cyl = inCyl;
         this.axis = inAxis;
 
-        //    console.log("Line 46 : PowerTranspose :\nsph:" + this.sph + "\ncyl:" + this.cyl + "\naxis:" + this.axis);
+        //  console.log("Line 46 : PowerTranspose :\nsph:" + this.sph + "\ncyl:" + this.cyl + "\naxis:" + this.axis);
         if (!isNaN(this.sph) && !isNaN(this.cyl) && !isNaN(this.axis)) {
             if ((this.sph > 0 && this.cyl < 0) || (this.sph < 0 && this.cyl > 0)) {
                 this.sph = this.sph + this.cyl;
@@ -191,7 +191,7 @@ export class powerTranspose {
                 }
             }
         }
-        //    console.log("Line 58 : PowerTranspose End:\nsph:" + this.sph + "\ncyl:" + this.cyl + "\naxis:" + this.axis);
+        //  console.log("Line 58 : PowerTranspose End:\nsph:" + this.sph + "\ncyl:" + this.cyl + "\naxis:" + this.axis);
     }
 
 
@@ -307,139 +307,139 @@ export function testTypeProg(sphPower, cylPower, axis, add) {
     var axisType = "";
     //var addType = "";
     if (!isNaN(add)) {
-        //    console.log("line : 190");
+        //  console.log("line : 190");
         if (add >= 1 && add <= 3) {
-            //    console.log("line : 192");
+            //  console.log("line : 192");
             if (!isNaN(cylPower) && !isNaN(sphPower)) {
                 if ((sphPower < 0 && cylPower > 0) || (sphPower > 0 && cylPower < 0)) {
-                    //    console.log("line : 195");
+                    //  console.log("line : 195");
                     type = "Rx";
                 } else if (!isNaN(axis)) {
                     if ((sphPower > 3 && cylPower > 1) || (sphPower < -3 && cylPower < -1)) {
-                        //    console.log("line : 199");
+                        //  console.log("line : 199");
                         type = "Rx";
                     } else if ((sphPower > 2 && cylPower > 2) || (sphPower < -2 && cylPower < -2)) {
-                        //    console.log("line : 199");
+                        //  console.log("line : 199");
                         type = "Rx";
                     }
                 }
             } else if (cylPower < 0 && axis != 90) {
-                //    console.log("line : 198");
+                //  console.log("line : 198");
                 type = "Rx";
             } else if (cylPower > 0 && axis != 180) {
-                //    console.log("line : 200");
+                //  console.log("line : 200");
                 type = "Rx";
             } else if (isNaN(cylPower) && (sphPower > 6 || sphPower < -6)) {
-                //    console.log("line : 204");
+                //  console.log("line : 204");
                 type = "Rx";
             }
         } else {
-            //    console.log("line : 208");
+            //  console.log("line : 208");
             type = "Rx";
         }
         if (type.length == 0) {
-            //    console.log("line : 212");
+            //  console.log("line : 212");
             if (isNaN(sphPower) && !isNaN(cylPower)) {
-                //    console.log("line : 214");
+                //  console.log("line : 214");
                 if (cylPower > 0 && cylPower <= 2 && axis == 180) {
-                    //    console.log("line : 216");
+                    //  console.log("line : 216");
                     cylType = "+2"; axisType = " 180";
                 } else if (cylPower < 0 && cylPower >= -2 && axis == 90) {
-                    //    console.log("line : 219");
+                    //  console.log("line : 219");
                     cylType = "-2"; axisType = " 90";
                 } else if (cylPower > 1 && cylPower <= 2 && axis == 180) {
-                    //    console.log("line : 222");
+                    //  console.log("line : 222");
                     cylType = "+2"; axisType = " 180";
                 } else if (cylPower < -2 && cylPower >= -3 && axis == 90) {
-                    //    console.log("line : 225");
+                    //  console.log("line : 225");
                     cylType = "-3"; axisType = " 90";
                 } else if (cylPower > 2 && cylPower <= 3 && axis == 180) {
-                    //    console.log("line : 227");
+                    //  console.log("line : 227");
                     cylType = "+3"; axisType = " 180";
                 } else if (cylPower < -3 && cylPower >= -4 && axis == 90) {
-                    //    console.log("line : 231");
+                    //  console.log("line : 231");
                     cylType = "-4"; axisType = " 90";
                 } else if (cylPower > 3 && cylPower <= 4 && axis == 180) {
-                    //    console.log("line : 234");
+                    //  console.log("line : 234");
                     cylType = "+4"; axisType = " 180";
                 } else {
-                    //    console.log("line : 237");
+                    //  console.log("line : 237");
                     type = "Rx"; console.log("line 69");
                 }
             } else if (!isNaN(cylPower)) {
-                //    console.log("line : 241");
+                //  console.log("line : 241");
                 if (cylPower > 0 && cylPower <= 1 && axis == 180) {
-                    //    console.log("line : 243");
+                    //  console.log("line : 243");
                     cylType = "+1"; axisType = " 180";
                 } else if (cylPower < 0 && cylPower >= -1 && axis == 90) {
-                    //    console.log("line : 246");
+                    //  console.log("line : 246");
                     cylType = "-1"; axisType = " 90";
                 } else if (cylPower > 1 && cylPower <= 2 && sphPower <= 2 && axis == 180) {
-                    //    console.log("line : 249");
+                    //  console.log("line : 249");
                     cylType = "+2"; axisType = " 180";
                 } else if (cylPower < 1 && cylPower >= -2 && sphPower >= -2 && axis == 90) {
-                    //    console.log("line : 252");
+                    //  console.log("line : 252");
                     cylType = "-2"; axisType = " 90";
                 } else {
-                    //    console.log("line : 255");
+                    //  console.log("line : 255");
                     type = "Rx"; console.log("line 81");
                 }
             }
 
             if (sphPower > 0 && sphPower <= 2) {
-                //    console.log("line : 261");
+                //  console.log("line : 261");
                 sphType = "+2";
             } else if (sphPower < 0 && sphPower >= -2) {
-                //    console.log("line : 264");
+                //  console.log("line : 264");
                 sphType = "-2";
             } else if ((isNaN(cylPower) || cylPower <= 1) && sphPower > 2 && sphPower <= 3) {
-                //    console.log("line : 267");
+                //  console.log("line : 267");
                 sphType = "+3";
             } else if ((isNaN(cylPower) || cylPower >= -1) && sphPower < -2 && sphPower >= -3) {
-                //    console.log("line : 270");
+                //  console.log("line : 270");
                 sphType = "-3";
             } else if (isNaN(cylPower) && (sphPower < -3 || sphPower > 3)) {
-                //    console.log("line : 273");
+                //  console.log("line : 273");
                 if (sphPower < -3 && sphPower >= -4) {
-                    //    console.log("line : 275");
+                    //  console.log("line : 275");
                     sphType = "-4";
                 } else if (sphPower < -4 && sphPower >= -5) {
-                    //    console.log("line : 278");
+                    //  console.log("line : 278");
                     sphType = "-5";
                 } else if (sphPower < -5 && sphPower >= -6) {
-                    //    console.log("line : 281");
+                    //  console.log("line : 281");
                     sphType = "-6";
                 } else if (sphPower > 3 && sphPower <= 4) {
-                    //    console.log("line : 284");
+                    //  console.log("line : 284");
                     sphPower = "+4";
                 } else if (sphPower > 4 && sphPower <= 5) {
-                    //    console.log("line : 287");
+                    //  console.log("line : 287");
                     sphType = "+5";
                 } else if (sphPower > 5 && sphPower <= 6) {
-                    //    console.log("line : 289");
+                    //  console.log("line : 289");
                     sphType = "+6";
                 } else {
-                    //    console.log("line : 293");
+                    //  console.log("line : 293");
                     type = "Rx";
                 }
             }
             if (add < 1 || add > 3) {
-                //    console.log("line : 298");
+                //  console.log("line : 298");
                 type = "Rx";
             }
             if (type.length == 0) {
-                //    console.log("line : 302");
+                //  console.log("line : 302");
                 if (sphType.length > 0 && cylType.length > 0 && axisType.length > 0) {
-                    //    console.log("line : 304");
+                    //  console.log("line : 304");
                     type = sphType + "sph/" + cylType + "cyl" + axisType + " V2";
                 } else if (sphType.length == 0 && cylType.length > 0 && axisType.length > 0) {
-                    //    console.log("line : 307");
+                    //  console.log("line : 307");
                     type = cylType + "cyl" + axisType + " V2";
                 } else if (sphType.length > 0 && cylType.length == 0) {
-                    //    console.log("line : 309");
+                    //  console.log("line : 309");
                     type = sphType + "sph V2";
                 } else {
-                    //    console.log("line : 313");
+                    //  console.log("line : 313");
                     type = "Error";
                 }
             }
@@ -447,118 +447,118 @@ export function testTypeProg(sphPower, cylPower, axis, add) {
 
         return type;
     } else {
-        //    console.log("line : 321");
+        //  console.log("line : 321");
         return testTypeSV(sphPower, cylPower);
     }
 }
 export function testTypeSV(sphPower, cylPower) {
-    //    console.log("sphPower :" + sphPower + "\n cylPower : " + cylPower);
-    //    console.log(cylPower);
+    //  console.log("sphPower :" + sphPower + "\n cylPower : " + cylPower);
+    //  console.log(cylPower);
     var type = "";
     var sphType = "";
     var cylType = "";
     if (sphPower >= -6 && sphPower <= 0) {
         sphType = "-6";
-        //    console.log("line : 291");
+        //  console.log("line : 291");
     } else if (sphPower >= -8 && sphPower <= -6.25) {
         sphType = "-8";
-        //    console.log("line : 294");
+        //  console.log("line : 294");
     } else if (sphPower >= -10 && sphPower <= -8.25) {
         sphType = "-10";
-        //    console.log("line : 397");
+        //  console.log("line : 397");
     } else if (sphPower <= -10.25) {
         sphType = "Rx";
-        //    console.log("line : 300");
+        //  console.log("line : 300");
     } if (sphPower >= 0 && sphPower <= 4) {
         sphType = "+4";
-        //    console.log("line : 303");
+        //  console.log("line : 303");
     } else if (sphPower > 4 && sphPower <= 6) {
         sphType = "+6";
-        //    console.log("line : 306");
+        //  console.log("line : 306");
     } else if (sphPower > 6 && sphPower <= 8) {
         sphType = "+8";
-        //    console.log("line : 309");
+        //  console.log("line : 309");
     } else if (sphPower > 8.00) {
         sphType = "Rx";
-        //    console.log("line : 312");
+        //  console.log("line : 312");
     }
     if (cylPower >= -2 && cylPower <= 0) {
         cylType = "-2";
-        //    console.log("line : 316");
+        //  console.log("line : 316");
     } else if (cylPower >= -4 && cylPower <= -2.25) {
         cylType = "-4";
-        //    console.log("line : 319");
+        //  console.log("line : 319");
     } else if (cylPower <= -4.25) {
         cylType = "Rx";
-        //    console.log("line : 322");
+        //  console.log("line : 322");
     } else if (cylPower >= 0 && cylPower <= 2) {
         cylType = "+2";
-        //    console.log("line : 325");
+        //  console.log("line : 325");
     } else if (cylPower > 2 && cylPower <= 4) {
         cylType = "+4";
-        //    console.log("line : 328");
+        //  console.log("line : 328");
     } else if (cylPower > 4.00) {
         cylType = "Rx";
-        //    console.log("line : 331");
+        //  console.log("line : 331");
     }
     if (sphType.length == 0) {
-        //    console.log("line : 334");
+        //  console.log("line : 334");
         if (cylType.length > 0 && (cylType.indexOf('Rx') < 0)) {
-            //    console.log("line : 336");
+            //  console.log("line : 336");
             if (cylPower > 0) {
                 type = "+6/" + cylType;
-                //    console.log("line : 339");
+                //  console.log("line : 339");
             } else if (cylPower <= 0) {
                 type = "-6/" + cylType;
-                //    console.log("line : 342");
+                //  console.log("line : 342");
             } else {
                 type = "-6/-2";
-                //    console.log("line : 345");
+                //  console.log("line : 345");
             }
         } else if (cylType.indexOf('Rx') >= 0) {
             type = "Rx";
-            //    console.log("line : 249");
+            //  console.log("line : 249");
         } else {
             type = "Error";
-            //    console.log("line : 352");
+            //  console.log("line : 352");
         }
     }
     if (sphType.length > 0) {
-        //    console.log("line : 142");
+        //  console.log("line : 142");
         if (cylType.length > 0 && (cylType.indexOf('Rx') < 0) && (sphType.indexOf('Rx') < 0)) {
-            //    console.log("line : 144");
+            //  console.log("line : 144");
             if (cylPower > 0) {
                 type = sphType + "/" + cylType;
-                //    console.log("line : 147");
+                //  console.log("line : 147");
             } else if (cylPower < 0) {
                 type = sphType + "/" + cylType;
-                //    console.log("line : 150");
+                //  console.log("line : 150");
             } else if (sphPower <= 0) {
                 type = sphType + "/-2";
-                //    console.log("line : 153");
+                //  console.log("line : 153");
             } else if (sphPower > 0) {
                 type = sphType + "/+2";
-                //    console.log("line : 156");
+                //  console.log("line : 156");
             }
         } else if (cylType.indexOf('Rx') >= 0 || (sphType.indexOf('Rx') >= 0)) {
-            //    console.log("line : 159");
+            //  console.log("line : 159");
             type = "Rx";
         } else if (cylType.length == 0 && sphPower <= 0) {
             type = sphType + "/-2";
-            //    console.log("line : 163");
+            //  console.log("line : 163");
         } else if (cylType.length == 0 && sphPower > 0) {
             type = sphType + "/+2";
-            //    console.log("line : 166");
+            //  console.log("line : 166");
         } else {
             type = "Error";
-            //    console.log("line : 169");
+            //  console.log("line : 169");
         }
     }
     return type;
 }
 export function additionEnter() {
     var add_elems = document.querySelector('#additionLabel').querySelectorAll('select');
-    //    console.log(add_elems);
+    //  console.log(add_elems);
     for (var i = 0; i < add_elems.length; i++) {
         var inp = add_elems[i].value;
         if (inp.length > 0) {

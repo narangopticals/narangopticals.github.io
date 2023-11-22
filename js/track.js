@@ -45,7 +45,7 @@ export async function initId() {
             return results.json();
         });
         data = await results.then(data => {
-            console.log(data);
+            //   console.log(data);
             return data.files["trackOrder.json"].content;
         });
         setTimeout(data = JSON.parse(data), 3000);

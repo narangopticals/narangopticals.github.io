@@ -237,7 +237,7 @@ async function addItemViews(startNum, endNum) {
     for (var i = 0; i < prodViews.length; i++) {
         var tmp = prodViews[i];
         var prevBtn = tmp.querySelector("button[id^=grid" + i + "Prev]");
-        console.log(prevBtn);
+        //   console.log(prevBtn);
         prevBtn.value = "grid" + i;
         prevBtn.addEventListener("click",
             function (e) {
@@ -245,7 +245,7 @@ async function addItemViews(startNum, endNum) {
             });
         var nextBtn = tmp.querySelector("button[id^=grid" + i + "Next]");
         nextBtn.value = "grid" + i;
-        console.log(nextBtn);
+        //   console.log(nextBtn);
         nextBtn.addEventListener("click",
             function (e) {
                 imgSwitch('next', e.currentTarget.value, '');
