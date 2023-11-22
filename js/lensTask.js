@@ -27,6 +27,8 @@ export async function submit() {
     leftCyl = leftTranspose.cyl;
     leftAxis = leftTranspose.axis;
     var cost = "";
+    var numberStringR = generateString(rightSph, rightCyl, rightAxis, rightAdd)
+    var numberStringL = generateString(leftSph, leftCyl, leftAxis, leftAdd);
     if (disabled) {
         rightType = testTypeSV(rightSph, rightCyl);
         leftType = testTypeSV(leftSph, leftCyl);
@@ -46,9 +48,27 @@ export async function submit() {
             leftType = testTypeProg(leftSph, leftCyl, leftAxis, leftAdd);
         }
     }
-    var textString = "Right Type : " + rightType + "<br>Left Type : " + leftType + cost;
+
+    var textString = "R: " + numberStringR + "<br>" +
+        "L: " + numberStringL + "<br>" +
+        "Right Type : " + rightType + "<br>Left Type : " + leftType + cost;
     //    console.log(textString);
     document.querySelector('#detailsView').innerHTML = textString;
+}
+export function generateString(sph, cyl, axis, add) {
+    var string = "";
+    if (!isNaN(sph)) {
+        string += sph + "sph";
+    }
+    if (!isNaN(sph) && !isNaN(cyl)) {
+        string += "/" + cyl + "cyl " + axis;
+    } else if (!isNaN(cyl)) {
+        string += cyl + "cyl " + axis;
+    }
+    if (!isNaN(add)) {
+        string += "Add : +" + add;
+    }
+    return string;
 }
 export async function getKTprice(rightType, leftType) {
     var data = "";
