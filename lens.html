@@ -41,9 +41,9 @@
             </label>
             <label id="additionLabel" style="display: flex;flex-direction: column;">
                 <span>Add.</span>
-                <select for="reAdd" onchange="addition()" type="number" step="0.25" min="0.75" max="4.00" id="reAdd"
-                    style="min-width: 50%;"></select>
-                <select onchange="addition()" type="number" step="0.25" min="0.75" max="4.00" id="leAdd"
+                <select for="reAdd" onchange="additionEnter()" type="number" step="0.25" min="0.75" max="4.00"
+                    id="reAdd" style="min-width: 50%;"></select>
+                <select onchange="additionEnter()" type="number" step="0.25" min="0.75" max="4.00" id="leAdd"
                     style="min-width: 50%;"></select>
             </label>
         </div>
@@ -60,199 +60,7 @@
         <button onclick="submit()">Submit</button>
     </div>
     <div id="detailsView"></div>
-    <script type="text/javascript">
 
-        var disabled = true;
-        function submit() {
-            var rightType = "";
-            var leftType = "";
-            var rightSph_elem = document.querySelector('#r_sphPower');
-            var leftSph_elem = document.querySelector('#l_sphPower');
-            var rightCyl_elem = document.querySelector('#r_cylPower');
-            var leftCyl_elem = document.querySelector('#l_cylPower');
-            var rightAxis_elem = document.querySelector('#reAxis');
-            var leftAxis_elem = document.querySelector('#leAxis');
-            var rightAdd_elem = document.querySelector('#reAdd');
-            var leftAdd_elem = document.querySelector('#leAdd');
-            var rightSph = Number.parseFloat(rightSph_elem.value);
-            var leftSph = Number.parseFloat(leftSph_elem.value);
-            var rightCyl = Number.parseFloat(rightCyl_elem.value);
-            var leftCyl = Number.parseFloat(leftCyl_elem.value);
-            if (disabled) {
-                rightType = testTypeSV(rightSph, rightCyl);
-                leftType = testTypeSV(leftSph, leftCyl);
-            }else{
-                
-            }
-            var textString = "Right Type : " + rightType + "<br>Left Type : " + leftType;
-            console.log(textString);
-            document.querySelector('#detailsView').innerHTML = textString;
-        }
-
-        function testTypeSV(sphPower, cylPower) {
-            console.log("sphPower :" + sphPower + "\n cylPower : " + cylPower);
-            console.log(cylPower);
-            var type = "";
-            var sphType = "";
-            var cylType = "";
-            if (sphPower >= -6 && sphPower <= 0) {
-                sphType = "-6";
-                console.log("line : 98");
-            } else if (sphPower >= -8 && sphPower <= -6.25) {
-                sphType = "-8";
-                console.log("line : 101");
-            } else if (sphPower >= -10 && sphPower <= -8.25) {
-                sphType = "-10";
-                console.log("line : 104");
-            } else if (sphPower <= -10.25) {
-                sphType = "Rx";
-                console.log("line : 107");
-            } if (sphPower >= 0 && sphPower <= 4) {
-                sphType = "+4";
-                console.log("line : 110");
-            } else if (sphPower > 4 && sphPower <= 6) {
-                sphType = "+6";
-                console.log("line : 113");
-            } else if (sphPower > 6 && sphPower <= 8) {
-                sphType = "+8";
-                console.log("line : 116");
-            } else if (sphPower > 8.00) {
-                sphType = "Rx";
-                console.log("line : 119");
-            }
-            if (cylPower >= -2 && cylPower <= 0) {
-                cylType = "-2";
-                console.log("line : 123");
-            } else if (cylPower >= -4 && cylPower <= -2.25) {
-                cylType = "-4";
-                console.log("line : 126");
-            } else if (cylPower <= -4.25) {
-                cylType = "Rx";
-                console.log("line : 129");
-            } else if (cylPower >= 0 && cylPower <= 2) {
-                cylType = "+2";
-                console.log("line : 123");
-            } else if (cylPower > 2 && cylPower <= 4) {
-                cylType = "+4";
-                console.log("line : 126");
-            } else if (cylPower > 4.00) {
-                cylType = "Rx";
-                console.log("line : 129");
-            }
-            if (sphType.length == 0) {
-                console.log("line : 120");
-                if (cylType.length > 0 && (cylType.indexOf('Rx') < 0)) {
-                    console.log("line : 122");
-                    if (cylPower > 0) {
-                        type = "+6/" + cylType;
-                        console.log("line : 125");
-                    } else if (cylPower <= 0) {
-                        type = "-6/" + cylType;
-                        console.log("line : 127");
-                    } else {
-                        type = "-6/-2";
-                        console.log("line : 131");
-                    }
-                } else if (cylType.indexOf('Rx') >= 0) {
-                    type = "Rx";
-                    console.log("line : 135");
-                } else {
-                    type = "Error";
-                    console.log("line : 137");
-                }
-            }
-            if (sphType.length > 0) {
-                console.log("line : 142");
-                if (cylType.length > 0 && (cylType.indexOf('Rx') < 0) && (sphType.indexOf('Rx') < 0)) {
-                    console.log("line : 144");
-                    if (cylPower > 0) {
-                        type = sphType + "/" + cylType;
-                        console.log("line : 147");
-                    } else if (cylPower < 0) {
-                        type = sphType + "/" + cylType;
-                        console.log("line : 150");
-                    } else if (sphPower <= 0) {
-                        type = sphType + "/-2";
-                        console.log("line : 153");
-                    } else if (sphPower > 0) {
-                        type = sphType + "/+2";
-                        console.log("line : 156");
-                    }
-                } else if (cylType.indexOf('Rx') >= 0 || (sphType.indexOf('Rx') >= 0)) {
-                    console.log("line : 159");
-                    type = "Rx";
-                } else if (cylType.length == 0 && sphPower <= 0) {
-                    type = sphType + "/-2";
-                    console.log("line : 163");
-                } else if (cylType.length == 0 && sphPower > 0) {
-                    type = sphType + "/+2";
-                    console.log("line : 166");
-                } else {
-                    type = "Error";
-                    console.log("line : 169");
-                }
-            }
-            return type;
-        }
-        function addition() {
-            var add_elems = document.querySelector('#additionLabel').querySelectorAll('select');
-            console.log(add_elems);
-            for (var i = 0; i < add_elems.length; i++) {
-                var inp = add_elems[i].value;
-                if (inp.length > 0) {
-                    disabled = false;
-                    break;
-                } else {
-                    disabled = true;
-                }
-            }
-            var lensType_elem = document.querySelector('#lensType');
-            var input_elems = lensType_elem.querySelectorAll('input');
-            if (disabled) {
-                input_elems[0].click();
-            }
-            for (var i = 1; i < input_elems.length; i++) {
-                var inp = input_elems[i];
-                inp.disabled = disabled;
-            }
-        }
-    </script>
-    <script type="text/javascript">
-        var rightSph_elem = document.querySelector('#r_sphPower');
-        var leftSph_elem = document.querySelector('#l_sphPower');
-        var rightCyl_elem = document.querySelector('#r_cylPower');
-        var leftCyl_elem = document.querySelector('#l_cylPower');
-        var rightAdd_elem = document.querySelector('#reAdd');
-        var leftAdd_elem = document.querySelector('#leAdd');
-        var i = -20;
-        var opt = '<option value=""></option>';
-        rightSph_elem.innerHTML = rightSph_elem.innerHTML + opt;
-        leftSph_elem.innerHTML = leftSph_elem.innerHTML + opt;
-        rightCyl_elem.innerHTML = rightCyl_elem.innerHTML + opt;
-        leftCyl_elem.innerHTML = leftCyl_elem.innerHTML + opt;
-        rightAdd_elem.innerHTML = rightAdd_elem.innerHTML + opt;
-        leftAdd_elem.innerHTML = leftAdd_elem.innerHTML + opt;
-        while (i <= 20) {
-            var opt = '<option value="' + i.toFixed(2) + '">' + i.toFixed(2) + '</option>';
-            rightSph_elem.innerHTML = rightSph_elem.innerHTML + opt;
-            leftSph_elem.innerHTML = leftSph_elem.innerHTML + opt;
-            if (i >= -10 && i <= 10) {
-                rightCyl_elem.innerHTML = rightCyl_elem.innerHTML + opt;
-                leftCyl_elem.innerHTML = leftCyl_elem.innerHTML + opt;
-            }
-            if (i <= -10 || i >= 10) {
-                i = i + 1;
-            } else if (i <= -6 || i >= 6) {
-                i = i + 0.50;
-            } else {
-                i = i + 0.25;
-                if (i > 0.50 && i < 4.25) {
-                    rightAdd_elem.innerHTML = rightAdd_elem.innerHTML + opt;
-                    leftAdd_elem.innerHTML = leftAdd_elem.innerHTML + opt;
-                }
-            }
-        }
-    </script>
     <!--<div id="formBody" style="width: 100%;
     height: fit-content;">
         <iframe src="https://vyaparapp.in/store/NarangOpticalsKashipur" style="width: 100%;
@@ -263,13 +71,12 @@
 
     </div>-->
 
-
-
     <script type="module">
 
         import { navLoader, toggle, navScroll, switchTheme, loadThemeBtn } from "./js/navload.js";
         import { browserDetect } from "./js/general.js";
         import { animateFlexs, swipeLeft, swipeRight } from "./js/indexAnimate.js";
+        import { initViews, submit, testTypeKT, testTypeSV, additionEnter, disabled } from "./js/lensTask.js";
         browserDetect();
         window.navLoader = navLoader;
         window.toggle = toggle;
@@ -287,5 +94,15 @@
             location.reload();
         });
         window.document.body.onload = loadThemeBtn;
+
+        /**lensTask.js assign**/
+        window.submit = submit;
+        window.testTypeKT = testTypeKT;
+        window.testTypeSV = testTypeSV;
+        window.additionEnter = additionEnter;
+        window.disabled = disabled;
+        window.initViews = initViews;
+        initViews();
+        /**lensTask.js assign**/
     </script>
 </body>

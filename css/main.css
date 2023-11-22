@@ -419,7 +419,8 @@ article {
     padding-left: 8px;
 }
 
-.flexs {
+.flexs,
+#detailsView {
     flex-wrap: wrap;
     word-wrap: normal;
     min-width: 45%;
