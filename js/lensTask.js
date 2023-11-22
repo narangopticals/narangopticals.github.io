@@ -39,13 +39,15 @@ export async function submit() {
         if (input_elems[0].checked) {
             rightType = testTypeSV(rightSph, rightCyl);
             leftType = testTypeSV(leftSph, leftCyl);
+            cost = await getPrice(rightType, leftType, 0);
         } else if (input_elems[1].checked) {
             rightType = testTypeKT(rightSph, rightCyl, rightAxis, rightAdd);
             leftType = testTypeKT(leftSph, leftCyl, leftAxis, leftAdd);
-            cost = await getKTprice(rightType, leftType);
+            cost = await getPrice(rightType, leftType, 1);
         } else if (input_elems[2].checked) {
             rightType = testTypeProg(rightSph, rightCyl, rightAxis, rightAdd);
             leftType = testTypeProg(leftSph, leftCyl, leftAxis, leftAdd);
+            cost = await getPrice(rightType, leftType, 2);
         }
     }
 
@@ -70,21 +72,53 @@ export function generateString(sph, cyl, axis, add) {
     }
     return string;
 }
-export async function getKTprice(rightType, leftType) {
+export async function getPrice(rightType, leftType, type) {
     var data = "";
-    try {
-        var results = fetch('https://api.github.com/gists/d60f835029b271e9c33d34836e6459ec').then(results => {
-            return results.json();
-        });
-        data = await results.then(data => {
-            return data.files["lensKTDetails.json"].content;
-        });
-        setTimeout(data = JSON.parse(data), 3000);
-    } catch (error) {
-        window.alert(error);
-        /*data = fetch('../json/prodFmData.json').then(results => {
-            return results.json();
-        });*/
+    if (type == 0) {
+        try {
+            var results = fetch('https://api.github.com/gists/833f42c511801927fea4026d252eaa61').then(results => {
+                return results.json();
+            });
+            data = await results.then(data => {
+                return data.files["lensSVDetails.json"].content;
+            });
+            setTimeout(data = JSON.parse(data), 3000);
+        } catch (error) {
+            window.alert(error);
+            /*data = fetch('../json/prodFmData.json').then(results => {
+                return results.json();
+            });*/
+        }
+    } else if (type == 1) {
+        try {
+            var results = fetch('https://api.github.com/gists/44d674dd8f4ea4c2f2971096f10cf1d5').then(results => {
+                return results.json();
+            });
+            data = await results.then(data => {
+                return data.files["lensKTDetails.json"].content;
+            });
+            setTimeout(data = JSON.parse(data), 3000);
+        } catch (error) {
+            window.alert(error);
+            /*data = fetch('../json/prodFmData.json').then(results => {
+                return results.json();
+            });*/
+        }
+    } else if (type == 2) {
+        try {
+            var results = fetch('https://api.github.com/gists/d60f835029b271e9c33d34836e6459ec').then(results => {
+                return results.json();
+            });
+            data = await results.then(data => {
+                return data.files["lensV2Details.json"].content;
+            });
+            setTimeout(data = JSON.parse(data), 3000);
+        } catch (error) {
+            window.alert(error);
+            /*data = fetch('../json/prodFmData.json').then(results => {
+                return results.json();
+            });*/
+        }
     }
     data = Object.values((await data).valueOf("data"))[0];
     console.log(data);
