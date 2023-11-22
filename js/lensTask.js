@@ -91,7 +91,7 @@ export async function getPrice(rightType, leftType, type) {
         }
     } else if (type == 1) {
         try {
-            var results = fetch('https://api.github.com/gists/44d674dd8f4ea4c2f2971096f10cf1d5').then(results => {
+            var results = fetch('https://api.github.com/gists/d60f835029b271e9c33d34836e6459ec').then(results => {
                 return results.json();
             });
             data = await results.then(data => {
@@ -106,7 +106,7 @@ export async function getPrice(rightType, leftType, type) {
         }
     } else if (type == 2) {
         try {
-            var results = fetch('https://api.github.com/gists/d60f835029b271e9c33d34836e6459ec').then(results => {
+            var results = fetch('https://api.github.com/gists/44d674dd8f4ea4c2f2971096f10cf1d5').then(results => {
                 return results.json();
             });
             data = await results.then(data => {
