@@ -27,11 +27,13 @@ export async function submit() {
     leftCyl = leftTranspose.cyl;
     leftAxis = leftTranspose.axis;
     var cost = "";
-    var numberStringR = generateString(rightSph, rightCyl, rightAxis, rightAdd)
-    var numberStringL = generateString(leftSph, leftCyl, leftAxis, leftAdd);
+    var numberStringR = "";
+    var numberStringL = "";
     if (disabled) {
         rightType = testTypeSV(rightSph, rightCyl);
         leftType = testTypeSV(leftSph, leftCyl);
+        rightAdd = NaN;
+        leftAdd = NaN;
     } else {
         var lensType_elem = document.querySelector('#lensType');
         var input_elems = lensType_elem.querySelectorAll('input');
@@ -40,6 +42,8 @@ export async function submit() {
             rightType = testTypeSV(rightSph, rightCyl);
             leftType = testTypeSV(leftSph, leftCyl);
             cost = await getPrice(rightType, leftType, 0);
+            rightAdd = NaN;
+            leftAdd = NaN;
         } else if (input_elems[1].checked) {
             rightType = testTypeKT(rightSph, rightCyl, rightAxis, rightAdd);
             leftType = testTypeKT(leftSph, leftCyl, leftAxis, leftAdd);
@@ -51,6 +55,8 @@ export async function submit() {
         }
     }
 
+    var numberStringR = generateString(rightSph, rightCyl, rightAxis, rightAdd)
+    var numberStringL = generateString(leftSph, leftCyl, leftAxis, leftAdd);
     var textString = "R: " + numberStringR + "<br>" +
         "L: " + numberStringL + "<br>" +
         "Right Type : " + rightType + "<br>Left Type : " + leftType + cost;
@@ -68,7 +74,7 @@ export function generateString(sph, cyl, axis, add) {
         string += cyl + "cyl " + axis;
     }
     if (!isNaN(add)) {
-        string += "Add : +" + add;
+        string += " Add : +" + add;
     }
     return string;
 }
