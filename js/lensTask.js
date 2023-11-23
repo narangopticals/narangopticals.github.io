@@ -82,7 +82,8 @@ export function generateString(sph, cyl, axis, add) {
 export async function getPrice(rightType, leftType, type) {
     var data = "";
     var keys;
-    var factor = 1;
+    var factor = 3;
+    var dis = 100;
     if (type == 0) {
         factor = 3.5;
         keys = ["CRHC", "Tinted", "BRC", "ASH BRC", "Bluecutt Violet", "Eyeconic Violet", "Ash Prevencia",
@@ -104,7 +105,7 @@ export async function getPrice(rightType, leftType, type) {
             });*/
         }
     } else if (type == 1) {
-        factor = 3;
+        factor = 3.5;
         keys = ["CRHC", "BRC", "Violet", "PGlite",
             "PGdark", "PolyHC", "PolyViolet", "PGViolet", "PhotoBrown"];
         try {
@@ -122,7 +123,7 @@ export async function getPrice(rightType, leftType, type) {
             });*/
         }
     } else if (type == 2) {
-        factor = 3.5;
+        factor = 4;
         keys = ["CRHC", "CRHC Digital", "BRC", "Violet", "Bluecutt Digital",
             "PG CR", "PolyBluecutt", "Poly PG BRC", "PolyHC", "PG CR BRC"];
         try {
@@ -165,10 +166,18 @@ export async function getPrice(rightType, leftType, type) {
             //   console.log(rightCost['"' + keys[j] + '"']);
             //   console.log(leftCost['"' + keys[j] + '"']);
             var totalCost = Number.parseFloat(rightCost[keys[j]]) + Number.parseFloat(leftCost[keys[j]]);
+            totalCost = (totalCost * factor);
+            if (totalCost < 1000) {
+                dis = 1;
+            } else if (totalCost >= 1000 && totalCost < 2000) {
+                dis = 0.92;
+            } else if (totalCost >= 2000 && totalCost < 3000) {
+                dis = 0.84;
+            }
             if (!isNaN(totalCost)) {
-                totalCosts += "<br><br> " + keys[j] + " Rs." + (totalCost * factor);
+                totalCosts += "<br><br> " + keys[j] + ": Rs." + (totalCost * dis).toFixed(2);
             } else {
-                totalCosts += "<br><br> " + keys[j] + " Rx";
+                totalCosts += "<br><br> " + keys[j] + ": Rx";
             }
         }
         return totalCosts;
