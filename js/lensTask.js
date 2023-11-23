@@ -168,11 +168,15 @@ export async function getPrice(rightType, leftType, type) {
             var totalCost = Number.parseFloat(rightCost[keys[j]]) + Number.parseFloat(leftCost[keys[j]]);
             totalCost = (totalCost * factor);
             if (totalCost < 1000) {
-                dis = 1;
+                dis = 1.1;
             } else if (totalCost >= 1000 && totalCost < 2000) {
-                dis = 0.92;
+                dis = 0.90;
             } else if (totalCost >= 2000 && totalCost < 3000) {
-                dis = 0.84;
+                dis = 0.80;
+            } else if (totalCost >= 3000 && totalCost < 4000) {
+                dis = 0.68;
+            } else if (totalCost >= 4000) {
+                dis = 0.55;
             }
             if (!isNaN(totalCost)) {
                 totalCosts += "<br><br> " + keys[j] + ": Rs." + (totalCost * dis).toFixed(2);
