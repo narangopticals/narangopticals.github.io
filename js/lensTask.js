@@ -32,6 +32,7 @@ export async function submit() {
     if (disabled) {
         rightType = testTypeSV(rightSph, rightCyl);
         leftType = testTypeSV(leftSph, leftCyl);
+        cost = await getPrice(rightType, leftType, 0);
         rightAdd = NaN;
         leftAdd = NaN;
     } else {
@@ -80,7 +81,14 @@ export function generateString(sph, cyl, axis, add) {
 }
 export async function getPrice(rightType, leftType, type) {
     var data = "";
+    var keys;
+    var factor = 1;
     if (type == 0) {
+        factor = 3.5;
+        keys = ["CRHC", "Tinted", "BRC", "ASH BRC", "Bluecutt Violet", "Eyeconic Violet", "Ash Prevencia",
+            "Ash NightDrive", "Ash MariBlue", "Poly BRC", "Poly Bluecutt Violet", "Poly TwinSteel",
+            "ASH PG Bluecut BRC", "ASH PG Bluecut Violet", "PG Bluecut BRC", "PG Bluecut Violet",
+            "PG lite", "PG super"];
         try {
             var results = fetch('https://api.github.com/gists/833f42c511801927fea4026d252eaa61').then(results => {
                 return results.json();
@@ -96,6 +104,9 @@ export async function getPrice(rightType, leftType, type) {
             });*/
         }
     } else if (type == 1) {
+        factor = 3;
+        keys = ["CRHC", "BRC", "Violet", "PGlite",
+            "PGdark", "PolyHC", "PolyViolet", "PGViolet", "PhotoBrown"];
         try {
             var results = fetch('https://api.github.com/gists/d60f835029b271e9c33d34836e6459ec').then(results => {
                 return results.json();
@@ -111,6 +122,9 @@ export async function getPrice(rightType, leftType, type) {
             });*/
         }
     } else if (type == 2) {
+        factor = 3.5;
+        keys = ["CRHC", "CRHC Digital", "BRC", "Violet", "Bluecutt Digital",
+            "PG CR", "PolyBluecutt", "Poly PG BRC", "PolyHC", "PG CR BRC"];
         try {
             var results = fetch('https://api.github.com/gists/44d674dd8f4ea4c2f2971096f10cf1d5').then(results => {
                 return results.json();
@@ -129,8 +143,6 @@ export async function getPrice(rightType, leftType, type) {
     data = Object.values((await data).valueOf("data"))[0];
     ////   console.log(data);
     if (data.length > 0) {
-        var keys = ["CRHC", "BRC", "Violet", "PGlite",
-            "PGdark", "PolyHC", "PolyViolet", "PGViolet", "PhotoBrown"];
         var rightCost = "";
         var leftCost = "";
         var totalCosts = "";
@@ -154,7 +166,7 @@ export async function getPrice(rightType, leftType, type) {
             //   console.log(leftCost['"' + keys[j] + '"']);
             var totalCost = Number.parseFloat(rightCost[keys[j]]) + Number.parseFloat(leftCost[keys[j]]);
             if (!isNaN(totalCost)) {
-                totalCosts += "<br><br> " + keys[j] + " Rs." + (totalCost * 3);
+                totalCosts += "<br><br> " + keys[j] + " Rs." + (totalCost * factor);
             } else {
                 totalCosts += "<br><br> " + keys[j] + " Rx";
             }
@@ -167,10 +179,12 @@ export class powerTranspose {
     static sph;
     static cyl;
     static axis;
-    constructor(inSph, inCyl, inAxis) {
+    //static add;
+    constructor(inSph, inCyl, inAxis, inAdd) {
         this.sph = inSph;
         this.cyl = inCyl;
         this.axis = inAxis;
+        //this.add = inAdd;
 
         //  console.log("Line 46 : PowerTranspose :\nsph:" + this.sph + "\ncyl:" + this.cyl + "\naxis:" + this.axis);
         if (!isNaN(this.sph) && !isNaN(this.cyl) && !isNaN(this.axis)) {
@@ -189,7 +203,12 @@ export class powerTranspose {
                 if (this.cyl == 0) {
                     this.cyl = NaN;
                 }
+
             }
+        }
+
+        if (isNaN(this.sph) && isNaN(this.cyl)) {
+            this.sph = 0;
         }
         //  console.log("Line 58 : PowerTranspose End:\nsph:" + this.sph + "\ncyl:" + this.cyl + "\naxis:" + this.axis);
     }
@@ -386,7 +405,7 @@ export function testTypeProg(sphPower, cylPower, axis, add) {
                 }
             }
 
-            if (sphPower > 0 && sphPower <= 2) {
+            if (sphPower >= 0 && sphPower <= 2) {
                 //  console.log("line : 261");
                 sphType = "+2";
             } else if (sphPower < 0 && sphPower >= -2) {
@@ -452,6 +471,91 @@ export function testTypeProg(sphPower, cylPower, axis, add) {
     }
 }
 export function testTypeSV(sphPower, cylPower) {
+    var type = "";
+    var sphType = "";
+    var cylType = "";
+    if (isNaN(sphPower)) {
+        if (!isNaN(cylPower)) {
+            if (cylPower > 0) {
+                sphType = "+4";
+            } else if (cylPower < 0) {
+                sphType = "-6";
+            }
+        } else {
+            type = "-6/-2";
+        }
+    } else if (sphPower >= -6 && sphPower <= 0) {
+        sphType = "-6";
+        //  console.log("line : 291");
+    } else if (sphPower >= -8 && sphPower < -6) {
+        sphType = "-8";
+        //  console.log("line : 294");
+    } else if (sphPower >= -10 && sphPower < -8.00) {
+        if (isNaN(cylPower) || (cylPower > -2 && cylPower < 0)) {
+            sphType = "-10";
+        } else {
+            type = "Rx";
+        }
+        //  console.log("line : 397");
+    } else if (sphPower > 0 && sphPower <= 3) {
+        if (isNaN(cylPower) || (cylPower > 0 && cylPower <= 1)) {
+            type = "+3/+1";
+        } else {
+            type = "Rx";
+        }
+        //  console.log("line : 303");
+    } else if (sphPower > 3 && sphPower <= 4) {
+        if (isNaN(cylPower) || (cylPower > 0 && cylPower <= 2)) {
+            type = "+4/+2";
+        } else {
+            type = "Rx";
+        }
+        //  console.log("line : 303");
+    } else if (sphPower > 4 && sphPower <= 6) {
+        if (isNaN(cylPower) || (cylPower >= -2 && cylPower < 0)) {
+            type = "+6/-2 (only sph)";
+        } else {
+            type = "Rx";
+        }
+        //  console.log("line : 306");
+    } else if (sphPower > 6 && sphPower <= 8) {
+        if (isNaN(cylPower) || (cylPower > -2 && cylPower < 0)) {
+            sphType = "+8";
+        } else {
+            type = "Rx";
+        }
+        //  console.log("line : 309");
+    } else if (sphPower > 8.00 || sphPower < -10) {
+        type = "Rx";
+        //  console.log("line : 312");
+    }
+    if (isNaN(cylPower)) {
+        if (sphPower > 0) {
+            cylType = "+2";
+        } else if (sphPower <= 0) {
+            cylType = "-2";
+        } else if (sphPower > 4 && sphPower <= 6) {
+            cylType = "-2 (only sph)";
+        }
+    } else if (cylPower >= -2 && cylPower <= 0) {
+        cylType = "-2";
+    } else if (cylPower >= -4 && cylPower < -2) {
+        cylType = "-4";
+    } else if (cylPower > 0 && cylPower <= 2) {
+        cylType = "+2";
+    } else if (cylPower > 2 || cylPower < -2) {
+        type = "Rx";
+    }
+    if (type.length == 0) {
+        if (sphType.length > 0 && cylType.length > 0) {
+            type = sphType + "/" + cylType;
+        } else {
+            type = "Error";
+        }
+    }
+    return type;
+}
+export function testTypeSVold(sphPower, cylPower) {
     //  console.log("sphPower :" + sphPower + "\n cylPower : " + cylPower);
     //  console.log(cylPower);
     var type = "";
@@ -460,14 +564,14 @@ export function testTypeSV(sphPower, cylPower) {
     if (sphPower >= -6 && sphPower <= 0) {
         sphType = "-6";
         //  console.log("line : 291");
-    } else if (sphPower >= -8 && sphPower <= -6.25) {
+    } else if (sphPower >= -8 && sphPower < -6) {
         sphType = "-8";
         //  console.log("line : 294");
-    } else if (sphPower >= -10 && sphPower <= -8.25) {
+    } else if (sphPower >= -10 && sphPower < -8.00) {
         sphType = "-10";
         //  console.log("line : 397");
-    } else if (sphPower <= -10.25) {
-        sphType = "Rx";
+    } else if (sphPower < -10) {
+        type = "Rx";
         //  console.log("line : 300");
     } if (sphPower >= 0 && sphPower <= 4) {
         sphType = "+4";
@@ -479,7 +583,7 @@ export function testTypeSV(sphPower, cylPower) {
         sphType = "+8";
         //  console.log("line : 309");
     } else if (sphPower > 8.00) {
-        sphType = "Rx";
+        type = "Rx";
         //  console.log("line : 312");
     }
     if (cylPower >= -2 && cylPower <= 0) {
@@ -488,8 +592,8 @@ export function testTypeSV(sphPower, cylPower) {
     } else if (cylPower >= -4 && cylPower <= -2.25) {
         cylType = "-4";
         //  console.log("line : 319");
-    } else if (cylPower <= -4.25) {
-        cylType = "Rx";
+    } else if (cylPower < -4) {
+        type = "Rx";
         //  console.log("line : 322");
     } else if (cylPower >= 0 && cylPower <= 2) {
         cylType = "+2";
@@ -497,16 +601,16 @@ export function testTypeSV(sphPower, cylPower) {
     } else if (cylPower > 2 && cylPower <= 4) {
         cylType = "+4";
         //  console.log("line : 328");
-    } else if (cylPower > 4.00) {
-        cylType = "Rx";
+    } else if (cylPower > 4) {
+        type = "Rx";
         //  console.log("line : 331");
     }
-    if (sphType.length == 0) {
+    if (type.length == 0) {
         //  console.log("line : 334");
         if (cylType.length > 0 && (cylType.indexOf('Rx') < 0)) {
             //  console.log("line : 336");
             if (cylPower > 0) {
-                type = "+6/" + cylType;
+                type = "+4/" + cylType;
                 //  console.log("line : 339");
             } else if (cylPower <= 0) {
                 type = "-6/" + cylType;
