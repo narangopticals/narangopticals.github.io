@@ -196,7 +196,9 @@ async function addItemViews(startNum, endNum) {
     });
     cartView.innerHTML = await popElemText;
     var prodViews = prodView.querySelectorAll('#prodParent');
+    var enquiryWaBtn = cartView.querySelector('#orderEnquiry');
     var clearBtn = cartView.querySelector('#cartClear');
+    //clearBtn.style.height = enquiryWaBtn.offsetHeight + "px";
     clearBtn.addEventListener("click",
         function (e) {
             var cartBtns = window.document.querySelectorAll(".cartBtn");
@@ -245,52 +247,66 @@ async function addItemViews(startNum, endNum) {
                         }
                     }
                     itemLoadNum = 0;
-                    var prodMain_elem = window.document.getElementById('prodMain');
-                    if (prodMain_elem != undefined) {
-                        prodMain_elem.innerHTML = '';
-                    }
                 }
                 if (dataLength > 0) {
                     clearBtn.textContent = "Clear";
                 } else {
                     clearBtn.textContent = "Undo";
                 }
+                var prodMain_elem = window.document.getElementById('prodMain');
+                if (prodMain_elem != undefined) {
+                    prodMain_elem.innerHTML = '';
+                }
                 checkOutLater(null, null, null);
                 updateCartItem();
             }
 
-        });
-    cartView.querySelector('#orderEnquiry').addEventListener("click",
+        });;
+    enquiryWaBtn.addEventListener("click",
         function (e) {
             //var whatsappBtns = prodView.querySelectorAll(".whatsappBtn");
             var text = "";
             var prodViews = prodView.querySelectorAll('#prodParent');
-            for (var i = 0; i < prodViews.length; i++) {
-                var tmp = prodViews[i];
-                //    console.log("line 148");
-                //    console.log(tmp);
-                if (tmp.style.visibility != "hidden") {
-                    //    console.log("line 152 : not hidden");
-                    var cartBtn = tmp.querySelector('.cartBtn');
-                    var shareBtn = tmp.querySelector('.shareBtn');
-                    if (cartBtn.dataCart == 'true') {
-                        //    console.log("line 156 : cartBtn.textContent = " + cartBtn.textContent);
-                        var tmptxt = encodeURIComponent("\n\nName : ") +
-                            encodeURIComponent(cartItem[i].title.replaceAll('/e', '')) +
-                            encodeURIComponent("&  Item ID :") +
-                            encodeURIComponent(cartItem[i].itemnum) +
-                            encodeURIComponent("\t& Rs") + cartItem[i].cost +
-                            encodeURIComponent("\nProduct Link : \n") +
-                            encodeURIComponent("https://narangopticals.com/product" + shareBtn.value);
-                        //    console.log("line 159 test:");
-                        //    console.log(tmptxt);
-                        text += tmptxt;
+            var cartBtns = window.document.querySelectorAll('.cartBtn');
+            if (cartBtns.length == cartItem.length) {
+                for (var i = 0; i < prodViews.length; i++) {
+                    var tmp = prodViews[i];
+                    //    console.log("line 148");
+                    //    console.log(tmp);
+                    if (tmp.style.visibility != "hidden") {
+                        //    console.log("line 152 : not hidden");
+                        var cartBtn = tmp.querySelector('.cartBtn');
+                        var shareBtn = tmp.querySelector('.shareBtn');
+                        if (cartBtn.dataCart == 'true') {
+                            //    console.log("line 156 : cartBtn.textContent = " + cartBtn.textContent);
+                            var tmptxt = encodeURIComponent("\n\nName : ") +
+                                encodeURIComponent(cartItem[i].title.replaceAll('/e', '')) +
+                                encodeURIComponent("&  Item ID :") +
+                                encodeURIComponent(cartItem[i].itemnum) +
+                                encodeURIComponent("\t& Rs") + cartItem[i].cost +
+                                encodeURIComponent("\nProduct Link : \n") +
+                                encodeURIComponent("https://narangopticals.com/product" + shareBtn.value);
+                            //    console.log("line 159 test:");
+                            //    console.log(tmptxt);
+                            text += tmptxt;
+                        }
                     }
-
                 }
-
-
+            } else {
+                for (var i = 0; i < cartItem.length; i++) {
+                    var tmptxt = encodeURIComponent("\n\nName : ") +
+                        encodeURIComponent(cartItem[i].title.replaceAll('/e', '')) +
+                        encodeURIComponent("&  Item ID :") +
+                        encodeURIComponent(cartItem[i].itemnum) +
+                        encodeURIComponent("\t& Rs") + cartItem[i].cost +
+                        encodeURIComponent("\nProduct Link : \n") +
+                        encodeURIComponent("https://narangopticals.com/product?type=" + cartItem[i].type + "&itemnum=" + cartItem[i].itemnum);
+                    //    console.log("line 159 test:");
+                    //    console.log(tmptxt);
+                    text += tmptxt;
+                }
             }
+
             var val = [encodeURIComponent("I want to know More About Your Products") + text +
                 "&type=phone_number&app_absent=0&send=1" + encodeURIComponent("\n\nTotal : Rs.") + cartCost];
             //    console.log("line 169 :" + val);
@@ -867,11 +883,14 @@ export async function loadItems(startNum, endNum, pgNum) {
 }
 /* #Function : loadItems : load item from databases string into views*/
 
-/*#Function : cartToggle: Show Or Hide Cart Detailed View */
+/*#Function : path=/;SameSite = Strict";: Show Or Hide Cart Detailed View */
 export async function cartToggle(e) {
     var popElemt = document.getElementById('cartViewMini').querySelector('#cartElemt');
     if (popElemt.style.display == "none") {
         popElemt.style.display = "";
+        var enquiryWaBtn = document.querySelector('#orderEnquiry');
+        var clearBtn = document.querySelector('#cartClear');
+        clearBtn.style.height = enquiryWaBtn.offsetHeight + "px";
         //popElemt.querySelector('#cartCloser').style.top = "-45px";
     } else {
         popElemt.style.display = "none";
