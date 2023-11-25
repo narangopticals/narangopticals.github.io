@@ -564,6 +564,38 @@ a.dailer {
     background: linear-gradient(#900226, #73021e, #5e0219, #6a021c, #73021e, #900226);
 }
 
+@keyframes shineGreenBtn {
+    18% {
+        background: radial-gradient(#4fdecb, #53b6a9, #043f37, #043f37, #04433b, #275750);
+    }
+
+    36% {
+        background: radial-gradient(#325f59, #4fdecb, #53b6a9, #043f37, #04433b, #275750);
+    }
+
+    52% {
+        background: radial-gradient(#325f59, #04433b, #4fdecb, #53b6a9, #04433b, #275750);
+    }
+
+    70% {
+        background: radial-gradient(#325f59, #04433b, #043f37, #4fdecb, #53b6a9, #275750);
+    }
+
+    85% {
+        background: radial-gradient(#325f59, #04433b, #043f37, #043f37, #4fdecb, #53b6a9);
+    }
+
+    100% {
+        background: radial-gradient(#53b6a9, #04433b, #043f37, #043f37, #04433b, #4fdecb);
+    }
+}
+
+.whatsappBtn:hover {
+    animation-duration: 500ms;
+    animation-iteration-count: 3;
+    animation-name: shineGreenBtn;
+}
+
 /* Dropdown content (hidden by default) */
 .dropdown-content {
     display: none;
