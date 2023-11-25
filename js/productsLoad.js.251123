@@ -11,9 +11,6 @@ var sectionCurrent = 0;
 var filtered = false;
 var viewOrientation = '';
 var imgWidth = '100%';
-var swipeUp = false;
-var dataLength = 0;
-var itemLoadNum = 0;
 export function setFiltered(boolVal) {
     //console.log('setFiltered(boolVal) = ' + boolVal);
     filtered = boolVal;
@@ -32,7 +29,6 @@ export function setLow(cost) {
     minCost = cost;
 }
 export async function Func(section, page) {
-    swipeUp = false;
     sectionCurrent = section;
     var data = "";
     if (viewOrientation == undefined) {
@@ -68,7 +64,7 @@ export async function Func(section, page) {
                 });
                 setTimeout(data = JSON.parse(data), 3000);
             } catch (error) {
-                window.alert("Internet Connectivity Error , or hourly usage limit exceeded protected for security.");
+                window.alert(error);
                 /*data = fetch('../json/prodFmData.json').then(results => {
                     return results.json();
                 });*/
@@ -88,7 +84,7 @@ export async function Func(section, page) {
                 setTimeout(data = JSON.parse(data), 3000);
                 //framesData = (framesData.valueOf("data"))[0];
             } catch (error) {
-                window.alert("Internet Connectivity Error , or hourly usage limit exceeded protected for security.");
+                window.alert(error);
                 /*data = fetch('../json/prodSgData.json').then(results => {
                     return results.json();
                 });*/
@@ -106,7 +102,7 @@ export async function Func(section, page) {
                 setTimeout(data = JSON.parse(data), 3000);
                 //framesData = (framesData.valueOf("data"))[0];
             } catch (error) {
-                window.alert("Internet Connectivity Error , or hourly usage limit exceeded protected for security.");
+                window.alert(error);
                 /*data = fetch('../json/prodLnsData.json').then(results => {
                     return results.json();
                 });*/
@@ -124,7 +120,7 @@ export async function Func(section, page) {
                 setTimeout(data = JSON.parse(data), 3000);
                 //framesData = (framesData.valueOf("data"))[0];
             } catch (error) {
-                window.alert("Internet Connectivity Error , or hourly usage limit exceeded protected for security.");
+                window.alert(error);
                 /*data = fetch('../json/prodRdyData.json').then(results => {
                     return results.json();
                 });*/
@@ -142,7 +138,7 @@ export async function Func(section, page) {
                 setTimeout(data = JSON.parse(data), 3000);
                 //framesData = (framesData.valueOf("data"))[0];
             } catch (error) {
-                window.alert("Internet Connectivity Error , or hourly usage limit exceeded protected for security.");
+                window.alert(error);
                 /*data = fetch('../json/prodRdyData.json').then(results => {
                     return results.json();
                 });*/
@@ -163,94 +159,37 @@ export async function Func(section, page) {
         }
         str = await grabData(type);
     }
-
-    if (page == 0) {
-        addItems();
-    } else {
-        await initMain(section);
-        if ((await str) != null) {
-            /*var keys = new filterKeys();
-            keys.front = "plastic";
-            keys.pattern = "multicolor";*/
-            str = await getFiltered(str, minCost, maxCost, keys);
-            dataLength = (await str).length;
-            if (dataLength > 8) {
-                await addLoadMoreView();
-                //await addPagesNavBtn(dataLength);
-                await addItemViews(0, 9);
-                var starts = 0;
-                var pgNum = 0;
-                if (page <= Math.ceil(dataLength / 9) && page > 0) {
-                    //console.log("line 134");
-                    pgNum = (page - 1);
-                    starts = (pgNum * 9);
-                }
-
-                //console.log("line 137 : starts = " + starts + "\n page=" + pgNum);
-                await loadItems(starts, dataLength, pgNum);
-            } else {
-                //await (dataLength);
-                await addItemViews(0, dataLength);
-                await loadItems(0, dataLength, 0);
-            }
-        }
-    }
+    await initMain(section);
     //await initTest(section);
 
     //console.log(str);
+    if ((await str) != null) {
+        /*var keys = new filterKeys();
+        keys.front = "plastic";
+        keys.pattern = "multicolor";*/
+        str = await getFiltered(str, minCost, maxCost, keys);
+        var dataLength = (await str).length;
+        var prodParents = "";
+        if (dataLength > 8) {
+            await addPagesNavBtn(dataLength);
+            await addItemViews(0, 9);
+            var starts = 0;
+            var pgNum = 0;
+            if (page <= Math.ceil(dataLength / 9) && page > 0) {
+                //console.log("line 134");
+                pgNum = (page - 1);
+                starts = (pgNum * 9);
+            }
 
-    async function addItems() {
-        await addItemViews(itemLoadNum, itemLoadNum + 9);
-        await loadItems(itemLoadNum, dataLength, 0);
-    }
-    async function addLoadMoreView() {
-        var scrollViewElem = document.getElementById("scrollView");
-
-        var devType = navigator.userAgent;
-        if (devType.match(/Android/i)
-            || devType.match(/webOS/i)
-            || devType.match(/iPhone/i)
-            || devType.match(/iPad/i)
-            || devType.match(/iPod/i)
-            || devType.match(/BlackBerry/i)
-            || devType.match(/Windows Phone/i)) {
-
-            var sv_touchstartX, sv_touchstartY, sv_touchendX, sv_touchendY;
-            scrollViewElem.textContent = "Drag up Twice: Load More";
-            scrollViewElem.addEventListener('touchstart', function (event) {
-                sv_touchstartX = event.changedTouches[0].screenX;
-                sv_touchstartY = event.changedTouches[0].screenY;
-            }, false);
-
-            scrollViewElem.addEventListener('touchend', function (event) {
-                sv_touchendX = event.changedTouches[0].screenX;
-                sv_touchendY = event.changedTouches[0].screenY;
-                var changeY = Math.abs(sv_touchendY - sv_touchstartY);
-                var changeX = Math.abs(sv_touchendX - sv_touchstartX);
-                if (sv_touchendY < sv_touchstartY && changeX < changeY) {
-                    //console.log('Swiped Up');
-                    if (swipeUp) {
-                        setTimeout(Func(sectionCurrent, 0), 3000);
-                    }
-                    swipeUp = true;
-                }
-
-                if (sv_touchendY > sv_touchstartY && changeX < changeY) {
-                    //console.log('Swiped Down');
-                }
-                if (sv_touchendY === sv_touchstartY && sv_touchendX === sv_touchstartX) {
-                    //console.log('Tap');
-                }
-            }, false);
+            //console.log("line 137 : starts = " + starts + "\n page=" + pgNum);
+            await loadItems(starts, dataLength, pgNum);
         } else {
-            scrollViewElem.textContent = "Click to Load More";
-            scrollViewElem.addEventListener("click", function (e) {
-                setTimeout(Func(sectionCurrent, 0), 3000);
-            });
+            await addPagesNavBtn(dataLength);
+            await addItemViews(0, dataLength);
+            await loadItems(0, dataLength, 0);
         }
-
     }
-    /*async function addPagesNavBtn(dataLength) {
+    async function addPagesNavBtn(dataLength) {
         var btnParent = document.getElementById("btnNavProdView");
         var dtl = dataLength + 1;
         var pagesLen = Math.ceil(dtl / 9);
@@ -279,19 +218,8 @@ export async function Func(section, page) {
             btnParent.style.visibility = 'hidden';
         }
         //window.document.getElementById("btnNavProdView2").innerHTML = document.getElementById("btnNavProdView").innerHTML;
-    }*/
+    }
     async function addItemViews(startNum, endNum) {
-        var scrollView = window.document.querySelector('#scrollView');
-        if (startNum + 9 >= str.length) {
-            scrollView.style.display = 'none';
-        } else {
-            scrollView.style.display = '';
-        }
-        var prodParents = "";
-        var prodHolder = window.document.getElementById('prodMain');
-        prodHolder.innerHTML += '<div class="mainProdView" id="mainProdView' + startNum + '" style="  height: 100%;\
-  width: 100vw;\
-  margin: 0;"></div>';
         for (var i = startNum; i < endNum; i++) {
             //console.log(prodParent);
             var vW = (await prodParent).replaceAll('grid', 'grid' + i);
@@ -301,11 +229,14 @@ export async function Func(section, page) {
         }
         var pS = prodParents.toString();
         //var prodView = document.getElementById("mainProdView");
-        var mainView = window.document.getElementById('mainProdView' + startNum);
+        var mainView = window.document.getElementById('mainProdView');
+        if (mainView == null) {
+            mainView = window.document.getElementById('prodView');
+        }
         mainView.innerHTML = pS;
-        mainView = document.getElementById('mainProdView' + startNum);
-        var prodViews = window.document.querySelectorAll('#prodParent');
-        for (var i = 0; i < endNum; i++) {
+        mainView = document.getElementById("mainProdView");
+        var prodViews = mainView.querySelectorAll('#prodParent');
+        for (var i = startNum; i < endNum; i++) {
             var elem = prodViews[i];
             var whatsappBtn = elem.querySelector("button[class^=whatsappBtn]");
             var cartBtn = elem.querySelector("button[class^=cartBtn]");
@@ -395,11 +326,11 @@ export async function Func(section, page) {
 }
 export async function imgSwitch(func, grid, setItem) {
     //console.log("line 143 : imgSwitch : func = " + func + "\n grid = " + grid);
-    /*var mainView = window.document.getElementById('mainProdView');
+    var mainView = window.document.getElementById('mainProdView');
     if (mainView == null) {
         mainView = window.document.getElementById('prodView');
-    }*/
-    var elem = window.document.querySelector('div[class^=' + grid + ']');
+    }
+    var elem = mainView.querySelector('div[class^=' + grid + ']');
     var iframeHolder = elem.querySelector('#iframeHolder');
     //console.log("line 158 : imgSwitch : iframeHolder = ");
     //console.log(iframeHolder);
@@ -537,13 +468,12 @@ export async function checkOutLater(btnLoad, pressedBtn) {
     function updateProductCount() {
         var totalSelected = selectedItems.length;
         //var prodView = window.document.getElementById('mainProdView');
-        /*var mainView = window.document.getElementById('mainProdView');
+        var mainView = window.document.getElementById('mainProdView');
         if (mainView == null) {
             mainView = window.document.getElementById('prodView');
         }
-        var cartBtns = mainView.querySelectorAll('button[class^=cartBtn]');*/
+        var cartBtns = mainView.querySelectorAll('button[class^=cartBtn]');
         //console.log("updateProductCount:" + totalSelected);
-        var cartBtns = window.document.querySelectorAll('button[class^=cartBtn]');
         var idBtnsLen = cartBtns.length;
         //console.log("updateProductCount: idBtnsLen =" + idBtnsLen);
 
@@ -641,7 +571,6 @@ export async function loadItems(startNum, endNum, pgNum) {
         window.history.pushState('Page ' + (pgNum + 1), '', '/products.html?sect=' + sectionCurrent + '&page=' + (pgNum + 1));
     }
 
-
     currentPgNum = pgNum;
     /*var home = window.location.origin + "/?";
     var loc = window.location.href;
@@ -652,11 +581,9 @@ export async function loadItems(startNum, endNum, pgNum) {
     var elemsParents = window.document.querySelectorAll('div[id^=prodParent]');
     //console.log(elemsParents);
     var i = startNum;
-    var newEnd = (startNum + 9);
-    for (var j = startNum; j < newEnd; j++) {
+    for (var j = 0; j < 9; j++) {
         var elem = elemsParents[j];
         if (i < str.length) {
-            //    console.log(elem);
             var iframeHolder = elem.querySelector("#iframeHolder");
             //console.log("Line 325 : Loading Item: " + i + "\nin view number : " + j);
             iframeHolder.innerHTML = "";
@@ -727,11 +654,11 @@ export async function loadItems(startNum, endNum, pgNum) {
                 elem.style.visibility = "hidden";
             }
         }
-        itemLoadNum = newEnd;
+
     }
 
 
-    /*var btnParent = window.document.getElementById("btnNavProdView").getElementsByTagName('button');
+    var btnParent = window.document.getElementById("btnNavProdView").getElementsByTagName('button');
     var len = btnParent.length;
     for (var k = 0; k < len; k++) {
         if (k == pgNum) {
@@ -739,7 +666,7 @@ export async function loadItems(startNum, endNum, pgNum) {
         } else {
             btnParent[k].style.background = 'linear-gradient(#212121, #252525,#292929, #252525, #212121)';
         }
-    }*/
+    }
     document.title = document.title.replaceAll('loading, ', '');
     setTimeout(checkOutLater(null, null), 10000);
 }

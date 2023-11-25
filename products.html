@@ -74,12 +74,12 @@
                 text-align: center;"></img><span style="margin: 0.2%;">Share</span></button>
     </div>
 
-    <div id="btnNavProdView" style="width: 85%;
+    <!---<div id="btnNavProdView" style="width: 85%;
             align-items: center;
             text-align: center;
             padding:1%;
             height: 100%;
-            visibility:hidden;"></div>
+            visibility:hidden;"></div>-->
     <div id="filterView" style="  display: none;
             top: 10%;
             width: fit-content;
@@ -89,7 +89,7 @@
             margin: 0px 2px 0px 3%;
             position: sticky;
             padding: 0px 4px;"></div>
-    <div id="mainProdView" style="  height: 100%;
+    <div id="prodMain" style="  height: 100%;
   width: 100vw;
   margin: 0;">
 
@@ -99,7 +99,15 @@
             text-align: center;
             padding:1%;
             height: 100%;"></div>
-    <div id="cartFloat">
+    <button id="scrollView" style="width: 85%;
+                        align-items: center;
+                        text-align: center;
+                        padding:1%;
+                        top: 0%;
+                        position: relative;
+                        font-size: xx-large;
+                        margin-bottom: 20%;"></button>
+    <div id="cartFloat" style="margin-bottom: 15%;">
         <button id="cartExpand" onclick="openWindow()">&#128722;<span id='cartCounter'>0</span>
         </button>
         <div id="cartViewMini">
@@ -155,6 +163,7 @@
         window.switchTheme = switchTheme;
         window.onscroll = navScroll;
         window.document.body.onload = loadThemeBtn;
+
     </script>
     <script type="text/javascript">
         //var filterVisible = false;
@@ -216,7 +225,12 @@
                     });
                     filterView.style.display = 'block';
                     filterView.innerHTML = view;
-                    window.document.getElementById('mainProdView').style.display = "none";
+                    var mainView = window.document.querySelectorAll('.mainProdView');
+                    for (var v = 0; v < mainView.length; v++) {
+                        if (mainView[v] != undefined) {
+                            mainView[v].style.display = "none";
+                        }
+                    }
                 } else {
                     //console.log("line168");
                     closeFilterView();

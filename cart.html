@@ -24,19 +24,6 @@
     </script>
     <!-- Google tag (gtag.js) -->
 </head>
-<!--<style>
-    @media screen and (orientation: portrait) {
-        #cartFloat{
-            
-        }
-    }
-
-    @media screen and (orientation: landscape) {
-        #cartFloat{
-
-        }
-    }
-</style>-->
 
 <body id="mainBody">
     <nav id="navbar">
@@ -59,17 +46,30 @@
         <button class="slideName" style="font-weight: bold;" onclick="switchSection(1)">Sunglass</button>
     </div>-->
 
-    <div id="btnNavProdView" style="width: 85%;
+    <!---<div id="btnNavProdView" style="width: 85%;
             align-items: center;
             text-align: center;
             padding:1%;
             height: 100%;"></div>
-    <div id="mainProdView" style="height: 100%;">
+    <div class="mainProdView" style="height: 100%;">
 
-    </div>
+    </div>--->
+    <div id="prodMain" style="  height: 100%;
+      width: 100vw;
+      margin: 0;"></div>
+
+    <button id="scrollView" style="width: 85%;
+                            align-items: center;
+                            text-align: center;
+                            padding:1%;
+                            top: 0%;
+                            position: relative;
+                            font-size: xx-large;
+                            margin-bottom: 20%;"></button>
     <div id="cartFloat" style="/*width: 30%;*/
     display: flex;
-    flex-direction: column;">
+    flex-direction: column;
+    z-index: 100;">
         <button id="cartExpand" onclick="cartToggle()">&#128722;<span id='cartCounter'>0</span>
         </button>
         <div id="cartViewMini">
@@ -77,22 +77,10 @@
         </div>
     </div>
     <script type="module">
-        import { Func, loadItems, imgSwitch, checkOutLater, cartToggle } from "./js/cartLoad.js";
-        window.Func = Func;
-        window.loadItems = loadItems;
-        window.checkOutLater = checkOutLater;
-        window.cartToggle = cartToggle;
-        window.imgSwitch = imgSwitch;
-        Func();
-        document.title = "Cart | Narang Opticals, Kashipur";
-        window.matchMedia("(orientation:portrait)").addEventListener("change", function (e) {
-            //console.log('Orientation change' + e);
-            location.reload();
-        });
-    </script>
-    <script type="module">
         import { navLoader, toggle, navScroll, switchTheme, loadThemeBtn } from "./js/navload.js";
         import { browserDetect } from "./js/general.js";
+        import { Func, loadItems, imgSwitch, checkOutLater, cartToggle } from "./js/cartLoad.js";
+
         browserDetect();
         window.navLoader = navLoader;
         window.toggle = toggle;
@@ -100,7 +88,18 @@
 
         window.switchTheme = switchTheme;
         window.onscroll = navScroll;
-
+        /*
+        * cartLoad.js Assign
+        */
+        window.Func = Func;
+        window.loadItems = loadItems;
+        window.checkOutLater = checkOutLater;
+        window.cartToggle = cartToggle;
+        window.imgSwitch = imgSwitch;
+        Func(0);
+        /*
+        * cartLoad.js Assign
+        */
         document.title = "Cart | Narang Opticals, Kashipur";
         window.matchMedia("(orientation:portrait)").addEventListener("change", function (e) {
             //console.log('Orientation change' + e);
@@ -108,24 +107,6 @@
         });
         window.document.body.onload = loadThemeBtn;
     </script>
-    <!--<script>
-        var currentSection = 1;
-        function switchSection(section) {
-            if (currentSection != section) {
-                let slideName = document.getElementsByClassName("slideName");
-                for (i = 0; i < slideName.length; i++) {
-                    slideName[i].className = slideName[i].className.replace("active", "");
-                    slideName[i].textContent = slideName[i].textContent.replace("*", "");
-                    slideName[i].title = "Click To Switch"
-                }
-                slideName[section].className += " active";
-                slideName[section].textContent += "*";
-                slideName[section].title = "Currently Open";
-                Func(section);
-                currentSection = section;
-            }
-        }
-    </script>-->
 </body>
 
 </html>

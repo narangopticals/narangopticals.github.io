@@ -70,7 +70,12 @@ export async function submitFilter() {
 export async function restoreProduts() {
     var filterView = window.document.getElementById('filterView');
     filterView.style.display = 'none';
-    window.document.getElementById('mainProdView').style.display = "";
+    var mainView = window.document.querySelectorAll('.mainProdView');
+    for (var v = 0; v < mainView.length; v++) {
+        if (mainView[v] != undefined) {
+            mainView[v].style.display = "";
+        }
+    }
 }
 export async function setSolid() {
     //document.getElementById("opacity").value = "solid";

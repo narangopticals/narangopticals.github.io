@@ -73,6 +73,7 @@ button {
     bottom: 2%;
     background-color: grey;
     border-radius: 5%;
+    z-index: 100;
 }
 
 #cartExpand,
@@ -81,6 +82,7 @@ button {
     min-height: 20px;
     font-size: x-large;
     font-weight: bolder;
+    z-index: 100;
 }
 
 h1,
@@ -842,7 +844,7 @@ button {
         width: 100vw;
     }
 
-    #mainProdView {
+    .mainProdView {
         display: flex;
         flex-direction: column;
         width: 100vw;
@@ -929,13 +931,13 @@ button {
         min-width: 15%;
     }
 
-    #mainProdView {
+    .mainProdView {
         display: grid;
         /*width: 100%;*/
         align-content: center;
         text-align: center;
         /*column-gap: 2%;*/
-        row-gap: 2%;
+        /*row-gap: 2%;*/
         grid-template-columns: repeat(3, 33%);
         font-size: larger;
     }
