@@ -611,7 +611,7 @@ export async function checkOutLater(btnLoad, pressedBtn) {
         const d = new Date();
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
         let expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/;SameSite = Strict";
     }
     async function getCookie(cname) {
         let name = cname + "=";

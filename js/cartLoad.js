@@ -4,16 +4,20 @@ var str = "";
 //var section = 1;
 var prodParent = ""
 var prodParents = "";
-var selectedItems = [];
-var cartItem = [];
 var cartCost = 0;
 var type = "";
 var viewOrientation = '';
 var imgWidth = '100%';
 var loadType = 0;
+var selectedItems = [];
+var cartItem = [];
 var dataLength = 0;
 var itemLoadNum = 0;
-
+var removeItem = true;
+var cartCost_bkp = 0;
+var selectedItems_bkp = [];
+var cartItem_bkp = [];
+var dataLength_bkp = 0;
 /*Main Access To Script */
 export async function Func(p) {
     loadType = p;
@@ -55,7 +59,7 @@ export async function Func(p) {
             setTimeout(framesData = JSON.parse(framesData), 3000);
             //framesData = (framesData.valueOf("data"))[0];
         } catch (error) {
-            window.alert("Internet Connectivity Error , or hourly usage limit exceeded protected for security.");
+            window.alert("Internet Connectivity Error OR hourly usage limit exceeded protected for security.");
             /*framesData = fetch('../json/prodFmData.json').then(results => {
                 return results.json();
             });*/
@@ -71,7 +75,7 @@ export async function Func(p) {
             setTimeout(sunglassData = JSON.parse(sunglassData), 3000);
             //framesData = (framesData.valueOf("data"))[0];
         } catch (error) {
-            window.alert("Internet Connectivity Error , or hourly usage limit exceeded protected for security.");
+            window.alert("Internet Connectivity Error OR hourly usage limit exceeded protected for security.");
             /*sunglassData = fetch('../json/prodSgData.json').then(results => {
                 return results.json();
             });*/
@@ -88,7 +92,7 @@ export async function Func(p) {
             setTimeout(lensData = JSON.parse(lensData), 3000);
             //framesData = (framesData.valueOf("data"))[0];
         } catch (error) {
-            window.alert("Internet Connectivity Error , or hourly usage limit exceeded protected for security.");
+            window.alert("Internet Connectivity Error OR hourly usage limit exceeded protected for security.");
             /*lensData = fetch('../json/prodLnsData.json').then(results => {
                 return results.json();
             });*/
@@ -104,7 +108,7 @@ export async function Func(p) {
             setTimeout(rdyData = JSON.parse(rdyData), 3000);
             //framesData = (framesData.valueOf("data"))[0];
         } catch (error) {
-            window.alert("Internet Connectivity Error , or hourly usage limit exceeded protected for security.");
+            window.alert("Internet Connectivity Error OR hourly usage limit exceeded protected for security.");
             /*rdyData = fetch('../json/prodLnsData.json').then(results => {
                 return results.json();
             });*/
@@ -120,24 +124,24 @@ export async function Func(p) {
             setTimeout(watchData = JSON.parse(watchData), 3000);
             //framesData = (framesData.valueOf("data"))[0];
         } catch (error) {
-            window.alert("Internet Connectivity Error , or hourly usage limit exceeded protected for security.");
+            window.alert("Internet Connectivity Error OR hourly usage limit exceeded protected for security.");
             /*watchData = fetch('../json/prodLnsData.json').then(results => {
                 return results.json();
             });*/
         }
-        console.log("framesData");
-        console.log(framesData['data']);
-        console.log("sunglassData");
-        console.log(sunglassData['data']);
-        console.log("lensData");
-        console.log(lensData);
+        //    console.log("framesData");
+        //    console.log(framesData['data']);
+        //    console.log("sunglassData");
+        //    console.log(sunglassData['data']);
+        //    console.log("lensData");
+        //    console.log(lensData['data']);
         var dbArray = Array.prototype.concat(framesData['data'], sunglassData['data'], lensData['data'], rdyData['data'], watchData['data']);
-        console.log("dbArray");
-        console.log(dbArray);
+        //    console.log("dbArray");
+        //    console.log(dbArray);
         //console.log(mergedJSON.valueOf("data"));
         str = dbArray;
-        console.log(str);
-        console.log(str.length);
+        //    console.log(str);
+        //    console.log(str.length);
         //var dataLength = str.length;
     }
 
@@ -195,21 +199,66 @@ async function addItemViews(startNum, endNum) {
     var clearBtn = cartView.querySelector('#cartClear');
     clearBtn.addEventListener("click",
         function (e) {
-            var cartBtns = prodView.querySelectorAll(".cartBtn");
-            var prodViews = prodView.querySelectorAll('#prodParent');
+            var cartBtns = window.document.querySelectorAll(".cartBtn");
+            /*var prodViews = window.document.querySelectorAll('#prodParent');
             for (var i = 0; i < prodViews.length; i++) {
                 var tmp = prodViews[i];
                 if (tmp.style.visibility != "hidden") {
                     checkOutLater(null, cartBtns[i], '');
-                    console.log(e);
+                //    console.log(e);
                     //clearBtn.removeEventListener("click", e);
                 }
+            }*/
+            var prodViews = window.document.querySelectorAll('#prodParent');
+            var cartElem = window.document.getElementById('cartElemt');
+            if (cartElem != null) {
+                var trElem = cartElem.querySelectorAll('tr');
+                if (trElem.length > 1) {
+                    removeItem = true;
+                } else {
+                    removeItem = false;
+                }
+                if (removeItem) {
+                    selectedItems_bkp = selectedItems;
+                    cartItem_bkp = cartItem;
+                    dataLength_bkp = dataLength;
+                    cartCost_bkp = cartCost;
+                    for (var i = 0; i < prodViews.length; i++) {
+                        var tmp = prodViews[i];
+                        if (tmp.style.visibility != "hidden") {
+                            checkOutLater(cartBtns[i], null, '');
+                        }
+                    }
+                    selectedItems = [];
+                    cartItem = [];
+                    dataLength = 0;
+                    cartCost = 0;
+                } else {
+                    selectedItems = selectedItems_bkp;
+                    cartItem = cartItem_bkp;
+                    dataLength = dataLength_bkp;
+                    cartCost = cartCost_bkp;
+                    for (var i = 0; i < prodViews.length; i++) {
+                        var tmp = prodViews[i];
+                        if (tmp.style.visibility != "hidden") {
+                            checkOutLater(cartBtns[i], null, '');
+                        }
+                    }
+                    itemLoadNum = 0;
+                    var prodMain_elem = window.document.getElementById('prodMain');
+                    if (prodMain_elem != undefined) {
+                        prodMain_elem.innerHTML = '';
+                    }
+                }
+                if (dataLength > 0) {
+                    clearBtn.textContent = "Clear";
+                } else {
+                    clearBtn.textContent = "Undo";
+                }
+                checkOutLater(null, null, null);
+                updateCartItem();
             }
-            if (selectedItems.length > 0) {
-                clearBtn.textContent = "Clear";
-            } else {
-                clearBtn.textContent = "Undo";
-            }
+
         });
     cartView.querySelector('#orderEnquiry').addEventListener("click",
         function (e) {
@@ -218,14 +267,14 @@ async function addItemViews(startNum, endNum) {
             var prodViews = prodView.querySelectorAll('#prodParent');
             for (var i = 0; i < prodViews.length; i++) {
                 var tmp = prodViews[i];
-                console.log("line 148");
-                console.log(tmp);
+                //    console.log("line 148");
+                //    console.log(tmp);
                 if (tmp.style.visibility != "hidden") {
-                    console.log("line 152 : not hidden");
+                    //    console.log("line 152 : not hidden");
                     var cartBtn = tmp.querySelector('.cartBtn');
                     var shareBtn = tmp.querySelector('.shareBtn');
                     if (cartBtn.dataCart == 'true') {
-                        console.log("line 156 : cartBtn.textContent = " + cartBtn.textContent);
+                        //    console.log("line 156 : cartBtn.textContent = " + cartBtn.textContent);
                         var tmptxt = encodeURIComponent("\n\nName : ") +
                             encodeURIComponent(cartItem[i].title.replaceAll('/e', '')) +
                             encodeURIComponent("&  Item ID :") +
@@ -233,8 +282,8 @@ async function addItemViews(startNum, endNum) {
                             encodeURIComponent("\t& Rs") + cartItem[i].cost +
                             encodeURIComponent("\nProduct Link : \n") +
                             encodeURIComponent("https://narangopticals.com/product" + shareBtn.value);
-                        console.log("line 159 test:");
-                        console.log(tmptxt);
+                        //    console.log("line 159 test:");
+                        //    console.log(tmptxt);
                         text += tmptxt;
                     }
 
@@ -244,7 +293,7 @@ async function addItemViews(startNum, endNum) {
             }
             var val = [encodeURIComponent("I want to know More About Your Products") + text +
                 "&type=phone_number&app_absent=0&send=1" + encodeURIComponent("\n\nTotal : Rs.") + cartCost];
-            console.log("line 169 :" + val);
+            //    console.log("line 169 :" + val);
             msgWhatsapp(val);
         });
 
@@ -265,7 +314,7 @@ async function addItemViews(startNum, endNum) {
                 var url = obj.value;
                 window.open(url, "_blank");
             });
-        checkOutLater(cartBtn, null, '');
+        //checkOutLater(cartBtn, null, '');
         cartBtn.addEventListener("click",
             function (e) {
                 checkOutLater(null, e.target, '');
@@ -273,7 +322,7 @@ async function addItemViews(startNum, endNum) {
 
         /*productsload.js = copy*/
         var prevBtn = elem.querySelector("button[id^=grid" + (i + startNum) + "Prev]");
-        console.log(prevBtn);
+        //    console.log(prevBtn);
         prevBtn.value = "grid" + (i + startNum);
         prevBtn.addEventListener("click",
             function (e) {
@@ -281,7 +330,7 @@ async function addItemViews(startNum, endNum) {
             });
         var nextBtn = elem.querySelector("button[id^=grid" + (i + startNum) + "Next]");
         nextBtn.value = "grid" + (i + startNum);
-        console.log(nextBtn);
+        //    console.log(nextBtn);
         nextBtn.addEventListener("click",
             function (e) {
                 imgSwitch('next', e.currentTarget.value, '');
@@ -303,12 +352,12 @@ async function addItemViews(startNum, endNum) {
         }, false);
 
         imgParent.addEventListener('touchend', function (event) {
-            console.log("event.target:");
-            console.log(event.target);
-            console.log('imgParent:');
+            //    console.log("event.target:");
+            //    console.log(event.target);
+            //    console.log('imgParent:');
             var imgParent = event.target.parentNode.parentNode.parentNode;
-            console.log(imgParent);
-            console.log();
+            //    console.log(imgParent);
+            //    console.log();
             var prevBtn = imgParent.querySelector('#' + imgParent.className.replaceAll('Img', 'Prev'));
             var nextBtn = imgParent.querySelector('#' + imgParent.className.replaceAll('Img', 'Next'));
             touchendX = event.changedTouches[0].screenX;
@@ -318,20 +367,20 @@ async function addItemViews(startNum, endNum) {
             var changeY = Math.abs(touchendY - touchstartY);
             var changeX = Math.abs(touchendX - touchstartX);
             if (touchendX < touchstartX && changeX > changeY) {
-                console.log('Swiped Left');
+                //    console.log('Swiped Left');
                 imgSwitch('next', nextBtn.value, '');
                 //autoSwipe = true;
                 //setTimeout(firstRun, 5000);
             }
 
             if (touchendX > touchstartX && changeX > changeY) {
-                console.log('Swiped Right');
+                //    console.log('Swiped Right');
                 imgSwitch('prev', prevBtn.value, '');
                 //autoSwipe = true;
                 //setTimeout(firstRun, 5000);
             }
             if (touchendY === touchstartY && touchendX === touchstartX) {
-                console.log('Tap');
+                //    console.log('Tap');
                 var shareBtn = imgParent.parentNode.querySelector('.shareBtn');
                 var url = shareBtn.value;
                 window.open(url, "_blank");
@@ -341,17 +390,17 @@ async function addItemViews(startNum, endNum) {
     }
 }
 export async function imgSwitch(func, grid, setItem) {
-    console.log("line 143 : imgSwitch : func = " + func + "\n grid = " + grid);
+    //    console.log("line 143 : imgSwitch : func = " + func + "\n grid = " + grid);
     //var elem = window.document.getElementById('mainProdView').querySelector('div[class^=' + grid);
     var elem = window.document.querySelector('div[class^=' + grid);
     var iframeHolder = elem.querySelector('#iframeHolder');
-    console.log("line 158 : imgSwitch : iframeHolder = ");
-    console.log(iframeHolder);
+    //    console.log("line 158 : imgSwitch : iframeHolder = ");
+    //    console.log(iframeHolder);
     /*var frames = iframeHolder.querySelectorAll('img');
     var lenIframes = frames.length;*/
     var frames = iframeHolder.querySelectorAll('[id^=iframe]');
     var lenIframes = frames.length;
-    console.log("line 162 : imgSwitch : lenIframes = " + lenIframes);
+    //    console.log("line 162 : imgSwitch : lenIframes = " + lenIframes);
     var current = Number.parseInt(iframeHolder.value);
     //var setItem;
     if (lenIframes != 0) {
@@ -372,9 +421,9 @@ export async function imgSwitch(func, grid, setItem) {
             }
         }
 
-        console.log("line 177 : imgSwitch : setItem = " + setItem + "\n current=" + current);
+        //    console.log("line 177 : imgSwitch : setItem = " + setItem + "\n current=" + current);
         if (setItem > -1 && setItem < lenIframes) {
-            console.log("line 179 : imgSwitch : setItem = " + setItem);
+            //    console.log("line 179 : imgSwitch : setItem = " + setItem);
             iframeHolder.value = setItem;
             for (var i = 0; i < lenIframes; i++) {
                 frames[i].style.display = "none";
@@ -401,7 +450,7 @@ export function shareLinkOpen(e) {
     window.open(url, "_blank");
 }
 export async function msgWhatsapp(text) {
-    console.log(text.length);
+    //    console.log(text.length);
     if (text.length > 0) {
         var devType = navigator.userAgent;
         var wbLink = "";
@@ -426,68 +475,92 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
         await loadCart(jsonData);
     } else if (pressedBtn != null) {
         updateCart(pressedBtn);
-        console.log(pressedBtn);
+        //    console.log(pressedBtn);
     } else if (btnLoad != null) {
-
+        if (removeItem) {
+            removeProduct(btnLoad.value, btnLoad);
+        } else {
+            addProduct(btnLoad.value, btnLoad);
+        }
+    } else if (btnLoad == null && pressedBtn == null && jsonData == null) {
+        setCookie("incartItems", selectedItems, 10);
+        updateProductCount();
+        updateCartItem();
+        if (itemLoadNum == 0) {
+            addItems();
+        }
     }
 
     function getLoadingObjects(data, selection) {
         var arrSelect = [];
+        var newSelection = [];
         for (var j = 0; j < selection.length; j++) {
-            console.log(data);
+            //    console.log(data);
             var currentItemVal = selection[j];
-            console.log(currentItemVal);
+            //    console.log(currentItemVal);
             for (var i = 0; i < data.length; i++) {
                 var value = data[i];
                 if (value != undefined) {
                     if (value.itemnum.trim() == currentItemVal.trim()) {
-                        console.log(value);
+                        //    console.log(value);
                         arrSelect.push(value);
+                        newSelection.push(currentItemVal.trim());
                     }
                 }
             }
         }
         if (arrSelect.length != selection.length) {
-            setCookie("incartItems", "", 10);
+            selectedItems = newSelection;
+            setCookie("incartItems", selectedItems, 10);
         }
-        console.log(arrSelect);
+        //    console.log(arrSelect);
         cartItem = arrSelect;
+        cartItem_bkp = cartItem;
     }
     function modifyCartCount() {
         var cartView = document.getElementById('cartExpand');
         var cartCounter = cartView.querySelector('#cartCounter');
-        console.log(cartCounter);
-        cartCounter.textContent = selectedItems.length + " (Rs." + cartCost + ")";
+        //    console.log(cartCounter);
+        if (selectedItems != undefined) {
+            cartCounter.textContent = selectedItems.length + " (Rs." + cartCost + ")";
+        } else {
+            cartCounter.textContent = dataLength + " (Rs." + cartCost + ")";
+        }
     }
     function addProduct(id, btn) {
-        if (selectedItems.indexOf(id) < 0) {
-            selectedItems.push(id);
-            setCookie("incartItems", selectedItems, 10);
-            for (var i = 0; i < cartItem.length; i++) {
-                if (cartItem[i].itemnum == id) {
-                    cartCost += Number.parseInt(cartItem[i].cost);
+        if (selectedItems != undefined) {
+            if (selectedItems.indexOf(id) < 0) {
+                selectedItems.push(id);
+                setCookie("incartItems", selectedItems, 10);
+                for (var i = 0; i < cartItem.length; i++) {
+                    if (cartItem[i].itemnum == id) {
+                        cartCost += Number.parseInt(cartItem[i].cost);
+                    }
                 }
+                //btn.textContent = "-";
             }
-            //btn.textContent = "-";
-            btn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
-            btn.dataCart = 'true';
-            console.log(selectedItems);
-            modifyCartCount();
         }
+        btn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
+        btn.dataCart = 'true';
+        //console.log(selectedItems);
+        modifyCartCount();
+
     }
     function removeProduct(id, btn) {
         //var itemElems = document.getElementById('mainProdView').querySelectorAll('#prodParent');
         cartCost = 0;
-        if (selectedItems.indexOf(id) > -1) {
-            var newSelection = [];
-            cartCost = 0;
-            for (let i = 0; i < selectedItems.length; i++) {
-                var element = selectedItems[i];
-                if (element != id) {
-                    newSelection.push(element);
-                    console.log("index " + i);
-                    if (cartItem[i].cost.length > 0) {
-                        cartCost += Number.parseInt(cartItem[i].cost);
+        if (selectedItems != undefined) {
+            if (selectedItems.indexOf(id) > -1) {
+                var newSelection = [];
+                cartCost = 0;
+                for (let i = 0; i < selectedItems.length; i++) {
+                    var element = selectedItems[i];
+                    if (element != id) {
+                        newSelection.push(element);
+                        //    console.log("index " + i);
+                        if (cartItem[i].cost.length > 0) {
+                            cartCost += Number.parseInt(cartItem[i].cost);
+                        }
                     }
                 }
             }
@@ -505,9 +578,9 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
         /*var prodView = window.document.getElementById('mainProdView');
         var cartBtns = prodView.querySelectorAll('button[class^=cartBtn]');*/
         var cartBtns = window.document.querySelectorAll('button[class^=cartBtn]');
-        console.log("updateProductCount:" + totalSelected);
+        //    console.log("updateProductCount:" + totalSelected);
         var idBtnsLen = cartBtns.length;
-        console.log("updateProductCount: idBtnsLen =" + idBtnsLen);
+        //    console.log("updateProductCount: idBtnsLen =" + idBtnsLen);
 
         for (var j = 0; j < idBtnsLen; j++) {
             var currentBtn = cartBtns[j];
@@ -516,15 +589,15 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
                 currentBtn.style.background = 'linear-gradient(to bottom, rgb(55, 55, 55),rgb(22, 22, 22),rgb(0, 0, 0),rgb(22, 22, 22),rgb(55, 55, 55))';
                 currentBtn.dataCart = 'false';
                 var currentBtnVal = currentBtn.value.toString();
-                console.log("updateProductCount: currentBtn.value =" + currentBtnVal);
-                console.log("updateProductCount: selItemID =" + selItemIdstr);
+                //    console.log("updateProductCount: currentBtn.value =" + currentBtnVal);
+                //    console.log("updateProductCount: selItemID =" + selItemIdstr);
                 for (var i = 0; i < totalSelected; i++) {
                     var selItemID = selectedItems[i];
                     var selItemIdstr = selItemID.toString();
                     selItemIdstr = selItemIdstr.trim();
                     if (currentBtnVal == selItemIdstr) {
-                        console.log("match found");
-                        console.log(currentBtn);
+                        //    console.log("match found");
+                        //    console.log(currentBtn);
                         //currentBtn.textContent = "-";
                         currentBtn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
                         currentBtn.dataCart = 'true';
@@ -540,7 +613,7 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
         if (btn != undefined) {
             idMod = btn.value;
         }
-        console.log(idMod.length);
+        //    console.log(idMod.length);
         if (idMod.length > 0) {
             if (selectedItems.length > 0) {
                 if (selectedItems.indexOf(idMod) > -1) {
@@ -558,11 +631,12 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
 
     async function loadCart(jsonData) {
         var cartString = await getCookie("incartItems");
-        console.log(cartString);
+        //    console.log(cartString);
         if (cartString.length > 0) {
             selectedItems = cartString.split(",")
         }
-        console.log(selectedItems);
+        verifyItem(selectedItems);
+        //    console.log(selectedItems);
         dataLength = selectedItems.length;
         getLoadingObjects(jsonData, selectedItems);
         if (loadType == 1) {
@@ -581,7 +655,14 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
         }
         updateProductCount();
     }
-
+    function verifyItem(selectedItems) {
+        for (var i = 0; i < selectedItems.length; i++) {
+            if (selectedItems[i].length <= 0) {
+                selectedItems.removeItem(i);
+            }
+        }
+        selectedItems_bkp = selectedItems;
+    }
     async function addItems() {
         await addItemViews(itemLoadNum, itemLoadNum + 9);
         await loadItems(itemLoadNum, dataLength, 0);
@@ -612,24 +693,28 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
                 var changeY = Math.abs(sv_touchendY - sv_touchstartY);
                 var changeX = Math.abs(sv_touchendX - sv_touchstartX);
                 if (sv_touchendY < sv_touchstartY && changeX < changeY) {
-                    console.log('Swiped Up');
+                    //    console.log('Swiped Up');
                     if (swipeUp) {
-                        setTimeout(Func(1), 3000);
+                        setTimeout(function () {
+                            Func(1);
+                        }, 3000);
                     }
                     swipeUp = true;
                 }
 
                 if (sv_touchendY > sv_touchstartY && changeX < changeY) {
-                    console.log('Swiped Down');
+                    //    console.log('Swiped Down');
                 }
                 if (sv_touchendY === sv_touchstartY && sv_touchendX === sv_touchstartX) {
-                    console.log('Tap');
+                    //    console.log('Tap');
                 }
             }, false);
         } else {
             scrollViewElem.textContent = "Click to Load More";
             scrollViewElem.addEventListener("click", function (e) {
-                setTimeout(Func(1), 3000);
+                setTimeout(function () {
+                    Func(1);
+                }, 3000);
             });
         }
 
@@ -638,7 +723,11 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
         const d = new Date();
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
         let expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        if (cvalue != undefined) {
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/;SameSite = Strict";
+        } else {
+            document.cookie = cname + "=" + "" + ";" + expires + ";path=/;SameSite = Strict";
+        }
     }
     async function getCookie(cname) {
         let name = cname + "=";
@@ -693,7 +782,7 @@ function updateCartItem() {
 export async function loadItems(startNum, endNum, pgNum) {
 
     var elemsParents = window.document.querySelectorAll('div[id^=prodParent]');
-    console.log(elemsParents);
+    //    console.log(elemsParents);
     var i = startNum;
     var newEnd = startNum + 9;
     for (var j = startNum; j < newEnd; j++) {
@@ -744,6 +833,7 @@ export async function loadItems(startNum, endNum, pgNum) {
                 whatsappBtn.values = val;
                 var cartBtn = elem.querySelector("button[class^=cartBtn]");
                 cartBtn.value = valueData.itemnum;
+                cartBtn.activeVal = 'true';
                 //checkOutLater(cartBtn, null);
 
                 var shareBtn = elem.querySelector("button[class^=shareBtn]");
