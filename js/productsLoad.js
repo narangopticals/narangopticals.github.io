@@ -656,7 +656,7 @@ export async function loadItems(startNum, endNum, pgNum) {
     for (var j = startNum; j < newEnd; j++) {
         var elem = elemsParents[j];
         if (i < str.length) {
-            //    console.log(elem);
+            //console.log(elem);
             var iframeHolder = elem.querySelector("#iframeHolder");
             //console.log("Line 325 : Loading Item: " + i + "\nin view number : " + j);
             iframeHolder.innerHTML = "";
