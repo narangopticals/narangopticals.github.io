@@ -672,8 +672,10 @@ export async function loadItems(startNum, endNum, pgNum) {
                     //var link = "https://drive.google.com/file/d/" + imgs[k] + "/preview";
                     //v1.1.4c [update]
                     var link = "https://drive.google.com/thumbnail?id=" + imgs[k] + "&sz=w450-h450";
-                    iframeHolder.innerHTML += "<img style=\"height: 1;\
-                    width: " + imgWidth + ";\" id=\"iframe" + j + "img" + k + "\" src=\"" + link + "\"></img>";
+                    var name = 'iframe' + j + 'img' + k;
+                    iframeHolder.innerHTML += generateImageView(name, link, imgWidth);
+                    /*iframeHolder.innerHTML += "<img style=\"width: " + imgWidth +
+                        "; height: 100 %;aspect - ratio: 1; \" id=\"iframe" + j + "img" + k + "\" src=\"" + link + "\"></img>";*/
                 }
             }
 
@@ -742,4 +744,14 @@ export async function loadItems(startNum, endNum, pgNum) {
     }*/
     document.title = document.title.replaceAll('loading, ', '');
     setTimeout(checkOutLater(null, null), 10000);
+}
+
+export function generateImageView(name, link, width) {
+    var imgView = window.document.createElement('IMG');
+    imgView.id = name;
+    imgView.src = link;
+    imgView.style.width = width;
+    imgView.style.height = '100%';
+    imgView.style.aspectRatio = '1';
+    return imgView.outerHTML;
 }

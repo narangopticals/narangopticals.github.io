@@ -23,19 +23,27 @@ background-color: rgba(50, 50, 50,0.95);">
         <button id=gridPrev style="min-height: 20%;
             margin: 40% 0 40% 0;">&#x25C0;</button>
         <div class="imgCtrl" style="width: 100%;
-            height: 100%;">
-            <img class="overlay" style="  width: 80px;
+            height: 100%;  overflow: clip;">
+            <!--<img class="overlay" style="  width: 80px;
                 aspect-ratio: 1;
                 position: relative;
                 background: black;
                 /*transform: translateX(146%) translateY(25%);*/
                 border-radius: 50%;
                 top: -3%;
-                left: 40%;" src="../imgs/logo.jpg"></img>
+                left: 40%;" src="../imgs/logo.jpg"></img>-->
+            <img class="overlay" style="  width: 10vh;
+                                aspect-ratio: 1;
+                                position: relative;
+                                background: black;
+                                /*! transform: translateX(100%) translateY(-5%); */
+                                border-radius: 50%;
+                                top: -3%;
+                                left: 40%;" src="../imgs/logo.jpg">
             <div id="iframeHolder" style="  text-align: center;
                 /*aspect-ratio: 1;*/
                 height: 100%;
-                margin-top: -90px;">
+                margin-top: -63px;">
 
             </div>
             <span id="imgCount" style="  opacity: 0.5;
@@ -50,6 +58,9 @@ background-color: rgba(50, 50, 50,0.95);">
                 border-radius: 15px;
                 padding: 5px 10px 5px 10px;
                 font-weight: bold;"></span>
+            <div
+                style="/*! background: green; */position: relative;z-index: 100000;top: -100vh;left: 0;width: 100%;height: 100vh;">
+            </div>
         </div>
         <button id="gridNext" style="min-height: 20%;
             margin: 40% 0 40% 0;">&#x25B6;</button>
