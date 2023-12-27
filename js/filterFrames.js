@@ -48,24 +48,19 @@ export async function submitFilter() {
         //console.log(key);
         keys[key] = document.getElementById(key).value;
     }
-    /*keys.pattern = document.getElementById("pattern").value;
-    keys.front = document.getElementById("front").value;
-    keys.side = document.getElementById("side").value;
-    keys.opacity = document.getElementById("opacity").value;
-    keys.resistance = document.getElementById("resistance").value;
-    keys.joint = document.getElementById("joint").value;
-    keys.surfacing = document.getElementById("surfacing").value;*/
     setHigh(highCost);
     setLow(lowCost);
     setFiltered(true);
-    //console.log("keys =");
-    //console.log(keys);
     setKeys(keys);
     highCost = null;
     lowCost = null;
     keys = null;
     restoreProduts();
     Func(currentSection, page);
+}
+
+export async function manualFilter() {
+    
 }
 export async function restoreProduts() {
     var filterView = window.document.getElementById('filterView');

@@ -163,7 +163,7 @@ export async function Func(section, page) {
         }
         str = await grabData(type);
     }
-
+    console.log(page);
     if (page == 0) {
         addItems();
     } else {
@@ -175,7 +175,6 @@ export async function Func(section, page) {
             str = await getFiltered(str, minCost, maxCost, keys);
             dataLength = (await str).length;
             if (dataLength > 8) {
-                await addLoadMoreView();
                 //await addPagesNavBtn(dataLength);
                 await addItemViews(0, 9);
                 var starts = 0;
@@ -203,53 +202,9 @@ export async function Func(section, page) {
         await addItemViews(itemLoadNum, itemLoadNum + 9);
         await loadItems(itemLoadNum, dataLength, 0);
     }
-    async function addLoadMoreView() {
-        var scrollViewElem = document.getElementById("scrollView");
 
-        var devType = navigator.userAgent;
-        if (devType.match(/Android/i)
-            || devType.match(/webOS/i)
-            || devType.match(/iPhone/i)
-            || devType.match(/iPad/i)
-            || devType.match(/iPod/i)
-            || devType.match(/BlackBerry/i)
-            || devType.match(/Windows Phone/i)) {
 
-            var sv_touchstartX, sv_touchstartY, sv_touchendX, sv_touchendY;
-            scrollViewElem.textContent = "Drag up Twice: Load More";
-            scrollViewElem.addEventListener('touchstart', function (event) {
-                sv_touchstartX = event.changedTouches[0].screenX;
-                sv_touchstartY = event.changedTouches[0].screenY;
-            }, false);
 
-            scrollViewElem.addEventListener('touchend', function (event) {
-                sv_touchendX = event.changedTouches[0].screenX;
-                sv_touchendY = event.changedTouches[0].screenY;
-                var changeY = Math.abs(sv_touchendY - sv_touchstartY);
-                var changeX = Math.abs(sv_touchendX - sv_touchstartX);
-                if (sv_touchendY < sv_touchstartY && changeX < changeY) {
-                    //console.log('Swiped Up');
-                    if (swipeUp) {
-                        setTimeout(Func(sectionCurrent, 0), 3000);
-                    }
-                    swipeUp = true;
-                }
-
-                if (sv_touchendY > sv_touchstartY && changeX < changeY) {
-                    //console.log('Swiped Down');
-                }
-                if (sv_touchendY === sv_touchstartY && sv_touchendX === sv_touchstartX) {
-                    //console.log('Tap');
-                }
-            }, false);
-        } else {
-            scrollViewElem.textContent = "Click to Load More";
-            scrollViewElem.addEventListener("click", function (e) {
-                setTimeout(Func(sectionCurrent, 0), 3000);
-            });
-        }
-
-    }
     /*async function addPagesNavBtn(dataLength) {
         var btnParent = document.getElementById("btnNavProdView");
         var dtl = dataLength + 1;
@@ -304,6 +259,11 @@ export async function Func(section, page) {
         var mainView = window.document.getElementById('mainProdView' + startNum);
         mainView.innerHTML = pS;
         mainView = document.getElementById('mainProdView' + startNum);
+        mainView.onload = executeLoad(endNum);
+
+    }
+
+    async function executeLoad(endNum) {
         var prodViews = window.document.querySelectorAll('#prodParent');
         for (var i = 0; i < endNum; i++) {
             var elem = prodViews[i];
@@ -641,7 +601,8 @@ export async function loadItems(startNum, endNum, pgNum) {
         window.history.pushState('Page ' + (pgNum + 1), '', '/products.html?sect=' + sectionCurrent + '&page=' + (pgNum + 1));
     }
 
-
+    console.log(startNum);
+    console.log(pgNum);
     currentPgNum = pgNum;
     /*var home = window.location.origin + "/?";
     var loc = window.location.href;
@@ -754,4 +715,115 @@ export function generateImageView(name, link, width) {
     imgView.style.height = '100%';
     imgView.style.aspectRatio = '1';
     return imgView.outerHTML;
+}
+
+export async function addLoadMoreView() {
+    var scrollViewElem = document.getElementById("scrollView");
+    var prodElem = document.getElementById("prodMain");
+    var devType = navigator.userAgent;
+    if (devType.match(/Android/i)
+        || devType.match(/webOS/i)
+        || devType.match(/iPhone/i)
+        || devType.match(/iPad/i)
+        || devType.match(/iPod/i)
+        || devType.match(/BlackBerry/i)
+        || devType.match(/Windows Phone/i)) {
+
+        //var sv_touchstartX, sv_touchstartY, sv_touchendX, sv_touchendY;
+        //scrollViewElem.textContent = "Drag up Twice: Load More";
+        scrollViewElem.style.display = 'none';
+        /*scrollViewElem.addEventListener('touchstart', function (event) {
+            sv_touchstartX = event.changedTouches[0].screenX;
+            sv_touchstartY = event.changedTouches[0].screenY;
+        }, false);*/
+
+        /*scrollViewElem.addEventListener('touchend', function (event) {
+            sv_touchendX = event.changedTouches[0].screenX;
+            sv_touchendY = event.changedTouches[0].screenY;
+            var changeY = Math.abs(sv_touchendY - sv_touchstartY);
+            var changeX = Math.abs(sv_touchendX - sv_touchstartX);
+            var targetElem = event.target
+            console.log(sv_touchendY);
+            console.log(changeY);
+            console.log(targetElem.scrollHeight);
+            console.log(targetElem.clientHeight);
+            console.log(targetElem.scrollTop);
+            console.log(Math.abs(targetElem.scrollHeight - targetElem.clientHeight - targetElem.scrollTop) < 1);
+            /*if (sv_touchendY < sv_touchstartY && changeX < changeY) {
+                scrollPage(event);
+                //console.log('Swiped Up');
+                /*if (swipeUp) {
+                    scrollPage(event);
+                }
+                swipeUp = true;
+            }
+
+            if (sv_touchendY > sv_touchstartY && changeX < changeY) {
+                //console.log('Swiped Down');
+            }
+            if (sv_touchendY === sv_touchstartY && sv_touchendX === sv_touchstartX) {
+                //console.log('Tap');
+            }
+        }, false);*/
+
+        prodElem.addEventListener('touchend', function (event) {
+            var prodsAll = window.document.querySelectorAll('#prodParent')
+            //console.log(prodsAll.length);
+            //console.log(dataLength);
+            if (prodsAll.length < dataLength) {
+                var max = window.document.body.clientHeight;
+                var min = (max - (screen.availHeight * 1.5));
+                //console.log(max);
+                //console.log(min);
+                var touchpoint = event.changedTouches[0].pageY;
+                if (touchpoint > min && touchpoint < max) {
+                    setTimeout(Func(sectionCurrent, 0), 3000);
+                    //console.log(touchpoint);
+                    //console.log(document.getElementById("prodMain").clientHeight);
+                } else {
+                    setTimeout(function () {
+                        var currentPos = window.scrollY;
+                        if (currentPos > min && currentPos < max) {
+                            setTimeout(Func(sectionCurrent, 0), 3000);
+                            //console.log(touchpoint);
+                            //console.log(document.getElementById("prodMain").clientHeight);
+                        }
+                    }, 3000);
+                }
+            } else {
+                for (var i = dataLength; i < prodsAll.length; i++) {
+                    prodsAll[i].remove();
+                }
+
+            }
+        });
+    } else {
+        scrollViewElem.style.display = 'block';
+        scrollViewElem.textContent = "Click to Load More";
+        //scrollViewElem.removeEventListener("click", null);
+        scrollViewElem.addEventListener("click", (e) => scrollPage(e));
+    }
+    async function scrollPage(e) {
+        var prodsAll = window.document.querySelectorAll('#prodParent');
+        console.log(prodsAll.length);
+        console.log(dataLength);
+        if (prodsAll.length < dataLength) {
+            if (e.target.id === 'scrollView') {
+                setTimeout(Func(sectionCurrent, 0), 3000);
+            }
+            setTimeout(function () {
+                var prodsAll = window.document.querySelectorAll('#prodParent');
+                if (prodsAll.length >= dataLength) {
+                    for (var i = dataLength; i < prodsAll.length; i++) {
+                        prodsAll[i].remove();
+                    }
+                }
+            }, 2000);
+        } else {
+            for (var i = dataLength; i < prodsAll.length; i++) {
+                prodsAll[i].remove();
+            }
+
+        }
+    }
 }

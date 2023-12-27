@@ -1000,7 +1000,7 @@ button {
 .overlayImagesBlur {
     width: var(--elemW);
     aspect-ratio: 1;
-    opacity: 0.6;
+    opacity: 0.4;
     background-color: rgb(207, 208, 208);
     display: block;
     position: relative;
@@ -1091,7 +1091,7 @@ button {
         --framH: var(--widthPercent);
         --blurTop: -104%;
         --catTxtSize: 30px;
-        --catTxtTop: -175%;
+        --catTxtTop: -132%;
         --disImgTop: -7px;
         --disImgLeft: -7px;
         --widthPercent: 70vw;
@@ -1145,11 +1145,36 @@ button {
         --framH: var(--widthPercent);
         --blurTop: -104%;
         --catTxtSize: 47px;
-        --catTxtTop: -158%;
+        --catTxtTop: -125%;
         --disImgTop: -10px;
         --disImgLeft: -10px;
         --widthPercent: 50vh;
     }
+}
+
+#gridFrames {
+    display: flex;
+    min-height: 30%;
+    width: fit-content;
+    overflow: hidden;
+    animation-duration: 4s;
+    animation-delay: 4s;
+    animation-iteration-count: infinite;
+    color: var(--flex-bg-color);
+    animation-name: moveit;
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+    flex-direction: row;
+    position: absolute;
+}
+
+#gridHolder {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100vw;
 }
 
 /***INDEX PAGE CSS****/

@@ -134,7 +134,7 @@
         //window.filterVisible = filterVisible
     </script>
     <script type="module">
-        import { setFiltered, setHigh, setLow, setKeys, Func, loadItems, checkOutLater, imgSwitch } from "./js/productsLoad.js";
+        import { addLoadMoreView, setFiltered, setHigh, setLow, setKeys, Func, loadItems, checkOutLater, imgSwitch } from "./js/productsLoad.js";
         window.Func = Func;
         window.loadItems = loadItems;
         window.checkOutLater = checkOutLater;
@@ -143,6 +143,7 @@
         window.setLow = setLow;
         window.setHigh = setHigh;
         window.setFiltered = setFiltered;
+        window.addLoadMoreView = addLoadMoreView;
         //window.text = text;
         //window.Func(1);
         grabUrlProd();
@@ -151,6 +152,7 @@
             location.reload();
         });
 
+        addLoadMoreView();
     </script>
     <script type="module">
         import { navLoader, toggle, navScroll, switchTheme, loadThemeBtn } from "./js/navload.js";
@@ -228,7 +230,8 @@
                     var mainView = window.document.querySelectorAll('.mainProdView');
                     for (var v = 0; v < mainView.length; v++) {
                         if (mainView[v] != undefined) {
-                            mainView[v].style.display = "none";
+                            mainView[v].remove();
+                            //mainView[v].style.display = "none";
                         }
                     }
                 } else {
