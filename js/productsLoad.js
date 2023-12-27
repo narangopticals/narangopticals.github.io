@@ -743,12 +743,12 @@ export async function addLoadMoreView() {
             var changeY = Math.abs(sv_touchendY - sv_touchstartY);
             var changeX = Math.abs(sv_touchendX - sv_touchstartX);
             var targetElem = event.target
-            console.log(sv_touchendY);
-            console.log(changeY);
-            console.log(targetElem.scrollHeight);
-            console.log(targetElem.clientHeight);
-            console.log(targetElem.scrollTop);
-            console.log(Math.abs(targetElem.scrollHeight - targetElem.clientHeight - targetElem.scrollTop) < 1);
+           //console.log(sv_touchendY);
+           //console.log(changeY);
+           //console.log(targetElem.scrollHeight);
+           //console.log(targetElem.clientHeight);
+           //console.log(targetElem.scrollTop);
+           //console.log(Math.abs(targetElem.scrollHeight - targetElem.clientHeight - targetElem.scrollTop) < 1);
             /*if (sv_touchendY < sv_touchstartY && changeX < changeY) {
                 scrollPage(event);
                 //console.log('Swiped Up');
@@ -805,8 +805,8 @@ export async function addLoadMoreView() {
     }
     async function scrollPage(e) {
         var prodsAll = window.document.querySelectorAll('#prodParent');
-        console.log(prodsAll.length);
-        console.log(dataLength);
+        //console.log(prodsAll.length);
+        //console.log(dataLength);
         if (prodsAll.length < dataLength) {
             if (e.target.id === 'scrollView') {
                 setTimeout(Func(sectionCurrent, 0), 3000);
