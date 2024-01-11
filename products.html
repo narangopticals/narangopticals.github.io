@@ -94,11 +94,7 @@
   margin: 0;">
 
     </div>
-    <div id="btnNavProdView2" style="width: 85%;
-            align-items: center;
-            text-align: center;
-            padding:1%;
-            height: 100%;"></div>
+    <div id="footerbar"></div>
     <button id="scrollView" style="width: 85%;
                         align-items: center;
                         text-align: center;
@@ -155,13 +151,13 @@
         addLoadMoreView();
     </script>
     <script type="module">
-        import { navLoader, toggle, navScroll, switchTheme, loadThemeBtn } from "./js/navload.js";
+        import { toFooter, navLoader, toggle, navScroll, switchTheme, loadThemeBtn } from "./js/navload2.js";
         import { browserDetect } from "./js/general.js";
         browserDetect();
         window.navLoader = navLoader;
         window.toggle = toggle;
         navLoader('menuBtns', 1, 'Products');
-
+        window.toFooter = toFooter;
         window.switchTheme = switchTheme;
         window.onscroll = navScroll;
         window.document.body.onload = loadThemeBtn;

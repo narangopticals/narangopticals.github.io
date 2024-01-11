@@ -24,9 +24,10 @@ body {
     --bg-color: rgb(50, 50, 50);
     --font-color-primary: #fff;
     --font-color-secondary: #cbc4c4;
-    --navbar-bg-color: linear-gradient(rgba(71, 26, 26, 0.9), rgba(41, 0, 0, 0.9),
+    /*--navbar-bg-color: linear-gradient(rgba(71, 26, 26, 0.9), rgba(41, 0, 0, 0.9),
             rgba(56, 21, 21, 0.9), rgba(74, 28, 28, 0.9),
-            rgba(93, 34, 34, 0.95), rgba(112, 41, 41, 0.95));
+            rgba(93, 34, 34, 0.95), rgba(112, 41, 41, 0.95));*/
+    --navbar-bg-color: linear-gradient(rgba(109, 109, 109, 0.95), rgba(114, 114, 114, 0.9), rgba(105, 105, 105, 0.9), rgba(103, 103, 103, 0.9), rgba(105, 105, 105, 0.9), rgba(114, 114, 114, 0.9), rgba(109, 109, 109, 0.95));
     --text-shadow: 0 0 4px #c66666, 0 0 8px #6793c6;
     --btn-active-color: linear-gradient(#3f6789, #375a78, #2f4d67, #375a78, #3f6789);
     --btn-filter-bg-color: linear-gradient(#027263, #027f6e, #1b8c7d, #027f6e, #027263);
@@ -40,7 +41,14 @@ body {
     --bg-color: #EFEAEA;
     --font-color-primary: #2e2e2e;
     --font-color-secondary: #828282;
-    --navbar-bg-color: linear-gradient(rgba(160, 170, 170, 0.9), rgba(170, 180, 180, 0.9), rgba(180, 187, 187, 0.9), rgba(180, 187, 187, 0.9), rgba(170, 180, 180, 0.9), rgba(160, 170, 170, 0.9));
+    /*--navbar-bg-color: linear-gradient(rgba(160, 170, 170, 0.9), rgba(170, 180, 180, 0.9),
+                rgba(180, 187, 187, 0.9), rgba(180, 187, 187, 0.9),
+                rgba(170, 180, 180, 0.9), rgba(160, 170, 170, 0.9));*/
+
+    --navbar-bg-color: linear-gradient(rgba(160, 177, 177, 0.9), rgba(135, 140, 140, 0.9),
+            rgba(120, 130, 130, 1), rgba(120, 130, 130, 1),
+            rgba(135, 140, 140, 0.9), rgba(160, 177, 177, 0.9));
+
     --text-shadow: 0 0 4px #eadcba, 0 0 8px #f5edc0;
     --btn-active-color: linear-gradient(#6399c7, #70ace0, #7cbff9, #70ace0, #6399c7);
     --btn-filter-bg-color: linear-gradient(#358e82, #4e9c92, #67aaa1, #4e9c92, #358e82);
@@ -62,9 +70,8 @@ button {
 #nav-menu li {
     float: left;
     height: inherit;
-    /*!width: 100%;*/
+    width: 66%;
     margin: 0 1%;
-    flex-grow: 1;
 }
 
 #cartFloat {
@@ -191,11 +198,17 @@ h1,
     border-radius: 50%;
 }
 
+.logoLong {
+    margin: 0.5%;
+    margin-left: 0.1%;
+}
+
 #navbarhide {
     font-size: large;
 }
 
-nav {
+nav,
+#footerbar {
     /*background: linear-gradient(rgb(42, 42, 45),rgb(23, 23, 23),rgb(16, 16, 16), rgb(23, 23, 23), rgb(45, 42, 42));*/
     /*background: linear-gradient(rgb(42, 42, 45),rgb(23, 23, 23),rgb(16, 15, 15), rgb(23, 23, 14), rgb(23, 14, 14), rgb(34, 9, 9));*/
     /*background: linear-gradient(#2e0000, #290000, #290000, #290000, #2e0000, #330000, #471a1a, #5c3333);*/
@@ -207,6 +220,7 @@ nav {
     z-index: 1000000;
     width: 100vw;
     margin: 0 2px 0 0;
+    color: var(--font-color-primary);
     /*text-align: end;*/
 }
 
@@ -523,11 +537,12 @@ a.dailer {
 
 .dropdown .dropbtn,
 .menuBtns,
-.dailer {
+.dailer,
+.pages {
     outline: none;
     color: white;
     background-color: inherit;
-    font-family: inherit;
+    font-family: var(--fontfamily-fancy-text);
     /* Important for vertical align on mobile phones */
     margin: 0.20% 0 0.20% 0;
     /* Important for vertical align on mobile phones */
@@ -552,7 +567,8 @@ a.dailer {
     width: 100%;
 }
 
-.menuBtns {
+.menuBtns,
+.pages {
     color: rgb(175, 175, 175);
     margin: 0.7%;
     display: block;
@@ -863,6 +879,10 @@ button {
         max-width: 30%;
     }
 
+    .logoLong {
+        max-width: 75%;
+    }
+
     #directionFrame {
         width: 100%;
         margin-top: 5%;
@@ -948,6 +968,10 @@ button {
 
     .logo {
         max-width: 12%;
+    }
+
+    .logoLong {
+        max-width: 32vw;
     }
 
     #directionFrame {

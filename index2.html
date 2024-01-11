@@ -41,6 +41,25 @@
         gtag('config', 'G-0M7E1Z41TJ');
     </script>
     <!-- Google tag (gtag.js) -->
+    <style>
+        .prodImageHold {
+            margin: 5px;
+        }
+
+        #indexBody li {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 4px solid aliceblue;
+            border-radius: 23px;
+            margin: 5px;
+        }
+
+        .prodImage {
+            max-width: 25vw;
+        }
+    </style>
 </head>
 
 <body id="mainBody">
@@ -59,194 +78,161 @@
 
         }// ]]></script>
 
-    <div id="indexBody">
-        <div id="swipeHolder">
-            <img src="/imgs/swipe-left-64.png"
-                style="background-color:aliceblue; opacity: 0.8; width: 40px; height: 40px;align-self: center;"
-                onclick="swipeRight()"></img>
-            <div id="productIntroHolder">
-                <div id="frameProdIntroHolder" class="typeHolder">
-                    <a href="products.html?sect=0&page1" target="_blank">
-                        <img class="displayImg"
-                            src="https://drive.google.com/thumbnail?id=1Mj5NSrD6q3Eo1auwYP4Fh4qztF9YbjDa&sz=w500-h500">
-
-                        </img>
-                        <div class="overlayImagesBlur"></div><span class="catgryText">Frames</span>
-                    </a>
-
-                </div>
-                <div id="sunglassProdIntroHolder" class="typeHolder">
-                    <a href="products.html?sect=1&page1" target="_blank">
-                        <img class="displayImg"
-                            src="https://drive.google.com/thumbnail?id=1sefCpBWqxtdeuuwOlvOEmdTF51ThfAEN&sz=w500-h500">
-
-                        </img>
-                        <div class="overlayImagesBlur">
-                        </div><span class="catgryText">Sunglass</span>
-                    </a>
-                </div>
-
-                <div id="lensProdIntroHolder" class="typeHolder">
-                    <a href="products.html?sect=2&page1" target="_blank">
-                        <img class="displayImg"
-                            src="https://drive.google.com/thumbnail?id=17hJ-LZPDdWbz3ddXLtchN5MpZinQsZOu&sz=w500-h500">
-                        </img>
-                        <div class="overlayImagesBlur"></div><span class="catgryText">Lens</span>
-                    </a>
-                </div>
-                <div id="readyMadeProdIntroHolder" class="typeHolder">
-                    <a href="products.html?sect=3&page1" target="_blank">
-                        <img class="displayImg"
-                            src="https://drive.google.com/thumbnail?id=16PrT9ecvMgyJDfB8rhDB3arMhL6LrYTT&sz=w500-h500">
-
-                        </img>
-                        <div class="overlayImagesBlur">
-                        </div><span class="catgryText">Readymade</span>
-                    </a>
-                </div>
-                <div id="watchProdIntroHolder" class="typeHolder">
-                    <a href="products.html?sect=4&page1" target="_blank">
-                        <img class="displayImg"
-                            src="https://drive.google.com/thumbnail?id=1nN0AJKcZYHcvAgMITuaHiM4F8wjnhh6b&sz=w500-h500">
-
-                        </img>
-                        <div class="overlayImagesBlur">
-                        </div><span class="catgryText">Watch</span>
-                    </a>
-                </div>
+    <div id="indexBody" style="display: flex;flex-direction: column;">
+        <div>
+            <a href="products.html?sect=0&page1" target="_blank">
+                <h2 style="color: black;">Frames</h2>
+            </a>
+            <ul style="display: flex;flex-direction: row;">
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=1Mj5NSrD6q3Eo1auwYP4Fh4qztF9YbjDa&sz=w500-h500"></img>
+                </li>
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=1Mj5NSrD6q3Eo1auwYP4Fh4qztF9YbjDa&sz=w500-h500"></img>
+                </li>
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=1Mj5NSrD6q3Eo1auwYP4Fh4qztF9YbjDa&sz=w500-h500"></img>
+                </li>
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=1Mj5NSrD6q3Eo1auwYP4Fh4qztF9YbjDa&sz=w500-h500"></img>
+                </li>
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=1Mj5NSrD6q3Eo1auwYP4Fh4qztF9YbjDa&sz=w500-h500"></img>
+                </li>
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=1Mj5NSrD6q3Eo1auwYP4Fh4qztF9YbjDa&sz=w500-h500"></img>
+                </li>
+            </ul>
 
 
-            </div>
-            <img src="/imgs/swipe-right-64.png"
-                style="  margin: 1.2%;background-color:aliceblue; opacity: 0.8;width: 40px; height: 40px;align-self: center;"
-                onclick="swipeLeft()"></img>
         </div>
-        <div id="mainContent">
-
-            <div class="contentSlider">
-                <div style="text-align:center; margin:0.2%; display: flex; flex-direction: column;">
-                    <div style="margin: 0.8%;">
-                        <button id="playPause" style=" font-weight: bold;" onclick="autoSlide()"></button>
-                        <button class="slideName" style=" font-weight: bold;" onclick="manualSlide(1)">Intro</button>
-                        <button class="slideName" style=" font-weight: bold;" onclick="manualSlide(2)">Info</button>
-                        <button class="slideName" style=" font-weight: bold;" onclick="manualSlide(3)">About Us</button>
-                        <button class="slideName" style=" font-weight: bold;" onclick="manualSlide(4)">Google
-                            Maps</button>
-
-                    </div>
-
-                </div>
-                <div class="mySlides fade">
-                    <iframe id="youtube-holder"
-                        src="https://drive.google.com/file/d/1unrEWjOUrZpIyfZNsyy1_gt0-QUl8Kyg/preview?start=1"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;"
-                        allowfullscreen></iframe>
-                </div>
-                <div class="mySlides fade">
-                    <div class="info-holder">
-                        <div class="flexs">
-                            <h4>Phone :<h3><a class="dailer" href="tel:+919756231332">+919756231332</a></h3>
-                            </h4>
-                            <h4>Address : </h4>
-                            <h3>Main Market Road</h3>
-                            <h3>City : Kashipur</h3>
-                            <h3>District : Udham Singh Nagar</h3>
-                            <h3>State : Uttarakhand</h3>
-                            <h3>Pin : 244713</h3>
-                        </div>
-                        <div class="flexs">
-                            <h4>Facilities : </h4>
-                            <h3>Wholesale & Retail - Complete Eyewear's Range</h3>
-                            <ul>
-                                <li>
-                                    <h3>Frames</h3>
-                                </li>
-                                <li>
-                                    <h3>Sunglasses</h3>
-                                </li>
-                                <li>
-                                    <h3>Lens</h3>
-                                </li>
-                                <li>
-                                    <h3>Free EyeTest @ store</h3>
-                                </li>
-                                <li>
-                                    <h3>Home EyeTest Booking Available.<br>
-                                        Register :<a href="/connect.html" style="color: rgb(35, 164, 121);">Booking</a>
-                                    </h3>
-                                </li>
-                                <li>
-                                    <h3>Powered Sunglass</h3>
-                                </li>
-                                <li>
-                                    <h3>Computer Eyewear</h3>
-                                </li>
-                                <li>
-                                    <h3>NightDrive Eyewear</h3>
-                                </li>
-                                <li>
-                                    <h3>Progressive Eyewear Specialist</h3>
-                                </li>
-                                <h3>& more</h3>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="mySlides fade">
-                    <div class="aboutus-container">
-                        <h4>About us:</h4>
-                        <article>Trusted Since 1979, First & Most Popular Optician Shop, in district Udham Singh
-                            Nagar,Uttarakhand.<br><br>We deal in all kind
-                            of eyewear, and in vast variety of Frames, Sunglasses, Spectacles.<br><br> We have
-                            served customers more than 100km from the establishment, to name few notable cities
-                            including
-                            Kashipur are Ramnagar, Almora, Ranikhet, Haldwani,
-                            Bazpur,Jaspur, Gadarpur, Mahuakheraganj, Peerumadara, Kundeshwari, Jaspur Khurd and the
-                            towns in
-                            between. </article>
-                    </div>
-                </div>
-
-                <div class="mySlides fade">
-                    <div class="map-holder">
-                        <iframe class="mapView"
-                            src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d1551.2471716178372!2d78.95875608206036!3d29.21084336113857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x390a43b9eecd5fdf%3A0xdf7b8d537da00b3c!2sMaharana%20Pratap%20Chowk%2C%20Kashipur%2C%20Uttarakhand%20244713!3m2!1d29.2104051!2d78.96191859999999!4m5!1s0x390a4388aab1be0f%3A0x52aa28c91123d862!2sNarang%20Opticals%20Main%20Bazar%20Rd%20Kashipur%2C%20Uttarakhand%20244713!3m2!1d29.211494!2d78.9596866!5e0!3m2!1sen!2sin!4v1671637066627!5m2!1sen!2sin"
-                            style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                </div>
-            </div>
+        <div><a href="products.html?sect=1&page1" target="_blank">
+                <h2 style="color: black;">Sunglass</h2>
+            </a>
+            <ul style="display: flex;flex-direction: row;">
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=1sefCpBWqxtdeuuwOlvOEmdTF51ThfAEN&sz=w500-h500"></img>
+                </li>
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=1sefCpBWqxtdeuuwOlvOEmdTF51ThfAEN&sz=w500-h500"></img>
+                </li>
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=1sefCpBWqxtdeuuwOlvOEmdTF51ThfAEN&sz=w500-h500"></img>
+                </li>
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=1sefCpBWqxtdeuuwOlvOEmdTF51ThfAEN&sz=w500-h500"></img>
+                </li>
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=1sefCpBWqxtdeuuwOlvOEmdTF51ThfAEN&sz=w500-h500"></img>
+                </li>
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=1sefCpBWqxtdeuuwOlvOEmdTF51ThfAEN&sz=w500-h500"></img>
+                </li>
+            </ul>
         </div>
+
+        <div><a href="products.html?sect=1&page1" target="_blank">
+                <h2 style="color: black;">Lens</h2>
+            </a>
+            <ul style="display: flex;flex-direction: row;">
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=17hJ-LZPDdWbz3ddXLtchN5MpZinQsZOu&sz=w500-h500"></img>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <a href="products.html?sect=1&page1" target="_blank">
+                <h2 style="color: black;">Readymade</h2>
+            </a>
+            <ul style="display: flex;flex-direction: row;">
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=16PrT9ecvMgyJDfB8rhDB3arMhL6LrYTT&sz=w500-h500"></img>
+                </li>
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=16PrT9ecvMgyJDfB8rhDB3arMhL6LrYTT&sz=w500-h500"></img>
+                </li>
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=16PrT9ecvMgyJDfB8rhDB3arMhL6LrYTT&sz=w500-h500"></img>
+                </li>
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=16PrT9ecvMgyJDfB8rhDB3arMhL6LrYTT&sz=w500-h500"></img>
+                </li>
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=16PrT9ecvMgyJDfB8rhDB3arMhL6LrYTT&sz=w500-h500"></img>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <a href="products.html?sect=1&page1" target="_blank">
+                <h2 style="color: black;">Watch</h2>
+            </a>
+            <ul style="display: flex;flex-direction: row;">
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=1nN0AJKcZYHcvAgMITuaHiM4F8wjnhh6b&sz=w500-h500">
+
+                    </img>
+                </li>
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=1nN0AJKcZYHcvAgMITuaHiM4F8wjnhh6b&sz=w500-h500">
+
+                    </img>
+                </li>
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=1nN0AJKcZYHcvAgMITuaHiM4F8wjnhh6b&sz=w500-h500">
+
+                    </img>
+                </li>
+                <li class='prodImageHold'><img class="prodImage"
+                        src="https://drive.google.com/thumbnail?id=1nN0AJKcZYHcvAgMITuaHiM4F8wjnhh6b&sz=w500-h500">
+
+                    </img>
+                </li>
+            </ul>
+        </div>
+
 
     </div>
-
+    <div id="footerbar"></div>
     <script type="module">
-        import { navLoader, toggle, navScroll, switchTheme, loadThemeBtn } from "./js/navload.js";
+        import { loadNavBtns, navLoader, toggle, navScroll, switchTheme, loadThemeBtn } from "./js/navload2.js";
         import { browserDetect } from "./js/general.js";
-        import { animateFlexs, swipeLeft, swipeRight } from "./js/indexAnimate.js";
         browserDetect();
         window.navLoader = navLoader;
-        window.toggle = toggle;
+        window.loadNavBtns = loadNavBtns;
         navLoader('menuBtns', 0, 'HomePage');
         window.switchTheme = switchTheme;
 
         window.switchTheme = switchTheme;
-        window.onscroll = navScroll;
+        //window.onscroll = navScroll;
         grabUrlProd();
         //animateFlexs();
-        window.animt = animateFlexs;
-        animt();
-        window.swipeLeft = swipeLeft;
-        window.swipeRight = swipeRight;
 
         document.title = "HomePage | Narang Opticals, Kashipur";
         window.matchMedia("(orientation:portrait)").addEventListener("change", function (e) {
             //console.log('Orientation change' + e);
             location.reload();
         });
-        window.document.body.onload = loadThemeBtn;
         //console.log("avail =" + screen.availHeight + ", window =" + window.innerHeight)
+        export function initFooter(cls, ind, headTxt) {
+            fetch("/class/footer.html")
+                .then((res) => {
+                    var val = res.text();
+                    //console.log(val);
+                    return val;
+                })
+                .then((data) => {
+                    //mutevent = new MutationDetector(window.document.getElementById('navbar'));
+
+                    window.document.getElementById('footerbar').innerHTML = data;
+                    //document.getElementById('navbarhide').onclick = "toggle()";
+                    /*do {
+                        setTimeout(loadNavBtns(cls, ind, headTxt), 2000);
+                    } while ((document.getElementById('navbar').childElementCount == 0) || loadSet)*/
+                });
+            //prevScrollpos = window.scrollY;
+
+        }
+        initFooter();
     </script>
     <script type="text/javascript">
 

@@ -1,0 +1,156 @@
+<nav id="navbar" class="ng-theme-d5">
+    <div id="staticbar">
+
+        <ul id="nav-menu" class="links">
+            <li>
+                <!-- Rounded switch -->
+                <label class="switch" style="text-align: center;flex-grow: 0.5;">
+                    <input type="checkbox">
+                    <span class="slider round" onclick="switchTheme('slider round')">
+                        <p style="  position: absolute;
+                                    left: 4px;
+                                    top: -16px;
+                                    z-index: 10;
+                                    font-size: 15px;">☾</p>
+                        <p class="before"></p>
+                        <p style="  position: absolute;
+                                        right: 3px;
+                                        top: -16px;
+                                        z-index: 10;
+                                        font-size: 15px;">☀</p>
+                    </span>
+                </label>
+            </li>
+            <li style="display: flex;flex-direction: row;">
+                <div class="dropdown">
+                    <button id="menuBtn" class="dropbtn"
+                        title="Navigation Menu, List Of Pages,Browse Our Website's Other Pages.">☰Menu▼
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content" style="z-index: 15;">
+                        <a class="menuBtns" href="/index2.html" title="Home"
+                            style="background: linear-gradient(rgb(136, 135, 135), rgb(74, 74, 74), rgb(74, 74, 74), rgb(136, 135, 135));">Home**</a>
+                        <a class="menuBtns" href="/products.html" title="Products Menu">Products</a>
+                        <a class="menuBtns" href="/cart.html" title="Check Your Cart, Selected Item">Cart</a>
+                        <a class="menuBtns" href="/aboutus.html" title="Learn More About Us On this Page.">About Us</a>
+                        <a class="menuBtns" href="/connect.html"
+                            title="Fill out Contact Form with your Querry .We will Call/Message you Back About your Querry">Leave
+                            Querry</a>
+                        <a class="menuBtns" href="/map.html"
+                            title="Check Our Location on Google Maps, Directions">Map</a>
+                        <a class="menuBtns" href="/track.html" title="Track Order Status">Track Order</a>
+                        <a class="menuBtns" href="/registration.html"
+                            title="Fill Form to Apply For Premium Membership">Premium
+                            Membership</a>
+                    </div>
+                </div>
+            </li>
+            <li><button onclick="toFooter()">More Info</button></li>
+
+
+        </ul>
+        <ul>
+            <a id="logoHeader2" href="/" style="text-align: center;flex-grow: 0.5;" title="Click to go to homepage">
+                <img class="logoLong" src="imgs/logo_long.png">
+            </a>
+        </ul>
+    </div>
+    <style>
+        @media screen and (orientation: portrait) {
+
+            #staticbar ul {
+                margin: 2px;
+                display: flex;
+                flex-direction: row;
+                min-width: 36%;
+                list-style-type: none;
+                padding: 0;
+                overflow: hidden;
+            }
+        }
+
+        @media screen and (orientation: landscape) {
+
+
+            #staticbar ul,
+            #staticbar li {
+                min-width: 36%;
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+        }
+
+        /* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 47px;
+            height: 18px;
+            align-self: center;
+            margin: 0 2px 0 2px;
+            border: 2px solid aliceblue;
+            border-radius: 20px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgb(111, 111, 111);
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider .before {
+            position: absolute;
+            content: "";
+            height: 15px;
+            aspect-ratio: 1;
+            left: 2px;
+            bottom: -14px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bolder;
+        }
+
+        input:checked+.slider {
+            background-color: #EAEAEA;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider .before {
+            -webkit-transform: translateX(29px);
+            -ms-transform: translateX(29px);
+            transform: translateX(29px);
+
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round .before {
+            border-radius: 50%;
+        }
+    </style>
+</nav>
