@@ -103,17 +103,6 @@
         }// ]]></script>
     <script type="text/javascript"
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <!--<div style="width: 100%; height:fit-content; text-align:center; margin: 0.5%;">
-        <button class="slideName" style="font-weight: bold;" onclick="switchSection(0)">Eyewear Frame</button>
-        <button class="slideName" style="font-weight: bold;" onclick="switchSection(1)">Sunglass</button>
-        <button class="slideName" style="font-weight: bold;" onclick="switchSection(2)">Lens</button>
-    </div>-->
-
-    <!--<div id="btnNavProdView" style="width: 85%;
-            align-items: center;
-            text-align: center;
-            padding:1%;
-            height: 100%;"></div>-->
     <div id="prodView" style="height: 100%;width: 100%;">
         <div id="prodParent" class="grid" style="
             width: inherit;
@@ -452,9 +441,10 @@
             }
 
             var details = "";
-            if (item.cost.length > 0) {
+            /**Cost:OFF
+             * if (item.cost.length > 0) {
                 details += "<span>Rs." + item.cost + "</span>";
-            }
+            }**/
             if (item.title.length > 0) {
                 details += "<br><span>Title : " + item.title.replaceAll('/e', '') + "</span>";
             }

@@ -653,7 +653,7 @@ export async function loadItems(startNum, endNum, pgNum) {
             if (valueData.title.trim().indexOf('/e') < 0) {
                 title = valueData.title;
             }
-            var valString = title;//cost + title;
+            var valString = title;//cost + title; /**Cost:OFF
             //console.log(valString);
             /*var valString = "";
             if (valueData.type == 'lens') {
