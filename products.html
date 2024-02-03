@@ -48,7 +48,7 @@
     <nav id="navbar">
     </nav>
     <div id="google_translate_element" style="
-    margin: 5px 2px 0 0;"></div>
+    margin: 5px 2px 0 0; display: none;"></div>
     <script type="text/javascript">// <![CDATA[
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
@@ -155,6 +155,8 @@
         addLoadMoreView();
     </script>
     <script type="module">
+        import { setLanguage } from './js/language.js';
+        window.setLanguage = setLanguage;
         import { navLoader, toggle, navScroll, switchTheme, loadThemeBtn } from "./js/navload.js";
         import { browserDetect } from "./js/general.js";
         browserDetect();
@@ -165,7 +167,6 @@
         window.switchTheme = switchTheme;
         window.onscroll = navScroll;
         window.document.body.onload = loadThemeBtn;
-
     </script>
     <script type="text/javascript">
         //var filterVisible = false;
