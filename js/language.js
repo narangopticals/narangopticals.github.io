@@ -32,7 +32,7 @@ const createSelector = () => {
     //elementsToTranslate.forEach(element => updateContentLanguage(element, default_lang));
 }
 const destroySelector = () => {
-    if (document.getElementsByClassName('language-selection')[0]) {
+    if (!!document.getElementsByClassName('language-selection')[0]) {
         document.body.removeChild(document.getElementsByClassName('language-selection')[0]);
     }
 }
