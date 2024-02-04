@@ -184,16 +184,19 @@ export async function getFiltered(itemArr, costlow, costHigh, keywords) {
     }
 }
 
-export async function setCookie(cname, cvalue, exdays) {
+export async function setCookie(cname, cvalue, exdays, extras) {
+    if (extras == null) {
+        extras = '';
+    }
     const d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     let expires = "expires=" + d.toUTCString();
-    var string = cname + "=" + cvalue + ";" + expires + "; SameSite=Strict;path=/";
+    var string = cname + "=" + cvalue + ";" + expires + "; SameSite=Strict;path=/" + extras;
     //console.log(string);
     document.cookie = string;
     var cookie = await getCookie(cname);
-    //console.log(cookie);
-    var cookieArr = cookie.split(",");
+    console.log(cookie);
+    //var cookieArr = cookie.split(",");
     //console.log(cookieArr);
 }
 export async function getCookie(cname) {
