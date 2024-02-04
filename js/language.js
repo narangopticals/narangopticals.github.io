@@ -50,13 +50,8 @@ export const setLanguage = (lang, override) => {
     //window.location.replace(`/#googtrans(${lang})`);
 }
 var default_lang = await getCookie('lang');
-if (default_lang != null) {
-    if (default_lang.length > 0) {
-        setLanguage(default_lang, false);
-    }
-
-} else {
-
+console.log(default_lang);
+if (default_lang == null) {
     // Initialize
     createSelector();
 }
