@@ -192,7 +192,7 @@ export async function setCookie(cname, cvalue, exdays, extras) {
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     let expires = "expires=" + d.toUTCString();
     var string = cname + "=" + cvalue + ";" + expires + "; SameSite=Strict;path=/" + extras;
-    //console.log(string);
+    console.log(string);
     document.cookie = string;
     var cookie = await getCookie(cname);
     console.log(cookie);
