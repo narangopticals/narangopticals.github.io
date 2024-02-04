@@ -41,8 +41,13 @@ export const setLanguage = (lang, override) => {
     destroySelector();
     const urlParams = new URLSearchParams(window.location.search.substring(1));
     setCookie('lang', lang, 7);
-    setCookie('googtrans', `/en/${lang}`, 1, ';domain=.' + window.location.host);
-    setCookie('googtrans', `/en/${lang}`, 1, ';domain=' + window.location.host);
+    if (lang == 'en') {
+        //setCookie('googtrans', ``, 0, ';domain=.' + window.location.host);
+        setCookie('googtrans', ``, 0, ';domain=' + window.location.host);
+    } else {
+        //setCookie('googtrans', `/en/${lang}`, 1, ';domain=.' + window.location.host);
+        setCookie('googtrans', `/en/${lang}`, 1, ';domain=' + window.location.host);
+    }
     document.querySelector('html').setAttribute("lang", lang);
     if (!urlParams.has('googtrans') || override) {
         urlParams.set('googtrans', lang);
