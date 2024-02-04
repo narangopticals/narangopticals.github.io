@@ -41,7 +41,7 @@ export const setLanguage = (lang, override) => {
     destroySelector();
     const urlParams = new URLSearchParams(window.location.search.substring(1));
     setCookie('lang', lang, 365);
-    setCookie('googtrans', `/${lang}`, 1, ';hostOnly=false');
+    setCookie('googtrans', `/en/${lang}`, 1, ';hostOnly=false');
     document.querySelector('html').setAttribute("lang", lang);
     if (!urlParams.has('googtrans') || override) {
         urlParams.set('googtrans', lang);
