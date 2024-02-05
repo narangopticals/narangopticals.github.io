@@ -1,12 +1,12 @@
 import { getCookie, setCookie } from './general.js';
 
 
-const populateLanguageSelection = (selector, lang, text) => {
+export const populateLanguageSelection = (selector, lang, text) => {
     //const ul = document.createElement("ul");
     //const li = document.createElement("li");
     const a = document.createElement("a");
     a.href = "#";
-    const p = document.createElement("p");
+    const p = document.createElement("button");
     //const langkey = `${lang.toLowerCase()}`;
     p.textContent = text;
     a.appendChild(p);
@@ -29,6 +29,15 @@ const createSelector = () => {
     document.body.appendChild(selector);
     populateLanguageSelection(selector, 'en', 'English');
     populateLanguageSelection(selector, 'hi', 'हिन्दी');
+    //const elementsToTranslate = document.querySelectorAll('.translate');
+    //elementsToTranslate.forEach(element => updateContentLanguage(element, default_lang));
+}
+export const createnavSelector = () => {
+    var selector = document.querySelector('.selector-skiptranslate');
+    if (!!selector) {
+        populateLanguageSelection(selector, 'en', 'English');
+        populateLanguageSelection(selector, 'hi', 'हिन्दी');
+    }
     //const elementsToTranslate = document.querySelectorAll('.translate');
     //elementsToTranslate.forEach(element => updateContentLanguage(element, default_lang));
 }

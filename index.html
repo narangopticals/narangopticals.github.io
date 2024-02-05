@@ -227,8 +227,9 @@
     <script type="text/javascript"
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script type="module">
-        import { setLanguage } from './js/language.js';
+        import { setLanguage, createnavSelector } from './js/language.js';
         window.setLanguage = setLanguage;
+        //window.populateLanguageSelection = populateLanguageSelection;
         import { navLoader, toggle, navScroll, switchTheme, loadThemeBtn } from "./js/navload.js";
         import { browserDetect } from "./js/general.js";
         import { animateFlexs, swipeLeft, swipeRight } from "./js/indexAnimate.js";
@@ -252,7 +253,10 @@
             //console.log('Orientation change' + e);
             location.reload();
         });
-        window.document.body.onload = loadThemeBtn;
+        window.document.body.onload = () => {
+            loadThemeBtn();
+            createnavSelector();
+        };
         //console.log("avail =" + screen.availHeight + ", window =" + window.innerHeight)
     </script>
     <script type="text/javascript">
