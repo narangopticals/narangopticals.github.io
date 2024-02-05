@@ -1,8 +1,7 @@
 import { getCookie, setCookie } from './general.js';
 
-var selector = document.createElement('div');
 
-const populateLanguageSelection = (lang, text) => {
+const populateLanguageSelection = (selector, lang, text) => {
     //const ul = document.createElement("ul");
     //const li = document.createElement("li");
     const a = document.createElement("a");
@@ -17,6 +16,8 @@ const populateLanguageSelection = (lang, text) => {
     selector.appendChild(a);
 }
 const createSelector = () => {
+    var selector = document.createElement('div');
+
     selector.className = "language-selection";
     selector.style.position = 'absolute';
     selector.style.top = '50vw';
@@ -25,8 +26,8 @@ const createSelector = () => {
     selector.style.margin = '5vw';
 
     selector.style.background = 'grey';
-    populateLanguageSelection('en', 'English');
-    populateLanguageSelection('hi', 'हिन्दी');
+    populateLanguageSelection(selector, 'en', 'English');
+    populateLanguageSelection(selector, 'hi', 'हिन्दी');
     document.body.appendChild(selector);
     //const elementsToTranslate = document.querySelectorAll('.translate');
     //elementsToTranslate.forEach(element => updateContentLanguage(element, default_lang));
