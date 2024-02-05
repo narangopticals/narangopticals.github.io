@@ -26,9 +26,9 @@ const createSelector = () => {
     selector.style.margin = '5vw';
 
     selector.style.background = 'grey';
+    document.body.appendChild(selector);
     populateLanguageSelection(selector, 'en', 'English');
     populateLanguageSelection(selector, 'hi', 'हिन्दी');
-    document.body.appendChild(selector);
     //const elementsToTranslate = document.querySelectorAll('.translate');
     //elementsToTranslate.forEach(element => updateContentLanguage(element, default_lang));
 }
