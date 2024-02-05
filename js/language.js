@@ -52,7 +52,7 @@ export const setLanguage = (lang, override) => {
     const urlParams = new URLSearchParams(window.location.search.substring(1));
     setCookie('lang', lang, 7);
     if (lang.indexOf('en') > -1) {
-        const cookieTask = setCookie('googtrans', ``, 0, ';domain=' + window.location.host);
+        const cookieTask = setCookie('googtrans', ``, 0);
         const cookieTask2 = setCookie('googtrans', ``, 0, ';domain=.' + window.location.host);
         cookieTask;
         cookieTask2;
