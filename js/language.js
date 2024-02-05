@@ -1,5 +1,6 @@
 import { getCookie, setCookie } from './general.js';
 
+var selector = document.createElement('div');
 
 const populateLanguageSelection = (lang, text) => {
     //const ul = document.createElement("ul");
@@ -16,7 +17,6 @@ const populateLanguageSelection = (lang, text) => {
     selector.appendChild(a);
 }
 const createSelector = () => {
-    var selector = document.createElement('div');
     selector.className = "language-selection";
     selector.style.position = 'absolute';
     selector.style.top = '50vw';
