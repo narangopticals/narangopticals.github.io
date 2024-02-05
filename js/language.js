@@ -54,6 +54,8 @@ export const setLanguage = (lang, override) => {
     if (lang.indexOf('en') > -1) {
         const cookieTask = setCookie('googtrans', ``, 0, ';domain=' + window.location.host);
         const cookieTask2 = setCookie('googtrans', ``, 0, ';domain=.' + window.location.host);
+        cookieTask;
+        cookieTask2;
     } else {
         //setCookie('googtrans', `/en/${lang}`, 1, ';domain=.' + window.location.host);
         setCookie('googtrans', `/en/${lang}`, 1, ';domain=' + window.location.host);
