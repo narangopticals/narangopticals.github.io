@@ -52,8 +52,8 @@ export const setLanguage = (lang, override) => {
     const urlParams = new URLSearchParams(window.location.search.substring(1));
     setCookie('lang', lang, 7);
     if (lang.indexOf('en') > -1) {
-        setTimeout(setCookie('googtrans', ``, 0, ';domain=' + window.location.host), 1500);
-        setTimeout(setCookie('googtrans', ``, 0, ';domain=.' + window.location.host), 1500);
+        const cookieTask = setCookie('googtrans', ``, 0, ';domain=' + window.location.host);
+        const cookieTask2 = setCookie('googtrans', ``, 0, ';domain=.' + window.location.host);
     } else {
         //setCookie('googtrans', `/en/${lang}`, 1, ';domain=.' + window.location.host);
         setCookie('googtrans', `/en/${lang}`, 1, ';domain=' + window.location.host);
