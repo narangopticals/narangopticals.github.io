@@ -208,11 +208,12 @@
 
         window.switchTheme = switchTheme;
         window.onscroll = navScroll;
-        import { setLanguage, createnavSelector } from './js/language.js';
+        import { setLanguage, createnavSelector, preventGooglePops } from './js/language.js';
         window.setLanguage = setLanguage;
         window.document.body.onload = () => {
             loadThemeBtn();
             createnavSelector();
+            preventGooglePops(true);
         };
     </script>
     <script type="text/javascript">

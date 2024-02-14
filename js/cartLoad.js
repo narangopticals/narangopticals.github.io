@@ -625,23 +625,26 @@ export async function checkOutLater(btnLoad, pressedBtn, jsonData) {
     }
 
     function updateCart(btn) {
-        var idMod = "";
-        if (btn != undefined) {
-            idMod = btn.value;
-        }
-        //console.log(idMod.length);
-        if (idMod.length > 0) {
-            if (selectedItems.length > 0) {
-                if (selectedItems.indexOf(idMod) > -1) {
-                    removeProduct(idMod, btn);
+        if (!(btn.nodeName.toLowerCase() === 'font')) {
+
+            var idMod = "";
+            if (btn != undefined) {
+                idMod = btn.value;
+            }
+            //console.log(idMod.length);
+            if (idMod.length > 0) {
+                if (selectedItems.length > 0) {
+                    if (selectedItems.indexOf(idMod) > -1) {
+                        removeProduct(idMod, btn);
+                    } else {
+                        addProduct(idMod, btn);
+                    }
                 } else {
                     addProduct(idMod, btn);
                 }
-            } else {
-                addProduct(idMod, btn);
             }
+            updateCartItem();
         }
-        updateCartItem();
     }
 
 

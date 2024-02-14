@@ -33,7 +33,7 @@ const createSelector = () => {
     //elementsToTranslate.forEach(element => updateContentLanguage(element, default_lang));
 }
 export const createnavSelector = () => {
-    var selector = document.querySelector('.selector-skiptranslate');
+    var selector = document.querySelector('.selector.skiptranslate');
     if (!!selector) {
         populateLanguageSelection(selector, 'en', 'English');
         populateLanguageSelection(selector, 'hi', 'हिन्दी');
@@ -70,12 +70,12 @@ export const setLanguage = (lang, override) => {
     //window.location.replace(`/#googtrans(${lang})`);
 }
 var default_lang = await getCookie('lang');
-console.log(default_lang);
+//console.log(default_lang);
 /*if (default_lang == null || default_lang.length == 0) {
     // Initialize
     createSelector();
 }*/
-preventGooglePops(true);
+
 export function preventGooglePops(start) {
     var body = window.document.body;
 
@@ -84,7 +84,20 @@ export function preventGooglePops(start) {
         constructor(element) {
             var observer = new MutationObserver(function (mutations) {
                 mutations.forEach(m => {
-                    console.log(m.target.nodeName);
+                    var target = m.target;
+                    var nodeName = target.nodeName;
+                    //console.log(nodeName);
+                    var n = nodeName.toLowerCase();
+                    if (n.indexOf('font') > -1) {
+                        if (target.querySelector('font') == null) {
+                            //m.preventDefault();
+                            target.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                //console.log(e.target);
+                                e.target.parentElement.parentElement.dispatchEvent(new MouseEvent('click'));
+                            });
+                        }
+                    }
                 })
             });
             // Configure and start observing the target element for changes in child nodes
@@ -98,6 +111,10 @@ export function preventGooglePops(start) {
     if (start) {
         if (mutatObj == null) {
             mutatObj = new MutationDetector(body);
+            document.querySelectorAll('div[id^=goog]').forEach((e) => {
+                console.log(e);
+                e.remove();
+            });
         } else {
             mutatObj.obs.disconnect();
             mutatObj = null;

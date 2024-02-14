@@ -440,19 +440,21 @@ export async function checkOutLater(btnLoad, pressedBtn) {
         loadButton(btnLoad);
     }
     function loadButton(btn) {
-        console.log(btn);
-        var idMod = "";
-        if (btn != undefined) {
-            idMod = btn.value;
-        }
-        //console.log(idMod.length);
-        if (idMod.length > 0) {
-            if (selectedItems.length > 0) {
-                if (selectedItems.indexOf(idMod) > -1) {
-                    //btn.innerHTML = "-";
-                    btn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
-                    btn.dataCart = 'true';
-                    //console.log(selectedItems);
+        if (!(btn.nodeName.toLowerCase() === 'font')) {
+            //console.log(btn);
+            var idMod = "";
+            if (btn != undefined) {
+                idMod = btn.value;
+            }
+            //console.log(idMod.length);
+            if (idMod.length > 0) {
+                if (selectedItems.length > 0) {
+                    if (selectedItems.indexOf(idMod) > -1) {
+                        //btn.innerHTML = "-";
+                        btn.style.background = 'linear-gradient(to bottom, maroon, rgb(172, 23, 23), maroon)';
+                        btn.dataCart = 'true';
+                        //console.log(selectedItems);
+                    }
                 }
             }
         }
@@ -535,29 +537,30 @@ export async function checkOutLater(btnLoad, pressedBtn) {
     }
 
     function updateCart(btn) {
-        var idMod = "";
-        //console.log("line 258:");
-        console.log(btn);
-        if (btn != undefined) {
-            idMod = btn.value;
-            //console.log("line 262:");
-            //console.log(idMod);
-        }
-        //console.log(idMod.length);
-        //if (idMod != null) {
-        if (idMod.length > 0) {
-            if (selectedItems.length > 0) {
-                if (selectedItems.indexOf(idMod) > -1) {
-                    removeProduct(idMod, btn);
+        if (!(btn.nodeName.toLowerCase() === 'font')) {
+            var idMod = "";
+            //console.log("line 258:");
+            //console.log(btn);
+            if (btn != undefined) {
+                idMod = btn.value;
+                //console.log("line 262:");
+                //console.log(idMod);
+            }
+            //console.log(idMod.length);
+            //if (idMod != null) {
+            if (idMod.length > 0) {
+                if (selectedItems.length > 0) {
+                    if (selectedItems.indexOf(idMod) > -1) {
+                        removeProduct(idMod, btn);
+                    } else {
+                        addProduct(idMod, btn);
+                    }
                 } else {
                     addProduct(idMod, btn);
                 }
-            } else {
-                addProduct(idMod, btn);
             }
+            //}
         }
-        //}
-
     }
     async function loadCart() {
         var cartString = await getCookie("incartItems");
