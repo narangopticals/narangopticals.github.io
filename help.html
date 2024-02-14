@@ -68,6 +68,11 @@
             location.reload();
         });
 
-        window.document.body.onload = loadThemeBtn;
+        import { setLanguage, createnavSelector } from './js/language.js';
+        window.setLanguage = setLanguage;
+        window.document.body.onload = () => {
+            loadThemeBtn();
+            createnavSelector();
+        };
     </script>
 </body>

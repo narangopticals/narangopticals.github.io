@@ -91,7 +91,7 @@ h1,
 #flexSpcTel {
     color: var(--font-color-primary);
     text-shadow: var(--text-shadow);
-    font-size: xx-large;
+    font-size: x-large;
 }
 
 /**animation event #start**/
@@ -284,6 +284,7 @@ p {
     font-size: medium;
     font-weight: bold;
     word-wrap: normal;
+    color: var(--font-color-primary);
 }
 
 h4 {
@@ -679,6 +680,7 @@ a.dailer {
     font-size: x-large;
 }
 
+
 #filter {
     background: var(--btn-filter-bg-color);
 }
@@ -808,12 +810,12 @@ button {
 
 /* Portrait orientation ||*/
 @media screen and (orientation: portrait) {
-    #flashBannerTxt {
+    /*#flashBannerTxt {
         left: 6%;
-    }
+    }*/
 
     #flashBannerBg {
-        min-width: 30%;
+        min-width: 35%;
     }
 
     #share {
@@ -895,7 +897,7 @@ button {
     .header,
     #flexSpc,
     #flexSpcTxt {
-        font-size: 30px;
+        font-size: large;
         margin-bottom: 2px;
     }
 
@@ -906,9 +908,9 @@ button {
 
 /* Landscape orientation = */
 @media screen and (orientation: landscape) {
-    #flashBannerTxt {
+    /*#flashBannerTxt {
         left: 11%;
-    }
+    }*/
 
     #flashBannerBg {
         min-width: 25%;
@@ -918,9 +920,9 @@ button {
         height: 45px;
     }
 
-    #sectionSwitch {
+    /*#sectionSwitch {
         left: 20%;
-    }
+    }*/
 
     .mainContent {
         flex-direction: row;

@@ -69,7 +69,7 @@ export const setLanguage = (lang, override) => {
 }
 var default_lang = await getCookie('lang');
 console.log(default_lang);
-if (default_lang == null || default_lang.length == 0) {
+/*if (default_lang == null || default_lang.length == 0) {
     // Initialize
     createSelector();
-}
+}*/

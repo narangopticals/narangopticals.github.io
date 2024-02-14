@@ -47,7 +47,7 @@
 <body id="mainBody">
     <nav id="navbar">
     </nav>
-    <div id="google_translate_element" style="
+    <div id="google_translate_element" style="display:none;
     margin: 5px 2px 0 0; display: none;"></div>
     <script type="text/javascript">// <![CDATA[
         function googleTranslateElementInit() {
@@ -68,6 +68,50 @@
         <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(2,1)">Lens</button>
         <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(3,1)">Readymade</button>
         <button class="slideName" style="font-weight: bold;" onclick="switchUrlSection(4,1)">Watch</button>
+        <!--<button style="font-weight: bold; height:22vw;display: flex;flex-direction: column;"
+            onclick="switchUrlSection(0,1)">
+            <img style="width: 20vw;aspect-ratio:1"
+                src="https://drive.google.com/thumbnail?id=1Mj5NSrD6q3Eo1auwYP4Fh4qztF9YbjDa&sz=w200-h200">
+            <p class=" slideName" style="display: block;
+                    position: relative;
+                    transform: translateY(-180%);">Eyewear Frame</p>
+        </button>
+        <button style="font-weight: bold; height:22vw;display: flex;flex-direction: column;"
+            onclick="switchUrlSection(1,1)">
+            <img style="width: 20vw;aspect-ratio:1"
+                src="https://drive.google.com/thumbnail?id=1sefCpBWqxtdeuuwOlvOEmdTF51ThfAEN&sz=w200-h200">
+            <p class=" slideName" style="display: block;
+                    position: relative;
+                    transform: translateY(-180%);">
+                Sunglass</p>
+        </button>
+        <button style="font-weight: bold; height:22vw;display: flex;flex-direction: column;"
+            onclick="switchUrlSection(2,1)">
+            <img style="width: 20vw;aspect-ratio:1"
+                src="https://drive.google.com/thumbnail?id=17hJ-LZPDdWbz3ddXLtchN5MpZinQsZOu&sz=w200-h200">
+            <p class=" slideName" style="display: block;
+                    position: relative;
+                    transform: translateY(-180%);">
+                Lens</p>
+        </button>
+        <button style="font-weight: bold; height:22vw;display: flex;flex-direction: column;"
+            onclick="switchUrlSection(3,1)">
+            <img style="width: 20vw;aspect-ratio:1"
+                src="https://drive.google.com/thumbnail?id=16PrT9ecvMgyJDfB8rhDB3arMhL6LrYTT&sz=w200-h200">
+            <p class=" slideName" style="display: block;
+                    position: relative;
+                    transform: translateY(-180%);">
+                Readymade</p>
+        </button>
+        <button style="font-weight: bold; height:22vw;display: flex;flex-direction: column;"
+            onclick="switchUrlSection(4,1)">
+            <img style="width: 20vw;aspect-ratio:1"
+                src="https://drive.google.com/thumbnail?id=1nN0AJKcZYHcvAgMITuaHiM4F8wjnhh6b&sz=w200-h200">
+            <p class=" slideName" style="display: block;
+                    position: relative;
+                    transform: translateY(-180%);">
+                Watch</p>
+        </button>-->
         <button id="share" onclick="shareLink()">
             <img id="sharesvg" src="./svg/share-button.svg" style="aspect-ratio: 1; height: 100%;
                 align-self: center;
@@ -155,8 +199,6 @@
         addLoadMoreView();
     </script>
     <script type="module">
-        import { setLanguage } from './js/language.js';
-        window.setLanguage = setLanguage;
         import { navLoader, toggle, navScroll, switchTheme, loadThemeBtn } from "./js/navload.js";
         import { browserDetect } from "./js/general.js";
         browserDetect();
@@ -166,7 +208,12 @@
 
         window.switchTheme = switchTheme;
         window.onscroll = navScroll;
-        window.document.body.onload = loadThemeBtn;
+        import { setLanguage, createnavSelector } from './js/language.js';
+        window.setLanguage = setLanguage;
+        window.document.body.onload = () => {
+            loadThemeBtn();
+            createnavSelector();
+        };
     </script>
     <script type="text/javascript">
         //var filterVisible = false;

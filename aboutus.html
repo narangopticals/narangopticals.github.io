@@ -84,13 +84,37 @@
             <div class="mySlides fade">
                 <div class="aboutus-container">
                     <h4>About us:</h4>
-                    <article>Trusted Since 1979, First & Most Popular Optician Shop, in district Udham Singh
+                    <section>
+                        <p>Welcome to our Optician Shop</p>
+                        <p>Trusted since 1979, we are the first and most popular optician shop in Udham Singh Nagar,
+                            Uttarakhand.</p>
+                        <p>We offer a wide variety of eyewear, including frames, sunglasses, and spectacles.</p>
+                        <p>Our customers come from beyond Udham Singh Nagar, with some traveling more than 100km to
+                            visit us. Some of the
+                            notable cities we serve include:</p>
+                        <ul>
+                            <li>Kashipur</li>
+                            <li>Ramnagar</li>
+                            <li>Almora</li>
+                            <li>Ranikhet</li>
+                            <li>Haldwani</li>
+                            <li>Bazpur</li>
+                            <li>Jaspur</li>
+                            <li>Gadarpur</li>
+                            <li>Mahuakheraganj</li>
+                            <li>Peerumadara</li>
+                            <li>Kundeshwari</li>
+                            <li>Jaspur Khurd</li>
+                        </ul>
+                        <p>as well as the towns in between.</p>
+                    </section>
+                    <!--<article>Trusted Since 1979, First & Most Popular Optician Shop, in district Udham Singh
                         Nagar,Uttarakhand.<br><br>We deal in all kind
                         of eyewear, and in vast variety of Frames, Sunglasses, Spectacles.<br><br> We have
                         served customers more than 100km from the establishment, to name few notable cities including
                         Kashipur are Ramnagar, Almora, Ranikhet, Haldwani,
                         Bazpur,Jaspur, Gadarpur, Mahuakheraganj, Peerumadara, Kundeshwari, Jaspur Khurd and the towns in
-                        between. </article>
+                        between. </article>-->
                 </div>
             </div>
 
@@ -121,7 +145,12 @@
             location.reload();
         });
 
-        window.document.body.onload = loadThemeBtn;
+        import { setLanguage, createnavSelector } from './js/language.js';
+        window.setLanguage = setLanguage;
+        window.document.body.onload = () => {
+            loadThemeBtn();
+            createnavSelector();
+        };
     </script>
     <script>
         let slideIndex = 0;
