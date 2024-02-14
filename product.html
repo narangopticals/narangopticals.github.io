@@ -437,7 +437,12 @@
                 iframeHolder.style.display = "";
                 iframeHolder.innerHTML = "";
                 for (var i = 0; i < ilen; i++) {
-                    iframeHolder.innerHTML += "<iframe style=\"height: 100%;width: 100%;\" id=\"iframe" + i + "\" src=\"https://drive.google.com/file/d/" + imgs[i] + "/preview\"></iframe>";
+                    var link = '';
+                    if (imgs[i].length > 0) {
+                        link = `https://drive.google.com/file/d/${imgs[i]}/preview`;
+
+                    }
+                    iframeHolder.innerHTML += `<iframe style="height: 100%;width: 100%;" id="iframe${i}" src="${link}"></iframe>`;
                 }
                 imgSwitch('', 0);
                 /*prodMain.querySelector('.gridImg').style.display = "";
