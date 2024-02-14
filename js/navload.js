@@ -75,7 +75,7 @@ export async function navScroll() {
 
 
 export async function switchTheme(event) {
-    //   console.log(event);
+    //console.log(event);
     const root = document.documentElement;
     if (switchOff) {
         /*root.style.setProperty(`--bg-color`, "rgb(50,50,50)");*/
@@ -116,8 +116,8 @@ export async function toggleTheme() {
     }
 })();
 export async function loadThemeBtn() {
-    //   console.log('document body loaded');
-    //   console.log('switchOff:' + switchOff);
+    //console.log('document body loaded');
+    //console.log('switchOff:' + switchOff);
     if (switchOff) {
         var switchBtn = window.document.querySelector('.switch>input');
         if (switchBtn != undefined) {

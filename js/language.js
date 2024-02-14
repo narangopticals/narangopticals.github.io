@@ -112,7 +112,7 @@ export function preventGooglePops(start) {
         if (mutatObj == null) {
             mutatObj = new MutationDetector(body);
             document.querySelectorAll('div[id^=goog]').forEach((e) => {
-                console.log(e);
+                //console.log(e);
                 e.remove();
             });
         } else {

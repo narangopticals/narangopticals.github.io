@@ -60,7 +60,7 @@ export async function submitFilter() {
 }
 
 export async function manualFilter() {
-    
+
 }
 export async function restoreProduts() {
     var filterView = window.document.getElementById('filterView');

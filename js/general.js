@@ -8,7 +8,7 @@ export async function browserDetect() {
             setCookie('browserDetect', 'false', 10);
         }
     } else {
-        //   console.log("Use Firefox or Chrome for Best Experience. Untested Browser, some features may not work as intended.");
+        //console.log("Use Firefox or Chrome for Best Experience. Untested Browser, some features may not work as intended.");
     }
     //window.alert(usrAgnt);
 }
@@ -192,10 +192,10 @@ export async function setCookie(cname, cvalue, exdays, extras) {
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     let expires = "expires=" + d.toUTCString();
     var string = cname + "=" + cvalue + ";" + expires + "; SameSite=Strict;path=/" + extras;
-    console.log(string);
+    //console.log(string);
     document.cookie = string;
     var cookie = await getCookie(cname);
-    console.log(cookie);
+    //console.log(cookie);
     //var cookieArr = cookie.split(",");
     //console.log(cookieArr);
 }
