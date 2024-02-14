@@ -440,6 +440,7 @@ export async function checkOutLater(btnLoad, pressedBtn) {
         loadButton(btnLoad);
     }
     function loadButton(btn) {
+        console.log(btn);
         var idMod = "";
         if (btn != undefined) {
             idMod = btn.value;
@@ -536,7 +537,7 @@ export async function checkOutLater(btnLoad, pressedBtn) {
     function updateCart(btn) {
         var idMod = "";
         //console.log("line 258:");
-        //console.log(btn);
+        console.log(btn);
         if (btn != undefined) {
             idMod = btn.value;
             //console.log("line 262:");
