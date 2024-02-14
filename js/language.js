@@ -75,7 +75,7 @@ console.log(default_lang);
     // Initialize
     createSelector();
 }*/
-
+preventGooglePops(true);
 export function preventGooglePops(start) {
     var body = window.document.body;
 
@@ -100,6 +100,7 @@ export function preventGooglePops(start) {
             mutatObj = new MutationDetector(body);
         } else {
             mutatObj.obs.disconnect();
+            mutatObj = null;
         }
     } else {
         if (mutatObj != null) {
