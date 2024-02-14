@@ -1,6 +1,6 @@
 import { getCookie, setCookie } from './general.js';
 
-
+var mutatObj;
 export const populateLanguageSelection = (selector, lang, text) => {
     //const ul = document.createElement("ul");
     //const li = document.createElement("li");
@@ -56,9 +56,11 @@ export const setLanguage = (lang, override) => {
         //const cookieTask2 = setCookie('googtrans', ``, 0, ';domain=.' + window.location.host);
         cookieTask;
         cookieTask;
+        preventGooglePops(false);
     } else {
         //setCookie('googtrans', `/en/${lang}`, 1, ';domain=.' + window.location.host);
         setCookie('googtrans', `/en/${lang}`, 1, ';domain=' + window.location.host);
+        preventGooglePops(true);
     }
     document.querySelector('html').setAttribute("lang", lang);
     if (!urlParams.has('googtrans') || override) {
@@ -73,3 +75,35 @@ console.log(default_lang);
     // Initialize
     createSelector();
 }*/
+
+export function preventGooglePops(start) {
+    var body = window.document.body;
+
+    class MutationDetector {
+        static obs;
+        constructor(element) {
+            var observer = new MutationObserver(function (mutations) {
+                mutations.forEach(m => {
+                    console.log(m.target.nodeName);
+                })
+            });
+            // Configure and start observing the target element for changes in child nodes
+            var config = { childList: true, subtree: true };
+            observer.observe(element, config);
+            this.obs = observer;
+
+        }
+    }
+
+    if (start) {
+        if (mutatObj == null) {
+            mutatObj = new MutationDetector(body);
+        } else {
+            mutatObj.obs.disconnect();
+        }
+    } else {
+        if (mutatObj != null) {
+            mutatObj.obs.disconnect();
+        }
+    }
+}
