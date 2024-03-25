@@ -69,7 +69,7 @@ export const setLanguage = (lang, override) => {
     }
     //window.location.replace(`/#googtrans(${lang})`);
 }
-async function checkLanguage() {
+export async function checkLanguage() {
     var default_lang = await getCookie('lang');
     if (default_lang === 'en') {
         setLanguage(default_lang, false);
