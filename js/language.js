@@ -52,18 +52,19 @@ export const setLanguage = (lang, override) => {
     const urlParams = new URLSearchParams(window.location.search.substring(1));
     setCookie('lang', lang, 7);
     if (lang.indexOf('en') > -1) {
+        preventGooglePops(false);
         const cookieTask = setCookie('googtrans', ``, 0, ';domain=' + window.location.host);
         const cookieTask2 = setCookie('googtrans', ``, 0, ';domain=.' + window.location.host);
         cookieTask;
         cookieTask2;
-        preventGooglePops(false);
+        cookieTask;
     } else {
         //setCookie('googtrans', `/en/${lang}`, 1, ';domain=.' + window.location.host);
         setCookie('googtrans', `/en/${lang}`, 1, ';domain=' + window.location.host);
         preventGooglePops(true);
     }
     document.querySelector('html').setAttribute("lang", lang);
-    if (!urlParams.has('googtrans') || override) {
+    if (!urlParams.has('googtrans') && override) {
         urlParams.set('googtrans', lang);
         window.location.search = urlParams.toString();
     }
@@ -72,7 +73,9 @@ export const setLanguage = (lang, override) => {
 export async function checkLanguage() {
     var default_lang = await getCookie('lang');
     if (default_lang === 'en') {
-        setLanguage(default_lang, false);
+        setInterval(function () {
+            setLanguage(default_lang, false);
+        }, 1200);
     }
 }
 //console.log(default_lang);
