@@ -57,11 +57,12 @@ export const setLanguage = (lang, override) => {
         const cookieTask2 = setCookie('googtrans', ``, 0, ';domain=.' + window.location.host);
         cookieTask;
         cookieTask2;
-        cookieTask;
+        document.querySelector('#mainBody').className += ' skiptranslate';
     } else {
         //setCookie('googtrans', `/en/${lang}`, 1, ';domain=.' + window.location.host);
         setCookie('googtrans', `/en/${lang}`, 1, ';domain=' + window.location.host);
         preventGooglePops(true);
+        document.querySelector('#mainBody').className = document.querySelector('#mainBody').className.replace(' skiptranslate', '');
     }
     document.querySelector('html').setAttribute("lang", lang);
     if (!urlParams.has('googtrans') && override) {
