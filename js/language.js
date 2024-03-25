@@ -52,8 +52,8 @@ export const setLanguage = (lang, override) => {
     const urlParams = new URLSearchParams(window.location.search.substring(1));
     setCookie('lang', lang, 7);
     if (lang.indexOf('en') > -1) {
-        const cookieTask = setCookie('googtrans', `/en/en`, 1, ';domain=' + window.location.host);
-        const cookieTask2 = setCookie('googtrans', `/en/en`, 1, ';domain=.' + window.location.host);
+        const cookieTask = setCookie('googtrans', ``, 0, ';domain=' + window.location.host);
+        const cookieTask2 = setCookie('googtrans', ``, 0, ';domain=.' + window.location.host);
         cookieTask;
         cookieTask2;
         preventGooglePops(false);
@@ -69,7 +69,12 @@ export const setLanguage = (lang, override) => {
     }
     //window.location.replace(`/#googtrans(${lang})`);
 }
-var default_lang = await getCookie('lang');
+async function checkLanguage() {
+    var default_lang = await getCookie('lang');
+    if (default_lang === 'en') {
+        setLanguage(default_lang, false);
+    }
+}
 //console.log(default_lang);
 /*if (default_lang == null || default_lang.length == 0) {
     // Initialize
